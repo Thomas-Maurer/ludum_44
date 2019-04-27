@@ -1,9 +1,12 @@
 /// <reference path="../node_modules/phaser3-docs/typescript/phaser.d.ts" />
 import "phaser";
 import MainScene from "./scripts/scenes/MainScene";
+
+import ui from "./ui/main.js";
 import "./styles/style.scss";
 import PhaserMatterCollisionPlugin from "phaser-matter-collision-plugin";
 
+new ui();
 const gameConfig: GameConfig = {
   backgroundColor: "#000000",
   height: window.innerHeight,
@@ -29,3 +32,4 @@ const gameConfig: GameConfig = {
   width: document.body.offsetWidth,
 };
 const game = new Phaser.Game(gameConfig);
+new ui();
