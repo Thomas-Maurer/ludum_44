@@ -7,15 +7,14 @@ export default class MainScene extends Phaser.Scene {
   public matterCollision: PhaserMatterCollisionPlugin;
   public map: Phaser.Tilemaps.Tilemap;
   public player: Player;
-  private parralaxLayers: Phaser.GameObjects.TileSprite[] = [];
   private parralaxLayers: {
     bg_static: Phaser.GameObjects.TileSprite,
     bg_clouds: Phaser.GameObjects.TileSprite,
     bg_far: Phaser.GameObjects.TileSprite
   };
   public cursors: any;
+  /*
    * TODO make a class calling alls enemies
-  /**
    */
   public enemy: any;
   constructor() {
@@ -47,8 +46,6 @@ export default class MainScene extends Phaser.Scene {
 
     this.enemy = new Enemy(this.matter, 10, 0);
 
-    this.matter.add.sprite(64, 11*32, 'all_sprites', 'Poses/player_walk1.png');
-
     // Get the layers registered with Matter. Any colliding tiles will be given a Matter body. We
     // haven't mapped out custom collision shapes in Tiled so each colliding tile will get a default
     // rectangle body (similar to AP).
@@ -65,7 +62,7 @@ export default class MainScene extends Phaser.Scene {
       },
       context: this // Context to apply to the callback function
     });
-
+console.log(tileset);
     this.matterCollision.addOnCollideActive({
       objectA: this.player.getPlayerSprite(),
       callback: function (eventData) {
