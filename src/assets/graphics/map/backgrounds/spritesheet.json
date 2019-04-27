@@ -1,6 +1,5 @@
 {
-	"textures": [
-		{
+	"textures": [{
 			"image": "spritesheet-0.png",
 			"format": "RGBA8888",
 			"size": {
@@ -8,8 +7,7 @@
 				"h": 1770
 			},
 			"scale": 1,
-			"frames": [
-				{
+			"frames": [{
 					"filename": "bg_static.png",
 					"rotated": false,
 					"trimmed": false,
@@ -69,8 +67,7 @@
 				"h": 1715
 			},
 			"scale": 1,
-			"frames": [
-				{
+			"frames": [{
 					"filename": "bg_beta.png",
 					"rotated": false,
 					"trimmed": false,
@@ -730,33 +727,31 @@
 				"h": 527
 			},
 			"scale": 1,
-			"frames": [
-				{
-					"filename": "bg_clouds.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 2000,
-						"h": 960
-					},
-					"spriteSourceSize": {
-						"x": 34,
-						"y": 0,
-						"w": 1923,
-						"h": 525
-					},
-					"frame": {
-						"x": 1,
-						"y": 1,
-						"w": 1923,
-						"h": 525
-					},
-					"anchor": {
-						"x": 0,
-						"y": 0
-					}
+			"frames": [{
+				"filename": "bg_clouds.png",
+				"rotated": false,
+				"trimmed": true,
+				"sourceSize": {
+					"w": 2000,
+					"h": 960
+				},
+				"spriteSourceSize": {
+					"x": 34,
+					"y": 0,
+					"w": 1923,
+					"h": 525
+				},
+				"frame": {
+					"x": 1,
+					"y": 1,
+					"w": 1923,
+					"h": 525
+				},
+				"anchor": {
+					"x": 0,
+					"y": 0
 				}
-			]
+			}]
 		}
 	],
 	"meta": {
