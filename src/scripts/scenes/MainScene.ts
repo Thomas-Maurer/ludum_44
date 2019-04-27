@@ -1,11 +1,18 @@
 import Player from "../player/Player";
 import * as PhaserMatterCollisionPlugin from "phaser-matter-collision-plugin";
 
+import {Enemy} from "../enemy/enemy";
+import {Map} from "../map-data";
 export default class MainScene extends Phaser.Scene {
   public matterCollision: PhaserMatterCollisionPlugin;
   public map: Phaser.Tilemaps.Tilemap;
   public player: Player;
   private parralaxLayers: Phaser.GameObjects.TileSprite[] = [];
+  public cursors: any;
+  /**
+   * TODO make a class calling alls enemies
+   */
+  public enemy: any;
   constructor() {
     super({
       key: "MainScene",
@@ -15,10 +22,15 @@ export default class MainScene extends Phaser.Scene {
     this.load.tilemapTiledJSON("map", "/assets/map/map_beta.json");
     this.load.image("tiles_test", "/assets/graphics/map/backgrounds/bg_beta.png");
     this.load.multiatlas('all_sprites', 'assets/graphics/map/backgrounds/spritesheet.json', 'assets/graphics/map/backgrounds');
+
+
+    this.load.multiatlas(Enemy.SPRITE_ID, 'assets/graphics/char/enemy/enemy_test.json', 'assets/graphics/char/enemy');
   }
   create() {
     /** Build all layers maps */
-    this.map = this.add.tilemap("map");
+    const map = Map.getInstance(this.add.tilemap('map'));
+    this.map = map.tileMap;
+
     const tileset = this.map.addTilesetImage("tile_test", "tiles_test");
     this.generateParralaxLayers();
 
@@ -31,6 +43,10 @@ export default class MainScene extends Phaser.Scene {
 
     worldLayer.setCollisionByProperty({ collide: true });
     this.player = new Player(this, 64, 11 * 32, 'all_sprites', 'Poses/player_walk1.png');
+
+    this.enemy = new Enemy(this.matter, 10, 0);
+
+    this.matter.add.sprite(64, 11*32, 'all_sprites', 'Poses/player_walk1.png');
 
     // Get the layers registered with Matter. Any colliding tiles will be given a Matter body. We
     // haven't mapped out custom collision shapes in Tiled so each colliding tile will get a default
@@ -81,6 +97,7 @@ export default class MainScene extends Phaser.Scene {
   public update() {
     this.player.handleActions();
     this.updateParralax();
+    this.enemy.update();
   }
 }
 
