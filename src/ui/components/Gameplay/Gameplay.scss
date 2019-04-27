@@ -1,11 +1,14 @@
 .gameplay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+
     display: flex;
-    align-items: center;
-    justify-content: center;
     font-family: 'Black Pearl';
+
+    .icon {
+        position: fixed;
+        top: 0;
+        left: 40%;
+        background: #000;
+        width: 45px;
+        height: 45px;
+    }
 }
