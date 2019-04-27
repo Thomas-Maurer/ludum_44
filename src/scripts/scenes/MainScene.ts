@@ -25,8 +25,8 @@ export default class MainScene extends Phaser.Scene {
   }
   preload() {
     this.load.tilemapTiledJSON("map", "/assets/map/map_beta.json");
-    this.load.image("tiles_test", "/assets/graphics/map/backgrounds/bg_beta.png");
     this.load.multiatlas('all_sprites', 'assets/graphics/map/backgrounds/spritesheet.json', 'assets/graphics/map/backgrounds');
+    this.load.multiatlas('block', 'assets/graphics/map/backgrounds/block.json', 'assets/graphics/map/backgrounds');
 
 
     this.load.multiatlas(Enemy.SPRITE_ID, 'assets/graphics/char/enemy/enemy_test.json', 'assets/graphics/char/enemy');
@@ -36,9 +36,10 @@ export default class MainScene extends Phaser.Scene {
     const map = Map.getInstance(this.add.tilemap('map'));
     this.map = map.tileMap;
 
-    const tileset = this.map.addTilesetImage("tile_test", "tiles_test");
+    const tileset = this.map.addTilesetImage('block', 'block');
+
     this.generateParralaxLayers();
-    const worldLayer = this.map.createStaticLayer("tile_test", tileset, 0, 0);
+    const worldLayer = this.map.createStaticLayer('main_tile', tileset, 0, 0);
 
     this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
     this.matter.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
