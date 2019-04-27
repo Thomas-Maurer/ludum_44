@@ -22,13 +22,6 @@ export class Enemy extends Phaser.Physics.Matter.Sprite{
      * @type {number}
      */
     private currentDirection: number = 1;
-    /**
-     * Contain enemy sprite object from phaser
-     */
-    private _enemySprite: any;
-    public get sprite() {
-        return this;
-    }
 
     /**
      *
@@ -97,7 +90,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite{
             this.currentVelocity = this.currentVelocity * -1;
         }
         // TODO delete after adding the right sprite (1 is corresponding to 64px)
-        // checking collid on head
+        // checking collide on head
         tileY = tileY - 1;
 
         if (map.isExistTile(tileX, tileY)) {
