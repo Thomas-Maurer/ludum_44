@@ -20,6 +20,15 @@ const gameConfig: GameConfig = {
     },
   },
   scene: [MainScene],
+  plugins: {
+    scene: [
+      {
+        plugin: PhaserMatterCollisionPlugin, // The plugin class
+        key: "matterCollision", // Where to store in Scene.Systems, e.g. scene.sys.matterCollision
+        mapping: "matterCollision" // Where to store in the Scene, e.g. scene.matterCollision
+      }
+    ]
+  },
   type: Phaser.AUTO,
   width: document.body.offsetWidth,
 };
