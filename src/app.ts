@@ -16,7 +16,7 @@ const gameConfig: GameConfig = {
     default: "matter",
     matter: {
       debug: false, // true for collisions debug
-      gravity: { y: 1 } // This is the default value, so we could omit this
+      gravity: { y: 2 } // This is the default value, so we could omit this
     },
   },
   scene: [MainScene],
