@@ -62,12 +62,12 @@ export default class MainScene extends Phaser.Scene {
       },
       context: this // Context to apply to the callback function
     });
-console.log(tileset);
     this.matterCollision.addOnCollideActive({
       objectA: this.player.getPlayerSprite(),
-      callback: function (eventData) {
-        //console.log(this.player.canPlayerAct());
-        this.player.playerInAir(false);
+      callback: (eventData: any) => {
+        if (eventData.gameObjectB !== undefined && eventData.gameObjectB instanceof Phaser.Tilemaps.Tile) {
+          this.player.playerInAir(false);
+        }
       },
       context: this
     });
