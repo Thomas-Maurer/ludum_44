@@ -1,8 +1,8 @@
 import Player from "../player/Player";
 import * as PhaserMatterCollisionPlugin from "phaser-matter-collision-plugin";
 
-import {Enemy} from "../enemy/enemy";
-import {Map} from "../map-data";
+import { Enemy } from "../enemy/enemy";
+import { Map } from "../map-data";
 export default class MainScene extends Phaser.Scene {
   public matterCollision: PhaserMatterCollisionPlugin;
   public map: Phaser.Tilemaps.Tilemap;
@@ -10,7 +10,8 @@ export default class MainScene extends Phaser.Scene {
   private parralaxLayers: {
     bg_static: Phaser.GameObjects.TileSprite,
     bg_clouds: Phaser.GameObjects.TileSprite,
-    bg_far: Phaser.GameObjects.TileSprite
+    bg_far: Phaser.GameObjects.TileSprite,
+    bg: Phaser.GameObjects.TileSprite
   };
   public cursors: any;
   /*
@@ -84,6 +85,7 @@ export default class MainScene extends Phaser.Scene {
       bg_static: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'bg_static.png'),
       bg_clouds: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'bg_clouds.png'),
       bg_far: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'bg_far.png'),
+      bg: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'bg.png'),
 
     }
 
@@ -105,7 +107,6 @@ export default class MainScene extends Phaser.Scene {
     for (const layerName in this.parralaxLayers) {
       if (this.parralaxLayers.hasOwnProperty(layerName)) {
         const layer: Phaser.GameObjects.TileSprite = this.parralaxLayers[layerName];
-        const playerPos = this.player.getPlayerSprite();
         layer.setPosition(this.cameras.main.scrollX, this.cameras.main.scrollY)
         layer.setOrigin(0, 0);
       }
@@ -114,6 +115,8 @@ export default class MainScene extends Phaser.Scene {
     this.parralaxLayers.bg_clouds.tilePositionX -= 0.5;
     this.parralaxLayers.bg_far.tilePositionX = this.cameras.main.scrollX * 0.1;
     this.parralaxLayers.bg_far.tilePositionY = this.cameras.main.scrollY * 0.1;
+    this.parralaxLayers.bg.tilePositionX = this.cameras.main.scrollX * 0.4;
+    this.parralaxLayers.bg.tilePositionY = this.cameras.main.scrollY * 0.4;
     // this.parralaxLayers[1].tilePositionX = this.player.getPlayerSprite().x * 0.1;
 
   }
@@ -125,4 +128,3 @@ export default class MainScene extends Phaser.Scene {
     this.enemy.update();
   }
 }
-
