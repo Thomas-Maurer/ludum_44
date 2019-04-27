@@ -1,6 +1,8 @@
 import Player from "../player/Player";
+import * as PhaserMatterCollisionPlugin from "phaser-matter-collision-plugin";
 
 export default class MainScene extends Phaser.Scene {
+  public matterCollision: PhaserMatterCollisionPlugin;
   public map: Phaser.Tilemaps.Tilemap;
   public player: Player;
   private parralaxLayers: Phaser.GameObjects.TileSprite[] = [];
@@ -20,6 +22,11 @@ export default class MainScene extends Phaser.Scene {
     const tileset = this.map.addTilesetImage("tile_test", "tiles_test");
     this.generateParralaxLayers();
 
+    this.generateParralaxLayers();
+
+
+
+
     const worldLayer = this.map.createStaticLayer("tile_test", tileset, 0, 0);
 
     worldLayer.setCollisionByProperty({ collide: true });
@@ -31,11 +38,28 @@ export default class MainScene extends Phaser.Scene {
     this.matter.world.convertTilemapLayer(worldLayer);
 
     this.cameras.main.startFollow(this.player.getPlayerSprite(), false, 0.5, 0.5);
-    // Visualize all the matter bodies in the world. Note: this will be slow so go ahead and comment
-    // it out after you've seen what the bodies look like.
-    this.matter.world.createDebugGraphic();
-  }
+      // Visualize all the matter bodies in the world. Note: this will be slow so go ahead and comment
+      // it out after you've seen what the bodies look like.
+      this.matter.world.createDebugGraphic();
+    this.matterCollision.addOnCollideStart({
+      objectA: this.player.getPlayerSprite(),
+      callback: function(eventData) {
+      //console.log(eventData)
+      },
+      context: this // Context to apply to the callback function
+    });
 
+    this.matterCollision.addOnCollideActive({
+        objectA: this.player.getPlayerSprite(),
+        callback: function(eventData) {
+          //console.log(this.player.canPlayerAct());
+          this.player.playerInAir(false);
+        },
+        context: this
+      });
+    }
+
+// Fct we call each frame
   /**
  * Create the parralax layers
  */
