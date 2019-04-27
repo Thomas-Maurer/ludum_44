@@ -52,6 +52,16 @@ export class Enemy {
      * Set the velocity of the sprite depending on the platform
      */
     private setVelocity(): void {
+        this.setVelocityOnGround();
+        this.setVelocityOnCollide();
+        this._enemySprite.setVelocityX(this.currentVelocity);
+
+    }
+
+    /**
+     * Set current velocity and direction
+     */
+    private setVelocityOnGround(): void {
         // fix prob with origin of the tile TODO check this condition after doing good sprite
         const xToAdd = this.currentDirection === 1 ? 0 : this.currentDirection;
         const map = Map.getInstance();
@@ -63,8 +73,32 @@ export class Enemy {
             this.currentDirection = this.currentDirection * -1;
             this.currentVelocity = this.currentVelocity * -1;
         }
-        this._enemySprite.setVelocityX(this.currentVelocity);
+    }
 
+    private setVelocityOnCollide(): void {
+        // fix prob with origin of the tile TODO check this condition after doing good sprite
+        // 0.3+ for fix "bug" math round
+        const xToAdd = this.currentDirection === -1 ? -1.3 : 0.3;
+        const map = Map.getInstance();
+        // calculate tile (for origin position of the sprite
+        const tileX: number = (parseInt(this._enemySprite.x) / Map.TILES_SIZE_X) + xToAdd;
+        let tileY: number = (parseInt(this._enemySprite.y) / Map.TILES_SIZE_Y);
+
+        console.log(Math.round(tileX), Math.round(tileY));
+        if (map.isExistTile(tileX, tileY)) {
+            console.log('istouching');
+            this.currentDirection = this.currentDirection * -1;
+            this.currentVelocity = this.currentVelocity * -1;
+        }
+        // TODO delete after adding the right sprite (1 is corresponding to 64px)
+        // checking collid on head
+        tileY = tileY - 1;
+
+        if (map.isExistTile(tileX, tileY)) {
+            console.log('istouching');
+            this.currentDirection = this.currentDirection * -1;
+            this.currentVelocity = this.currentVelocity * -1;
+        }
     }
 
     /**
@@ -78,6 +112,9 @@ export class Enemy {
             MapUtils.getMapPixelCoord(y),
             Enemy.SPRITE_ID,
             'zombie_hang.png');
+
+        this._enemySprite.setFixedRotation();
+        this._enemySprite.setFriction(0.2, 0.05,0);
     }
 
 }
