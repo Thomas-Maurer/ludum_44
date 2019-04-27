@@ -1,0 +1,39 @@
+.main-menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Black Pearl';
+
+    .btn {
+        border: 2px #000 solid;
+        padding: 5px 10px;
+        margin: 5px;
+        background-color: #212121;
+        color: #fff;
+        user-select: none;
+
+        &:hover {
+            background: #000;
+            cursor: pointer;
+        }
+    }
+
+    .main-menu-block {
+
+        border: 1px #ccc solid;
+
+        padding: 20px;
+
+        .game-title {
+            font-size: 1.5rem;
+            color: #fff;
+        }
+
+
+    }
+}

@@ -3,7 +3,7 @@
     "src/app.ts"
   ],
   "compilerOptions": {
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "target": "es5",
     "module": "commonjs",
     "removeComments": true,
