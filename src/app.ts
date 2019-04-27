@@ -5,6 +5,8 @@ import MainScene from "./scripts/scenes/MainScene";
 
 import ui from "./ui/main.js";
 import "./styles/style.scss";
+import * as PhaserMatterCollisionPlugin from "phaser-matter-collision-plugin";
+
 new ui();
 const gameConfig: GameConfig = {
   backgroundColor: "#000000",
