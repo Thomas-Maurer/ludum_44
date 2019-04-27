@@ -3,19 +3,60 @@ import Vector2 = Phaser.Math.Vector2;
 
 export class PlayerControls {
     private cursors: any;
+    private leftInput: string;
+    private rightInput: string;
+    private jumpInput: string;
     constructor(scene: Phaser.Scene){
+        this.initDefaultKeys();
         this.mappingKeys(scene);
     }
 
-    private mappingKeys(scene: Phaser.Scene) {
+    /**
+     * Init the default control keys
+     */
+    private initDefaultKeys(): void {
+        this.leftInput = 'left';
+        this.rightInput = 'right';
+        this.jumpInput = 'up';
+    }
+
+    /**
+     * CHange the jump control key
+     * @param value
+     */
+    public changeJumpKey(value: string): void {
+        this.jumpInput = value;
+    }
+
+    /**
+     * CHange the right control key
+     * @param value
+     */
+    public changeRightKey(value: string): void {
+        this.rightInput = value;
+    }
+
+    /**
+     * CHange the left control key
+     * @param value
+     */
+    public changeLeftKey(value: string): void {
+        this.leftInput = value;
+    }
+
+    /**
+     * Map the Keys to the events
+     * @param scene
+     */
+    private mappingKeys(scene: Phaser.Scene): void {
         // Handle Keyboard Event
         this.cursors = scene.input.keyboard.addKeys(
             {
                 escape: Phaser.Input.Keyboard.KeyCodes.ESC,
-                up: "up",
+                up: this.jumpInput,
                 down: "down",
-                left: "left",
-                right: "right",
+                left: this.leftInput,
+                right: this.rightInput,
             });
     }
 
@@ -23,7 +64,7 @@ export class PlayerControls {
         let negativeforceVector: Vector2;
         let forceVector: Vector2;
         let body: any = player.getPlayerSprite().body;
-        if (!player.canPlayerAct()) {
+        if (!player.isPlayerInTheAir()) {
             // Player is in the Air
             forceVector = new Vector2(0.1,0);
             negativeforceVector = new Vector2(-0.1,0);
@@ -51,7 +92,7 @@ export class PlayerControls {
         } else {
             player.getPlayerSprite().setVelocityX(0);
         }
-        if (this.cursors.up.isDown && player.getCanJump() && !player.canPlayerAct()) {
+        if (this.cursors.up.isDown && player.getCanJump() && !player.isPlayerInTheAir()) {
             console.log('penis');
             player.desactivateJump();
             player.getPlayerSprite().setVelocityY(-11);
