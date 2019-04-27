@@ -42,14 +42,14 @@ export default class MainScene extends Phaser.Scene {
     this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
     this.matter.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
     worldLayer.setCollisionByProperty({ collide: true });
-    this.player = new Player(this, 64, 11 * 32, 'all_sprites', 'Poses/player_walk1.png');
-
-    this.enemy = new Enemy(this.matter, 10, 0);
 
     // Get the layers registered with Matter. Any colliding tiles will be given a Matter body. We
     // haven't mapped out custom collision shapes in Tiled so each colliding tile will get a default
     // rectangle body (similar to AP).
     this.matter.world.convertTilemapLayer(worldLayer);
+
+    this.player = new Player(this.matter.world, this, 64, 11 * 32, 'all_sprites', 'Poses/player_walk1.png');
+    this.enemy = new Enemy(this.matter.world, this, 10 *64, 0, Enemy.SPRITE_ID, 'zombie_hang');
 
     this.cameras.main.startFollow(this.player.getPlayerSprite(), false, 0.5, 0.5);
     // Visualize all the matter bodies in the world. Note: this will be slow so go ahead and comment
@@ -67,6 +67,8 @@ export default class MainScene extends Phaser.Scene {
       callback: (eventData: any) => {
         if (eventData.gameObjectB !== undefined && eventData.gameObjectB instanceof Phaser.Tilemaps.Tile) {
           this.player.setPlayerInAirValue(false);
+        } else if(eventData.gameObjectB instanceof Enemy ) {
+          console.log(eventData.gameObjectB)
         }
       },
       context: this
