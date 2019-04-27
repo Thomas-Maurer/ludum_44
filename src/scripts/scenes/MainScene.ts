@@ -25,14 +25,10 @@ export default class MainScene extends Phaser.Scene {
     this.map = this.add.tilemap("map");
     const tileset = this.map.addTilesetImage("tile_test", "tiles_test");
     this.generateParralaxLayers();
-
-    this.generateParralaxLayers();
-
-
-
-
     const worldLayer = this.map.createStaticLayer("tile_test", tileset, 0, 0);
 
+    this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
+    this.matter.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
     worldLayer.setCollisionByProperty({ collide: true });
     this.player = new Player(this, 64, 11 * 32, 'all_sprites', 'Poses/player_walk1.png');
 
