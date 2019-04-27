@@ -93,7 +93,6 @@ export class PlayerControls {
             player.getPlayerSprite().setVelocityX(0);
         }
         if (this.cursors.up.isDown && player.getCanJump() && !player.isPlayerInTheAir()) {
-            console.log('penis');
             player.desactivateJump();
             player.getPlayerSprite().setVelocityY(-11);
         }
