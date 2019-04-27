@@ -13,7 +13,6 @@ export default class MainScene extends Phaser.Scene {
     bg_far: Phaser.GameObjects.TileSprite,
     bg: Phaser.GameObjects.TileSprite
   };
-  public cursors: any;
   /*
    * TODO make a class calling alls enemies
    */
