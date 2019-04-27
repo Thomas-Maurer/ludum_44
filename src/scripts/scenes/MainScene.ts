@@ -66,7 +66,7 @@ export default class MainScene extends Phaser.Scene {
       objectA: this.player.getPlayerSprite(),
       callback: (eventData: any) => {
         if (eventData.gameObjectB !== undefined && eventData.gameObjectB instanceof Phaser.Tilemaps.Tile) {
-          this.player.playerInAir(false);
+          this.player.setPlayerInAirValue(false);
         }
       },
       context: this

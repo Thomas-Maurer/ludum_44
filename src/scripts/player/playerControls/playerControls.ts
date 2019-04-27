@@ -23,7 +23,7 @@ export class PlayerControls {
         let negativeforceVector: Vector2;
         let forceVector: Vector2;
         let body: any = player.getPlayerSprite().body;
-        if (!player.canPlayerAct()) {
+        if (!player.isPlayerInTheAir()) {
             // Player is in the Air
             forceVector = new Vector2(0.1,0);
             negativeforceVector = new Vector2(-0.1,0);
@@ -51,7 +51,7 @@ export class PlayerControls {
         } else {
             player.getPlayerSprite().setVelocityX(0);
         }
-        if (this.cursors.up.isDown && player.getCanJump() && !player.canPlayerAct()) {
+        if (this.cursors.up.isDown && player.getCanJump() && !player.isPlayerInTheAir()) {
             console.log('penis');
             player.desactivateJump();
             player.getPlayerSprite().setVelocityY(-11);
