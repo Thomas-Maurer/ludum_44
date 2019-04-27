@@ -54,6 +54,7 @@ export default class MainScene extends Phaser.Scene {
         callback: function(eventData) {
           //console.log(this.player.canPlayerAct());
           this.player.playerInAir(false);
+          console.log(this.player);
         },
         context: this
       });
