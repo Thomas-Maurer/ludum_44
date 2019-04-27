@@ -6,8 +6,8 @@
     "noImplicitAny": false,
     "target": "es5",
     "module": "commonjs",
-    "allowSyntheticDefaultImports": true,
     "removeComments": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true
   }
 }

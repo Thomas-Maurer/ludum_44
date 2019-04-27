@@ -1,4 +1,5 @@
 /// <reference path="../node_modules/phaser3-docs/typescript/phaser.d.ts" />
+
 import "phaser";
 import MainScene from "./scripts/scenes/MainScene";
 
@@ -14,7 +15,7 @@ const gameConfig: GameConfig = {
   physics: {
     default: "matter",
     matter: {
-      debug: true, // true for collisions debug
+      debug: false, // true for collisions debug
       gravity: { y: 1 } // This is the default value, so we could omit this
     },
   },
