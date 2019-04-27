@@ -28,8 +28,6 @@ export default class MainScene extends Phaser.Scene {
       // haven't mapped out custom collision shapes in Tiled so each colliding tile will get a default
       // rectangle body (similar to AP).
       this.matter.world.convertTilemapLayer(worldLayer);
-
-    this.cameras.main.startFollow(this.player.getPlayerSprite(), false, 0.5, 0.5);
       // Visualize all the matter bodies in the world. Note: this will be slow so go ahead and comment
       // it out after you've seen what the bodies look like.
       this.matter.world.createDebugGraphic();
