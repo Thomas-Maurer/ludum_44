@@ -13,7 +13,6 @@ export default class MainScene extends Phaser.Scene {
     bg_far: Phaser.GameObjects.TileSprite,
     bg: Phaser.GameObjects.TileSprite
   };
-  public cursors: any;
   /*
    * TODO make a class calling alls enemies
    */
@@ -25,8 +24,8 @@ export default class MainScene extends Phaser.Scene {
   }
   preload() {
     this.load.tilemapTiledJSON("map", "/assets/map/map_beta.json");
-    this.load.image("tiles_test", "/assets/graphics/map/backgrounds/bg_beta.png");
     this.load.multiatlas('all_sprites', 'assets/graphics/map/backgrounds/spritesheet.json', 'assets/graphics/map/backgrounds');
+    this.load.multiatlas('block', 'assets/graphics/map/backgrounds/block.json', 'assets/graphics/map/backgrounds');
 
 
     this.load.multiatlas(Enemy.SPRITE_ID, 'assets/graphics/char/enemy/enemy_test.json', 'assets/graphics/char/enemy');
@@ -36,21 +35,22 @@ export default class MainScene extends Phaser.Scene {
     const map = Map.getInstance(this.add.tilemap('map'));
     this.map = map.tileMap;
 
-    const tileset = this.map.addTilesetImage("tile_test", "tiles_test");
+    const tileset = this.map.addTilesetImage('block', 'block');
+
     this.generateParralaxLayers();
-    const worldLayer = this.map.createStaticLayer("tile_test", tileset, 0, 0);
+    const worldLayer = this.map.createStaticLayer('main_tile', tileset, 0, 0);
 
     this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
     this.matter.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
     worldLayer.setCollisionByProperty({ collide: true });
-    this.player = new Player(this, 64, 11 * 32, 'all_sprites', 'Poses/player_walk1.png');
-
-    this.enemy = new Enemy(this.matter, 10, 0);
 
     // Get the layers registered with Matter. Any colliding tiles will be given a Matter body. We
     // haven't mapped out custom collision shapes in Tiled so each colliding tile will get a default
     // rectangle body (similar to AP).
     this.matter.world.convertTilemapLayer(worldLayer);
+
+    this.player = new Player(this.matter.world, this, 64, 11 * 32, 'all_sprites', 'Poses/player_walk1.png');
+    this.enemy = new Enemy(this.matter.world, this, 10 *64, 0, Enemy.SPRITE_ID, 'zombie_hang');
 
     this.cameras.main.startFollow(this.player.getPlayerSprite(), false, 0.5, 0.5);
     // Visualize all the matter bodies in the world. Note: this will be slow so go ahead and comment
@@ -68,6 +68,8 @@ export default class MainScene extends Phaser.Scene {
       callback: (eventData: any) => {
         if (eventData.gameObjectB !== undefined && eventData.gameObjectB instanceof Phaser.Tilemaps.Tile) {
           this.player.setPlayerInAirValue(false);
+        } else if(eventData.gameObjectB instanceof Enemy ) {
+          console.log(eventData.gameObjectB)
         }
       },
       context: this
