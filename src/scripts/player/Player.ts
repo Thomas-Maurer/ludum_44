@@ -1,27 +1,32 @@
 import {PlayerControls} from "./playerControls/playerControls";
+import {Enemy} from "../enemy/enemy";
 
-export default class Player {
-    private sprite: Phaser.Physics.Matter.Sprite;
+export default class Player extends Phaser.Physics.Matter.Sprite{
     private playerControl: PlayerControls;
     private canJump: boolean;
     private jumpCooldownTimer: Phaser.Time.TimerEvent;
-    private scene: Phaser.Scene;
     private inAir: boolean;
-    constructor(scene: Phaser.Scene, x: number, y: number, key: string, frame?: string | integer) {
-        this.sprite = scene.matter.add.sprite(x, y, key, frame);
+    private healthPoint: number;
+    private baseDamage: number;
+    constructor(world: Phaser.Physics.Matter.World, scene: Phaser.Scene, x: number, y: number, key: string, frame?: string | integer) {
+        super(world, x, y, key, frame);
+        scene.add.existing(this);
+        console.log(x, y, key, frame);
         this.playerControl = new PlayerControls(scene);
         this.scene = scene;
         this.canJump = true;
-        this.sprite.setFixedRotation();
-        this.sprite.setFriction(0.2, 0.05,0);
+        this.setFixedRotation();
+        this.setFriction(0.2, 0.05,0);
         this.inAir = true;
+        this.healthPoint = 100;
+        this.baseDamage = 1;
     }
 
     /**
      * Return the PlayerSprite
      */
     public getPlayerSprite(): Phaser.Physics.Matter.Sprite {
-        return this.sprite;
+        return this;
     }
 
     /**
@@ -65,5 +70,13 @@ export default class Player {
      */
     public isPlayerInTheAir(): boolean {
         return this.inAir;
+    }
+
+    /**
+     * this do damage to an enemy
+     * @param enemy
+     */
+    public doDamageTo(enemy: Enemy): void {
+
     }
 }
