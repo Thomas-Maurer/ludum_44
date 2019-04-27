@@ -2,8 +2,10 @@
 
 import "phaser";
 import MainScene from "./scripts/scenes/MainScene";
-import "./styles/style.scss";
 
+import ui from "./ui/main.js";
+import "./styles/style.scss";
+new ui();
 const gameConfig: GameConfig = {
   backgroundColor: "#000000",
   height: window.innerHeight,
@@ -19,3 +21,4 @@ const gameConfig: GameConfig = {
   width: document.body.offsetWidth,
 };
 const game = new Phaser.Game(gameConfig);
+new ui();
