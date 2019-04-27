@@ -1,6 +1,8 @@
+import Player from "../player/Player";
+
 export default class MainScene extends Phaser.Scene {
   public map: Phaser.Tilemaps.Tilemap;
-  public cursors: any;
+  public player: Player;
   constructor() {
     super({
       key: "MainScene",
@@ -20,7 +22,7 @@ export default class MainScene extends Phaser.Scene {
     const worldLayer = this.map.createStaticLayer("tile_test", tileset, 0, 0);
 
       worldLayer.setCollisionByProperty({ collide: true });
-    this.matter.add.sprite(64, 11*32, 'all_sprites', 'Poses/player_walk1.png');
+    this.player = new Player(this,64, 11*32, 'all_sprites', 'Poses/player_walk1.png');
 
       // Get the layers registered with Matter. Any colliding tiles will be given a Matter body. We
       // haven't mapped out custom collision shapes in Tiled so each colliding tile will get a default
@@ -29,23 +31,11 @@ export default class MainScene extends Phaser.Scene {
       // Visualize all the matter bodies in the world. Note: this will be slow so go ahead and comment
       // it out after you've seen what the bodies look like.
       this.matter.world.createDebugGraphic();
-    this.mappingKeys();
   }
 
-  private mappingKeys() {
-    // Handle Keyboard Event
-    this.cursors = this.input.keyboard.addKeys(
-        {
-          escape: Phaser.Input.Keyboard.KeyCodes.ESC,
-          up: "up",
-          down: "down",
-          left: "left",
-          right: "right",
-        });
-  }
 // Fct we call each frame
   public update() {
-
+    this.player.handleActions();
   }
 }
 
