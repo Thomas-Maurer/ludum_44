@@ -75,6 +75,9 @@ export class Enemy {
         }
     }
 
+    /**
+     * Set velocity on collide
+     */
     private setVelocityOnCollide(): void {
         // fix prob with origin of the tile TODO check this condition after doing good sprite
         // 0.3+ for fix "bug" math round
@@ -84,9 +87,7 @@ export class Enemy {
         const tileX: number = (parseInt(this._enemySprite.x) / Map.TILES_SIZE_X) + xToAdd;
         let tileY: number = (parseInt(this._enemySprite.y) / Map.TILES_SIZE_Y);
 
-        console.log(Math.round(tileX), Math.round(tileY));
         if (map.isExistTile(tileX, tileY)) {
-            console.log('istouching');
             this.currentDirection = this.currentDirection * -1;
             this.currentVelocity = this.currentVelocity * -1;
         }
@@ -95,7 +96,6 @@ export class Enemy {
         tileY = tileY - 1;
 
         if (map.isExistTile(tileX, tileY)) {
-            console.log('istouching');
             this.currentDirection = this.currentDirection * -1;
             this.currentVelocity = this.currentVelocity * -1;
         }
