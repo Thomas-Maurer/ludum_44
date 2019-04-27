@@ -1,14 +1,18 @@
 import {
     mapState
 } from 'vuex';
+
 export default {
-    name: "MainMenu",
+    name: "Gameplay",
     computed: mapState([
         'play'
     ]),
-    methods: {
-        setPlay() {
-            this.$store.commit("setPlay", true);
+    data() {
+        return {
+            lorem: false
         }
+    },
+    methods: {
+
     }
 };
