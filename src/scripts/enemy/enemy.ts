@@ -88,7 +88,6 @@ export class Enemy {
         let tileY: number = (parseInt(this._enemySprite.y) / Map.TILES_SIZE_Y);
 
         if (map.isExistTile(tileX, tileY)) {
-            console.log('istouching');
             this.currentDirection = this.currentDirection * -1;
             this.currentVelocity = this.currentVelocity * -1;
         }
@@ -97,7 +96,6 @@ export class Enemy {
         tileY = tileY - 1;
 
         if (map.isExistTile(tileX, tileY)) {
-            console.log('istouching');
             this.currentDirection = this.currentDirection * -1;
             this.currentVelocity = this.currentVelocity * -1;
         }
