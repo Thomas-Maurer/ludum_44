@@ -64,6 +64,7 @@ export class PlayerControls {
         let negativeforceVector: Vector2;
         let forceVector: Vector2;
         let body: any = player.getPlayerSprite().body;
+
         if (!player.isPlayerInTheAir()) {
             // Player is in the Air
             forceVector = new Vector2(0.1,0);
@@ -84,15 +85,30 @@ export class PlayerControls {
             }
         }
         if(this.cursors.right.isDown){
-            player.getPlayerSprite().setFlipX(true);
+            if (player.anims.currentAnim !== null && player.anims.currentAnim.key === 'playerJump') {
+            } else {
+                player.anims.play('playerRun',true);
+            }
+
+            player.getPlayerSprite().setFlipX(false);
             player.getPlayerSprite().applyForce(forceVector);
         } else if(this.cursors.left.isDown){
-            player.getPlayerSprite().setFlipX(false);
+            if (player.anims.currentAnim !== null && player.anims.currentAnim.key === 'playerJump') {
+            } else {
+                player.anims.play('playerRun',true);
+            }
+            player.getPlayerSprite().setFlipX(true);
             player.getPlayerSprite().applyForce(negativeforceVector);
         } else {
+            if (player.anims.currentAnim !== null && player.anims.currentAnim.key === 'playerJump') {
+
+            } else {
+                player.anims.play('playerIdle',true);
+            }
             player.getPlayerSprite().setVelocityX(0);
         }
         if (this.cursors.up.isDown && player.getCanJump() && !player.isPlayerInTheAir()) {
+            player.anims.play('playerJump',true);
             player.desactivateJump();
             player.getPlayerSprite().setVelocityY(-11);
         }

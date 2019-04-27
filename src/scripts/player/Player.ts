@@ -20,6 +20,29 @@ export default class Player extends Phaser.Physics.Matter.Sprite{
         this.inAir = true;
         this.healthPoint = 100;
         this.baseDamage = 1;
+//TODO Better handling of event
+        this.on('animationcomplete', function (anim, frame) {
+            this.emit('animationcomplete_' + anim.key, anim, frame);
+        }, this);
+
+        this.on('animationcomplete_playerJump', function () {
+            this.anims.play('playerIdle');
+        }, this);
+    }
+
+    /**
+     * TODO export this function
+     * Generate FrameNames
+     * @param key
+     * @param atlasName
+     * @param start
+     * @param end
+     */
+    public generateFrameNames (key: string, atlasName: string, start: number, end: number): Phaser.Animations.Types.AnimationFrame[] {
+        return this.scene.anims.generateFrameNames(atlasName,{
+            start: start, end: end, zeroPad: 1,
+            prefix: key, suffix: '.png'
+        } )
     }
 
     /**
