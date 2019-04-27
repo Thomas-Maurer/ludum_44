@@ -2,6 +2,7 @@ const path = require('path');
 var LiveReloadPlugin = require('webpack-livereload-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 var webpack = require('webpack')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 var definePlugin = new webpack.DefinePlugin({
     __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true')),
@@ -15,8 +16,7 @@ module.exports = {
     target: 'web',
     watch: true,
     module: {
-        rules: [
-            {
+        rules: [{
                 test: /\.tsx?$/,
                 use: 'ts-loader',
                 exclude: /node_modules/
@@ -28,6 +28,15 @@ module.exports = {
                     "css-loader", // translates CSS into CommonJS
                     "sass-loader" // compiles Sass to CSS, using Node Sass by default
                 ]
+            },
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader'
+            },
+            {
+                test: /\.(ttf|eot|woff|woff2)$/,
+                loader: "file-loader",
+
             }
         ]
     },
@@ -42,12 +51,14 @@ module.exports = {
     plugins: [
         definePlugin,
         new LiveReloadPlugin(),
-        new CopyPlugin([
-            { from: 'src/index.html' },
+        new CopyPlugin([{
+                from: 'src/index.html'
+            },
             {
                 from: 'src/assets',
                 to: 'assets'
             }
         ]),
+        new VueLoaderPlugin()
     ]
 };
