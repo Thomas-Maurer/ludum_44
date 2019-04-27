@@ -13,6 +13,15 @@ export default {
         }
     },
     methods: {
+        initEventsListeners() {
+            console.log("listening")
+            window.addEventListener('PLAYER_JUMP', (e) => {
+                console.log("Player jump")
+            });
+        }
+    },
 
-    }
+    created() {
+        this.initEventsListeners();
+    },
 };
