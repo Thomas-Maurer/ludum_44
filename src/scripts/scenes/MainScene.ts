@@ -90,14 +90,14 @@ export default class MainScene extends Phaser.Scene {
       if (this.parralaxLayers.hasOwnProperty(layerName)) {
         const layer: Phaser.GameObjects.TileSprite = this.parralaxLayers[layerName];
         const playerPos = this.player.getPlayerSprite();
-        layer.setPosition(playerPos.x, playerPos.y)
-        layer.setOrigin(0.5, 0.5);
+        layer.setPosition(this.cameras.main.scrollX, this.cameras.main.scrollY)
+        layer.setOrigin(0, 0);
       }
     }
 
     this.parralaxLayers.bg_clouds.tilePositionX -= 0.5;
-    this.parralaxLayers.bg_far.tilePositionX = this.player.getPlayerSprite().x * 0.1;
-    this.parralaxLayers.bg_far.tilePositionY = this.player.getPlayerSprite().y * 0.1;
+    this.parralaxLayers.bg_far.tilePositionX = this.cameras.main.scrollX * 0.1;
+    this.parralaxLayers.bg_far.tilePositionY = this.cameras.main.scrollY * 0.1;
     // this.parralaxLayers[1].tilePositionX = this.player.getPlayerSprite().x * 0.1;
 
   }
