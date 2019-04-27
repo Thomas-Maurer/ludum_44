@@ -1,9 +1,9 @@
 <template>
-  <div class="main-menu">
-    <div class="main-menu-block" v-show="!play">
+  <div class="main-menu" v-if="!play">
+    <div class="main-menu-block">
       <div class="game-title">LOREM IPSUM</div>
 
-      <div class="btn play-btn" @click="play = true">PLAY</div>
+      <div class="btn play-btn" @click="setPlay()">PLAY</div>
 
       <div class="btn other-btn">BUTTON</div>
     </div>
