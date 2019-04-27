@@ -5,6 +5,7 @@
 ### project ###
 dist
 
+.idea
 ### Node ###
 # Logs
 logs
