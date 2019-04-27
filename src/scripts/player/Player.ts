@@ -49,18 +49,21 @@ export default class Player {
             delay: 250,
             callback: () => (this.canJump = true)
         });
-        this.playerInAir(true);
+        this.setPlayerInAirValue(true);
         this.canJump = false;
     }
 
     /**
      * activate player in Air
      */
-    public playerInAir(value: boolean): void {
+    public setPlayerInAirValue(value: boolean): void {
         this.inAir = value;
     }
 
-    public canPlayerAct(): boolean {
+    /**
+     * return if the player is in the air or not
+     */
+    public isPlayerInTheAir(): boolean {
         return this.inAir;
     }
 }
