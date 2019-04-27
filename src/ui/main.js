@@ -3,9 +3,12 @@ import App from './App.vue'
 
 export default class ui {
     constructor() {
-        new Vue({
-            el: '#ui',
-            render: h => h(App)
-        });
+        window.addEventListener('load', () => {
+            new Vue({
+                el: '#ui',
+                render: h => h(App)
+            });
+        })
+
     }
 }
