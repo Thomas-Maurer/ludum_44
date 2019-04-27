@@ -1,5 +1,6 @@
 <template>
-  <div class="main-menu" v-if="!play">
+  <!-- enable here  -->
+  <div class="main-menu" v-if="play">
     <div class="main-menu-block">
       <div class="game-title">LOREM IPSUM</div>
 
