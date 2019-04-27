@@ -43,6 +43,8 @@
   },
   "dependencies": {
     "phaser": "^3.16.2",
-    "vue": "^2.6.10"
+    "phaser-matter-collision-plugin": "^0.10.2",
+    "vue": "^2.6.10",
+    "vuex": "^3.1.0"
   }
 }
