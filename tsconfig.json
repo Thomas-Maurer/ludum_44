@@ -3,9 +3,9 @@
     "src/app.ts"
   ],
   "compilerOptions": {
-    "noImplicitAny": true,
     "target": "es5",
     "module": "commonjs",
+    "allowSyntheticDefaultImports": true,
     "removeComments": true,
     "sourceMap": true
   }

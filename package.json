@@ -39,6 +39,7 @@
     "webpack-livereload-plugin": "^2.2.0"
   },
   "dependencies": {
-    "phaser": "^3.16.2"
+    "phaser": "^3.16.2",
+    "phaser-matter-collision-plugin": "^0.10.2"
   }
 }
