@@ -1,3 +1,4 @@
+import {MapUtils} from "../utils/map.utils";
 export default class MainScene extends Phaser.Scene {
   public map: Phaser.Tilemaps.Tilemap;
   public cursors: any;
@@ -10,6 +11,7 @@ export default class MainScene extends Phaser.Scene {
     this.load.tilemapTiledJSON("map", "/assets/map/map_beta.json");
     this.load.image("tiles_test", "/assets/graphics/map/backgrounds/bg_beta.png");
     this.load.multiatlas('all_sprites', 'assets/graphics/map/backgrounds/spritesheet.json', 'assets/graphics/map/backgrounds');
+    this.load.multiatlas('enemy_sprites', 'assets/graphics/char/enemy/enemy_test.json', 'assets/graphics/char/enemy');
   }
   create() {
     /** Build all layers maps */
@@ -21,6 +23,8 @@ export default class MainScene extends Phaser.Scene {
 
       worldLayer.setCollisionByProperty({ collide: true });
     this.matter.add.sprite(64, 11*32, 'all_sprites', 'Poses/player_walk1.png');
+
+    this.matter.add.sprite(MapUtils.getMapPixelCoord(10), MapUtils.getMapPixelCoord(0), 'enemy_sprites', 'zombie_hang.png');
 
       // Get the layers registered with Matter. Any colliding tiles will be given a Matter body. We
       // haven't mapped out custom collision shapes in Tiled so each colliding tile will get a default
