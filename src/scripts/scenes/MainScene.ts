@@ -1,6 +1,8 @@
 import Player from "../player/Player";
+import * as PhaserMatterCollisionPlugin from "phaser-matter-collision-plugin";
 
 export default class MainScene extends Phaser.Scene {
+  public matterCollision: PhaserMatterCollisionPlugin;
   public map: Phaser.Tilemaps.Tilemap;
   public player: Player;
   constructor() {
@@ -33,7 +35,23 @@ export default class MainScene extends Phaser.Scene {
       // Visualize all the matter bodies in the world. Note: this will be slow so go ahead and comment
       // it out after you've seen what the bodies look like.
       this.matter.world.createDebugGraphic();
-  }
+    this.matterCollision.addOnCollideStart({
+      objectA: this.player.getPlayerSprite(),
+      callback: function(eventData) {
+      //console.log(eventData)
+      },
+      context: this // Context to apply to the callback function
+    });
+
+    this.matterCollision.addOnCollideActive({
+        objectA: this.player.getPlayerSprite(),
+        callback: function(eventData) {
+          //console.log(this.player.canPlayerAct());
+          this.player.playerInAir(false);
+        },
+        context: this
+      });
+    }
 
 // Fct we call each frame
   public update() {
