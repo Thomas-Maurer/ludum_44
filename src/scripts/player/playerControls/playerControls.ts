@@ -1,4 +1,5 @@
 import Player from "../Player";
+import Vector2 = Phaser.Math.Vector2;
 
 export class PlayerControls {
     private cursors: any;
