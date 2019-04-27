@@ -1,8 +1,8 @@
 import Player from "../player/Player";
 import * as PhaserMatterCollisionPlugin from "phaser-matter-collision-plugin";
 
-import {Enemy} from "../enemy/enemy";
-import {Map} from "../map-data";
+import { Enemy } from "../enemy/enemy";
+import { Map } from "../map-data";
 export default class MainScene extends Phaser.Scene {
   public matterCollision: PhaserMatterCollisionPlugin;
   public map: Phaser.Tilemaps.Tilemap;
@@ -63,7 +63,7 @@ export default class MainScene extends Phaser.Scene {
       },
       context: this // Context to apply to the callback function
     });
-console.log(tileset);
+    console.log(tileset);
     this.matterCollision.addOnCollideActive({
       objectA: this.player.getPlayerSprite(),
       callback: function (eventData) {
@@ -105,7 +105,6 @@ console.log(tileset);
     for (const layerName in this.parralaxLayers) {
       if (this.parralaxLayers.hasOwnProperty(layerName)) {
         const layer: Phaser.GameObjects.TileSprite = this.parralaxLayers[layerName];
-        const playerPos = this.player.getPlayerSprite();
         layer.setPosition(this.cameras.main.scrollX, this.cameras.main.scrollY)
         layer.setOrigin(0, 0);
       }
