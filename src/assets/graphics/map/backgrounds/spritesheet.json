@@ -4,7 +4,7 @@
 			"image": "spritesheet.png",
 			"format": "RGBA8888",
 			"size": {
-				"w": 1490,
+				"w": 1708,
 				"h": 962
 			},
 			"scale": 1,
@@ -33,6 +33,606 @@
 						"x": 0,
 						"y": 0
 					}
+				},
+				{
+					"filename": "Poses/player_hurt.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 7,
+						"w": 80,
+						"h": 101
+					},
+					"frame": {
+						"x": 1491,
+						"y": 1,
+						"w": 80,
+						"h": 101
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_swim1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 6,
+						"w": 80,
+						"h": 101
+					},
+					"frame": {
+						"x": 1573,
+						"y": 1,
+						"w": 80,
+						"h": 101
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_fall.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 10,
+						"w": 79,
+						"h": 99
+					},
+					"frame": {
+						"x": 1491,
+						"y": 104,
+						"w": 79,
+						"h": 99
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_kick.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 11,
+						"w": 79,
+						"h": 99
+					},
+					"frame": {
+						"x": 1572,
+						"y": 104,
+						"w": 79,
+						"h": 99
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_hold2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 13,
+						"w": 54,
+						"h": 97
+					},
+					"frame": {
+						"x": 1653,
+						"y": 104,
+						"w": 54,
+						"h": 97
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_hold1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 13,
+						"w": 79,
+						"h": 97
+					},
+					"frame": {
+						"x": 1491,
+						"y": 205,
+						"w": 79,
+						"h": 97
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_action2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 15,
+						"w": 79,
+						"h": 95
+					},
+					"frame": {
+						"x": 1572,
+						"y": 205,
+						"w": 79,
+						"h": 95
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_swim2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 5,
+						"w": 78,
+						"h": 104
+					},
+					"frame": {
+						"x": 1572,
+						"y": 302,
+						"w": 78,
+						"h": 104
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_cheer1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 12,
+						"w": 78,
+						"h": 98
+					},
+					"frame": {
+						"x": 1491,
+						"y": 304,
+						"w": 78,
+						"h": 98
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_slide.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 17,
+						"w": 78,
+						"h": 93
+					},
+					"frame": {
+						"x": 1491,
+						"y": 404,
+						"w": 78,
+						"h": 93
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_cheer2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 13,
+						"w": 77,
+						"h": 97
+					},
+					"frame": {
+						"x": 1571,
+						"y": 408,
+						"w": 77,
+						"h": 97
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_walk2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 12,
+						"y": 11,
+						"w": 57,
+						"h": 99
+					},
+					"frame": {
+						"x": 1650,
+						"y": 408,
+						"w": 57,
+						"h": 99
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_hang.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 1,
+						"w": 76,
+						"h": 109
+					},
+					"frame": {
+						"x": 1491,
+						"y": 499,
+						"w": 76,
+						"h": 109
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_talk.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 13,
+						"w": 76,
+						"h": 97
+					},
+					"frame": {
+						"x": 1569,
+						"y": 507,
+						"w": 76,
+						"h": 97
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_climb1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 6,
+						"w": 60,
+						"h": 101
+					},
+					"frame": {
+						"x": 1647,
+						"y": 509,
+						"w": 60,
+						"h": 101
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_walk1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 12,
+						"w": 74,
+						"h": 98
+					},
+					"frame": {
+						"x": 1569,
+						"y": 606,
+						"w": 74,
+						"h": 98
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_stand.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 13,
+						"w": 62,
+						"h": 97
+					},
+					"frame": {
+						"x": 1645,
+						"y": 612,
+						"w": 62,
+						"h": 97
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_jump.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 8,
+						"w": 73,
+						"h": 102
+					},
+					"frame": {
+						"x": 1491,
+						"y": 610,
+						"w": 73,
+						"h": 102
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_action1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 9,
+						"w": 70,
+						"h": 101
+					},
+					"frame": {
+						"x": 1566,
+						"y": 706,
+						"w": 70,
+						"h": 101
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_skid.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 14,
+						"w": 69,
+						"h": 96
+					},
+					"frame": {
+						"x": 1638,
+						"y": 711,
+						"w": 69,
+						"h": 96
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_duck.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 25,
+						"w": 68,
+						"h": 85
+					},
+					"frame": {
+						"x": 1491,
+						"y": 714,
+						"w": 68,
+						"h": 85
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_back.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 13,
+						"w": 65,
+						"h": 97
+					},
+					"frame": {
+						"x": 1491,
+						"y": 801,
+						"w": 65,
+						"h": 97
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_climb2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 11,
+						"y": 6,
+						"w": 60,
+						"h": 101
+					},
+					"frame": {
+						"x": 1558,
+						"y": 809,
+						"w": 60,
+						"h": 101
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_idle.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 13,
+						"w": 65,
+						"h": 97
+					},
+					"frame": {
+						"x": 1620,
+						"y": 809,
+						"w": 65,
+						"h": 97
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
 				}
 			]
 		}
@@ -40,6 +640,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:3de9563a8996b1df00e35ab99690c308:d371acb3410476d91ac1409b172180db:729adc6043343cfda41c447ce8f464d6$"
+		"smartupdate": "$TexturePacker:SmartUpdate:6c14d090f5f7fa8e7dd5545033af00a9:011d4620bcef01c257c752c7a5a5151c:729adc6043343cfda41c447ce8f464d6$"
 	}
 }

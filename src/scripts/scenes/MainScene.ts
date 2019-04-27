@@ -15,10 +15,20 @@ export default class MainScene extends Phaser.Scene {
     /** Build all layers maps */
     this.map = this.add.tilemap("map");
     const tileset = this.map.addTilesetImage("tile_test", "tiles_test");
-    var background = this.add.sprite(0, 0, 'all_sprites', 'bg_beta.png');
-
+    this.add.sprite(0, 0, 'all_sprites', 'bg_beta.png');
+    var player = this.add.sprite(64, 11*32, 'all_sprites', 'Poses/player_walk1.png');
 
     const worldLayer = this.map.createStaticLayer("tile_test", tileset, 0, 0);
+
+      worldLayer.setCollisionByProperty({ collide: true });
+
+      // Get the layers registered with Matter. Any colliding tiles will be given a Matter body. We
+      // haven't mapped out custom collision shapes in Tiled so each colliding tile will get a default
+      // rectangle body (similar to AP).
+      this.matter.world.convertTilemapLayer(worldLayer);
+      // Visualize all the matter bodies in the world. Note: this will be slow so go ahead and comment
+      // it out after you've seen what the bodies look like.
+      this.matter.world.createDebugGraphic();
     this.mappingKeys();
   }
 
