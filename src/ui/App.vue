@@ -1,11 +1,16 @@
 <template>
-  <div id="ui">ECOUTE  MOI BIEN PD</div>
+  <div id="ui">
+    <MainMenu/>
+  </div>
 </template>
 
 <script>
+import MainMenu from "./components/MainMenu/MainMenu.vue";
 export default {
   name: "App",
-  components: {}
+  components: {
+    MainMenu
+  }
 };
 </script>
 

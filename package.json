@@ -27,6 +27,7 @@
   "devDependencies": {
     "copy-webpack-plugin": "^5.0.0",
     "css-loader": "^2.1.0",
+    "file-loader": "^3.0.1",
     "node-sass": "^4.11.0",
     "phaser3-docs": "git+https://github.com/photonstorm/phaser3-docs.git",
     "sass-loader": "^7.1.0",
