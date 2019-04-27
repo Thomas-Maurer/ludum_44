@@ -1,7 +1,12 @@
-import {MapUtils} from "../utils/map.utils";
+import {Enemy} from "../enemy/enemy";
+import {Map} from "../map-data";
 export default class MainScene extends Phaser.Scene {
   public map: Phaser.Tilemaps.Tilemap;
   public cursors: any;
+  /**
+   * TODO make a class calling alls enemies
+   */
+  public enemy: any;
   constructor() {
     super({
       key: "MainScene",
@@ -11,20 +16,25 @@ export default class MainScene extends Phaser.Scene {
     this.load.tilemapTiledJSON("map", "/assets/map/map_beta.json");
     this.load.image("tiles_test", "/assets/graphics/map/backgrounds/bg_beta.png");
     this.load.multiatlas('all_sprites', 'assets/graphics/map/backgrounds/spritesheet.json', 'assets/graphics/map/backgrounds');
-    this.load.multiatlas('enemy_sprites', 'assets/graphics/char/enemy/enemy_test.json', 'assets/graphics/char/enemy');
+
+
+    this.load.multiatlas(Enemy.SPRITE_ID, 'assets/graphics/char/enemy/enemy_test.json', 'assets/graphics/char/enemy');
   }
   create() {
     /** Build all layers maps */
-    this.map = this.add.tilemap("map");
+    const map = Map.getInstance(this.add.tilemap('map'));
+    this.map = map.tileMap;
+
     const tileset = this.map.addTilesetImage("tile_test", "tiles_test");
     this.add.sprite(0, 0, 'all_sprites', 'bg_beta.png');
 
     const worldLayer = this.map.createStaticLayer("tile_test", tileset, 0, 0);
 
       worldLayer.setCollisionByProperty({ collide: true });
-    this.matter.add.sprite(64, 11*32, 'all_sprites', 'Poses/player_walk1.png');
 
-    this.matter.add.sprite(MapUtils.getMapPixelCoord(10), MapUtils.getMapPixelCoord(0), 'enemy_sprites', 'zombie_hang.png');
+    this.enemy = new Enemy(this.matter, 10, 0);
+
+    this.matter.add.sprite(64, 11*32, 'all_sprites', 'Poses/player_walk1.png');
 
       // Get the layers registered with Matter. Any colliding tiles will be given a Matter body. We
       // haven't mapped out custom collision shapes in Tiled so each colliding tile will get a default
@@ -49,7 +59,7 @@ export default class MainScene extends Phaser.Scene {
   }
 // Fct we call each frame
   public update() {
-
+    this.enemy.update();
   }
 }
 
