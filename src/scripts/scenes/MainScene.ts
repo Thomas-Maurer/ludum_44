@@ -16,11 +16,11 @@ export default class MainScene extends Phaser.Scene {
     this.map = this.add.tilemap("map");
     const tileset = this.map.addTilesetImage("tile_test", "tiles_test");
     this.add.sprite(0, 0, 'all_sprites', 'bg_beta.png');
-    var player = this.add.sprite(64, 11*32, 'all_sprites', 'Poses/player_walk1.png');
 
     const worldLayer = this.map.createStaticLayer("tile_test", tileset, 0, 0);
 
       worldLayer.setCollisionByProperty({ collide: true });
+    this.matter.add.sprite(64, 11*32, 'all_sprites', 'Poses/player_walk1.png');
 
       // Get the layers registered with Matter. Any colliding tiles will be given a Matter body. We
       // haven't mapped out custom collision shapes in Tiled so each colliding tile will get a default
