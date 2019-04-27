@@ -18,7 +18,7 @@ export default class MainScene extends Phaser.Scene {
     /** Build all layers maps */
     this.map = this.add.tilemap("map");
     const tileset = this.map.addTilesetImage("tile_test", "tiles_test");
-    //create the parralax layers
+    this.generateParralaxLayers();
 
     this.generateParralaxLayers();
 
@@ -34,14 +34,16 @@ export default class MainScene extends Phaser.Scene {
     // haven't mapped out custom collision shapes in Tiled so each colliding tile will get a default
     // rectangle body (similar to AP).
     this.matter.world.convertTilemapLayer(worldLayer);
+
+    this.cameras.main.startFollow(this.player.getPlayerSprite(), false, 0.5, 0.5);
     // Visualize all the matter bodies in the world. Note: this will be slow so go ahead and comment
     // it out after you've seen what the bodies look like.
     this.matter.world.createDebugGraphic();
   }
 
   /**
-   * Create the parralax layers
-   */
+ * Create the parralax layers
+ */
   private generateParralaxLayers() {
     this.parralaxLayers.push(this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'bg_beta.png'))
   }
@@ -50,7 +52,10 @@ export default class MainScene extends Phaser.Scene {
    * Update the parralax layers each frame
    */
   private updateParralax() {
-    this.parralaxLayers[0].tilePositionX -= 0.05;
+    this.parralaxLayers[0].setOrigin(0, 0)
+    this.parralaxLayers[0].x = this.cameras.main.scrollX;
+    this.parralaxLayers[0].y = this.cameras.main.scrollY;
+    this.parralaxLayers[0].tilePositionX = this.cameras.main.scrollX * 0.1;
   }
 
   // Fct we call each frame
