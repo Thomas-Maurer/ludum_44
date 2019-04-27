@@ -1,0 +1,524 @@
+{
+	"textures": [
+		{
+			"image": "enemy_test.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 1788,
+				"h": 100
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "zombie_hang.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 12,
+						"w": 76,
+						"h": 98
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 76,
+						"h": 98
+					}
+				},
+				{
+					"filename": "zombie_swim2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 13,
+						"w": 78,
+						"h": 96
+					},
+					"frame": {
+						"x": 79,
+						"y": 1,
+						"w": 78,
+						"h": 96
+					}
+				},
+				{
+					"filename": "zombie_jump.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 14,
+						"w": 73,
+						"h": 96
+					},
+					"frame": {
+						"x": 159,
+						"y": 1,
+						"w": 73,
+						"h": 96
+					}
+				},
+				{
+					"filename": "zombie_hurt.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 13,
+						"w": 80,
+						"h": 95
+					},
+					"frame": {
+						"x": 234,
+						"y": 1,
+						"w": 80,
+						"h": 95
+					}
+				},
+				{
+					"filename": "zombie_swim1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 13,
+						"w": 80,
+						"h": 94
+					},
+					"frame": {
+						"x": 316,
+						"y": 1,
+						"w": 80,
+						"h": 94
+					}
+				},
+				{
+					"filename": "zombie_fall.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 15,
+						"w": 79,
+						"h": 94
+					},
+					"frame": {
+						"x": 398,
+						"y": 1,
+						"w": 79,
+						"h": 94
+					}
+				},
+				{
+					"filename": "zombie_kick.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 18,
+						"w": 79,
+						"h": 92
+					},
+					"frame": {
+						"x": 479,
+						"y": 1,
+						"w": 79,
+						"h": 92
+					}
+				},
+				{
+					"filename": "zombie_action1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 18,
+						"w": 70,
+						"h": 92
+					},
+					"frame": {
+						"x": 560,
+						"y": 1,
+						"w": 70,
+						"h": 92
+					}
+				},
+				{
+					"filename": "zombie_skid.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 18,
+						"w": 69,
+						"h": 92
+					},
+					"frame": {
+						"x": 632,
+						"y": 1,
+						"w": 69,
+						"h": 92
+					}
+				},
+				{
+					"filename": "zombie_walk2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 12,
+						"y": 18,
+						"w": 60,
+						"h": 92
+					},
+					"frame": {
+						"x": 703,
+						"y": 1,
+						"w": 60,
+						"h": 92
+					}
+				},
+				{
+					"filename": "zombie_action2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 19,
+						"w": 79,
+						"h": 91
+					},
+					"frame": {
+						"x": 765,
+						"y": 1,
+						"w": 79,
+						"h": 91
+					}
+				},
+				{
+					"filename": "zombie_cheer1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 19,
+						"w": 78,
+						"h": 91
+					},
+					"frame": {
+						"x": 846,
+						"y": 1,
+						"w": 78,
+						"h": 91
+					}
+				},
+				{
+					"filename": "zombie_talk.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 19,
+						"w": 76,
+						"h": 91
+					},
+					"frame": {
+						"x": 926,
+						"y": 1,
+						"w": 76,
+						"h": 91
+					}
+				},
+				{
+					"filename": "zombie_walk1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 19,
+						"w": 74,
+						"h": 91
+					},
+					"frame": {
+						"x": 1004,
+						"y": 1,
+						"w": 74,
+						"h": 91
+					}
+				},
+				{
+					"filename": "zombie_idle.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 19,
+						"w": 65,
+						"h": 91
+					},
+					"frame": {
+						"x": 1080,
+						"y": 1,
+						"w": 65,
+						"h": 91
+					}
+				},
+				{
+					"filename": "zombie_climb1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 16,
+						"w": 60,
+						"h": 91
+					},
+					"frame": {
+						"x": 1147,
+						"y": 1,
+						"w": 60,
+						"h": 91
+					}
+				},
+				{
+					"filename": "zombie_climb2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 11,
+						"y": 16,
+						"w": 60,
+						"h": 91
+					},
+					"frame": {
+						"x": 1209,
+						"y": 1,
+						"w": 60,
+						"h": 91
+					}
+				},
+				{
+					"filename": "zombie_hold1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 20,
+						"w": 79,
+						"h": 90
+					},
+					"frame": {
+						"x": 1271,
+						"y": 1,
+						"w": 79,
+						"h": 90
+					}
+				},
+				{
+					"filename": "zombie_cheer2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 20,
+						"w": 77,
+						"h": 90
+					},
+					"frame": {
+						"x": 1352,
+						"y": 1,
+						"w": 77,
+						"h": 90
+					}
+				},
+				{
+					"filename": "zombie_hold2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 20,
+						"w": 73,
+						"h": 90
+					},
+					"frame": {
+						"x": 1431,
+						"y": 1,
+						"w": 73,
+						"h": 90
+					}
+				},
+				{
+					"filename": "zombie_stand.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 20,
+						"w": 62,
+						"h": 90
+					},
+					"frame": {
+						"x": 1506,
+						"y": 1,
+						"w": 62,
+						"h": 90
+					}
+				},
+				{
+					"filename": "zombie_back.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 21,
+						"w": 65,
+						"h": 89
+					},
+					"frame": {
+						"x": 1570,
+						"y": 1,
+						"w": 65,
+						"h": 89
+					}
+				},
+				{
+					"filename": "zombie_slide.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 29,
+						"w": 80,
+						"h": 81
+					},
+					"frame": {
+						"x": 1637,
+						"y": 1,
+						"w": 80,
+						"h": 81
+					}
+				},
+				{
+					"filename": "zombie_duck.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 30,
+						"w": 68,
+						"h": 80
+					},
+					"frame": {
+						"x": 1719,
+						"y": 1,
+						"w": 68,
+						"h": 80
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:b0e5653a9ed45eecf242d31ec74b4fdc:52a0e6f20fbd94f980b7aab70e338e88:b3218b1fa597c46cdbd3604a94fc34f5$"
+	}
+}
