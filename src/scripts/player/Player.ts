@@ -21,6 +21,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     public isSucking: boolean;
     private isPlayerDead: boolean;
     public doAction: boolean;
+    private itemWantToBuy: Item;
     constructor(world: Phaser.Physics.Matter.World, scene: MainScene, x: number, y: number, key: string, frame?: string | integer, options?: object) {
         super(world, x, y, key, frame, options);
         this.scene = scene;
@@ -73,10 +74,14 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
             this.isSucking = false;
         });
 
-        this.on('playerbuyitem', (item: Item) => {
-            item.destroy();
-            this.takeDamage(item.getHpCost());
+        this.on('playerbuyitem', () => {
+            console.log(this.itemWantToBuy);
             this.doAction = false;
+            if (this.itemWantToBuy !== null && this.itemWantToBuy !== undefined) {
+                this.takeDamage(this.itemWantToBuy.getHpCost());
+                this.itemWantToBuy.destroy();
+                this.itemWantToBuy = null;
+            }
         });
 
         this.on('animationcomplete_playerAttack', function () {
@@ -115,7 +120,8 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         }, this);
     }
 
-    public addPlayerbuyitemEvent(): void {
+    public addItemPlayerWantToBuy(item: Item): void {
+        this.itemWantToBuy = item;
     }
 
     /**
