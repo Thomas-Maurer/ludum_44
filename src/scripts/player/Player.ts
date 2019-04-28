@@ -84,8 +84,10 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     }
 
     public addPlayerbuyitemEvent(): void {
+        console.log('penis');
         this.once('playerbuyitem', (item: Item) => {
             item.destroy();
+            this.takeDamage(item.getHpCost());
         }, this);
     }
 

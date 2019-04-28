@@ -8,6 +8,7 @@ import { Enemies } from "../enemy/enemies.class";
 import VictoryItem from "../items/victoryItem";
 import EventsUtils from "../utils/events.utils";
 import Item from "../items/item";
+import BoostItem from "../items/boostItem";
 export default class MainScene extends Phaser.Scene {
   public matterCollision: PhaserMatterCollisionPlugin;
   public map: Phaser.Tilemaps.Tilemap;
@@ -129,7 +130,7 @@ export default class MainScene extends Phaser.Scene {
           if (this.player.doAction) {
             this.player.doAction = false;
             this.player.emit('playerbuyitem', eventData.gameObjectB);
-            //eventData.gameObjectB.destroy();
+            eventData.gameObjectB.destroy();
           }
         }else {
           console.log(eventData.gameObjectB);
@@ -150,11 +151,12 @@ export default class MainScene extends Phaser.Scene {
 
   generateItems() {
     this.map.findObject("items", (obj: any) => {
-      let itemSprite = new Item(this.matter.world, this, obj.x, obj.y, 'all_sprites', 'items/dashpotion1.png');
+      let itemSprite = new BoostItem(this.matter.world, this, obj.x, obj.y, 'all_sprites', 'items/dashpotion1.png');
       const itemAnim = this.player.generateFrameNames('items/dashpotion', 'all_sprites', 1, 4);
       this.anims.create({ key: 'dashpotionAnim', frames: itemAnim, frameRate: 5, repeat: -1 });
       itemSprite.play('dashpotionAnim');
       itemSprite.setDensity(50);
+      itemSprite.setHpCost(10);
       // itemSprite.setStatic(true);
       itemSprite.setCollisionCategory(this.itemsCat);
       itemSprite.setCollidesWith([this.playerCatCollision, 1, this.itemsCat]);
