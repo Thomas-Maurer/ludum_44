@@ -146,7 +146,7 @@ export default class MainScene extends Phaser.Scene {
 
   // Fct we call each frame
   public update() {
-    this.player.handleActions();
+    this.player.update();
     this.updateParralax();
     this.enemy.update();
   }
