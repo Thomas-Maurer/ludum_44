@@ -49,11 +49,17 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy{
         this.scene = scene;
         scene.add.existing(this);
         // change collision rect
+        var group = this.world.nextGroup(true);
         const matterEngine: any = Phaser.Physics.Matter;
-        const body = matterEngine.Matter.Bodies.rectangle(x, y, 64, 115, { chamfer: { radius: 10 } });
+        const body = matterEngine.Matter.Bodies.rectangle(x, y, 64, 115, {
+            chamfer: {
+                radius: 10
+            }
+        });
         this.setExistingBody(body);
+
         this.setFixedRotation();
-        this.setFriction(0.2, 0.05, 0);
+        this.setFriction(0);
     }
 
     /**

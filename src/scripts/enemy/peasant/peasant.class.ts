@@ -67,6 +67,9 @@ export class Peasant extends Enemy implements IEnemy {
             this.isDead = true;
             this.stopAllAnims();
             this.anims.play('peasantDead',true);
+
+            this.setCollidesWith([1]);
+            this.setStatic(true);
         } else {
             this.isHit = true;
             this.isRunning = false;
