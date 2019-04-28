@@ -6,6 +6,7 @@ import { Map } from "../map-data";
 import { EnemiesEnum } from "../enemy/enemies.enum";
 import { Enemies } from "../enemy/enemies.class";
 import VictoryItem from "../items/victoryItem";
+import EventsUtils from "../utils/events.utils";
 export default class MainScene extends Phaser.Scene {
   public matterCollision: PhaserMatterCollisionPlugin;
   public map: Phaser.Tilemaps.Tilemap;
@@ -168,6 +169,9 @@ export default class MainScene extends Phaser.Scene {
   private triggerVictory(): void {
     //TODO play win anim
     console.log('you win !')
+    //this.scene.restart();
+    window.dispatchEvent(EventsUtils.PLAYER_WIN);
+    this.audioManager.playSound(this.audioManager.soundsList.VICTORY);
   }
 
   // Fct we call each frame

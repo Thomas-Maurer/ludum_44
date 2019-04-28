@@ -5,7 +5,8 @@ export default {
     name: "MainMenu",
     computed: mapState([
         'play',
-        'dead'
+        'dead',
+        'win'
     ]),
     methods: {
         setPlay() {
@@ -16,11 +17,16 @@ export default {
             window.addEventListener('PLAYER_DEAD', (e) => {
                 this.$store.commit("setDead", true);
             });
+
+            window.addEventListener('PLAYER_WIN', (e) => {
+                this.$store.commit("setWin", true);
+            });
         },
         retry() {
             const event = new Event("restart");
             window.dispatchEvent(event);
             this.$store.commit("setDead", false);
+            this.$store.commit("setWin", false);
         }
     },
     mounted() {

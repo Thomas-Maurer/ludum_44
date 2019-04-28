@@ -27,6 +27,11 @@
       <h1>YOU ARE DEAD</h1>
       <div class="btn replay-btn" @click="retry()">RETRY</div>
     </div>
+
+    <div class="win-screen" v-if="win">
+      <h1>YOU WON</h1>
+      <div class="btn replay-btn" @click="retry()">REPLAY</div>
+    </div>
   </div>
 </template>
 <script src="./MainMenu.js">
