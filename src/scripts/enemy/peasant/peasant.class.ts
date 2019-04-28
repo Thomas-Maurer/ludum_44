@@ -2,7 +2,7 @@ import {Enemy} from "../enemy";
 import {IEnemy} from "../enemy.interface";
 import {EnemyGuid} from "../enemy-guid.enum";
 import {PeasantInfo} from "./peasant-info.enum";
-import {Enemies} from "../enemies.enum";
+import {EnemiesEnum} from "../enemies.enum";
 
 export class Peasant extends Enemy implements IEnemy {
     /**
@@ -28,7 +28,7 @@ export class Peasant extends Enemy implements IEnemy {
     };
 
     constructor(world: Phaser.Physics.Matter.World, scene: Phaser.Scene, x: number, y: number) {
-        super(world, scene, x, y, Enemies.SPRITE_SHEET_ID, Peasant.firstSpriteSheet);
+        super(world, scene, x, y, EnemiesEnum.SPRITE_SHEET_ID, Peasant.firstSpriteSheet);
         this.initAnims();
     }
 
@@ -36,8 +36,8 @@ export class Peasant extends Enemy implements IEnemy {
      * Init all anims for peasant interaction
      */
     private initAnims(): void {
-        const peasantRunAnims = this.generateFrameNames(this.runPeasantSpritePrefix, Enemies.SPRITE_SHEET_ID, 1, 10);
-        const peasantIdleAnims = this.generateFrameNames(this.fightPeasantSpritePrefix, Enemies.SPRITE_SHEET_ID, 1, 8);
+        const peasantRunAnims = this.generateFrameNames(this.runPeasantSpritePrefix, EnemiesEnum.SPRITE_SHEET_ID, 1, 10);
+        const peasantIdleAnims = this.generateFrameNames(this.fightPeasantSpritePrefix, EnemiesEnum.SPRITE_SHEET_ID, 1, 8);
         this.scene.anims.create({ key: 'peasantRun', frames: peasantRunAnims, frameRate: 10, repeat: -1 });
         this.scene.anims.create({ key: 'peasantIdle', frames: peasantIdleAnims, frameRate: 10, repeat: -1 });
     }

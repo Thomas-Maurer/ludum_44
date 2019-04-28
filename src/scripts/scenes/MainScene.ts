@@ -3,8 +3,8 @@ import * as PhaserMatterCollisionPlugin from "phaser-matter-collision-plugin";
 import AudioManager from "../AudioManager";
 import { Enemy } from "../enemy/enemy";
 import { Map } from "../map-data";
-import { Peasant } from "../enemy/peasant/peasant.class";
-import { Enemies } from "../enemy/enemies.enum";
+import {EnemiesEnum} from "../enemy/enemies.enum";
+import {Enemies} from "../enemy/enemies.class";
 export default class MainScene extends Phaser.Scene {
   public matterCollision: PhaserMatterCollisionPlugin;
   public map: Phaser.Tilemaps.Tilemap;
@@ -29,10 +29,11 @@ export default class MainScene extends Phaser.Scene {
     // }
 
   };
-  /*
-   * TODO make a class calling alls enemies
+
+  /**
+   * Contain enemies object
    */
-  public enemy: any;
+  private enemies: Enemies;
   constructor() {
     super({
       key: "MainScene",
@@ -47,7 +48,7 @@ export default class MainScene extends Phaser.Scene {
     this.load.json('shapes', 'assets/graphics/char/character/shapes_char.json');
     this.audioManager = new AudioManager(this);
 
-    this.load.multiatlas(Enemies.SPRITE_SHEET_ID, Enemies.SPRITE_SHEET_URL, Enemies.SPRITE_SHEET_FOLDER);
+    this.load.multiatlas(EnemiesEnum.SPRITE_SHEET_ID, EnemiesEnum.SPRITE_SHEET_URL, EnemiesEnum.SPRITE_SHEET_FOLDER);
   }
   create() {
     /** Build all layers maps */
@@ -70,7 +71,8 @@ export default class MainScene extends Phaser.Scene {
 
     this.player = new Player(this.matter.world, this, 64, 11 * 32, 'all_sprites', 'vampire/runvampright1.png',
       { shape: this.shapes.runvampright1 });
-    this.enemy = new Peasant(this.matter.world, this, 10 * 64, 0);
+
+    this.enemies = new Enemies(this.map, this.matter.world, this);
 
     const playerRunAnims = this.player.generateFrameNames('vampire/runvampright', 'all_sprites', 1, 10);
     const playerIdleAnims = this.player.generateFrameNames('vampire/fightvamp', 'all_sprites', 1, 10);
@@ -182,6 +184,6 @@ export default class MainScene extends Phaser.Scene {
   public update() {
     this.player.update();
     this.updateParralax();
-    this.enemy.update();
+    this.enemies.updateAllEnemies(this.player.x);
   }
 }
