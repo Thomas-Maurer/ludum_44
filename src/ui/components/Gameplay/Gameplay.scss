@@ -5,13 +5,16 @@
     align-items: center;
     justify-content: center;
     margin-top: 20px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    flex-direction: column;
 
     .icon {
-
         top: 0;
         left: 40%;
-        width: 45px;
-        height: 45px;
+        width: 60px;
+        height: 60px;
     }
 
     .bloodpotion {
