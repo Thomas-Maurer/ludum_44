@@ -1,0 +1,23 @@
+TODO
+
+Sound managment
+Boss, animation , patterns ?
+Pouvoir recharger la scene
+Cutscenes ? (petite intro ? Win screen ?)
+win condition
+Systeme de shop
+Marchand, animation , Systeme
+ennemis font des degats
+Level design
+Autre ennemies ?
+Interface
+Systeme de vie (perdre / gagner des pv)
+Systeme du soleil
+Musique
+Bind de touches
+effet de particules derrière le perso (que quand il prend des degats ?)
+animation de mort
+
+===
+
+Trésors / pièges ?
