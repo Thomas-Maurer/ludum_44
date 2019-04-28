@@ -170,7 +170,6 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
      * Handle sun damage
      */
     private handleSun() {
-        console.log(this.isInSun);
         //ignore if not in sun
         if (!this.isInSun) {
 
@@ -184,9 +183,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         if (this.isInSun && !this.willTakeSunDamage) {
             //  The same as above, but uses a method signature to declare it (shorter, and compatible with GSAP syntax)
             this.willTakeSunDamage = this.scene.time.delayedCall(1000, () => {
-                if (this.isInSun) {
-                    this.takeDamage(1);
-                }
+                this.takeDamage(1);
                 this.willTakeSunDamage.remove();
                 this.willTakeSunDamage = null;
 
@@ -196,7 +193,6 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     }
 
     public disableSun(): void {
-        console.log('disable or enable sun')
         this.isInSun = !this.isInSun;
     }
 
