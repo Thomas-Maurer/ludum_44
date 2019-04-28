@@ -92,6 +92,9 @@ export default class MainScene extends Phaser.Scene {
     const playerJumpAnims = this.player.generateFrameNames('vampire/jumpvamp', 'all_sprites', 1, 7);
     const playerAttackAnims = this.player.generateFrameNames('vampire/fightvamp', 'all_sprites', 9, 19);
     const playerDeathAnims = this.player.generateFrameNames('vampire/deathvamp', 'all_sprites', 1, 7);
+    const playerSuck = this.player.generateFrameNames('vampire/vampdrink', 'all_sprites', 1, 5);
+
+    this.anims.create({ key: 'suck', frames: playerSuck, frameRate: 10, repeat: 0 });
     this.anims.create({ key: 'playerRun', frames: playerRunAnims, frameRate: 10, repeat: -1 });
     this.anims.create({ key: 'playerIdle', frames: playerIdleAnims, frameRate: 10, repeat: -1 });
     this.anims.create({ key: 'playerJump', frames: playerJumpAnims, frameRate: 9 });
@@ -121,8 +124,9 @@ export default class MainScene extends Phaser.Scene {
           }
 
           if (this.player.doAction && eventData.gameObjectB.isDead) {
+            console.log('suck');
             this.player.doAction = false;
-            eventData.gameObjectB.suck();
+            this.player.suck();
           }
 
         } else if (eventData.gameObjectB == null) {
