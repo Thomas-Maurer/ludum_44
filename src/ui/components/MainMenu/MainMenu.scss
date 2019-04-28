@@ -18,21 +18,47 @@
         color: #fff;
         user-select: none;
 
+
         &:hover {
-            background: #000;
+            background: #fff;
+            color: #000;
+
             cursor: pointer;
         }
     }
 
     .main-menu-block {
-
+        color: #fff;
         border: 1px #ccc solid;
 
         padding: 20px;
 
         .game-title {
             font-size: 1.5rem;
-            color: #fff;
+        }
+
+        .controls-block {
+            display: flex;
+            flex-direction: column;
+
+            .control-type {
+                margin: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                .control-label {
+                    margin-left: 20px;
+                }
+
+                .potion-icon {
+                    width: 45px;
+                    height: 45px;
+                    background-image: url('../../../assets/graphics/ui/bloodpotion.png');
+                    background-size: auto 100%;
+                    background-position: -720px 0px;
+                }
+            }
         }
 
 
