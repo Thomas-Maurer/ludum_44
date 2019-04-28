@@ -11,7 +11,15 @@
       }"
     ></div>
     <span class="potion-label">{{playerHP}}</span>
-    <div class="item"></div>
+    <div class="item potion" v-if="potion">
+      <img src="../../../assets/graphics/ui/iconspeedpotion.png" alt>
+    </div>
+    <div class="item glass" v-if="glass">
+      <img src="../../../assets/graphics/ui/iconglasses.png" alt>
+    </div>
+    <div class="item umbrella" v-if="umbrella">
+      <img src="../../../assets/graphics/ui/iconumbrella.png" alt>
+    </div>
   </div>
 </template>
 <script src="./Gameplay.js">
