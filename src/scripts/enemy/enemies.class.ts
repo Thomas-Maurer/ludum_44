@@ -26,7 +26,7 @@ export class Enemies {
      * Contain all enemies object
      * @type {Array}
      */
-    private listOfEnemies: Array<Enemy> = [];
+    public listOfEnemies: Array<Enemy> = [];
 
     constructor(map: any, world: Phaser.Physics.Matter.World, scene: Phaser.Scene) {
         this.scene = scene;
