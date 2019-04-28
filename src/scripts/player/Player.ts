@@ -1,28 +1,41 @@
 import {PlayerControls} from "./playerControls/playerControls";
 import {Enemy} from "../enemy/enemy";
+import MainScene from "../scenes/MainScene";
 
 export default class Player extends Phaser.Physics.Matter.Sprite{
     private playerControl: PlayerControls;
+    public scene: MainScene;
     private canJump: boolean;
+    private canAttack: boolean;
     private jumpCooldownTimer: Phaser.Time.TimerEvent;
+    private attackCooldownTimer: Phaser.Time.TimerEvent;
     private inAir: boolean;
     private healthPoint: number;
     private baseDamage: number;
-    constructor(world: Phaser.Physics.Matter.World, scene: Phaser.Scene, x: number, y: number, key: string, frame?: string | integer) {
-        super(world, x, y, key, frame);
+    private isAttacking: boolean;
+    constructor(world: Phaser.Physics.Matter.World, scene: MainScene, x: number, y: number, key: string, frame?: string | integer,  options?: object) {
+        super(world, x, y, key, frame, options);
         const matterEngine: any = Phaser.Physics.Matter;
-        const body = matterEngine.Matter.Bodies.rectangle(x, y, 55, 100, { chamfer: { radius: 10 } });
-        this.setExistingBody(body);
+        this.scene = scene;
+        //const body = matterEngine.Matter.Bodies.rectangle(x, y, 55, 100, { chamfer: { radius: 10 } });
+        //this.setExistingBody(body);
         scene.add.existing(this);
         this.playerControl = new PlayerControls(scene);
         this.scene = scene;
         this.canJump = true;
+        this.canAttack = true;
         this.setFixedRotation();
         this.setFriction(0.2, 0.05,0);
         this.inAir = true;
         this.healthPoint = 100;
         this.baseDamage = 1;
 //TODO Better handling of event
+        this.on('animationupdate', function (anim, frame) {
+            //console.log(anim)
+            //console.log(this.scene.shapes[anim.key.toLowerCase() + frame.index]);
+            this.setBody(this.scene.shapes[anim.key.toLowerCase() + frame.index])
+        }, this);
+
         this.on('animationcomplete', function (anim, frame) {
             this.emit('animationcomplete_' + anim.key, anim, frame);
         }, this);
@@ -33,7 +46,9 @@ export default class Player extends Phaser.Physics.Matter.Sprite{
 
         this.on('animationcomplete_playerAttack', function () {
             this.anims.play('playerIdle');
+            this.alterHitbox();
             //TODO Player attack system
+            this.disableAttackState();
         }, this);
     }
 
@@ -50,6 +65,10 @@ export default class Player extends Phaser.Physics.Matter.Sprite{
             start: start, end: end, zeroPad: 1,
             prefix: key, suffix: '.png'
         } )
+    }
+
+    private alterHitbox(){
+        this.setSize(20,20);
     }
 
     /**
@@ -72,6 +91,26 @@ export default class Player extends Phaser.Physics.Matter.Sprite{
      */
     public getCanJump(): boolean {
         return this.canJump;
+    }
+
+    /**
+     * Enable attack state
+     */
+    public enableAttackState(): void {
+        this.isAttacking = true;
+        // Add a slight delay between attack
+        this.attackCooldownTimer = this.scene.time.addEvent({
+            delay: 250,
+            callback: () => (this.canAttack = true)
+        });
+        this.canAttack = false;
+    }
+
+    /**
+     * disable attack state
+     */
+    public disableAttackState(): void {
+        this.isAttacking = false;
     }
 
     /**
