@@ -5,6 +5,10 @@ body {
   overflow: hidden;
 }
 
+* {
+  user-select: none;
+}
+
 @font-face {
   font-family: "Black Pearl";
   src: url("../assets/fonts/BlackPearl.ttf");

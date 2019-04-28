@@ -4,11 +4,15 @@ import {
 export default {
     name: "MainMenu",
     computed: mapState([
-        'play'
+        'play',
+        'keyboardMode'
     ]),
     methods: {
         setPlay() {
             this.$store.commit("setPlay", true);
+        },
+        setKeyboardMode(mode) {
+            this.$store.commit("setKeyboardMode", mode);
         }
     }
 };

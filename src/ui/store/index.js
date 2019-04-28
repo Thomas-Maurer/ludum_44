@@ -5,16 +5,20 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         // config: defaultConfig,
-        play: false
+        play: false,
+        keyboardMode: 'wasd'
     },
     mutations: {
         setPlay(state, value) {
             state.play = value;
+        },
+        setKeyboardMode(state, value) {
+            state.keyboardMode = value;
         }
     },
     actions: {
-        setPlay(context, value) {
-            context.commit('setPlay', value);
+        setKeyboardMode(context, value) {
+            context.commit('setKeyboardMode', value);
         }
     }
 });
