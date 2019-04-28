@@ -54,8 +54,11 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
             this.anims.play('playerIdle');
         }, this);
 
-        this.once('animationcomplete_playerDeath', function () {
-            this.scene.restart();
+        this.once('animationcomplete_playerDeath', () => {
+
+            //this.scene.restart();
+            window.dispatchEvent(EventsUtils.PLAYER_DEAD);
+            this.scene.audioManager.playSound(this.scene.audioManager.soundsList.DEATH);
         }, this);
 
         this.on('animationcomplete_playerAttack', function () {
