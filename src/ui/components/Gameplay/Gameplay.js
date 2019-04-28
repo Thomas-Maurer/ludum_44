@@ -5,14 +5,24 @@ import {
 export default {
     name: "Gameplay",
     computed: mapState([
-        'play'
+        'play',
+        'playerHP'
     ]),
     data() {
         return {
-            lorem: false
+            listen: false
         }
     },
     methods: {
+        initEventsListeners() {
 
-    }
+            window.addEventListener('PLAYER_HP', (e) => {
+                this.$store.commit("setPlayerHP", e.detail);
+            });
+        }
+    },
+
+    created() {
+        this.initEventsListeners();
+    },
 };

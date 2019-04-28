@@ -3,8 +3,8 @@ import * as PhaserMatterCollisionPlugin from "phaser-matter-collision-plugin";
 import AudioManager from "../AudioManager";
 import { Enemy } from "../enemy/enemy";
 import { Map } from "../map-data";
-import { Peasant } from "../enemy/peasant/peasant.class";
-import { Enemies } from "../enemy/enemies.enum";
+import {EnemiesEnum} from "../enemy/enemies.enum";
+import {Enemies} from "../enemy/enemies.class";
 export default class MainScene extends Phaser.Scene {
   public matterCollision: PhaserMatterCollisionPlugin;
   public map: Phaser.Tilemaps.Tilemap;
@@ -29,10 +29,11 @@ export default class MainScene extends Phaser.Scene {
     // }
 
   };
-  /*
-   * TODO make a class calling alls enemies
+
+  /**
+   * Contain enemies object
    */
-  public enemy: any;
+  private enemies: Enemies;
   constructor() {
     super({
       key: "MainScene",
@@ -47,7 +48,7 @@ export default class MainScene extends Phaser.Scene {
     this.load.json('shapes', 'assets/graphics/char/character/shapes_char.json');
     this.audioManager = new AudioManager(this);
 
-    this.load.multiatlas(Enemies.SPRITE_SHEET_ID, Enemies.SPRITE_SHEET_URL, Enemies.SPRITE_SHEET_FOLDER);
+    this.load.multiatlas(EnemiesEnum.SPRITE_SHEET_ID, EnemiesEnum.SPRITE_SHEET_URL, EnemiesEnum.SPRITE_SHEET_FOLDER);
   }
   create() {
     /** Build all layers maps */
@@ -202,6 +203,6 @@ export default class MainScene extends Phaser.Scene {
   public update() {
     this.player.update();
     this.updateParralax();
-    //this.enemy.update();
+    this.enemies.updateAllEnemies(this.player.x);
   }
 }
