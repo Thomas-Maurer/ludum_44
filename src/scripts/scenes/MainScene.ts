@@ -75,8 +75,7 @@ export default class MainScene extends Phaser.Scene {
     // Get the layers registered with Matter. Any colliding tiles will be given a Matter body. We
     // haven't mapped out custom collision shapes in Tiled so each colliding tile will get a default
     // rectangle body (similar to AP).
-    let test = this.matter.world.convertTilemapLayer(worldLayer);
-    console.log(test)
+    this.matter.world.convertTilemapLayer(worldLayer);
     this.player = this.spawnPlayer();
 
     this.enemies = new Enemies(this.map, this.matter.world, this);
