@@ -11,8 +11,11 @@ export class PlayerControls {
     private rightInput: string;
     private jumpInput: string;
     private attackInput: KeyCodes;
+    private actionInput: KeyCodes;
     private scene: MainScene;
     private audioManager: AudioManager;
+    private negativeforceVector: Vector2;
+    private forceVector: Vector2;
     constructor(scene: MainScene) {
         this.initDefaultKeys();
         this.mappingKeys(scene);
@@ -28,6 +31,7 @@ export class PlayerControls {
         this.rightInput = 'right';
         this.jumpInput = 'up';
         this.attackInput = KeyCodes.SPACE;
+        this.actionInput = KeyCodes.E
     }
 
     /**
@@ -67,25 +71,22 @@ export class PlayerControls {
                 down: "down",
                 left: this.leftInput,
                 right: this.rightInput,
-                attack: this.attackInput
+                attack: this.attackInput,
+                action: this.actionInput
             });
     }
 
-    public handlePlayerControls(player: Player): void {
+    /**
+     * Handle vector for force application
+     * @param player
+     * @param body
+     */
 
-        if (player.anims.currentAnim !== null) {
-            //console.log(player.anims.currentAnim)
-            //console.log(player.scene.shapes[player.anims.currentAnim.key.toLocaleLowerCase()]);
-            //player.setBody()
-        }
-        let negativeforceVector: Vector2;
-        let forceVector: Vector2;
-        let body: any = player.getPlayerSprite().body;
-
+    private handlePlayerControlInAir(player: Player, body: any): void{
         if (!player.isPlayerInTheAir()) {
             // Player is in the Air
-            forceVector = new Vector2(0.1, 0);
-            negativeforceVector = new Vector2(-0.1, 0);
+            this.forceVector = new Vector2(0.1, 0);
+            this.negativeforceVector = new Vector2(-0.1, 0);
             if (body.velocity.x >= 0.3) {
                 player.getPlayerSprite().setVelocity(0.3);
             } else if (body.velocity.x <= -0.3) {
@@ -93,14 +94,21 @@ export class PlayerControls {
             }
         } else {
             //Player touch the ground
-            negativeforceVector = new Vector2(-0.1, 0);
-            forceVector = new Vector2(0.1, 0);
+            this.negativeforceVector = new Vector2(-0.1, 0);
+            this.forceVector = new Vector2(0.1, 0);
             if (body.velocity.x >= 0.1) {
                 player.getPlayerSprite().setVelocityX(0.1);
             } else if (body.velocity.x <= -0.15) {
                 player.getPlayerSprite().setVelocityX(-0.15);
             }
         }
+    }
+
+    public handlePlayerControls(player: Player): void {
+        let body: any = player.getPlayerSprite().body;
+
+        this.handlePlayerControlInAir(player, body);
+
 
         if (this.cursors.attack.isDown) {
             player.anims.play('playerAttack',true);
@@ -114,7 +122,7 @@ export class PlayerControls {
             }
 
             player.getPlayerSprite().setFlipX(false);
-            player.getPlayerSprite().applyForce(forceVector);
+            player.getPlayerSprite().applyForce(this.forceVector);
         } else if(this.cursors.left.isDown){
             if (player.anims.currentAnim !== null && (player.anims.currentAnim.key === 'playerJump' || player.anims.currentAnim.key === 'playerAttack')) {
             } else {
@@ -122,14 +130,19 @@ export class PlayerControls {
                 //this.audioManager.playSound(this.audioManager.soundsList.PLAYER_FOOTSTEP);
             }
             player.getPlayerSprite().setFlipX(true);
-            player.getPlayerSprite().applyForce(negativeforceVector);
+            player.getPlayerSprite().applyForce(this.negativeforceVector);
         } else {
             if (player.anims.currentAnim !== null && (player.anims.currentAnim.key === 'playerJump' || player.anims.currentAnim.key === 'playerAttack' || player.anims.currentAnim.key === 'playerDeath')) {
 
             } else {
+                player.doAction = false;
                 player.anims.play('playerIdle', true);
             }
             player.getPlayerSprite().setVelocityX(0);
+        }
+        if(this.cursors.action.isDown) {
+            player.doAction = true;
+            console.log('player use action');
         }
         if (this.cursors.up.isDown && player.getCanJump() && !player.isPlayerInTheAir()) {
             player.anims.play('playerJump', true);
