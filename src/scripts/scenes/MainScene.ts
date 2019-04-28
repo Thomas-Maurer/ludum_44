@@ -3,6 +3,8 @@ import * as PhaserMatterCollisionPlugin from "phaser-matter-collision-plugin";
 import AudioManager from "../AudioManager";
 import { Enemy } from "../enemy/enemy";
 import { Map } from "../map-data";
+import { Peasant } from "../enemy/peasant/peasant.class";
+import { Enemies } from "../enemy/enemies.enum";
 export default class MainScene extends Phaser.Scene {
   public matterCollision: PhaserMatterCollisionPlugin;
   public map: Phaser.Tilemaps.Tilemap;
@@ -10,10 +12,22 @@ export default class MainScene extends Phaser.Scene {
   public shapes: any;
   public audioManager: AudioManager;
   private parralaxLayers: {
-    bg_static: Phaser.GameObjects.TileSprite,
-    bg_clouds: Phaser.GameObjects.TileSprite,
-    bg_far: Phaser.GameObjects.TileSprite,
-    bg: Phaser.GameObjects.TileSprite
+    static: {
+      cloud: Phaser.GameObjects.TileSprite,
+      sun: Phaser.GameObjects.TileSprite,
+      sky: Phaser.GameObjects.TileSprite,
+    }
+    scene1: {
+      foreground: Phaser.GameObjects.TileSprite,
+      bg_far: Phaser.GameObjects.TileSprite,
+      bg: Phaser.GameObjects.TileSprite
+    },
+    // scene2: {
+    //   foreground: Phaser.GameObjects.TileSprite,
+    //   bg_far: Phaser.GameObjects.TileSprite,
+    //   bg: Phaser.GameObjects.TileSprite
+    // }
+
   };
   /*
    * TODO make a class calling alls enemies
@@ -29,12 +43,11 @@ export default class MainScene extends Phaser.Scene {
     this.load.tilemapTiledJSON("map", "/assets/map/map_beta.json");
     this.load.multiatlas('all_sprites', 'assets/graphics/map/backgrounds/spritesheet.json', 'assets/graphics/map/backgrounds');
     this.load.multiatlas('block', 'assets/graphics/map/backgrounds/block.json', 'assets/graphics/map/backgrounds');
-    this.load.multiatlas(Enemy.SPRITE_ID, 'assets/graphics/char/enemy/enemy_test.json', 'assets/graphics/char/enemy');
-
-// Load body shapes from JSON file generated using PhysicsEditor
+    // Load body shapes from JSON file generated using PhysicsEditor
     this.load.json('shapes', 'assets/graphics/char/character/shapes_char.json');
-    this.load.multiatlas(Enemy.SPRITE_ID, 'assets/graphics/char/enemy/enemy_test.json', 'assets/graphics/char/enemy');
     this.audioManager = new AudioManager(this);
+
+    this.load.multiatlas(Enemies.SPRITE_SHEET_ID, Enemies.SPRITE_SHEET_URL, Enemies.SPRITE_SHEET_FOLDER);
   }
   create() {
     /** Build all layers maps */
@@ -56,8 +69,8 @@ export default class MainScene extends Phaser.Scene {
     this.matter.world.convertTilemapLayer(worldLayer);
 
     this.player = new Player(this.matter.world, this, 64, 11 * 32, 'all_sprites', 'vampire/runvampright1.png',
-        {shape: this.shapes.runvampright1});
-    this.enemy = new Enemy(this.matter.world, this, 10 *64, 0, Enemy.SPRITE_ID, 'zombie_hang');
+      { shape: this.shapes.runvampright1 });
+    this.enemy = new Peasant(this.matter.world, this, 10 * 64, 0);
 
     const playerRunAnims = this.player.generateFrameNames('vampire/runvampright', 'all_sprites', 1, 10);
     const playerIdleAnims = this.player.generateFrameNames('vampire/fightvamp', 'all_sprites', 1, 10);
@@ -85,7 +98,10 @@ export default class MainScene extends Phaser.Scene {
         if (eventData.gameObjectB !== undefined && eventData.gameObjectB instanceof Phaser.Tilemaps.Tile) {
           this.player.setPlayerInAirValue(false);
         } else if (eventData.gameObjectB instanceof Enemy) {
-          console.log(eventData.gameObjectB)
+          if (this.player.getAttackstate()){
+            this.player.emit('playertouchtarget', eventData.gameObjectB);
+          }
+
         }
       },
       context: this
@@ -105,19 +121,25 @@ export default class MainScene extends Phaser.Scene {
  */
   private generateParralaxLayers() {
     this.parralaxLayers = {
-      bg_static: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'bg_static.png'),
-      bg_clouds: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'bg_clouds.png'),
-      bg_far: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'bg_far.png'),
-      bg: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'bg.png'),
+      static: {
+        sky: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/static/sky.png'),
+        sun: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/static/sun.png'),
+        cloud: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/static/cloud.png'),
+      },
+      scene1: {
 
-    }
+        bg_far: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/scene1/bg_far.png'),
+        bg: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/scene1/bg.png'),
+        foreground: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/scene1/foreground.png'),
+      },
+      // scene2: {
+      //   bg_far: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/scene2/bg_far.png'),
+      //   bg: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/scene2/bg.png'),
+      //   foreground: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/scene2/foreground.png'),
 
-    for (const layerName in this.parralaxLayers) {
-      if (this.parralaxLayers.hasOwnProperty(layerName)) {
-        const layer: Phaser.GameObjects.TileSprite = this.parralaxLayers[layerName];
-        layer.setOrigin(0, 0);
-      }
-    }
+      // }
+
+    };
   }
 
 
@@ -130,23 +152,38 @@ export default class MainScene extends Phaser.Scene {
     for (const layerName in this.parralaxLayers) {
       if (this.parralaxLayers.hasOwnProperty(layerName)) {
         const layer: Phaser.GameObjects.TileSprite = this.parralaxLayers[layerName];
-        layer.setPosition(this.cameras.main.scrollX, this.cameras.main.scrollY)
-        layer.setOrigin(0, 0);
+        for (const tileName in layer) {
+          if (layer.hasOwnProperty(tileName)) {
+            const tile = layer[tileName];
+            tile.setPosition(this.cameras.main.scrollX, this.cameras.main.scrollY)
+            tile.setOrigin(0, 0);
+          }
+        }
       }
     }
 
-    this.parralaxLayers.bg_clouds.tilePositionX -= 0.5;
-    this.parralaxLayers.bg_far.tilePositionX = this.cameras.main.scrollX * 0.1;
-    this.parralaxLayers.bg_far.tilePositionY = this.cameras.main.scrollY * 0.1;
-    this.parralaxLayers.bg.tilePositionX = this.cameras.main.scrollX * 0.4;
-    this.parralaxLayers.bg.tilePositionY = this.cameras.main.scrollY * 0.4;
-    // this.parralaxLayers[1].tilePositionX = this.player.getPlayerSprite().x * 0.1;
+    //Static bg
 
+    //Cloud
+    this.parralaxLayers.static.cloud.tilePositionX -= 0.5;
+
+
+    //Scene1 bg
+
+    //bg far
+    this.parralaxLayers.scene1.bg_far.setTilePosition(this.cameras.main.scrollX * 0.1, this.cameras.main.scrollY * 0.1)
+    //this.parralaxLayers.scene1.foreground.setTilePosition(this.player.x, this.player.y);
+
+    //bg
+    this.parralaxLayers.scene1.bg.setTilePosition(this.cameras.main.scrollX * 0.4, this.cameras.main.scrollY * 0.4)
+
+    //foreground
+    this.parralaxLayers.scene1.foreground.active = false;
   }
 
   // Fct we call each frame
   public update() {
-    this.player.handleActions();
+    this.player.update();
     this.updateParralax();
     this.enemy.update();
   }

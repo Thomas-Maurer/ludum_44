@@ -10,15 +10,18 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     private jumpCooldownTimer: Phaser.Time.TimerEvent;
     private attackCooldownTimer: Phaser.Time.TimerEvent;
     private inAir: boolean;
+    private isInSun: boolean;
+    private willTakeSunDamage: Phaser.Time.TimerEvent;
     private healthPoint: number;
     private baseDamage: number;
     private isAttacking: boolean;
-    constructor(world: Phaser.Physics.Matter.World, scene: MainScene, x: number, y: number, key: string, frame?: string | integer,  options?: object) {
+    private doingDamage: boolean;
+    constructor(world: Phaser.Physics.Matter.World, scene: MainScene, x: number, y: number, key: string, frame?: string | integer, options?: object) {
         super(world, x, y, key, frame, options);
         const matterEngine: any = Phaser.Physics.Matter;
         this.scene = scene;
-        //const body = matterEngine.Matter.Bodies.rectangle(x, y, 55, 100, { chamfer: { radius: 10 } });
-        //this.setExistingBody(body);
+        const body = matterEngine.Matter.Bodies.rectangle(x, y, 55, 100, { chamfer: { radius: 10 } });
+        this.setExistingBody(body);
         scene.add.existing(this);
         this.playerControl = new PlayerControls(scene);
         this.scene = scene;
@@ -29,11 +32,12 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.inAir = true;
         this.healthPoint = 100;
         this.baseDamage = 1;
-//TODO Better handling of event
+        this.isInSun = true;
+
+        //TODO Better handling of event
         this.on('animationupdate', function (anim, frame) {
-            //console.log(anim)
             //console.log(this.scene.shapes[anim.key.toLowerCase() + frame.index]);
-            this.setBody(this.scene.shapes[anim.key.toLowerCase() + frame.index])
+            //this.setBody(this.scene.shapes[anim.key.toLowerCase() + frame.index])
         }, this);
 
         this.on('animationcomplete', function (anim, frame) {
@@ -46,10 +50,25 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
 
         this.on('animationcomplete_playerAttack', function () {
             this.anims.play('playerIdle');
-            this.alterHitbox();
             //TODO Player attack system
             this.disableAttackState();
+
         }, this);
+
+    }
+
+    private addPlayerTouchTargetEvent(): void {
+        this.once('playertouchtarget', function (enemy: Enemy) {
+            this.doDamageTo(enemy);
+        }, this);
+    }
+
+    /**
+     * called each frame
+     */
+    update() {
+        this.handleActions();
+        this.handleSun();
     }
 
     /**
@@ -65,10 +84,6 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
             start: start, end: end, zeroPad: 1,
             prefix: key, suffix: '.png'
         })
-    }
-
-    private alterHitbox(){
-        this.setSize(20,20);
     }
 
     /**
@@ -87,6 +102,40 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     }
 
     /**
+     * Handle sun damage
+     */
+    private handleSun() {
+        //ignore if not in sun
+        if (!this.isInSun) {
+
+            //remove the event if we got out the sun before taking the damage
+            if (this.willTakeSunDamage) {
+                this.willTakeSunDamage.remove();
+                this.willTakeSunDamage = null;
+            }
+        }
+
+        if (this.isInSun && !this.willTakeSunDamage) {
+            //  The same as above, but uses a method signature to declare it (shorter, and compatible with GSAP syntax)
+            this.willTakeSunDamage = this.scene.time.delayedCall(1000, () => {
+                this.takeDamage(1);
+                this.willTakeSunDamage.remove();
+                this.willTakeSunDamage = null;
+
+            }, [], this);
+        }
+
+    }
+
+    /**
+     * Take damage
+     */
+    private takeDamage(damage: number) {
+        console.log("Player take " + damage + " damages")
+        this.healthPoint -= damage;
+    }
+
+    /**
      * Return if the player can jump or not
      */
     public getCanJump(): boolean {
@@ -98,6 +147,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
      */
     public enableAttackState(): void {
         this.isAttacking = true;
+        this.doingDamage = true;
         // Add a slight delay between attack
         this.attackCooldownTimer = this.scene.time.addEvent({
             delay: 250,
@@ -111,6 +161,14 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
      */
     public disableAttackState(): void {
         this.isAttacking = false;
+        this.addPlayerTouchTargetEvent();
+    }
+
+    /**
+     * return if the player is attacking or not
+     */
+    public getAttackstate(): boolean {
+        return this.isAttacking;
     }
 
     /**
@@ -146,6 +204,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
      * @param enemy
      */
     public doDamageTo(enemy: Enemy): void {
-
+        //TODO do damge to an ennemy
+        console.log('player do damage to ennemy');
     }
 }

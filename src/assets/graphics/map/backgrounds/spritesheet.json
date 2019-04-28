@@ -5,12 +5,12 @@
 			"format": "RGBA8888",
 			"size": {
 				"w": 4096,
-				"h": 3042
+				"h": 4080
 			},
 			"scale": 1,
 			"frames": [
 				{
-					"filename": "test.png",
+					"filename": "background/scene2/bg.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -35,7 +35,57 @@
 					}
 				},
 				{
-					"filename": "bg_static.png",
+					"filename": "background/scene2/bg_far.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 4096,
+						"h": 960
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 4096,
+						"h": 960
+					},
+					"frame": {
+						"x": 0,
+						"y": 960,
+						"w": 4096,
+						"h": 960
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "background/scene2/foreground.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 4096,
+						"h": 960
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 4096,
+						"h": 960
+					},
+					"frame": {
+						"x": 0,
+						"y": 1920,
+						"w": 4096,
+						"h": 960
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "background/scene1/all2.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -50,609 +100,34 @@
 					},
 					"frame": {
 						"x": 0,
-						"y": 960,
+						"y": 2880,
 						"w": 2000,
 						"h": 960
 					},
 					"anchor": {
-						"x": 0,
-						"y": 0
+						"x": 0.5,
+						"y": 0.5
 					}
 				},
 				{
-					"filename": "bg_far.png",
+					"filename": "background/scene1/bg.png",
 					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
 					"sourceSize": {
 						"w": 2000,
 						"h": 960
 					},
 					"spriteSourceSize": {
 						"x": 0,
-						"y": 154,
+						"y": 0,
 						"w": 2000,
-						"h": 806
+						"h": 960
 					},
 					"frame": {
 						"x": 2000,
-						"y": 960,
-						"w": 2000,
-						"h": 806
-					},
-					"anchor": {
-						"x": 0,
-						"y": 0
-					}
-				},
-				{
-					"filename": "vampire/fightvamp18.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 22,
-						"w": 88,
-						"h": 98
-					},
-					"frame": {
-						"x": 4000,
-						"y": 960,
-						"w": 88,
-						"h": 98
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "vampire/jumpvamp1.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 6,
-						"y": 8,
-						"w": 88,
-						"h": 95
-					},
-					"frame": {
-						"x": 4000,
-						"y": 1058,
-						"w": 88,
-						"h": 95
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "vampire/fightvamp17.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 6,
-						"y": 23,
-						"w": 86,
-						"h": 97
-					},
-					"frame": {
-						"x": 4000,
-						"y": 1153,
-						"w": 86,
-						"h": 97
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "Poses/player_hang.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 80,
-						"h": 110
-					},
-					"spriteSourceSize": {
-						"x": 4,
-						"y": 1,
-						"w": 76,
-						"h": 109
-					},
-					"frame": {
-						"x": 4000,
-						"y": 1250,
-						"w": 76,
-						"h": 109
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "Poses/player_swim2.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 80,
-						"h": 110
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 5,
-						"w": 78,
-						"h": 104
-					},
-					"frame": {
-						"x": 4000,
-						"y": 1359,
-						"w": 78,
-						"h": 104
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "Poses/player_hurt.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 80,
-						"h": 110
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 7,
-						"w": 80,
-						"h": 101
-					},
-					"frame": {
-						"x": 4000,
-						"y": 1463,
-						"w": 80,
-						"h": 101
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "Poses/player_swim1.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 80,
-						"h": 110
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 6,
-						"w": 80,
-						"h": 101
-					},
-					"frame": {
-						"x": 4000,
-						"y": 1564,
-						"w": 80,
-						"h": 101
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "vampire/fightvamp19.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 22,
-						"w": 82,
-						"h": 98
-					},
-					"frame": {
-						"x": 4000,
-						"y": 1665,
-						"w": 82,
-						"h": 98
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "Poses/player_fall.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 80,
-						"h": 110
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 10,
-						"w": 79,
-						"h": 99
-					},
-					"frame": {
-						"x": 4000,
-						"y": 1763,
-						"w": 79,
-						"h": 99
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "bg.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
+						"y": 2880,
 						"w": 2000,
 						"h": 960
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 209,
-						"w": 2000,
-						"h": 751
-					},
-					"frame": {
-						"x": 2000,
-						"y": 1766,
-						"w": 2000,
-						"h": 751
-					},
-					"anchor": {
-						"x": 0,
-						"y": 0
-					}
-				},
-				{
-					"filename": "Poses/player_kick.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 80,
-						"h": 110
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 11,
-						"w": 79,
-						"h": 99
-					},
-					"frame": {
-						"x": 4000,
-						"y": 1862,
-						"w": 79,
-						"h": 99
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "Poses/player_hold1.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 80,
-						"h": 110
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 13,
-						"w": 79,
-						"h": 97
-					},
-					"frame": {
-						"x": 4000,
-						"y": 1961,
-						"w": 79,
-						"h": 97
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "Poses/player_cheer1.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 80,
-						"h": 110
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 12,
-						"w": 78,
-						"h": 98
-					},
-					"frame": {
-						"x": 4000,
-						"y": 2058,
-						"w": 78,
-						"h": 98
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "vampire/runvampright1.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 6,
-						"y": 23,
-						"w": 78,
-						"h": 97
-					},
-					"frame": {
-						"x": 4000,
-						"y": 2156,
-						"w": 78,
-						"h": 97
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "Poses/player_action2.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 80,
-						"h": 110
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 15,
-						"w": 79,
-						"h": 95
-					},
-					"frame": {
-						"x": 4000,
-						"y": 2253,
-						"w": 79,
-						"h": 95
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "Poses/player_cheer2.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 80,
-						"h": 110
-					},
-					"spriteSourceSize": {
-						"x": 2,
-						"y": 13,
-						"w": 77,
-						"h": 97
-					},
-					"frame": {
-						"x": 4000,
-						"y": 2348,
-						"w": 77,
-						"h": 97
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "Poses/player_jump.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 80,
-						"h": 110
-					},
-					"spriteSourceSize": {
-						"x": 3,
-						"y": 8,
-						"w": 73,
-						"h": 102
-					},
-					"frame": {
-						"x": 4000,
-						"y": 2445,
-						"w": 73,
-						"h": 102
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "bg_beta.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 1488,
-						"h": 960
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 1488,
-						"h": 960
-					},
-					"frame": {
-						"x": 0,
-						"y": 1920,
-						"w": 1488,
-						"h": 960
-					},
-					"anchor": {
-						"x": 0,
-						"y": 0
-					}
-				},
-				{
-					"filename": "vampire/jumpvamp3.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 18,
-						"y": 10,
-						"w": 80,
-						"h": 93
-					},
-					"frame": {
-						"x": 1488,
-						"y": 1920,
-						"w": 80,
-						"h": 93
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "Poses/player_talk.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 80,
-						"h": 110
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 13,
-						"w": 76,
-						"h": 97
-					},
-					"frame": {
-						"x": 1568,
-						"y": 1920,
-						"w": 76,
-						"h": 97
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "Poses/player_slide.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 80,
-						"h": 110
-					},
-					"spriteSourceSize": {
-						"x": 2,
-						"y": 17,
-						"w": 78,
-						"h": 93
-					},
-					"frame": {
-						"x": 1488,
-						"y": 2013,
-						"w": 78,
-						"h": 93
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "vampire/runvampright10.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 15,
-						"y": 27,
-						"w": 82,
-						"h": 89
-					},
-					"frame": {
-						"x": 1644,
-						"y": 1920,
-						"w": 82,
-						"h": 89
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "Poses/player_walk1.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 80,
-						"h": 110
-					},
-					"spriteSourceSize": {
-						"x": 2,
-						"y": 12,
-						"w": 74,
-						"h": 98
-					},
-					"frame": {
-						"x": 1726,
-						"y": 1920,
-						"w": 74,
-						"h": 98
 					},
 					"anchor": {
 						"x": 0.5,
@@ -662,22 +137,22 @@
 				{
 					"filename": "Poses/player_action1.png",
 					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
 					"sourceSize": {
 						"w": 80,
 						"h": 110
 					},
 					"spriteSourceSize": {
 						"x": 0,
-						"y": 9,
-						"w": 70,
-						"h": 101
+						"y": 0,
+						"w": 80,
+						"h": 110
 					},
 					"frame": {
-						"x": 1644,
-						"y": 2009,
-						"w": 70,
-						"h": 101
+						"x": 4000,
+						"y": 2880,
+						"w": 80,
+						"h": 110
 					},
 					"anchor": {
 						"x": 0.5,
@@ -685,224 +160,24 @@
 					}
 				},
 				{
-					"filename": "vampire/runvampright2.png",
+					"filename": "Poses/player_action2.png",
 					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 10,
-						"y": 24,
-						"w": 72,
-						"h": 96
-					},
-					"frame": {
-						"x": 1566,
-						"y": 2017,
-						"w": 72,
-						"h": 96
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "Poses/player_skid.png",
-					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
 					"sourceSize": {
 						"w": 80,
 						"h": 110
 					},
 					"spriteSourceSize": {
-						"x": 9,
-						"y": 14,
-						"w": 69,
-						"h": 96
-					},
-					"frame": {
-						"x": 1488,
-						"y": 2106,
-						"w": 69,
-						"h": 96
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "vampire/runvampright5.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 6,
-						"y": 27,
-						"w": 79,
-						"h": 87
-					},
-					"frame": {
-						"x": 1800,
-						"y": 1920,
-						"w": 79,
-						"h": 87
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "vampire/fightvamp12.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 13,
-						"y": 22,
-						"w": 65,
-						"h": 98
-					},
-					"frame": {
-						"x": 1879,
-						"y": 1920,
-						"w": 65,
-						"h": 98
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "Poses/player_hold2.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
+						"x": 0,
+						"y": 0,
 						"w": 80,
 						"h": 110
 					},
-					"spriteSourceSize": {
-						"x": 8,
-						"y": 13,
-						"w": 54,
-						"h": 97
-					},
 					"frame": {
-						"x": 1944,
-						"y": 1920,
-						"w": 54,
-						"h": 97
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "vampire/runvampright3.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 25,
-						"y": 25,
-						"w": 52,
-						"h": 95
-					},
-					"frame": {
-						"x": 1944,
-						"y": 2017,
-						"w": 52,
-						"h": 95
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "vampire/fightvamp13.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 12,
-						"y": 22,
-						"w": 65,
-						"h": 98
-					},
-					"frame": {
-						"x": 1800,
-						"y": 2007,
-						"w": 65,
-						"h": 98
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "vampire/runvampright4.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 24,
-						"y": 24,
-						"w": 67,
-						"h": 95
-					},
-					"frame": {
-						"x": 1865,
-						"y": 2018,
-						"w": 67,
-						"h": 95
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "vampire/fightvamp14.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 12,
-						"y": 21,
-						"w": 64,
-						"h": 99
-					},
-					"frame": {
-						"x": 1932,
-						"y": 2112,
-						"w": 64,
-						"h": 99
+						"x": 4000,
+						"y": 2990,
+						"w": 80,
+						"h": 110
 					},
 					"anchor": {
 						"x": 0.5,
@@ -912,72 +187,22 @@
 				{
 					"filename": "Poses/player_back.png",
 					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
 					"sourceSize": {
 						"w": 80,
 						"h": 110
-					},
-					"spriteSourceSize": {
-						"x": 8,
-						"y": 13,
-						"w": 65,
-						"h": 97
-					},
-					"frame": {
-						"x": 1714,
-						"y": 2018,
-						"w": 65,
-						"h": 97
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "Poses/player_idle.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 80,
-						"h": 110
-					},
-					"spriteSourceSize": {
-						"x": 8,
-						"y": 13,
-						"w": 65,
-						"h": 97
-					},
-					"frame": {
-						"x": 1638,
-						"y": 2110,
-						"w": 65,
-						"h": 97
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "vampire/fightvamp16.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
 					},
 					"spriteSourceSize": {
 						"x": 0,
-						"y": 23,
-						"w": 65,
-						"h": 97
+						"y": 0,
+						"w": 80,
+						"h": 110
 					},
 					"frame": {
-						"x": 1557,
-						"y": 2113,
-						"w": 65,
-						"h": 97
+						"x": 4000,
+						"y": 3100,
+						"w": 80,
+						"h": 110
 					},
 					"anchor": {
 						"x": 0.5,
@@ -985,24 +210,24 @@
 					}
 				},
 				{
-					"filename": "vampire/fightvamp1.png",
+					"filename": "Poses/player_cheer1.png",
 					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
 					"sourceSize": {
-						"w": 120,
-						"h": 120
+						"w": 80,
+						"h": 110
 					},
 					"spriteSourceSize": {
-						"x": 14,
-						"y": 25,
-						"w": 66,
-						"h": 95
+						"x": 0,
+						"y": 0,
+						"w": 80,
+						"h": 110
 					},
 					"frame": {
-						"x": 1488,
-						"y": 2202,
-						"w": 66,
-						"h": 95
+						"x": 4000,
+						"y": 3210,
+						"w": 80,
+						"h": 110
 					},
 					"anchor": {
 						"x": 0.5,
@@ -1010,149 +235,24 @@
 					}
 				},
 				{
-					"filename": "vampire/fightvamp9.png",
+					"filename": "Poses/player_cheer2.png",
 					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
 					"sourceSize": {
-						"w": 120,
-						"h": 120
+						"w": 80,
+						"h": 110
 					},
 					"spriteSourceSize": {
-						"x": 14,
-						"y": 25,
-						"w": 66,
-						"h": 95
+						"x": 0,
+						"y": 0,
+						"w": 80,
+						"h": 110
 					},
 					"frame": {
-						"x": 1779,
-						"y": 2105,
-						"w": 66,
-						"h": 95
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "vampire/fightvamp11.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 13,
-						"y": 27,
-						"w": 67,
-						"h": 93
-					},
-					"frame": {
-						"x": 1703,
-						"y": 2115,
-						"w": 67,
-						"h": 93
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "vampire/fightvamp7.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 15,
-						"y": 26,
-						"w": 65,
-						"h": 94
-					},
-					"frame": {
-						"x": 1622,
-						"y": 2207,
-						"w": 65,
-						"h": 94
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "vampire/fightvamp10.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 14,
-						"y": 28,
-						"w": 66,
-						"h": 92
-					},
-					"frame": {
-						"x": 1554,
-						"y": 2210,
-						"w": 66,
-						"h": 92
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "vampire/fightvamp2.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 14,
-						"y": 28,
-						"w": 66,
-						"h": 92
-					},
-					"frame": {
-						"x": 1488,
-						"y": 2297,
-						"w": 66,
-						"h": 92
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "vampire/jumpvamp2.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 14,
-						"y": 10,
-						"w": 82,
-						"h": 75
-					},
-					"frame": {
-						"x": 1845,
-						"y": 2113,
-						"w": 82,
-						"h": 75
+						"x": 4000,
+						"y": 3320,
+						"w": 80,
+						"h": 110
 					},
 					"anchor": {
 						"x": 0.5,
@@ -1162,22 +262,22 @@
 				{
 					"filename": "Poses/player_climb1.png",
 					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
 					"sourceSize": {
 						"w": 80,
 						"h": 110
 					},
 					"spriteSourceSize": {
-						"x": 9,
-						"y": 6,
-						"w": 60,
-						"h": 101
+						"x": 0,
+						"y": 0,
+						"w": 80,
+						"h": 110
 					},
 					"frame": {
-						"x": 1845,
-						"y": 2188,
-						"w": 60,
-						"h": 101
+						"x": 4000,
+						"y": 3430,
+						"w": 80,
+						"h": 110
 					},
 					"anchor": {
 						"x": 0.5,
@@ -1187,172 +287,22 @@
 				{
 					"filename": "Poses/player_climb2.png",
 					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
 					"sourceSize": {
 						"w": 80,
 						"h": 110
 					},
 					"spriteSourceSize": {
-						"x": 11,
-						"y": 6,
-						"w": 60,
-						"h": 101
-					},
-					"frame": {
-						"x": 1770,
-						"y": 2200,
-						"w": 60,
-						"h": 101
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "Poses/player_stand.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
+						"x": 0,
+						"y": 0,
 						"w": 80,
 						"h": 110
 					},
-					"spriteSourceSize": {
-						"x": 9,
-						"y": 13,
-						"w": 62,
-						"h": 97
-					},
 					"frame": {
-						"x": 1687,
-						"y": 2208,
-						"w": 62,
-						"h": 97
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "vampire/fightvamp15.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 8,
-						"y": 20,
-						"w": 60,
-						"h": 100
-					},
-					"frame": {
-						"x": 1620,
-						"y": 2301,
-						"w": 60,
-						"h": 100
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "vampire/fightvamp3.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 15,
-						"y": 28,
-						"w": 65,
-						"h": 92
-					},
-					"frame": {
-						"x": 1554,
-						"y": 2302,
-						"w": 65,
-						"h": 92
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "vampire/runvampright9.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 20,
-						"y": 22,
-						"w": 61,
-						"h": 98
-					},
-					"frame": {
-						"x": 1488,
-						"y": 2389,
-						"w": 61,
-						"h": 98
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "vampire/fightvamp4.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 12,
-						"y": 33,
-						"w": 68,
-						"h": 87
-					},
-					"frame": {
-						"x": 1549,
-						"y": 2394,
-						"w": 68,
-						"h": 87
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "vampire/fightvamp8.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 18,
-						"y": 25,
-						"w": 62,
-						"h": 95
-					},
-					"frame": {
-						"x": 1905,
-						"y": 2211,
-						"w": 62,
-						"h": 95
+						"x": 4000,
+						"y": 3540,
+						"w": 80,
+						"h": 110
 					},
 					"anchor": {
 						"x": 0.5,
@@ -1362,22 +312,22 @@
 				{
 					"filename": "Poses/player_duck.png",
 					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
 					"sourceSize": {
 						"w": 80,
 						"h": 110
 					},
 					"spriteSourceSize": {
-						"x": 7,
-						"y": 25,
-						"w": 68,
-						"h": 85
+						"x": 0,
+						"y": 0,
+						"w": 80,
+						"h": 110
 					},
 					"frame": {
-						"x": 1830,
-						"y": 2289,
-						"w": 68,
-						"h": 85
+						"x": 4000,
+						"y": 3650,
+						"w": 80,
+						"h": 110
 					},
 					"anchor": {
 						"x": 0.5,
@@ -1385,74 +335,374 @@
 					}
 				},
 				{
-					"filename": "vampire/fightvamp6.png",
+					"filename": "Poses/player_fall.png",
 					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 18,
-						"y": 27,
-						"w": 62,
-						"h": 93
-					},
-					"frame": {
-						"x": 1749,
-						"y": 2301,
-						"w": 62,
-						"h": 93
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "vampire/runvampright8.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 25,
-						"y": 24,
-						"w": 59,
-						"h": 96
-					},
-					"frame": {
-						"x": 1680,
-						"y": 2305,
-						"w": 59,
-						"h": 96
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "Poses/player_walk2.png",
-					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
 					"sourceSize": {
 						"w": 80,
 						"h": 110
 					},
 					"spriteSourceSize": {
-						"x": 12,
-						"y": 11,
-						"w": 57,
-						"h": 99
+						"x": 0,
+						"y": 0,
+						"w": 80,
+						"h": 110
 					},
 					"frame": {
-						"x": 1898,
-						"y": 2306,
-						"w": 57,
-						"h": 99
+						"x": 4000,
+						"y": 3760,
+						"w": 80,
+						"h": 110
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "vampire/fightvamp1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
+					},
+					"frame": {
+						"x": 0,
+						"y": 3840,
+						"w": 120,
+						"h": 120
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "vampire/fightvamp10.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
+					},
+					"frame": {
+						"x": 120,
+						"y": 3840,
+						"w": 120,
+						"h": 120
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "vampire/fightvamp11.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
+					},
+					"frame": {
+						"x": 240,
+						"y": 3840,
+						"w": 120,
+						"h": 120
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "vampire/fightvamp12.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
+					},
+					"frame": {
+						"x": 360,
+						"y": 3840,
+						"w": 120,
+						"h": 120
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "vampire/fightvamp13.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
+					},
+					"frame": {
+						"x": 480,
+						"y": 3840,
+						"w": 120,
+						"h": 120
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "vampire/fightvamp14.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
+					},
+					"frame": {
+						"x": 600,
+						"y": 3840,
+						"w": 120,
+						"h": 120
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "vampire/fightvamp15.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
+					},
+					"frame": {
+						"x": 720,
+						"y": 3840,
+						"w": 120,
+						"h": 120
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "vampire/fightvamp16.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
+					},
+					"frame": {
+						"x": 840,
+						"y": 3840,
+						"w": 120,
+						"h": 120
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "vampire/fightvamp17.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
+					},
+					"frame": {
+						"x": 960,
+						"y": 3840,
+						"w": 120,
+						"h": 120
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "vampire/fightvamp18.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
+					},
+					"frame": {
+						"x": 1080,
+						"y": 3840,
+						"w": 120,
+						"h": 120
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "vampire/fightvamp19.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
+					},
+					"frame": {
+						"x": 1200,
+						"y": 3840,
+						"w": 120,
+						"h": 120
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "vampire/fightvamp2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
+					},
+					"frame": {
+						"x": 1320,
+						"y": 3840,
+						"w": 120,
+						"h": 120
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "vampire/fightvamp3.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
+					},
+					"frame": {
+						"x": 1440,
+						"y": 3840,
+						"w": 120,
+						"h": 120
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "vampire/fightvamp4.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
+					},
+					"frame": {
+						"x": 1560,
+						"y": 3840,
+						"w": 120,
+						"h": 120
 					},
 					"anchor": {
 						"x": 0.5,
@@ -1462,22 +712,22 @@
 				{
 					"filename": "vampire/fightvamp5.png",
 					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
 					"sourceSize": {
 						"w": 120,
 						"h": 120
 					},
 					"spriteSourceSize": {
-						"x": 18,
-						"y": 29,
-						"w": 62,
-						"h": 91
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
 					},
 					"frame": {
-						"x": 1811,
-						"y": 2374,
-						"w": 62,
-						"h": 91
+						"x": 1680,
+						"y": 3840,
+						"w": 120,
+						"h": 120
 					},
 					"anchor": {
 						"x": 0.5,
@@ -1485,24 +735,24 @@
 					}
 				},
 				{
-					"filename": "vampire/runvampright6.png",
+					"filename": "vampire/fightvamp6.png",
 					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
 					"sourceSize": {
 						"w": 120,
 						"h": 120
 					},
 					"spriteSourceSize": {
-						"x": 19,
-						"y": 34,
-						"w": 65,
-						"h": 86
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
 					},
 					"frame": {
-						"x": 1739,
-						"y": 2394,
-						"w": 65,
-						"h": 86
+						"x": 1800,
+						"y": 3840,
+						"w": 120,
+						"h": 120
 					},
 					"anchor": {
 						"x": 0.5,
@@ -1510,24 +760,149 @@
 					}
 				},
 				{
-					"filename": "vampire/runvampright7.png",
+					"filename": "vampire/fightvamp7.png",
 					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
 					"sourceSize": {
 						"w": 120,
 						"h": 120
 					},
 					"spriteSourceSize": {
-						"x": 23,
-						"y": 27,
-						"w": 57,
-						"h": 93
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
 					},
 					"frame": {
-						"x": 1617,
-						"y": 2401,
-						"w": 57,
-						"h": 93
+						"x": 1920,
+						"y": 3840,
+						"w": 120,
+						"h": 120
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "vampire/fightvamp8.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
+					},
+					"frame": {
+						"x": 2040,
+						"y": 3840,
+						"w": 120,
+						"h": 120
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "vampire/fightvamp9.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
+					},
+					"frame": {
+						"x": 2160,
+						"y": 3840,
+						"w": 120,
+						"h": 120
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "vampire/jumpvamp1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
+					},
+					"frame": {
+						"x": 2280,
+						"y": 3840,
+						"w": 120,
+						"h": 120
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "vampire/jumpvamp2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
+					},
+					"frame": {
+						"x": 2400,
+						"y": 3840,
+						"w": 120,
+						"h": 120
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "vampire/jumpvamp3.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
+					},
+					"frame": {
+						"x": 2520,
+						"y": 3840,
+						"w": 120,
+						"h": 120
 					},
 					"anchor": {
 						"x": 0.5,
@@ -1537,47 +912,22 @@
 				{
 					"filename": "vampire/jumpvamp4.png",
 					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
 					"sourceSize": {
 						"w": 120,
 						"h": 120
 					},
 					"spriteSourceSize": {
-						"x": 25,
-						"y": 52,
-						"w": 76,
-						"h": 68
-					},
-					"frame": {
-						"x": 1488,
-						"y": 2487,
-						"w": 76,
-						"h": 68
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "vampire/jumpvamp7.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
+						"x": 0,
+						"y": 0,
 						"w": 120,
 						"h": 120
 					},
-					"spriteSourceSize": {
-						"x": 29,
-						"y": 57,
-						"w": 78,
-						"h": 63
-					},
 					"frame": {
-						"x": 1873,
-						"y": 2405,
-						"w": 78,
-						"h": 63
+						"x": 2640,
+						"y": 3840,
+						"w": 120,
+						"h": 120
 					},
 					"anchor": {
 						"x": 0.5,
@@ -1587,22 +937,22 @@
 				{
 					"filename": "vampire/jumpvamp5.png",
 					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
 					"sourceSize": {
 						"w": 120,
 						"h": 120
 					},
 					"spriteSourceSize": {
-						"x": 30,
-						"y": 56,
-						"w": 74,
-						"h": 64
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
 					},
 					"frame": {
-						"x": 1804,
-						"y": 2468,
-						"w": 74,
-						"h": 64
+						"x": 2760,
+						"y": 3840,
+						"w": 120,
+						"h": 120
 					},
 					"anchor": {
 						"x": 0.5,
@@ -1612,22 +962,22 @@
 				{
 					"filename": "vampire/jumpvamp6.png",
 					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
 					"sourceSize": {
 						"w": 120,
 						"h": 120
 					},
 					"spriteSourceSize": {
-						"x": 29,
-						"y": 61,
-						"w": 78,
-						"h": 59
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
 					},
 					"frame": {
-						"x": 1878,
-						"y": 2468,
-						"w": 78,
-						"h": 59
+						"x": 2880,
+						"y": 3840,
+						"w": 120,
+						"h": 120
 					},
 					"anchor": {
 						"x": 0.5,
@@ -1635,28 +985,814 @@
 					}
 				},
 				{
-					"filename": "bg_clouds.png",
+					"filename": "vampire/jumpvamp7.png",
 					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
+					},
+					"frame": {
+						"x": 3000,
+						"y": 3840,
+						"w": 120,
+						"h": 120
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "vampire/runvampright1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
+					},
+					"frame": {
+						"x": 3120,
+						"y": 3840,
+						"w": 120,
+						"h": 120
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "vampire/runvampright10.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
+					},
+					"frame": {
+						"x": 3240,
+						"y": 3840,
+						"w": 120,
+						"h": 120
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "vampire/runvampright2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
+					},
+					"frame": {
+						"x": 3360,
+						"y": 3840,
+						"w": 120,
+						"h": 120
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "vampire/runvampright3.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
+					},
+					"frame": {
+						"x": 3480,
+						"y": 3840,
+						"w": 120,
+						"h": 120
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "vampire/runvampright4.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
+					},
+					"frame": {
+						"x": 3600,
+						"y": 3840,
+						"w": 120,
+						"h": 120
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "vampire/runvampright5.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
+					},
+					"frame": {
+						"x": 3720,
+						"y": 3840,
+						"w": 120,
+						"h": 120
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "vampire/runvampright6.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
+					},
+					"frame": {
+						"x": 3840,
+						"y": 3840,
+						"w": 120,
+						"h": 120
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "vampire/runvampright7.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
+					},
+					"frame": {
+						"x": 3960,
+						"y": 3870,
+						"w": 120,
+						"h": 120
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "vampire/runvampright8.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
+					},
+					"frame": {
+						"x": 0,
+						"y": 3960,
+						"w": 120,
+						"h": 120
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "vampire/runvampright9.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 120,
+						"h": 120
+					},
+					"frame": {
+						"x": 120,
+						"y": 3960,
+						"w": 120,
+						"h": 120
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_hang.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 80,
+						"h": 110
+					},
+					"frame": {
+						"x": 240,
+						"y": 3960,
+						"w": 80,
+						"h": 110
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_hold1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 80,
+						"h": 110
+					},
+					"frame": {
+						"x": 320,
+						"y": 3960,
+						"w": 80,
+						"h": 110
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_hold2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 80,
+						"h": 110
+					},
+					"frame": {
+						"x": 400,
+						"y": 3960,
+						"w": 80,
+						"h": 110
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_hurt.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 80,
+						"h": 110
+					},
+					"frame": {
+						"x": 480,
+						"y": 3960,
+						"w": 80,
+						"h": 110
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_idle.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 80,
+						"h": 110
+					},
+					"frame": {
+						"x": 560,
+						"y": 3960,
+						"w": 80,
+						"h": 110
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				}
+			]
+		},
+		{
+			"image": "spritesheet-1.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 4080,
+				"h": 2880
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "background/scene1/bg_far.png",
+					"rotated": false,
+					"trimmed": false,
 					"sourceSize": {
 						"w": 2000,
 						"h": 960
 					},
 					"spriteSourceSize": {
-						"x": 34,
+						"x": 0,
 						"y": 0,
-						"w": 1923,
-						"h": 525
+						"w": 2000,
+						"h": 960
 					},
 					"frame": {
-						"x": 1956,
-						"y": 2517,
-						"w": 1923,
-						"h": 525
+						"x": 0,
+						"y": 0,
+						"w": 2000,
+						"h": 960
 					},
 					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "background/scene1/crypte.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 2000,
+						"h": 960
+					},
+					"spriteSourceSize": {
 						"x": 0,
-						"y": 0
+						"y": 0,
+						"w": 2000,
+						"h": 960
+					},
+					"frame": {
+						"x": 2000,
+						"y": 0,
+						"w": 2000,
+						"h": 960
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_jump.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 80,
+						"h": 110
+					},
+					"frame": {
+						"x": 4000,
+						"y": 0,
+						"w": 80,
+						"h": 110
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_kick.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 80,
+						"h": 110
+					},
+					"frame": {
+						"x": 4000,
+						"y": 110,
+						"w": 80,
+						"h": 110
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_skid.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 80,
+						"h": 110
+					},
+					"frame": {
+						"x": 4000,
+						"y": 220,
+						"w": 80,
+						"h": 110
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_slide.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 80,
+						"h": 110
+					},
+					"frame": {
+						"x": 4000,
+						"y": 330,
+						"w": 80,
+						"h": 110
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_stand.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 80,
+						"h": 110
+					},
+					"frame": {
+						"x": 4000,
+						"y": 440,
+						"w": 80,
+						"h": 110
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_swim1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 80,
+						"h": 110
+					},
+					"frame": {
+						"x": 4000,
+						"y": 550,
+						"w": 80,
+						"h": 110
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_swim2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 80,
+						"h": 110
+					},
+					"frame": {
+						"x": 4000,
+						"y": 660,
+						"w": 80,
+						"h": 110
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_talk.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 80,
+						"h": 110
+					},
+					"frame": {
+						"x": 4000,
+						"y": 770,
+						"w": 80,
+						"h": 110
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_walk1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 80,
+						"h": 110
+					},
+					"frame": {
+						"x": 4000,
+						"y": 880,
+						"w": 80,
+						"h": 110
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "background/scene1/foreground.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 2000,
+						"h": 960
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 2000,
+						"h": 960
+					},
+					"frame": {
+						"x": 0,
+						"y": 960,
+						"w": 2000,
+						"h": 960
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "background/static/cloud.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 2000,
+						"h": 960
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 2000,
+						"h": 960
+					},
+					"frame": {
+						"x": 2000,
+						"y": 960,
+						"w": 2000,
+						"h": 960
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_walk2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 80,
+						"h": 110
+					},
+					"frame": {
+						"x": 4000,
+						"y": 990,
+						"w": 80,
+						"h": 110
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "background/static/sky.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 2000,
+						"h": 960
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 2000,
+						"h": 960
+					},
+					"frame": {
+						"x": 0,
+						"y": 1920,
+						"w": 2000,
+						"h": 960
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "background/static/sun.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 2000,
+						"h": 960
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 2000,
+						"h": 960
+					},
+					"frame": {
+						"x": 2000,
+						"y": 1920,
+						"w": 2000,
+						"h": 960
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
 					}
 				}
 			]
@@ -1665,6 +1801,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:2b29e3ac7ca01446fe428bb465b3cee1:2e84bf1c226ac95980d85d58d8c78457:8c6dd33834234b12e12b365e160caba2$"
+		"smartupdate": "$TexturePacker:SmartUpdate:d830c4a8a533d1cb119a6eaf2d3af42e:40ef4cd2a49f1e8faefbcdeeca7d57c7:891aeea45958f21e96a4508ee113e1b2$"
 	}
 }
