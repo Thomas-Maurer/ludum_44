@@ -6,7 +6,10 @@ export default {
     name: "Gameplay",
     computed: mapState([
         'play',
-        'playerHP'
+        'playerHP',
+        'potion',
+        'glass',
+        'umbrella'
     ]),
     data() {
         return {
@@ -18,6 +21,15 @@ export default {
 
             window.addEventListener('PLAYER_HP', (e) => {
                 this.$store.commit("setPlayerHP", e.detail);
+            });
+            window.addEventListener('PLAYER_GLASS', (e) => {
+                this.$store.commit("setGlass", true);
+            });
+            window.addEventListener('PLAYER_POTION', (e) => {
+                this.$store.commit("setPotion", true);
+            });
+            window.addEventListener('PLAYER_UMBRELLA', (e) => {
+                this.$store.commit("setUmbrella", true);
             });
         }
     },

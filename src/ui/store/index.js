@@ -8,7 +8,11 @@ export default new Vuex.Store({
         play: false,
         playerHP: 100,
         dead: false,
-        win: false
+        win: false,
+        potion: false,
+        glass: false,
+
+        umbrella: false
     },
     mutations: {
         setPlay(state, value) {
@@ -19,6 +23,15 @@ export default new Vuex.Store({
         },
         setWin(state, value) {
             state.win = value;
+        },
+        setPotion(state, value) {
+            state.potion = value;
+        },
+        setUmbrella(state, value) {
+            state.umbrella = value;
+        },
+        setGlass(state, value) {
+            state.glass = value;
         },
         setPlayerHP(state, value) {
             state.playerHP = value;
