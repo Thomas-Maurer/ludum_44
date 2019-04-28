@@ -54,6 +54,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy{
 
         this.setFixedRotation();
         this.setFriction(0.2, 0.05,0);
+        debugger
     }
 
     /**
