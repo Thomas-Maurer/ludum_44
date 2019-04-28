@@ -134,11 +134,13 @@ export default class MainScene extends Phaser.Scene {
 
   addCalice() {
     const spawnPoint: any = this.map.findObject("calice_spawn", (obj: any) => obj.name === "calice");
-    let caliceSprite = new VictoryItem(this.matter.world, this, spawnPoint.x, spawnPoint.y, 'all_sprites', 'icons/tdm.PNG');
+    let caliceSprite = new VictoryItem(this.matter.world, this, spawnPoint.x, spawnPoint.y, 'all_sprites', 'items/calice1.png');
+    const caliceAnim = this.player.generateFrameNames('items/calice', 'all_sprites', 1, 2);
+    this.anims.create({ key: 'caliceAnim', frames: caliceAnim, frameRate: 10, repeat: -1 });
+    caliceSprite.play('caliceAnim');
     caliceSprite.setStatic(true);
     caliceSprite.setCollisionCategory(this.matter.world.nextCategory());
     caliceSprite.setCollidesWith(this.playerCatCollision);
-    caliceSprite.setScale(0.5, 0.5);
   }
 
   /**
