@@ -1,8 +1,10 @@
 import {Map} from "../map-data";
+import {EnemyGuid} from "./enemy-guid.enum";
+import {IEnemy} from "./enemy.interface";
 /**
  * Enemy class
  */
-export class Enemy extends Phaser.Physics.Matter.Sprite{
+export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy{
     /**
      * Current velocity
      */
@@ -16,6 +18,19 @@ export class Enemy extends Phaser.Physics.Matter.Sprite{
     protected scene: Phaser.Scene;
 
     public isRunning = false;
+
+    /**
+     * Guid fill by the children
+     */
+    public GUID: EnemyGuid;
+    /**
+     * Fill by the children
+     * @type {{life: number; damage: number}}
+     */
+    public info = {
+        life:  0,
+        damage:  0,
+    };
 
     /**
      *

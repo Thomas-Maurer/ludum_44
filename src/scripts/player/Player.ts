@@ -204,6 +204,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
      * @param enemy
      */
     public doDamageTo(enemy: Enemy): void {
+        debugger
         //TODO do damge to an ennemy
         console.log('player do damage to ennemy');
     }

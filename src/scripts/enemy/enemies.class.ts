@@ -49,7 +49,7 @@ export class Enemies {
 
     /**
      * Call update on all enemies
-     * Check if player is 2000px to the enmy for update
+     * Check if player is 2000px to the enemy for update
      */
     public updateAllEnemies(playerX: number): void {
         for (let enemy of this.listOfEnemies) {
