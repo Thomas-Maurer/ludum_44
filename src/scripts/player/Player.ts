@@ -1,6 +1,7 @@
 import { PlayerControls } from "./playerControls/playerControls";
 import { Enemy } from "../enemy/enemy";
 import MainScene from "../scenes/MainScene";
+import EventsUtils from "../utils/events.utils";
 
 export default class Player extends Phaser.Physics.Matter.Sprite {
     private playerControl: PlayerControls;
@@ -133,6 +134,10 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     private takeDamage(damage: number) {
         console.log("Player take " + damage + " damages")
         this.healthPoint -= damage;
+        const playerHpEvent: CustomEvent = new CustomEvent("PLAYER_HP", {
+            detail: this.healthPoint
+        });
+        window.dispatchEvent(playerHpEvent);
     }
 
     /**

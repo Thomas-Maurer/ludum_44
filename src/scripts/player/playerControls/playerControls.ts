@@ -1,4 +1,5 @@
 import Player from "../Player";
+import EventUtils from "../../utils/events.utils";
 import Vector2 = Phaser.Math.Vector2;
 import KeyCodes = Phaser.Input.Keyboard.KeyCodes;
 import MainScene from "../../scenes/MainScene";
@@ -137,4 +138,5 @@ export class PlayerControls {
             player.getPlayerSprite().setVelocityY(-11);
         }
     }
+
 }
