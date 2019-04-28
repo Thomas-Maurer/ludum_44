@@ -2,13 +2,50 @@
 
     display: flex;
     font-family: 'Black Pearl';
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
 
     .icon {
-        position: fixed;
+
         top: 0;
         left: 40%;
-        background: #000;
         width: 45px;
         height: 45px;
     }
+
+    .bloodpotion {
+        background-image: url('../../../assets/graphics/ui/bloodpotion.png');
+        background-size: auto 100%;
+
+
+        &.hp100 {
+            background-position: -720px 0px;
+        }
+
+        &.hp75 {
+            background-position: -630px 0px;
+        }
+
+        &.hp50 {
+            background-position: -450px 0px;
+        }
+
+        &.hp25 {
+            background-position: -360px 0px;
+        }
+
+        &.hp0 {
+            background-position: 0px 0px;
+        }
+
+
+    }
+
+    .potion-label {
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+
+
 }

@@ -5,16 +5,23 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         // config: defaultConfig,
-        play: false
+        play: false,
+        playerHP: 100
     },
     mutations: {
         setPlay(state, value) {
             state.play = value;
+        },
+        setPlayerHP(state, value) {
+            state.playerHP = value;
         }
     },
     actions: {
         setPlay(context, value) {
             context.commit('setPlay', value);
+        },
+        setPlayerHP(context, value) {
+            context.commit('setPlayerHP', value);
         }
     }
 });
