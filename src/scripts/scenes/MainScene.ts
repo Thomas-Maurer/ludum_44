@@ -5,9 +5,11 @@ import { Enemy } from "../enemy/enemy";
 import { Map } from "../map-data";
 import {EnemiesEnum} from "../enemy/enemies.enum";
 import {Enemies} from "../enemy/enemies.class";
+import {Peasant} from "../enemy/peasant/peasant.class";
 export default class MainScene extends Phaser.Scene {
   public matterCollision: PhaserMatterCollisionPlugin;
   public map: Phaser.Tilemaps.Tilemap;
+  public enemy: Enemy;
   public player: Player;
   public shapes: any;
   public audioManager: AudioManager;
@@ -69,7 +71,7 @@ export default class MainScene extends Phaser.Scene {
     // Get the layers registered with Matter. Any colliding tiles will be given a Matter body. We
     // haven't mapped out custom collision shapes in Tiled so each colliding tile will get a default
     // rectangle body (similar to AP).
-    let test = this.matter.world.convertTilemapLayer(worldLayer);
+    this.matter.world.convertTilemapLayer(worldLayer);
 
     this.player = new Player(this.matter.world, this, 64, 11 * 32, 'all_sprites', 'vampire/runvampright1.png');
     this.enemy = new Peasant(this.matter.world, this, 10 * 64, 0);
