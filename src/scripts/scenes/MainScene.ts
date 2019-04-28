@@ -7,6 +7,7 @@ export default class MainScene extends Phaser.Scene {
   public matterCollision: PhaserMatterCollisionPlugin;
   public map: Phaser.Tilemaps.Tilemap;
   public player: Player;
+  public shapes: any;
   public audioManager: AudioManager;
   private parralaxLayers: {
     bg_static: Phaser.GameObjects.TileSprite,
@@ -30,12 +31,16 @@ export default class MainScene extends Phaser.Scene {
     this.load.multiatlas('block', 'assets/graphics/map/backgrounds/block.json', 'assets/graphics/map/backgrounds');
     this.load.multiatlas(Enemy.SPRITE_ID, 'assets/graphics/char/enemy/enemy_test.json', 'assets/graphics/char/enemy');
 
+// Load body shapes from JSON file generated using PhysicsEditor
+    this.load.json('shapes', 'assets/graphics/char/character/shapes_char.json');
+    this.load.multiatlas(Enemy.SPRITE_ID, 'assets/graphics/char/enemy/enemy_test.json', 'assets/graphics/char/enemy');
     this.audioManager = new AudioManager(this);
   }
   create() {
     /** Build all layers maps */
     const map = Map.getInstance(this.add.tilemap('map'));
     this.map = map.tileMap;
+    this.shapes = this.cache.json.get('shapes');
     const tileset = this.map.addTilesetImage('block', 'block');
 
     this.generateParralaxLayers();
@@ -50,13 +55,14 @@ export default class MainScene extends Phaser.Scene {
     // rectangle body (similar to AP).
     this.matter.world.convertTilemapLayer(worldLayer);
 
-    this.player = new Player(this.matter.world, this, 64, 11 * 32, 'all_sprites', 'vampire/runvampright1.png');
-    this.enemy = new Enemy(this.matter.world, this, 10 * 64, 0, Enemy.SPRITE_ID, 'zombie_hang');
+    this.player = new Player(this.matter.world, this, 64, 11 * 32, 'all_sprites', 'vampire/runvampright1.png',
+        {shape: this.shapes.runvampright1});
+    this.enemy = new Enemy(this.matter.world, this, 10 *64, 0, Enemy.SPRITE_ID, 'zombie_hang');
 
     const playerRunAnims = this.player.generateFrameNames('vampire/runvampright', 'all_sprites', 1, 10);
     const playerIdleAnims = this.player.generateFrameNames('vampire/fightvamp', 'all_sprites', 1, 10);
     const playerJumpAnims = this.player.generateFrameNames('vampire/jumpvamp', 'all_sprites', 1, 7);
-    const playerAttackAnims = this.player.generateFrameNames('vampire/fightvamp', 'all_sprites', 1, 19);
+    const playerAttackAnims = this.player.generateFrameNames('vampire/fightvamp', 'all_sprites', 9, 19);
     this.anims.create({ key: 'playerRun', frames: playerRunAnims, frameRate: 10, repeat: -1 });
     this.anims.create({ key: 'playerIdle', frames: playerIdleAnims, frameRate: 10, repeat: -1 });
     this.anims.create({ key: 'playerJump', frames: playerJumpAnims, frameRate: 9 });
