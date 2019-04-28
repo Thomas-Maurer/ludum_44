@@ -5,9 +5,11 @@ import { Enemy } from "../enemy/enemy";
 import { Map } from "../map-data";
 import {EnemiesEnum} from "../enemy/enemies.enum";
 import {Enemies} from "../enemy/enemies.class";
+import {Peasant} from "../enemy/peasant/peasant.class";
 export default class MainScene extends Phaser.Scene {
   public matterCollision: PhaserMatterCollisionPlugin;
   public map: Phaser.Tilemaps.Tilemap;
+  public enemy: Enemy;
   public player: Player;
   public shapes: any;
   public audioManager: AudioManager;
@@ -56,6 +58,8 @@ export default class MainScene extends Phaser.Scene {
     this.map = map.tileMap;
     this.shapes = this.cache.json.get('shapes');
     const tileset = this.map.addTilesetImage('block', 'block');
+    const defaultCat = this.matter.world.nextCategory();
+    const noCollisionCat = this.matter.world.nextCategory();
 
     this.generateParralaxLayers();
     const worldLayer = this.map.createStaticLayer('main_tile', tileset, 0, 0);
@@ -69,9 +73,10 @@ export default class MainScene extends Phaser.Scene {
     // rectangle body (similar to AP).
     this.matter.world.convertTilemapLayer(worldLayer);
 
-    this.player = new Player(this.matter.world, this, 64, 11 * 32, 'all_sprites', 'vampire/runvampright1.png',
-      { shape: this.shapes.runvampright1 });
+    this.player = new Player(this.matter.world, this, 64, 11 * 32, 'all_sprites', 'vampire/runvampright1.png');
 
+    //this.enemy.setCollisionCategory(defaultCat);
+    this.player.setCollisionCategory(defaultCat);
     this.enemies = new Enemies(this.map, this.matter.world, this);
 
     const playerRunAnims = this.player.generateFrameNames('vampire/runvampright', 'all_sprites', 1, 10);
@@ -104,10 +109,23 @@ export default class MainScene extends Phaser.Scene {
             this.player.emit('playertouchtarget', eventData.gameObjectB);
           }
 
+        }else if (eventData.gameObjectB == null) {
+          this.player.killPlayer();
         }
       },
       context: this
     });
+
+    this.addCalice();
+  }
+
+  addCalice() {
+    const spawnPoint: any = this.map.findObject("calice_spawn", (obj: any) => obj.name === "calice");
+    let caliceSprite = this.matter.add.sprite(spawnPoint.x,spawnPoint.y, 'all_sprites', 'icons/tdm.PNG');
+    caliceSprite.setStatic(true);
+    caliceSprite.setCollisionCategory(this.matter.world.nextCategory());
+    caliceSprite.setCollidesWith(this.matter.world.nextCategory());
+    caliceSprite.setScale(0.5, 0.5);
   }
 
   /**
