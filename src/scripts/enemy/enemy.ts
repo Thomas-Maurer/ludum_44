@@ -15,7 +15,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite{
 
     protected scene: Phaser.Scene;
 
-    private isRunning = false;
+    public isRunning = false;
 
     /**
      *
@@ -44,6 +44,11 @@ export class Enemy extends Phaser.Physics.Matter.Sprite{
         }
         // mak the enemy pnj always move
         this.setVelocityCustom();
+    }
+
+    public stopAllAnims() {
+        this.anims.stop();
+        this.isRunning = false;
     }
 
     /**
