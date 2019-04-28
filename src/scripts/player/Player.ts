@@ -1,25 +1,56 @@
-import {PlayerControls} from "./playerControls/playerControls";
-import {Enemy} from "../enemy/enemy";
+import { PlayerControls } from "./playerControls/playerControls";
+import { Enemy } from "../enemy/enemy";
+import MainScene from "../scenes/MainScene";
 
-export default class Player extends Phaser.Physics.Matter.Sprite{
+export default class Player extends Phaser.Physics.Matter.Sprite {
     private playerControl: PlayerControls;
     private canJump: boolean;
     private jumpCooldownTimer: Phaser.Time.TimerEvent;
     private inAir: boolean;
     private healthPoint: number;
     private baseDamage: number;
-    constructor(world: Phaser.Physics.Matter.World, scene: Phaser.Scene, x: number, y: number, key: string, frame?: string | integer) {
+    constructor(world: Phaser.Physics.Matter.World, scene: MainScene, x: number, y: number, key: string, frame?: string | integer) {
         super(world, x, y, key, frame);
+        const matterEngine: any = Phaser.Physics.Matter;
+        const body = matterEngine.Matter.Bodies.rectangle(x, y, 55, 100, { chamfer: { radius: 10 } });
+        this.setExistingBody(body);
         scene.add.existing(this);
-        console.log(x, y, key, frame);
         this.playerControl = new PlayerControls(scene);
         this.scene = scene;
         this.canJump = true;
         this.setFixedRotation();
-        this.setFriction(0.2, 0.05,0);
+        this.setFriction(0.2, 0.05, 0);
         this.inAir = true;
         this.healthPoint = 100;
         this.baseDamage = 1;
+        //TODO Better handling of event
+        this.on('animationcomplete', function (anim, frame) {
+            this.emit('animationcomplete_' + anim.key, anim, frame);
+        }, this);
+
+        this.on('animationcomplete_playerJump', function () {
+            this.anims.play('playerIdle');
+        }, this);
+
+        this.on('animationcomplete_playerAttack', function () {
+            this.anims.play('playerIdle');
+            //TODO Player attack system
+        }, this);
+    }
+
+    /**
+     * TODO export this function
+     * Generate FrameNames
+     * @param key
+     * @param atlasName
+     * @param start
+     * @param end
+     */
+    public generateFrameNames(key: string, atlasName: string, start: number, end: number): Phaser.Animations.Types.AnimationFrame[] {
+        return this.scene.anims.generateFrameNames(atlasName, {
+            start: start, end: end, zeroPad: 1,
+            prefix: key, suffix: '.png'
+        })
     }
 
     /**

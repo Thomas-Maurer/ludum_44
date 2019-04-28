@@ -1,12 +1,13 @@
 import Player from "../player/Player";
 import * as PhaserMatterCollisionPlugin from "phaser-matter-collision-plugin";
-
+import AudioManager from "../AudioManager";
 import { Enemy } from "../enemy/enemy";
 import { Map } from "../map-data";
 export default class MainScene extends Phaser.Scene {
   public matterCollision: PhaserMatterCollisionPlugin;
   public map: Phaser.Tilemaps.Tilemap;
   public player: Player;
+  public audioManager: AudioManager;
   private parralaxLayers: {
     bg_static: Phaser.GameObjects.TileSprite,
     bg_clouds: Phaser.GameObjects.TileSprite,
@@ -21,20 +22,20 @@ export default class MainScene extends Phaser.Scene {
     super({
       key: "MainScene",
     });
+
   }
   preload() {
     this.load.tilemapTiledJSON("map", "/assets/map/map_beta.json");
     this.load.multiatlas('all_sprites', 'assets/graphics/map/backgrounds/spritesheet.json', 'assets/graphics/map/backgrounds');
     this.load.multiatlas('block', 'assets/graphics/map/backgrounds/block.json', 'assets/graphics/map/backgrounds');
-
-
     this.load.multiatlas(Enemy.SPRITE_ID, 'assets/graphics/char/enemy/enemy_test.json', 'assets/graphics/char/enemy');
+
+    this.audioManager = new AudioManager(this);
   }
   create() {
     /** Build all layers maps */
     const map = Map.getInstance(this.add.tilemap('map'));
     this.map = map.tileMap;
-
     const tileset = this.map.addTilesetImage('block', 'block');
 
     this.generateParralaxLayers();
@@ -49,8 +50,17 @@ export default class MainScene extends Phaser.Scene {
     // rectangle body (similar to AP).
     this.matter.world.convertTilemapLayer(worldLayer);
 
-    this.player = new Player(this.matter.world, this, 64, 11 * 32, 'all_sprites', 'Poses/player_walk1.png');
-    this.enemy = new Enemy(this.matter.world, this, 10 *64, 0, Enemy.SPRITE_ID, 'zombie_hang');
+    this.player = new Player(this.matter.world, this, 64, 11 * 32, 'all_sprites', 'vampire/runvampright1.png');
+    this.enemy = new Enemy(this.matter.world, this, 10 * 64, 0, Enemy.SPRITE_ID, 'zombie_hang');
+
+    const playerRunAnims = this.player.generateFrameNames('vampire/runvampright', 'all_sprites', 1, 10);
+    const playerIdleAnims = this.player.generateFrameNames('vampire/fightvamp', 'all_sprites', 1, 10);
+    const playerJumpAnims = this.player.generateFrameNames('vampire/jumpvamp', 'all_sprites', 1, 7);
+    const playerAttackAnims = this.player.generateFrameNames('vampire/fightvamp', 'all_sprites', 1, 19);
+    this.anims.create({ key: 'playerRun', frames: playerRunAnims, frameRate: 10, repeat: -1 });
+    this.anims.create({ key: 'playerIdle', frames: playerIdleAnims, frameRate: 10, repeat: -1 });
+    this.anims.create({ key: 'playerJump', frames: playerJumpAnims, frameRate: 9 });
+    this.anims.create({ key: 'playerAttack', frames: playerAttackAnims, frameRate: 13 });
 
     this.cameras.main.startFollow(this.player.getPlayerSprite(), false, 0.5, 0.5);
     // Visualize all the matter bodies in the world. Note: this will be slow so go ahead and comment
@@ -68,12 +78,19 @@ export default class MainScene extends Phaser.Scene {
       callback: (eventData: any) => {
         if (eventData.gameObjectB !== undefined && eventData.gameObjectB instanceof Phaser.Tilemaps.Tile) {
           this.player.setPlayerInAirValue(false);
-        } else if(eventData.gameObjectB instanceof Enemy ) {
+        } else if (eventData.gameObjectB instanceof Enemy) {
           console.log(eventData.gameObjectB)
         }
       },
       context: this
     });
+  }
+
+  /**
+   * Shortcut for reloading the scene
+   */
+  restart() {
+    this.scene.restart();
   }
 
   // Fct we call each frame
