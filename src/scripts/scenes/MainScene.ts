@@ -17,6 +17,7 @@ export default class MainScene extends Phaser.Scene {
   public shapes: any;
   public audioManager: AudioManager;
   public playerCatCollision: any;
+  public itemsCat: any;
   private parralaxLayers: {
     static: {
       cloud: Phaser.GameObjects.TileSprite,
@@ -63,6 +64,7 @@ export default class MainScene extends Phaser.Scene {
     this.shapes = this.cache.json.get('shapes');
     const tileset = this.map.addTilesetImage('block', 'block');
     this.playerCatCollision = this.matter.world.nextCategory();
+    this.itemsCat = this.matter.world.nextCategory();
 
     this.generateParralaxLayers();
     const worldLayer = this.map.createStaticLayer('main_tile', tileset, 0, 0);
@@ -74,12 +76,14 @@ export default class MainScene extends Phaser.Scene {
     // Get the layers registered with Matter. Any colliding tiles will be given a Matter body. We
     // haven't mapped out custom collision shapes in Tiled so each colliding tile will get a default
     // rectangle body (similar to AP).
-    this.matter.world.convertTilemapLayer(worldLayer);
-
+    let test = this.matter.world.convertTilemapLayer(worldLayer);
+    console.log(test)
     this.player = this.spawnPlayer();
 
     //this.enemy.setCollisionCategory(defaultCat);
     this.player.setCollisionCategory(this.playerCatCollision);
+    // 1 is the collision category of the tile with tiled
+    this.player.setCollidesWith([this.itemsCat, 1]);
     this.enemies = new Enemies(this.map, this.matter.world, this);
 
     const playerRunAnims = this.player.generateFrameNames('vampire/runvampright', 'all_sprites', 1, 10);
@@ -100,7 +104,7 @@ export default class MainScene extends Phaser.Scene {
     this.matterCollision.addOnCollideStart({
       objectA: this.player.getPlayerSprite(),
       callback: function (eventData) {
-        //console.log(eventData)
+        //console.log(eventData.gameObjectB)
       },
       context: this // Context to apply to the callback function
     });
@@ -121,12 +125,20 @@ export default class MainScene extends Phaser.Scene {
           console.log(eventData.gameObjectB);
           eventData.gameObjectB.destroy();
           this.triggerVictory();
+        } else if (eventData.gameObjectB instanceof Item) {
+          if (this.player.doAction) {
+            this.player.doAction = false;
+            eventData.gameObjectB.destroy();
+          }
+        }else {
+          console.log(eventData.gameObjectB);
         }
       },
       context: this
     });
 
     this.addCalice();
+    this.generateItems();
   }
 
   spawnPlayer(): Player{
@@ -134,15 +146,18 @@ export default class MainScene extends Phaser.Scene {
     return new Player(this.matter.world, this, spawnPoint.x, spawnPoint.y, 'all_sprites', 'vampire/runvampright1.png');
   }
 
-  addCalice() {
-    const spawnPoint: any = this.map.findObject("calice_spawn", (obj: any) => obj.name === "calice");
-    let caliceSprite = new VictoryItem(this.matter.world, this, spawnPoint.x, spawnPoint.y, 'all_sprites', 'items/calice1.png');
-    const caliceAnim = this.player.generateFrameNames('items/calice', 'all_sprites', 1, 2);
-    this.anims.create({ key: 'caliceAnim', frames: caliceAnim, frameRate: 10, repeat: -1 });
-    caliceSprite.play('caliceAnim');
-    caliceSprite.setStatic(true);
-    caliceSprite.setCollisionCategory(this.matter.world.nextCategory());
-    caliceSprite.setCollidesWith(this.playerCatCollision);
+  generateItems() {
+    this.map.findObject("items", (obj: any) => {
+      let itemSprite = new Item(this.matter.world, this, obj.x, obj.y, 'all_sprites', 'items/dashpotion1.png');
+      const itemAnim = this.player.generateFrameNames('items/dashpotion', 'all_sprites', 1, 4);
+      this.anims.create({ key: 'dashpotionAnim', frames: itemAnim, frameRate: 5, repeat: -1 });
+      itemSprite.play('dashpotionAnim');
+      itemSprite.setDensity(50);
+      // itemSprite.setStatic(true);
+      itemSprite.setCollisionCategory(this.itemsCat);
+      itemSprite.setCollidesWith([this.playerCatCollision, 1, this.itemsCat]);
+    }
+    );
   }
 
   /**
@@ -160,6 +175,16 @@ export default class MainScene extends Phaser.Scene {
     console.log('you win !')
   }
 
+  private addCalice(): void {
+    const spawnPoint: any = this.map.findObject("calice_spawn", (obj: any) => obj.name === "calice");
+    let caliceSprite = new VictoryItem(this.matter.world, this, spawnPoint.x, spawnPoint.y, 'all_sprites', 'items/calice1.png');
+    const caliceAnim = this.player.generateFrameNames('items/calice', 'all_sprites', 1, 2);
+    this.anims.create({ key: 'caliceAnim', frames: caliceAnim, frameRate: 10, repeat: -1 });
+    caliceSprite.play('caliceAnim');
+    caliceSprite.setStatic(true);
+    caliceSprite.setCollisionCategory(this.matter.world.nextCategory());
+    caliceSprite.setCollidesWith(this.playerCatCollision);
+  }
   // Fct we call each frame
   /**
  * Create the parralax layers

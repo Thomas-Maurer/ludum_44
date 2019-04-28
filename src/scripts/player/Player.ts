@@ -18,6 +18,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     private isAttacking: boolean;
     private doingDamage: boolean;
     private isPlayerDead: boolean;
+    public doAction: boolean;
     constructor(world: Phaser.Physics.Matter.World, scene: MainScene, x: number, y: number, key: string, frame?: string | integer, options?: object) {
         super(world, x, y, key, frame, options);
         this.scene = scene;
@@ -37,6 +38,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.baseDamage = 1;
         this.isInSun = true;
         this.isPlayerDead = false;
+        this.doAction = false;
 
         //TODO Better handling of event
         this.on('animationupdate', function (anim, frame) {
@@ -63,6 +65,10 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
 
         }, this);
 
+    }
+
+    public getPlayerControl(): PlayerControls {
+        return this.playerControl;
     }
 
     private addPlayerTouchTargetEvent(): void {
