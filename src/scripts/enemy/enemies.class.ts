@@ -55,6 +55,7 @@ export class Enemies {
         for (let enemy of this.listOfEnemies) {
             if (enemy.x + this.DISTANCE_TO_PLAYER >= playerX && enemy.x - this.DISTANCE_TO_PLAYER <= playerX) {
                 enemy.update();
+
             } else {
                 if (enemy.anims.isPlaying) {
                     enemy.stopAllAnims();
