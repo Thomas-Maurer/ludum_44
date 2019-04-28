@@ -18,6 +18,8 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy{
     protected scene: Phaser.Scene;
 
     public isRunning = false;
+    public isDead = false;
+    public isHit = false;
 
     /**
      * Guid fill by the children
@@ -53,15 +55,22 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy{
      * Update function call by scene update
      */
     public update(): void {
+        if (this.isDead || this.isHit) {
+            return;
+        }
         if (!this.isRunning) {
             this.anims.play('peasantRun',true);
             this.isRunning = true;
         }
+
         // mak the enemy pnj always move
         this.setVelocityCustom();
     }
 
-    public stopAllAnims() {
+    /**
+     * Stop all animations
+     */
+    public stopAllAnims(): void {
         this.anims.stop();
         this.isRunning = false;
     }
@@ -136,5 +145,11 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy{
             this.setFlipX(this.currentDirection === -1);
         }
     }
+
+    /**
+     * Method used by childrens
+     * @param damage
+     */
+    public takeDamage(damage: number) {}
 
 }
