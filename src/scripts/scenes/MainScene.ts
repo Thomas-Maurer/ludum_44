@@ -31,7 +31,7 @@ export default class MainScene extends Phaser.Scene {
     this.load.multiatlas('block', 'assets/graphics/map/backgrounds/block.json', 'assets/graphics/map/backgrounds');
     this.load.multiatlas(Enemy.SPRITE_ID, 'assets/graphics/char/enemy/enemy_test.json', 'assets/graphics/char/enemy');
 
-// Load body shapes from JSON file generated using PhysicsEditor
+    // Load body shapes from JSON file generated using PhysicsEditor
     this.load.json('shapes', 'assets/graphics/char/character/shapes_char.json');
     this.load.multiatlas(Enemy.SPRITE_ID, 'assets/graphics/char/enemy/enemy_test.json', 'assets/graphics/char/enemy');
     this.audioManager = new AudioManager(this);
@@ -56,8 +56,8 @@ export default class MainScene extends Phaser.Scene {
     this.matter.world.convertTilemapLayer(worldLayer);
 
     this.player = new Player(this.matter.world, this, 64, 11 * 32, 'all_sprites', 'vampire/runvampright1.png',
-        {shape: this.shapes.runvampright1});
-    this.enemy = new Enemy(this.matter.world, this, 10 *64, 0, Enemy.SPRITE_ID, 'zombie_hang');
+      { shape: this.shapes.runvampright1 });
+    this.enemy = new Enemy(this.matter.world, this, 10 * 64, 0, Enemy.SPRITE_ID, 'zombie_hang');
 
     const playerRunAnims = this.player.generateFrameNames('vampire/runvampright', 'all_sprites', 1, 10);
     const playerIdleAnims = this.player.generateFrameNames('vampire/fightvamp', 'all_sprites', 1, 10);
@@ -146,7 +146,7 @@ export default class MainScene extends Phaser.Scene {
 
   // Fct we call each frame
   public update() {
-    this.player.handleActions();
+    this.player.update();
     this.updateParralax();
     this.enemy.update();
   }
