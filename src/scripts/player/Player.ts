@@ -1,8 +1,8 @@
-import {PlayerControls} from "./playerControls/playerControls";
-import {Enemy} from "../enemy/enemy";
+import { PlayerControls } from "./playerControls/playerControls";
+import { Enemy } from "../enemy/enemy";
 import MainScene from "../scenes/MainScene";
 
-export default class Player extends Phaser.Physics.Matter.Sprite{
+export default class Player extends Phaser.Physics.Matter.Sprite {
     private playerControl: PlayerControls;
     public scene: MainScene;
     private canJump: boolean;
@@ -25,7 +25,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite{
         this.canJump = true;
         this.canAttack = true;
         this.setFixedRotation();
-        this.setFriction(0.2, 0.05,0);
+        this.setFriction(0.2, 0.05, 0);
         this.inAir = true;
         this.healthPoint = 100;
         this.baseDamage = 1;
@@ -60,11 +60,11 @@ export default class Player extends Phaser.Physics.Matter.Sprite{
      * @param start
      * @param end
      */
-    public generateFrameNames (key: string, atlasName: string, start: number, end: number): Phaser.Animations.Types.AnimationFrame[] {
-        return this.scene.anims.generateFrameNames(atlasName,{
+    public generateFrameNames(key: string, atlasName: string, start: number, end: number): Phaser.Animations.Types.AnimationFrame[] {
+        return this.scene.anims.generateFrameNames(atlasName, {
             start: start, end: end, zeroPad: 1,
             prefix: key, suffix: '.png'
-        } )
+        })
     }
 
     private alterHitbox(){
