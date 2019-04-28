@@ -42,13 +42,13 @@ export class Peasant extends Enemy implements IEnemy {
      */
     private initAnims(): void {
         const peasantRunAnims = this.generateFrameNames(this.runPeasantSpritePrefix, EnemiesEnum.SPRITE_SHEET_ID, 1, 10);
-        const peasantIdleAnims = this.generateFrameNames(this.fightPeasantSpritePrefix, EnemiesEnum.SPRITE_SHEET_ID, 1, 8);
+        const peasantFightAnims = this.generateFrameNames(this.fightPeasantSpritePrefix, EnemiesEnum.SPRITE_SHEET_ID, 1, 8);
         const peasantDeadAnims = this.generateFrameNames(this.deadPeasantSpritePrefix, EnemiesEnum.SPRITE_SHEET_ID, 2, 9);
         const peasantHitAnims = this.generateFrameNames(this.deadPeasantSpritePrefix, EnemiesEnum.SPRITE_SHEET_ID, 2, 2);
 
         this.scene.anims.create({ key: 'peasantRun', frames: peasantRunAnims, frameRate: 10, repeat: -1 });
-        this.scene.anims.create({ key: 'peasantIdle', frames: peasantIdleAnims, frameRate: 10, repeat: -1 });
-        this.scene.anims.create({ key: 'peasantDead', frames: peasantDeadAnims, frameRate: 10, repeat: 0 });
+        this.scene.anims.create({ key: 'peasantFight', frames: peasantFightAnims, frameRate: 10, repeat: -1 });
+        this.scene.anims.create({ key: 'peasantDead', frames: peasantDeadAnims, frameRate: 5, repeat: 0 });
         this.scene.anims.create({ key: 'peasantHit', frames: peasantHitAnims, frameRate: 10, repeat: 0 });
     }
 
@@ -57,7 +57,7 @@ export class Peasant extends Enemy implements IEnemy {
      * @param damage
      */
     public takeDamage(damage: number): void {
-        if (this.isHit ||this.isDead) {
+        if (this.isHit || this.isDead) {
             return;
         }
         this.info.life = this.info.life - damage;
