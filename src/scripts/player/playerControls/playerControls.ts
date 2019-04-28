@@ -142,6 +142,7 @@ export class PlayerControls {
         }
         if(this.cursors.action.isDown) {
             player.doAction = true;
+            player.buying = true;
             player.addPlayerbuyitemEvent();
         }
         if (this.cursors.up.isDown && player.getCanJump() && !player.isPlayerInTheAir()) {

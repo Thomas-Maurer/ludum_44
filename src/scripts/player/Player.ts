@@ -25,12 +25,21 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         super(world, x, y, key, frame, options);
         this.scene = scene;
         const matterEngine: any = Phaser.Physics.Matter;
-
         const body = matterEngine.Matter.Bodies.rectangle(x, y, 55, 100, { chamfer: { radius: 10 } });
         this.setExistingBody(body);
         scene.add.existing(this);
-        this.playerControl = new PlayerControls(scene);
-        this.scene = scene;
+
+        this.initDefaultValue();
+        this.generateAnim();
+        this.generateEventHandler();
+
+    }
+
+    /**
+     * Init the default value of the player Char
+     */
+    private initDefaultValue(): void {
+        this.playerControl = new PlayerControls(this.scene);
         this.canJump = true;
         this.canAttack = true;
         this.setFixedRotation();
@@ -41,13 +50,12 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.isInSun = true;
         this.isPlayerDead = false;
         this.doAction = false;
+    }
 
-        //TODO Better handling of event
-        this.on('animationupdate', function (anim, frame) {
-            //console.log(this.scene.shapes[anim.key.toLowerCase() + frame.index]);
-            //this.setBody(this.scene.shapes[anim.key.toLowerCase() + frame.index])
-        }, this);
-
+    /**
+     * Generate Function event handler
+     */
+    private generateEventHandler(): void {
         this.on('animationcomplete', function (anim, frame) {
             this.emit('animationcomplete_' + anim.key, anim, frame);
         }, this);
@@ -65,17 +73,36 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
             this.isSucking = false;
         });
 
-        this.once('playerbuyitem', (item: Item) => {
+        this.on('playerbuyitem', (item: Item) => {
             item.destroy();
+            this.takeDamage(item.getHpCost());
+            this.doAction = false;
         });
 
         this.on('animationcomplete_playerAttack', function () {
             this.anims.play('playerIdle');
             //TODO Player attack system
             this.disableAttackState();
-
         }, this);
+    }
 
+    /**
+     * Create all the anim the player has
+     */
+    private generateAnim(): void {
+        const playerRunAnims = this.generateFrameNames('vampire/runvampright', 'all_sprites', 1, 10);
+        const playerIdleAnims = this.generateFrameNames('vampire/fightvamp', 'all_sprites', 1, 10);
+        const playerJumpAnims = this.generateFrameNames('vampire/jumpvamp', 'all_sprites', 1, 7);
+        const playerAttackAnims = this.generateFrameNames('vampire/fightvamp', 'all_sprites', 9, 19);
+        const playerDeathAnims = this.generateFrameNames('vampire/deathvamp', 'all_sprites', 1, 7);
+        const playerSuck = this.generateFrameNames('vampire/vampdrink', 'all_sprites', 1, 5);
+
+        this.scene.anims.create({ key: 'suck', frames: playerSuck, frameRate: 10, repeat: 0 });
+        this.scene.anims.create({ key: 'playerRun', frames: playerRunAnims, frameRate: 10, repeat: -1 });
+        this.scene.anims.create({ key: 'playerIdle', frames: playerIdleAnims, frameRate: 10, repeat: -1 });
+        this.scene.anims.create({ key: 'playerJump', frames: playerJumpAnims, frameRate: 9 });
+        this.scene.anims.create({ key: 'playerAttack', frames: playerAttackAnims, frameRate: 50 });
+        this.scene.anims.create({ key: 'playerDeath', frames: playerDeathAnims, frameRate: 13 });
     }
 
     public getPlayerControl(): PlayerControls {
@@ -89,11 +116,6 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     }
 
     public addPlayerbuyitemEvent(): void {
-        console.log('penis');
-        this.once('playerbuyitem', (item: Item) => {
-            item.destroy();
-            this.takeDamage(item.getHpCost());
-        }, this);
     }
 
     /**

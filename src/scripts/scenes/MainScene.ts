@@ -9,9 +9,11 @@ import VictoryItem from "../items/victoryItem";
 import EventsUtils from "../utils/events.utils";
 import Item from "../items/item";
 import BoostItem from "../items/boostItem";
+import ItemUtil from "../items/itemUtil";
 export default class MainScene extends Phaser.Scene {
   public matterCollision: PhaserMatterCollisionPlugin;
   public map: Phaser.Tilemaps.Tilemap;
+  public itemUtil: ItemUtil;
   public enemy: Enemy;
   public player: Player;
   public shapes: any;
@@ -66,6 +68,8 @@ export default class MainScene extends Phaser.Scene {
     this.playerCatCollision = this.matter.world.nextCategory();
     this.itemsCat = this.matter.world.nextCategory();
 
+    this.itemUtil = new ItemUtil(this);
+
     this.generateParralaxLayers();
     const worldLayer = this.map.createStaticLayer('main_tile', tileset, 0, 0);
 
@@ -87,20 +91,6 @@ export default class MainScene extends Phaser.Scene {
     this.player.setCollidesWith([1, this.enemies.collisionCat, this.itemsCat]);
 
 
-    const playerRunAnims = this.player.generateFrameNames('vampire/runvampright', 'all_sprites', 1, 10);
-    const playerIdleAnims = this.player.generateFrameNames('vampire/fightvamp', 'all_sprites', 1, 10);
-    const playerJumpAnims = this.player.generateFrameNames('vampire/jumpvamp', 'all_sprites', 1, 7);
-    const playerAttackAnims = this.player.generateFrameNames('vampire/fightvamp', 'all_sprites', 9, 19);
-    const playerDeathAnims = this.player.generateFrameNames('vampire/deathvamp', 'all_sprites', 1, 7);
-    const playerSuck = this.player.generateFrameNames('vampire/vampdrink', 'all_sprites', 1, 5);
-
-    this.anims.create({ key: 'suck', frames: playerSuck, frameRate: 10, repeat: 0 });
-    this.anims.create({ key: 'playerRun', frames: playerRunAnims, frameRate: 10, repeat: -1 });
-    this.anims.create({ key: 'playerIdle', frames: playerIdleAnims, frameRate: 10, repeat: -1 });
-    this.anims.create({ key: 'playerJump', frames: playerJumpAnims, frameRate: 9 });
-    this.anims.create({ key: 'playerAttack', frames: playerAttackAnims, frameRate: 50 });
-    this.anims.create({ key: 'playerDeath', frames: playerDeathAnims, frameRate: 13 });
-
     this.cameras.main.startFollow(this.player.getPlayerSprite(), false, 0.5, 0.5);
     // Visualize all the matter bodies in the world. Note: this will be slow so go ahead and comment
     // it out after you've seen what the bodies look like.
@@ -112,7 +102,13 @@ export default class MainScene extends Phaser.Scene {
       },
       context: this // Context to apply to the callback function
     });
+    this.handleCollision();
+    this.addCalice();
+    this.addEventsListeners();
+    this.generateItems();
+  }
 
+  handleCollision(): void {
     this.matterCollision.addOnCollideActive({
       objectA: this.player.getPlayerSprite(),
       callback: (eventData: any) => {
@@ -148,10 +144,6 @@ export default class MainScene extends Phaser.Scene {
       },
       context: this
     });
-
-    this.addCalice();
-    this.addEventsListeners();
-    this.generateItems();
   }
 
   spawnPlayer(): Player {
@@ -161,16 +153,8 @@ export default class MainScene extends Phaser.Scene {
 
   generateItems() {
     this.map.findObject("items", (obj: any) => {
-      let itemSprite = new BoostItem(this.matter.world, this, obj.x, obj.y, 'all_sprites', 'items/dashpotion1.png');
-      const itemAnim = this.player.generateFrameNames('items/dashpotion', 'all_sprites', 1, 4);
-      this.anims.create({ key: 'dashpotionAnim', frames: itemAnim, frameRate: 5, repeat: -1 });
-      itemSprite.play('dashpotionAnim');
-      itemSprite.setDensity(50);
-      itemSprite.setHpCost(10);
-      // itemSprite.setStatic(true);
-      itemSprite.setCollisionCategory(this.itemsCat);
-      itemSprite.setCollidesWith([this.playerCatCollision, 1, this.itemsCat]);
-    }
+      this.itemUtil.generateItem(obj);
+      }
     );
   }
 
