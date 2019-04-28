@@ -1,14 +1,22 @@
 import Player from "../Player";
 import Vector2 = Phaser.Math.Vector2;
+import KeyCodes = Phaser.Input.Keyboard.KeyCodes;
+import MainScene from "../../scenes/MainScene";
+import AudioManager from "../../AudioManager";
 
 export class PlayerControls {
     private cursors: any;
     private leftInput: string;
     private rightInput: string;
     private jumpInput: string;
-    constructor(scene: Phaser.Scene){
+    private attackInput: KeyCodes;
+    private scene: MainScene;
+    private audioManager: AudioManager;
+    constructor(scene: MainScene) {
         this.initDefaultKeys();
         this.mappingKeys(scene);
+        this.scene = scene;
+        this.audioManager = this.scene.audioManager;
     }
 
     /**
@@ -18,6 +26,7 @@ export class PlayerControls {
         this.leftInput = 'left';
         this.rightInput = 'right';
         this.jumpInput = 'up';
+        this.attackInput = KeyCodes.SPACE;
     }
 
     /**
@@ -57,18 +66,25 @@ export class PlayerControls {
                 down: "down",
                 left: this.leftInput,
                 right: this.rightInput,
+                attack: this.attackInput
             });
     }
 
     public handlePlayerControls(player: Player): void {
+
+        if (player.anims.currentAnim !== null) {
+            //console.log(player.anims.currentAnim)
+            //console.log(player.scene.shapes[player.anims.currentAnim.key.toLocaleLowerCase()]);
+            //player.setBody()
+        }
         let negativeforceVector: Vector2;
         let forceVector: Vector2;
         let body: any = player.getPlayerSprite().body;
 
         if (!player.isPlayerInTheAir()) {
             // Player is in the Air
-            forceVector = new Vector2(0.1,0);
-            negativeforceVector = new Vector2(-0.1,0);
+            forceVector = new Vector2(0.1, 0);
+            negativeforceVector = new Vector2(-0.1, 0);
             if (body.velocity.x >= 0.3) {
                 player.getPlayerSprite().setVelocity(0.3);
             } else if (body.velocity.x <= -0.3) {
@@ -84,31 +100,39 @@ export class PlayerControls {
                 player.getPlayerSprite().setVelocityX(-0.15);
             }
         }
+
+        if (this.cursors.attack.isDown) {
+            player.anims.play('playerAttack',true);
+            player.enableAttackState();
+        }
+
         if(this.cursors.right.isDown){
-            if (player.anims.currentAnim !== null && player.anims.currentAnim.key === 'playerJump') {
+            if (player.anims.currentAnim !== null && (player.anims.currentAnim.key === 'playerJump' || player.anims.currentAnim.key === 'playerAttack')) {
             } else {
-                player.anims.play('playerRun',true);
+                player.anims.play('playerRun', true);
             }
 
             player.getPlayerSprite().setFlipX(false);
             player.getPlayerSprite().applyForce(forceVector);
         } else if(this.cursors.left.isDown){
-            if (player.anims.currentAnim !== null && player.anims.currentAnim.key === 'playerJump') {
+            if (player.anims.currentAnim !== null && (player.anims.currentAnim.key === 'playerJump' || player.anims.currentAnim.key === 'playerAttack')) {
             } else {
-                player.anims.play('playerRun',true);
+                player.anims.play('playerRun', true);
+                //this.audioManager.playSound(this.audioManager.soundsList.PLAYER_FOOTSTEP);
             }
             player.getPlayerSprite().setFlipX(true);
             player.getPlayerSprite().applyForce(negativeforceVector);
         } else {
-            if (player.anims.currentAnim !== null && player.anims.currentAnim.key === 'playerJump') {
+            if (player.anims.currentAnim !== null && (player.anims.currentAnim.key === 'playerJump' || player.anims.currentAnim.key === 'playerAttack')) {
 
             } else {
-                player.anims.play('playerIdle',true);
+                player.anims.play('playerIdle', true);
             }
             player.getPlayerSprite().setVelocityX(0);
         }
         if (this.cursors.up.isDown && player.getCanJump() && !player.isPlayerInTheAir()) {
-            player.anims.play('playerJump',true);
+            player.anims.play('playerJump', true);
+            //this.audioManager.playSound(this.audioManager.soundsList.PLAYER_JUMP);
             player.desactivateJump();
             player.getPlayerSprite().setVelocityY(-11);
         }
