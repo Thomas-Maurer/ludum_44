@@ -18,7 +18,6 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         const matterEngine: any = Phaser.Physics.Matter;
         this.scene = scene;
         const body = matterEngine.Matter.Bodies.rectangle(x, y, 55, 100, { chamfer: { radius: 10 } });
-        console.log(matterEngine.Matter.Bodies);
         this.setExistingBody(body);
         scene.add.existing(this);
         this.playerControl = new PlayerControls(scene);
