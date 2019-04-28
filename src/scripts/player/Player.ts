@@ -17,8 +17,9 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         super(world, x, y, key, frame, options);
         const matterEngine: any = Phaser.Physics.Matter;
         this.scene = scene;
-        //const body = matterEngine.Matter.Bodies.rectangle(x, y, 55, 100, { chamfer: { radius: 10 } });
-        //this.setExistingBody(body);
+        const body = matterEngine.Matter.Bodies.rectangle(x, y, 55, 100, { chamfer: { radius: 10 } });
+        console.log(matterEngine.Matter.Bodies);
+        this.setExistingBody(body);
         scene.add.existing(this);
         this.playerControl = new PlayerControls(scene);
         this.scene = scene;
@@ -31,9 +32,8 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.baseDamage = 1;
 //TODO Better handling of event
         this.on('animationupdate', function (anim, frame) {
-            //console.log(anim)
             //console.log(this.scene.shapes[anim.key.toLowerCase() + frame.index]);
-            this.setBody(this.scene.shapes[anim.key.toLowerCase() + frame.index])
+            //this.setBody(this.scene.shapes[anim.key.toLowerCase() + frame.index])
         }, this);
 
         this.on('animationcomplete', function (anim, frame) {
