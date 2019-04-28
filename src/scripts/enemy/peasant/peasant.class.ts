@@ -53,6 +53,10 @@ export class Peasant extends Enemy implements IEnemy {
         this.scene.anims.create({ key: 'peasantHit', frames: peasantHitAnims, frameRate: 10, repeat: 0 });
     }
 
+    public suck() {
+
+    }
+
     /**
      * Player get damage
      * @param damage
@@ -68,8 +72,16 @@ export class Peasant extends Enemy implements IEnemy {
             this.stopAllAnims();
             this.anims.play('peasantDead',true);
 
-            this.setCollidesWith([1]);
-            this.setStatic(true);
+            // TODO null mais j'ai pas trouvé mieux :shrug
+            setTimeout(() => {
+                const matterEngine: any = Phaser.Physics.Matter;
+                const body = matterEngine.Matter.Bodies.rectangle(this.x, this.y, 64, 1);
+                this.setExistingBody(body);
+                this.setOrigin(0.5,1);
+                setTimeout(() => {
+                    this.setStatic(true);
+                }, 250);
+            }, 1500);
         } else {
             this.isHit = true;
             this.isRunning = false;

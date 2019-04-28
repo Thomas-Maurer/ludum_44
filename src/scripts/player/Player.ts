@@ -18,6 +18,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     private baseDamage: number;
     private isAttacking: boolean;
     private doingDamage: boolean;
+    public isSucking: boolean;
     private isPlayerDead: boolean;
     public doAction: boolean;
     constructor(world: Phaser.Physics.Matter.World, scene: MainScene, x: number, y: number, key: string, frame?: string | integer, options?: object) {
@@ -59,6 +60,10 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
             window.dispatchEvent(EventsUtils.PLAYER_DEAD);
             this.scene.audioManager.playSound(this.scene.audioManager.soundsList.DEATH);
         }, this);
+
+        this.on('animationcomplete_suck', () => {
+            this.isSucking = false;
+        });
 
         this.once('playerbuyitem', (item: Item) => {
             item.destroy();
@@ -216,6 +221,12 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.isAttacking = false;
         this.addPlayerTouchTargetEvent();
     }
+
+    public suck() {
+        this.isSucking = true;
+        this.anims.play('suck',true);
+    }
+
 
     /**
      * return if the player is attacking or not

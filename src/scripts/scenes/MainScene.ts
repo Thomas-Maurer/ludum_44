@@ -92,6 +92,9 @@ export default class MainScene extends Phaser.Scene {
     const playerJumpAnims = this.player.generateFrameNames('vampire/jumpvamp', 'all_sprites', 1, 7);
     const playerAttackAnims = this.player.generateFrameNames('vampire/fightvamp', 'all_sprites', 9, 19);
     const playerDeathAnims = this.player.generateFrameNames('vampire/deathvamp', 'all_sprites', 1, 7);
+    const playerSuck = this.player.generateFrameNames('vampire/vampdrink', 'all_sprites', 1, 5);
+
+    this.anims.create({ key: 'suck', frames: playerSuck, frameRate: 10, repeat: 0 });
     this.anims.create({ key: 'playerRun', frames: playerRunAnims, frameRate: 10, repeat: -1 });
     this.anims.create({ key: 'playerIdle', frames: playerIdleAnims, frameRate: 10, repeat: -1 });
     this.anims.create({ key: 'playerJump', frames: playerJumpAnims, frameRate: 9 });
@@ -109,6 +112,7 @@ export default class MainScene extends Phaser.Scene {
       },
       context: this // Context to apply to the callback function
     });
+
     this.matterCollision.addOnCollideActive({
       objectA: this.player.getPlayerSprite(),
       callback: (eventData: any) => {
@@ -117,6 +121,12 @@ export default class MainScene extends Phaser.Scene {
         } else if (eventData.gameObjectB instanceof Enemy) {
           if (this.player.getAttackstate()) {
             this.player.emit('playertouchtarget', eventData.gameObjectB);
+          }
+
+          if (this.player.doAction && eventData.gameObjectB.isDead) {
+            console.log('suck');
+            this.player.doAction = false;
+            this.player.suck();
           }
 
         } else if (eventData.gameObjectB == null) {
@@ -198,8 +208,8 @@ export default class MainScene extends Phaser.Scene {
     this.anims.create({ key: 'caliceAnim', frames: caliceAnim, frameRate: 10, repeat: -1 });
     caliceSprite.play('caliceAnim');
     caliceSprite.setStatic(true);
-    caliceSprite.setCollisionCategory(this.matter.world.nextCategory());
-    caliceSprite.setCollidesWith(this.playerCatCollision);
+    caliceSprite.setCollisionCategory(1);
+    caliceSprite.setCollidesWith([this.playerCatCollision]);
   }
   // Fct we call each frame
   /**
