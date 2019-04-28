@@ -8,14 +8,6 @@
     align-items: center;
     justify-content: center;
     font-family: 'Black Pearl';
-    background-image: url('../../../assets/graphics/ui/mainmenubg.jpg');
-    background-size: cover;
-
-    h2 {
-        margin: 0;
-        font-size: 1.2rem;
-        color: #fff;
-    }
 
     .btn {
         border: 2px #000 solid;
@@ -32,10 +24,9 @@
     }
 
     .main-menu-block {
-        background-image: url('../../../assets/graphics/ui/wood.jpg');
-        background-repeat: repeat;
 
-        height: 40%;
+        border: 1px #ccc solid;
+
         padding: 20px;
 
         .game-title {
@@ -44,34 +35,5 @@
         }
 
 
-
-
-    }
-
-    .keyboard-mode {
-        position: fixed;
-        bottom: 0;
-        right: 0;
-        display: flex;
-
-        .key-icon {
-            opacity: 0.5;
-            width: 75px;
-            margin: 20px;
-
-            img {
-                width: 100%;
-                height: 100%;
-            }
-
-            &:hover,
-            &.active {
-                opacity: 1.0;
-            }
-
-            &:hover {
-                cursor: pointer;
-            }
-        }
     }
 }
