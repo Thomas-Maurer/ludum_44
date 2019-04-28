@@ -15,17 +15,18 @@ export default class MainScene extends Phaser.Scene {
     static: {
       cloud: Phaser.GameObjects.TileSprite,
       sun: Phaser.GameObjects.TileSprite,
+      sky: Phaser.GameObjects.TileSprite,
     }
     scene1: {
       foreground: Phaser.GameObjects.TileSprite,
       bg_far: Phaser.GameObjects.TileSprite,
       bg: Phaser.GameObjects.TileSprite
     },
-    scene2: {
-      foreground: Phaser.GameObjects.TileSprite,
-      bg_far: Phaser.GameObjects.TileSprite,
-      bg: Phaser.GameObjects.TileSprite
-    }
+    // scene2: {
+    //   foreground: Phaser.GameObjects.TileSprite,
+    //   bg_far: Phaser.GameObjects.TileSprite,
+    //   bg: Phaser.GameObjects.TileSprite
+    // }
 
   };
   /*
@@ -118,6 +119,7 @@ export default class MainScene extends Phaser.Scene {
   private generateParralaxLayers() {
     this.parralaxLayers = {
       static: {
+        sky: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/static/sky.png'),
         sun: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/static/sun.png'),
         cloud: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/static/cloud.png'),
       },
@@ -127,12 +129,12 @@ export default class MainScene extends Phaser.Scene {
         bg: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/scene1/bg.png'),
         foreground: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/scene1/foreground.png'),
       },
-      scene2: {
-        bg_far: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/scene2/bg_far.png'),
-        bg: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/scene2/bg.png'),
-        foreground: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/scene2/foreground.png'),
+      // scene2: {
+      //   bg_far: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/scene2/bg_far.png'),
+      //   bg: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/scene2/bg.png'),
+      //   foreground: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/scene2/foreground.png'),
 
-      }
+      // }
 
     };
   }
@@ -166,13 +168,14 @@ export default class MainScene extends Phaser.Scene {
     //Scene1 bg
 
     //bg far
-    this.parralaxLayers.scene1.bg_far.tilePositionX = this.cameras.main.scrollX * 0.1;
-    this.parralaxLayers.scene1.bg_far.tilePositionY = this.cameras.main.scrollY * 0.1;
+    this.parralaxLayers.scene1.bg_far.setTilePosition(this.cameras.main.scrollX * 0.1, this.cameras.main.scrollY * 0.1)
+    //this.parralaxLayers.scene1.foreground.setTilePosition(this.player.x, this.player.y);
 
     //bg
-    this.parralaxLayers.scene1.bg.tilePositionX = this.cameras.main.scrollX * 0.4;
-    this.parralaxLayers.scene1.bg.tilePositionY = this.cameras.main.scrollY * 0.4;
+    this.parralaxLayers.scene1.bg.setTilePosition(this.cameras.main.scrollX * 0.4, this.cameras.main.scrollY * 0.4)
 
+    //foreground
+    this.parralaxLayers.scene1.foreground.active = false;
   }
 
   // Fct we call each frame
