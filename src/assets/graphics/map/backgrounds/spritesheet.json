@@ -1308,6 +1308,56 @@
 						"x": 0.5,
 						"y": 0.5
 					}
+				},
+				{
+					"filename": "items/calice1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 64,
+						"h": 64
+					},
+					"frame": {
+						"x": 816,
+						"y": 3960,
+						"w": 64,
+						"h": 64
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "items/calice2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 64,
+						"h": 64
+					},
+					"frame": {
+						"x": 880,
+						"y": 3960,
+						"w": 64,
+						"h": 64
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
 				}
 			]
 		},
@@ -1826,6 +1876,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:eef2bd0f7af2a6bfbc69481610dd3115:c73bf7da09f4bdb222afaca4b5bb84a3:891aeea45958f21e96a4508ee113e1b2$"
+		"smartupdate": "$TexturePacker:SmartUpdate:517796f9f1a24764fc553e716ebc6d0d:c5ef211b272bc3b2d41fc46561aac6d1:891aeea45958f21e96a4508ee113e1b2$"
 	}
 }

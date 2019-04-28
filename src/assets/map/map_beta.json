@@ -68,9 +68,32 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":5,
+         "name":"spawn_player",
+         "objects":[
+                {
+                 "height":0,
+                 "id":4,
+                 "name":"player",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1238,
+                 "y":816
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":5,
- "nextobjectid":4,
+ "nextlayerid":6,
+ "nextobjectid":5,
  "orientation":"orthogonal",
  "renderorder":"left-up",
  "tiledversion":"1.2.3",
