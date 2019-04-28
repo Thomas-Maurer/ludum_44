@@ -55,6 +55,8 @@ export default class MainScene extends Phaser.Scene {
     this.map = map.tileMap;
     this.shapes = this.cache.json.get('shapes');
     const tileset = this.map.addTilesetImage('block', 'block');
+    const defaultCat = this.matter.world.nextCategory();
+    const noCollisionCat = this.matter.world.nextCategory();
 
     this.generateParralaxLayers();
     const worldLayer = this.map.createStaticLayer('main_tile', tileset, 0, 0);
@@ -66,11 +68,13 @@ export default class MainScene extends Phaser.Scene {
     // Get the layers registered with Matter. Any colliding tiles will be given a Matter body. We
     // haven't mapped out custom collision shapes in Tiled so each colliding tile will get a default
     // rectangle body (similar to AP).
-    this.matter.world.convertTilemapLayer(worldLayer);
+    let test = this.matter.world.convertTilemapLayer(worldLayer);
 
-    this.player = new Player(this.matter.world, this, 64, 11 * 32, 'all_sprites', 'vampire/runvampright1.png',
-      { shape: this.shapes.runvampright1 });
+    this.player = new Player(this.matter.world, this, 64, 11 * 32, 'all_sprites', 'vampire/runvampright1.png');
     this.enemy = new Peasant(this.matter.world, this, 10 * 64, 0);
+
+    this.enemy.setCollisionCategory(defaultCat);
+    this.player.setCollisionCategory(defaultCat);
 
     const playerRunAnims = this.player.generateFrameNames('vampire/runvampright', 'all_sprites', 1, 10);
     const playerIdleAnims = this.player.generateFrameNames('vampire/fightvamp', 'all_sprites', 1, 10);
@@ -102,10 +106,23 @@ export default class MainScene extends Phaser.Scene {
             this.player.emit('playertouchtarget', eventData.gameObjectB);
           }
 
+        }else if (eventData.gameObjectB == null) {
+          this.player.killPlayer();
         }
       },
       context: this
     });
+
+    this.addCalice();
+  }
+
+  addCalice() {
+    const spawnPoint: any = this.map.findObject("calice_spawn", (obj: any) => obj.name === "calice");
+    let caliceSprite = this.matter.add.sprite(spawnPoint.x,spawnPoint.y, 'all_sprites', 'icons/tdm.PNG');
+    caliceSprite.setStatic(true);
+    caliceSprite.setCollisionCategory(this.matter.world.nextCategory());
+    caliceSprite.setCollidesWith(this.matter.world.nextCategory());
+    caliceSprite.setScale(0.5, 0.5);
   }
 
   /**
@@ -185,6 +202,6 @@ export default class MainScene extends Phaser.Scene {
   public update() {
     this.player.update();
     this.updateParralax();
-    this.enemy.update();
+    //this.enemy.update();
   }
 }

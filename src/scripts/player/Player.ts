@@ -19,8 +19,9 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     private isPlayerDead: boolean;
     constructor(world: Phaser.Physics.Matter.World, scene: MainScene, x: number, y: number, key: string, frame?: string | integer, options?: object) {
         super(world, x, y, key, frame, options);
-        const matterEngine: any = Phaser.Physics.Matter;
         this.scene = scene;
+        const matterEngine: any = Phaser.Physics.Matter;
+
         const body = matterEngine.Matter.Bodies.rectangle(x, y, 55, 100, { chamfer: { radius: 10 } });
         this.setExistingBody(body);
         scene.add.existing(this);
@@ -147,7 +148,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
      * Kill the player then restart the scene
      * Show deathScreen
      */
-    private killPlayer(): void {
+    public killPlayer(): void {
         console.log('player is dead');
         this.scene.restart();
     }
