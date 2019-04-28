@@ -14,14 +14,20 @@ export default class AudioManager {
         for (const soundName in this.soundsList) {
             if (this.soundsList.hasOwnProperty(soundName)) {
                 const soundFileName = this.soundsList[soundName];
-                this.scene.load.audio('playerJump', 'assets/sounds/' + soundFileName + '.wav');
+                this.scene.load.audio(soundFileName, 'assets/sounds/' + soundFileName + '.wav');
+                console.log("Sound " + soundFileName + " loaded from " + soundFileName)
             }
         }
 
     }
 
-    public playSound(soundName: string) {
+    /**
+     * Play the given sound name
+     * @param soundName 
+     * @param options Phaser sound options
+     */
+    public playSound(soundName: string, options?: SoundConfig) {
         const sound = this.scene.sound.add(soundName);
-        sound.play();
+        sound.play(null, options);
     }
 }

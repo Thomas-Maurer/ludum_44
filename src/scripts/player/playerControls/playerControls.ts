@@ -102,6 +102,7 @@ export class PlayerControls {
             if (player.anims.currentAnim !== null && player.anims.currentAnim.key === 'playerJump') {
             } else {
                 player.anims.play('playerRun', true);
+                //this.audioManager.playSound(this.audioManager.soundsList.PLAYER_FOOTSTEP);
             }
             player.getPlayerSprite().setFlipX(true);
             player.getPlayerSprite().applyForce(negativeforceVector);
@@ -115,7 +116,7 @@ export class PlayerControls {
         }
         if (this.cursors.up.isDown && player.getCanJump() && !player.isPlayerInTheAir()) {
             player.anims.play('playerJump', true);
-            this.audioManager.playSound(this.audioManager.soundsList.PLAYER_JUMP);
+            //this.audioManager.playSound(this.audioManager.soundsList.PLAYER_JUMP);
             player.desactivateJump();
             player.getPlayerSprite().setVelocityY(-11);
         }
