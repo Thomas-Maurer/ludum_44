@@ -74,10 +74,10 @@ export default class MainScene extends Phaser.Scene {
     this.matter.world.convertTilemapLayer(worldLayer);
 
     this.player = new Player(this.matter.world, this, 64, 11 * 32, 'all_sprites', 'vampire/runvampright1.png');
-    this.enemy = new Peasant(this.matter.world, this, 10 * 64, 0);
 
-    this.enemy.setCollisionCategory(defaultCat);
+    //this.enemy.setCollisionCategory(defaultCat);
     this.player.setCollisionCategory(defaultCat);
+    this.enemies = new Enemies(this.map, this.matter.world, this);
 
     const playerRunAnims = this.player.generateFrameNames('vampire/runvampright', 'all_sprites', 1, 10);
     const playerIdleAnims = this.player.generateFrameNames('vampire/fightvamp', 'all_sprites', 1, 10);
