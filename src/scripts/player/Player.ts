@@ -52,6 +52,10 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
             this.anims.play('playerIdle');
         }, this);
 
+        this.once('animationcomplete_playerDeath', function () {
+            this.scene.restart();
+        }, this);
+
         this.on('animationcomplete_playerAttack', function () {
             this.anims.play('playerIdle');
             //TODO Player attack system
@@ -154,8 +158,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
      * Show deathScreen
      */
     public killPlayer(): void {
-        console.log('player is dead');
-        this.scene.restart();
+        this.anims.play('playerDeath', true);
     }
 
     /**

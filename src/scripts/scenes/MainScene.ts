@@ -86,10 +86,12 @@ export default class MainScene extends Phaser.Scene {
     const playerIdleAnims = this.player.generateFrameNames('vampire/fightvamp', 'all_sprites', 1, 10);
     const playerJumpAnims = this.player.generateFrameNames('vampire/jumpvamp', 'all_sprites', 1, 7);
     const playerAttackAnims = this.player.generateFrameNames('vampire/fightvamp', 'all_sprites', 9, 19);
+    const playerDeathAnims = this.player.generateFrameNames('vampire/deathvamp', 'all_sprites', 1, 7);
     this.anims.create({ key: 'playerRun', frames: playerRunAnims, frameRate: 10, repeat: -1 });
     this.anims.create({ key: 'playerIdle', frames: playerIdleAnims, frameRate: 10, repeat: -1 });
     this.anims.create({ key: 'playerJump', frames: playerJumpAnims, frameRate: 9 });
-    this.anims.create({ key: 'playerAttack', frames: playerAttackAnims, frameRate: 13 });
+    this.anims.create({ key: 'playerAttack', frames: playerAttackAnims, frameRate: 50 });
+    this.anims.create({ key: 'playerDeath', frames: playerDeathAnims, frameRate: 13});
 
     this.cameras.main.startFollow(this.player.getPlayerSprite(), false, 0.5, 0.5);
     // Visualize all the matter bodies in the world. Note: this will be slow so go ahead and comment
