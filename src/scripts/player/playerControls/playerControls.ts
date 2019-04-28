@@ -142,7 +142,7 @@ export class PlayerControls {
         }
         if(this.cursors.action.isDown) {
             player.doAction = true;
-            console.log('player use action');
+            player.addPlayerbuyitemEvent();
         }
         if (this.cursors.up.isDown && player.getCanJump() && !player.isPlayerInTheAir()) {
             player.anims.play('playerJump', true);

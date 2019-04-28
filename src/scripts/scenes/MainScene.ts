@@ -128,7 +128,8 @@ export default class MainScene extends Phaser.Scene {
         } else if (eventData.gameObjectB instanceof Item) {
           if (this.player.doAction) {
             this.player.doAction = false;
-            eventData.gameObjectB.destroy();
+            this.player.emit('playerbuyitem', eventData.gameObjectB);
+            //eventData.gameObjectB.destroy();
           }
         }else {
           console.log(eventData.gameObjectB);

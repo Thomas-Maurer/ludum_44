@@ -2,6 +2,7 @@ import { PlayerControls } from "./playerControls/playerControls";
 import { Enemy } from "../enemy/enemy";
 import MainScene from "../scenes/MainScene";
 import EventsUtils from "../utils/events.utils";
+import Item from "../items/item";
 
 export default class Player extends Phaser.Physics.Matter.Sprite {
     private playerControl: PlayerControls;
@@ -55,11 +56,13 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         }, this);
 
         this.once('animationcomplete_playerDeath', () => {
-
-            //this.scene.restart();
             window.dispatchEvent(EventsUtils.PLAYER_DEAD);
             this.scene.audioManager.playSound(this.scene.audioManager.soundsList.DEATH);
         }, this);
+
+        this.once('playerbuyitem', (item: Item) => {
+            item.destroy();
+        });
 
         this.on('animationcomplete_playerAttack', function () {
             this.anims.play('playerIdle');
@@ -77,6 +80,12 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     private addPlayerTouchTargetEvent(): void {
         this.once('playertouchtarget', function (enemy: Enemy) {
             this.doDamageTo(enemy);
+        }, this);
+    }
+
+    public addPlayerbuyitemEvent(): void {
+        this.once('playerbuyitem', (item: Item) => {
+            item.destroy();
         }, this);
     }
 
