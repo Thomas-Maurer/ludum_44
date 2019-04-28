@@ -1,11 +1,13 @@
 import Player from "../Player";
 import Vector2 = Phaser.Math.Vector2;
+import KeyCodes = Phaser.Input.Keyboard.KeyCodes;
 
 export class PlayerControls {
     private cursors: any;
     private leftInput: string;
     private rightInput: string;
     private jumpInput: string;
+    private attackInput: KeyCodes;
     constructor(scene: Phaser.Scene){
         this.initDefaultKeys();
         this.mappingKeys(scene);
@@ -18,6 +20,7 @@ export class PlayerControls {
         this.leftInput = 'left';
         this.rightInput = 'right';
         this.jumpInput = 'up';
+        this.attackInput = KeyCodes.SPACE;
     }
 
     /**
@@ -57,6 +60,7 @@ export class PlayerControls {
                 down: "down",
                 left: this.leftInput,
                 right: this.rightInput,
+                attack: this.attackInput
             });
     }
 
@@ -84,8 +88,13 @@ export class PlayerControls {
                 player.getPlayerSprite().setVelocityX(-0.15);
             }
         }
+
+        if (this.cursors.attack.isDown) {
+            player.anims.play('playerAttack',true);
+        }
+
         if(this.cursors.right.isDown){
-            if (player.anims.currentAnim !== null && player.anims.currentAnim.key === 'playerJump') {
+            if (player.anims.currentAnim !== null && (player.anims.currentAnim.key === 'playerJump' || player.anims.currentAnim.key === 'playerAttack')) {
             } else {
                 player.anims.play('playerRun',true);
             }
@@ -93,14 +102,14 @@ export class PlayerControls {
             player.getPlayerSprite().setFlipX(false);
             player.getPlayerSprite().applyForce(forceVector);
         } else if(this.cursors.left.isDown){
-            if (player.anims.currentAnim !== null && player.anims.currentAnim.key === 'playerJump') {
+            if (player.anims.currentAnim !== null && (player.anims.currentAnim.key === 'playerJump' || player.anims.currentAnim.key === 'playerAttack')) {
             } else {
                 player.anims.play('playerRun',true);
             }
             player.getPlayerSprite().setFlipX(true);
             player.getPlayerSprite().applyForce(negativeforceVector);
         } else {
-            if (player.anims.currentAnim !== null && player.anims.currentAnim.key === 'playerJump') {
+            if (player.anims.currentAnim !== null && (player.anims.currentAnim.key === 'playerJump' || player.anims.currentAnim.key === 'playerAttack')) {
 
             } else {
                 player.anims.play('playerIdle',true);

@@ -30,6 +30,11 @@ export default class Player extends Phaser.Physics.Matter.Sprite{
         this.on('animationcomplete_playerJump', function () {
             this.anims.play('playerIdle');
         }, this);
+
+        this.on('animationcomplete_playerAttack', function () {
+            this.anims.play('playerIdle');
+            //TODO Player attack system
+        }, this);
     }
 
     /**
