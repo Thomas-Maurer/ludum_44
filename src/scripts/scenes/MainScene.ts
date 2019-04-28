@@ -31,11 +31,8 @@ export default class MainScene extends Phaser.Scene {
     this.load.tilemapTiledJSON("map", "/assets/map/map_beta.json");
     this.load.multiatlas('all_sprites', 'assets/graphics/map/backgrounds/spritesheet.json', 'assets/graphics/map/backgrounds');
     this.load.multiatlas('block', 'assets/graphics/map/backgrounds/block.json', 'assets/graphics/map/backgrounds');
-    this.load.multiatlas(Enemy.SPRITE_ID, 'assets/graphics/char/enemy/enemy_test.json', 'assets/graphics/char/enemy');
-
 // Load body shapes from JSON file generated using PhysicsEditor
     this.load.json('shapes', 'assets/graphics/char/character/shapes_char.json');
-    this.load.multiatlas(Enemy.SPRITE_ID, 'assets/graphics/char/enemy/enemy_test.json', 'assets/graphics/char/enemy');
     this.audioManager = new AudioManager(this);
 
     this.load.multiatlas(Enemies.SPRITE_SHEET_ID, Enemies.SPRITE_SHEET_URL, Enemies.SPRITE_SHEET_FOLDER);
