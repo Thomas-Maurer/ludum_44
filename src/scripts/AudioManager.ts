@@ -7,7 +7,8 @@ export default class AudioManager {
     public soundsList = {
         PLAYER_JUMP: "playerJump",
         PLAYER_FOOTSTEP: "playerFootstep",
-        VICTORY: 'victory'
+        VICTORY: 'victory',
+        DEATH: 'death'
     };
     constructor(scene: Phaser.Scene) {
         this.scene = scene;
