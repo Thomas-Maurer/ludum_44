@@ -15,6 +15,12 @@ export class Enemies {
     private DISTANCE_TO_PLAYER = 3000;
 
     private mapObject: any;
+    private scene: any;
+
+    private _collisionCat: any;
+    public get collisionCat() {
+        return this._collisionCat;
+    }
 
     /**
      * Contain all enemies object
@@ -23,6 +29,8 @@ export class Enemies {
     private listOfEnemies: Array<Enemy> = [];
 
     constructor(map: any, world: Phaser.Physics.Matter.World, scene: Phaser.Scene) {
+        this.scene = scene;
+        this._collisionCat = world.nextCategory();
         this.mapObject = map;
         this.initSpawns(world, scene);
     }
@@ -43,7 +51,10 @@ export class Enemies {
      */
     private iniPeasantSpwans(world: Phaser.Physics.Matter.World, scene: Phaser.Scene) {
        this.mapObject.findObject(this.SPAWN_PEASANT, (obj: any) => {
-           this.listOfEnemies.push(new Peasant(world, scene, obj.x, obj.y));
+           let peasant = new Peasant(world, scene, obj.x, obj.y);
+           peasant.setCollisionCategory(this.collisionCat);
+           peasant.setCollidesWith([1, this.scene.playerCatCollision]);
+           this.listOfEnemies.push(peasant);
         });
     }
 
