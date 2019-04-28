@@ -73,7 +73,7 @@ export default class MainScene extends Phaser.Scene {
     // rectangle body (similar to AP).
     this.matter.world.convertTilemapLayer(worldLayer);
 
-    this.player = new Player(this.matter.world, this, 64, 11 * 32, 'all_sprites', 'vampire/runvampright1.png');
+    this.player = this.spawnPlayer();
 
     //this.enemy.setCollisionCategory(defaultCat);
     this.player.setCollisionCategory(defaultCat);
@@ -117,6 +117,11 @@ export default class MainScene extends Phaser.Scene {
     });
 
     this.addCalice();
+  }
+
+  spawnPlayer(): Player{
+    const spawnPoint: any = this.map.findObject("spawn_player", (obj: any) => obj.name === "player");
+    return new Player(this.matter.world, this, spawnPoint.x, spawnPoint.y, 'all_sprites', 'vampire/runvampright1.png');
   }
 
   addCalice() {
