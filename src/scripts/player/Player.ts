@@ -10,8 +10,10 @@ export default class Player extends Phaser.Physics.Matter.Sprite{
     private baseDamage: number;
     constructor(world: Phaser.Physics.Matter.World, scene: Phaser.Scene, x: number, y: number, key: string, frame?: string | integer) {
         super(world, x, y, key, frame);
+        const matterEngine: any = Phaser.Physics.Matter;
+        const body = matterEngine.Matter.Bodies.rectangle(x, y, 55, 100, { chamfer: { radius: 10 } });
+        this.setExistingBody(body);
         scene.add.existing(this);
-        console.log(x, y, key, frame);
         this.playerControl = new PlayerControls(scene);
         this.scene = scene;
         this.canJump = true;
