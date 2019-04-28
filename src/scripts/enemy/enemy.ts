@@ -1,8 +1,10 @@
 import {Map} from "../map-data";
+import {EnemyGuid} from "./enemy-guid.enum";
+import {IEnemy} from "./enemy.interface";
 /**
  * Enemy class
  */
-export class Enemy extends Phaser.Physics.Matter.Sprite{
+export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy{
     /**
      * Current velocity
      */
@@ -16,6 +18,21 @@ export class Enemy extends Phaser.Physics.Matter.Sprite{
     protected scene: Phaser.Scene;
 
     public isRunning = false;
+    public isDead = false;
+    public isHit = false;
+
+    /**
+     * Guid fill by the children
+     */
+    public GUID: EnemyGuid;
+    /**
+     * Fill by the children
+     * @type {{life: number; damage: number}}
+     */
+    public info = {
+        life:  0,
+        damage:  0,
+    };
 
     /**
      *
@@ -38,15 +55,22 @@ export class Enemy extends Phaser.Physics.Matter.Sprite{
      * Update function call by scene update
      */
     public update(): void {
+        if (this.isDead || this.isHit) {
+            return;
+        }
         if (!this.isRunning) {
             this.anims.play('peasantRun',true);
             this.isRunning = true;
         }
+
         // mak the enemy pnj always move
         this.setVelocityCustom();
     }
 
-    public stopAllAnims() {
+    /**
+     * Stop all animations
+     */
+    public stopAllAnims(): void {
         this.anims.stop();
         this.isRunning = false;
     }
@@ -121,5 +145,11 @@ export class Enemy extends Phaser.Physics.Matter.Sprite{
             this.setFlipX(this.currentDirection === -1);
         }
     }
+
+    /**
+     * Method used by childrens
+     * @param damage
+     */
+    public takeDamage(damage: number) {}
 
 }
