@@ -11,6 +11,7 @@
       }"
     ></div>
     <span class="potion-label">{{playerHP}}</span>
+    <div class="item"></div>
   </div>
 </template>
 <script src="./Gameplay.js">
