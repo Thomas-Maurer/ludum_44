@@ -10,7 +10,7 @@
         'hp0': playerHP === 0,
       }"
     ></div>
-    <span class="potion-label">{{playerHP}} / 100</span>
+    <span class="potion-label">{{playerHP}}</span>
   </div>
 </template>
 <script src="./Gameplay.js">
