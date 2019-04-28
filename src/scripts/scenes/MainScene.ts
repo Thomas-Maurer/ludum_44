@@ -109,6 +109,7 @@ export default class MainScene extends Phaser.Scene {
       },
       context: this // Context to apply to the callback function
     });
+
     this.matterCollision.addOnCollideActive({
       objectA: this.player.getPlayerSprite(),
       callback: (eventData: any) => {
@@ -117,6 +118,11 @@ export default class MainScene extends Phaser.Scene {
         } else if (eventData.gameObjectB instanceof Enemy) {
           if (this.player.getAttackstate()) {
             this.player.emit('playertouchtarget', eventData.gameObjectB);
+          }
+
+          if (this.player.doAction && eventData.gameObjectB.isDead) {
+            this.player.doAction = false;
+            eventData.gameObjectB.suck();
           }
 
         } else if (eventData.gameObjectB == null) {
@@ -198,8 +204,8 @@ export default class MainScene extends Phaser.Scene {
     this.anims.create({ key: 'caliceAnim', frames: caliceAnim, frameRate: 10, repeat: -1 });
     caliceSprite.play('caliceAnim');
     caliceSprite.setStatic(true);
-    caliceSprite.setCollisionCategory(this.matter.world.nextCategory());
-    caliceSprite.setCollidesWith(this.playerCatCollision);
+    caliceSprite.setCollisionCategory(1);
+    caliceSprite.setCollidesWith([this.playerCatCollision]);
   }
   // Fct we call each frame
   /**
