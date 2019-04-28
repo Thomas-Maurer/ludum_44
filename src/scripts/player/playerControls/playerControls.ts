@@ -124,7 +124,7 @@ export class PlayerControls {
             player.getPlayerSprite().setFlipX(true);
             player.getPlayerSprite().applyForce(negativeforceVector);
         } else {
-            if (player.anims.currentAnim !== null && (player.anims.currentAnim.key === 'playerJump' || player.anims.currentAnim.key === 'playerAttack')) {
+            if (player.anims.currentAnim !== null && (player.anims.currentAnim.key === 'playerJump' || player.anims.currentAnim.key === 'playerAttack' || player.anims.currentAnim.key === 'playerDeath')) {
 
             } else {
                 player.anims.play('playerIdle', true);
