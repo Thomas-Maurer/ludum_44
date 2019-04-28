@@ -7,6 +7,7 @@ import { EnemiesEnum } from "../enemy/enemies.enum";
 import { Enemies } from "../enemy/enemies.class";
 import VictoryItem from "../items/victoryItem";
 import EventsUtils from "../utils/events.utils";
+import Item from "../items/item";
 export default class MainScene extends Phaser.Scene {
   public matterCollision: PhaserMatterCollisionPlugin;
   public map: Phaser.Tilemaps.Tilemap;
@@ -83,7 +84,7 @@ export default class MainScene extends Phaser.Scene {
     //this.enemy.setCollisionCategory(defaultCat);
     this.player.setCollisionCategory(this.playerCatCollision);
     // 1 is the collision category of the tile with tiled
-    this.player.setCollidesWith([1, this.enemies.collisionCat]);
+    this.player.setCollidesWith([1, this.enemies.collisionCat, this.itemsCat]);
 
 
     const playerRunAnims = this.player.generateFrameNames('vampire/runvampright', 'all_sprites', 1, 10);
