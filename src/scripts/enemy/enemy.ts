@@ -1,18 +1,8 @@
-import {MapUtils} from "../utils/map.utils";
 import {Map} from "../map-data";
 /**
  * Enemy class
  */
 export class Enemy extends Phaser.Physics.Matter.Sprite{
-    /**
-     * Sprite id
-     * @type {string}
-     */
-    public static SPRITE_ID = 'enemy_sprites';
-    /**
-     * Matter object
-     */
-    private matterObject: any;
     /**
      * Current velocity
      */
@@ -22,6 +12,10 @@ export class Enemy extends Phaser.Physics.Matter.Sprite{
      * @type {number}
      */
     private currentDirection: number = 1;
+
+    protected scene: Phaser.Scene;
+
+    private isRunning = false;
 
     /**
      *
@@ -34,13 +28,20 @@ export class Enemy extends Phaser.Physics.Matter.Sprite{
      */
     constructor(world: Phaser.Physics.Matter.World, scene: Phaser.Scene, x: number, y: number, key: string, frame?: string | integer) {
         super(world, x, y, key, frame);
+        this.scene = scene;
         scene.add.existing(this);
+        this.setFixedRotation();
+        this.setFriction(0.2, 0.05,0);
     }
 
     /**
      * Update function call by scene update
      */
     public update(): void {
+        if (!this.isRunning) {
+            this.anims.play('peasantRun',true);
+            this.isRunning = true;
+        }
         // mak the enemy pnj always move
         this.setVelocityCustom();
     }
@@ -52,7 +53,21 @@ export class Enemy extends Phaser.Physics.Matter.Sprite{
         this.setVelocityOnGround();
         this.setVelocityOnCollide();
         this.setVelocityX(this.currentVelocity);
+    }
 
+    /**
+     * TODO export this function
+     * Generate FrameNames
+     * @param key
+     * @param atlasName
+     * @param start
+     * @param end
+     */
+    public generateFrameNames (key: string, atlasName: string, start: number, end: number): Phaser.Animations.Types.AnimationFrame[] {
+        return this.scene.anims.generateFrameNames(atlasName,{
+            start: start, end: end, zeroPad: 1,
+            prefix: key, suffix: '.png'
+        } )
     }
 
     /**
@@ -69,6 +84,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite{
         if (!map.isExistTile(tileX, tileY)) {
             this.currentDirection = this.currentDirection * -1;
             this.currentVelocity = this.currentVelocity * -1;
+            this.setFlipX(this.currentDirection === -1);
         }
         this.setVelocityX(this.currentVelocity);
     }
@@ -88,6 +104,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite{
         if (map.isExistTile(tileX, tileY)) {
             this.currentDirection = this.currentDirection * -1;
             this.currentVelocity = this.currentVelocity * -1;
+            this.setFlipX(this.currentDirection === -1);
         }
         // TODO delete after adding the right sprite (1 is corresponding to 64px)
         // checking collide on head
@@ -96,6 +113,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite{
         if (map.isExistTile(tileX, tileY)) {
             this.currentDirection = this.currentDirection * -1;
             this.currentVelocity = this.currentVelocity * -1;
+            this.setFlipX(this.currentDirection === -1);
         }
     }
 
