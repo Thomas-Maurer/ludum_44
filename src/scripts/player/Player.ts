@@ -15,6 +15,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     private healthPoint: number;
     private baseDamage: number;
     private isAttacking: boolean;
+    private doingDamage: boolean;
     constructor(world: Phaser.Physics.Matter.World, scene: MainScene, x: number, y: number, key: string, frame?: string | integer, options?: object) {
         super(world, x, y, key, frame, options);
         const matterEngine: any = Phaser.Physics.Matter;
@@ -49,9 +50,16 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
 
         this.on('animationcomplete_playerAttack', function () {
             this.anims.play('playerIdle');
-            this.alterHitbox();
             //TODO Player attack system
             this.disableAttackState();
+
+        }, this);
+
+    }
+
+    private addPlayerTouchTargetEvent(): void {
+        this.once('playertouchtarget', function (enemy: Enemy) {
+            this.doDamageTo(enemy);
         }, this);
     }
 
@@ -76,10 +84,6 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
             start: start, end: end, zeroPad: 1,
             prefix: key, suffix: '.png'
         })
-    }
-
-    private alterHitbox() {
-        this.setSize(20, 20);
     }
 
     /**
@@ -143,6 +147,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
      */
     public enableAttackState(): void {
         this.isAttacking = true;
+        this.doingDamage = true;
         // Add a slight delay between attack
         this.attackCooldownTimer = this.scene.time.addEvent({
             delay: 250,
@@ -156,6 +161,14 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
      */
     public disableAttackState(): void {
         this.isAttacking = false;
+        this.addPlayerTouchTargetEvent();
+    }
+
+    /**
+     * return if the player is attacking or not
+     */
+    public getAttackstate(): boolean {
+        return this.isAttacking;
     }
 
     /**
@@ -191,6 +204,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
      * @param enemy
      */
     public doDamageTo(enemy: Enemy): void {
-
+        //TODO do damge to an ennemy
+        console.log('player do damage to ennemy');
     }
 }

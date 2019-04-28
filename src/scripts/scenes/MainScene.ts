@@ -98,7 +98,10 @@ export default class MainScene extends Phaser.Scene {
         if (eventData.gameObjectB !== undefined && eventData.gameObjectB instanceof Phaser.Tilemaps.Tile) {
           this.player.setPlayerInAirValue(false);
         } else if (eventData.gameObjectB instanceof Enemy) {
-          console.log(eventData.gameObjectB)
+          if (this.player.getAttackstate()){
+            this.player.emit('playertouchtarget', eventData.gameObjectB);
+          }
+
         }
       },
       context: this
