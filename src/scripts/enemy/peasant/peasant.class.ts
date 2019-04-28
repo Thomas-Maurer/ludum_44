@@ -34,6 +34,7 @@ export class Peasant extends Enemy implements IEnemy {
 
     constructor(world: Phaser.Physics.Matter.World, scene: Phaser.Scene, x: number, y: number) {
         super(world, scene, x, y, EnemiesEnum.SPRITE_SHEET_ID, Peasant.firstSpriteSheet);
+        this.world = world;
         this.initAnims();
     }
 
@@ -70,7 +71,7 @@ export class Peasant extends Enemy implements IEnemy {
             this.isHit = true;
             this.isRunning = false;
             this.anims.play('peasantHit',true);
-            setTimeout(() => this.isHit = false, 1000);
+            setTimeout(() => this.isHit = false, 500);
         }
     }
 }
