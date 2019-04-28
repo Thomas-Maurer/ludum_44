@@ -6,7 +6,20 @@
 
       <div class="btn play-btn" @click="setPlay()">PLAY</div>
 
-      <div class="btn other-btn">BUTTON</div>
+      <div class="controls-block">
+        <div class="control-type">
+          <img src="../../../assets/graphics/ui/arrow_keys.png" alt>
+          <span class="control-label">Move</span>
+        </div>
+        <div class="control-type">
+          <img src="../../../assets/graphics/ui/space.png" alt>
+          <span class="control-label">Attack</span>
+        </div>
+        <div class="control-type potion">
+          <div class="potion-icon"></div>
+          <span class="control-label">Keep it full</span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
