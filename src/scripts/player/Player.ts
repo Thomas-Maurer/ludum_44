@@ -17,10 +17,12 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     private baseDamage: number;
     private isAttacking: boolean;
     private doingDamage: boolean;
+    private isPlayerDead: boolean;
     constructor(world: Phaser.Physics.Matter.World, scene: MainScene, x: number, y: number, key: string, frame?: string | integer, options?: object) {
         super(world, x, y, key, frame, options);
-        const matterEngine: any = Phaser.Physics.Matter;
         this.scene = scene;
+        const matterEngine: any = Phaser.Physics.Matter;
+
         const body = matterEngine.Matter.Bodies.rectangle(x, y, 55, 100, { chamfer: { radius: 10 } });
         this.setExistingBody(body);
         scene.add.existing(this);
@@ -34,6 +36,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.healthPoint = 100;
         this.baseDamage = 1;
         this.isInSun = true;
+        this.isPlayerDead = false;
 
         //TODO Better handling of event
         this.on('animationupdate', function (anim, frame) {
@@ -68,6 +71,9 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
      * called each frame
      */
     update() {
+        if (this.isPlayerDead) {
+            this.killPlayer();
+        }
         this.handleActions();
         this.handleSun();
     }
@@ -138,6 +144,25 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
             detail: this.healthPoint
         });
         window.dispatchEvent(playerHpEvent);
+        if (this.healthPoint <= 0) {
+            this.killPlayer();
+        }
+    }
+
+    /**
+     * Kill the player then restart the scene
+     * Show deathScreen
+     */
+    public killPlayer(): void {
+        console.log('player is dead');
+        this.scene.restart();
+    }
+
+    /**
+     * return if the player is dead
+     */
+    public getisPlayerDead(): boolean {
+        return this.isPlayerDead;
     }
 
     /**
