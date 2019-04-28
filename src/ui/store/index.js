@@ -7,7 +7,8 @@ export default new Vuex.Store({
         // config: defaultConfig,
         play: false,
         playerHP: 100,
-        dead: false
+        dead: false,
+        win: false
     },
     mutations: {
         setPlay(state, value) {
@@ -15,6 +16,9 @@ export default new Vuex.Store({
         },
         setDead(state, value) {
             state.dead = value;
+        },
+        setWin(state, value) {
+            state.win = value;
         },
         setPlayerHP(state, value) {
             state.playerHP = value;
@@ -24,8 +28,11 @@ export default new Vuex.Store({
         setPlay(context, value) {
             context.commit('setPlay', value);
         },
-        setPlay(context, value) {
+        setDead(context, value) {
             context.commit('setDead', value);
+        },
+        setWin(context, value) {
+            context.commit('setWin', value);
         },
         setPlayerHP(context, value) {
             context.commit('setPlayerHP', value);
