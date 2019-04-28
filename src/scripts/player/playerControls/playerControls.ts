@@ -71,6 +71,12 @@ export class PlayerControls {
     }
 
     public handlePlayerControls(player: Player): void {
+
+        if (player.anims.currentAnim !== null) {
+            //console.log(player.anims.currentAnim)
+            //console.log(player.scene.shapes[player.anims.currentAnim.key.toLocaleLowerCase()]);
+            //player.setBody()
+        }
         let negativeforceVector: Vector2;
         let forceVector: Vector2;
         let body: any = player.getPlayerSprite().body;
@@ -97,6 +103,7 @@ export class PlayerControls {
 
         if (this.cursors.attack.isDown) {
             player.anims.play('playerAttack',true);
+            player.enableAttackState();
         }
 
         if(this.cursors.right.isDown){
