@@ -143,8 +143,8 @@ export default class MainScene extends Phaser.Scene {
     this.anims.create({ key: 'caliceAnim', frames: caliceAnim, frameRate: 10, repeat: -1 });
     caliceSprite.play('caliceAnim');
     caliceSprite.setStatic(true);
-    caliceSprite.setCollisionCategory(this.matter.world.nextCategory());
-    caliceSprite.setCollidesWith(this.playerCatCollision);
+    caliceSprite.setCollisionCategory(1);
+    caliceSprite.setCollidesWith([this.playerCatCollision]);
   }
 
   /**
