@@ -76,9 +76,12 @@ export default class MainScene extends Phaser.Scene {
 
     this.player = this.spawnPlayer();
 
+    this.enemies = new Enemies(this.map, this.matter.world, this);
+
     //this.enemy.setCollisionCategory(defaultCat);
     this.player.setCollisionCategory(this.playerCatCollision);
-    this.enemies = new Enemies(this.map, this.matter.world, this);
+    this.player.setCollidesWith([1, this.enemies.collisionCat]);
+
 
     const playerRunAnims = this.player.generateFrameNames('vampire/runvampright', 'all_sprites', 1, 10);
     const playerIdleAnims = this.player.generateFrameNames('vampire/fightvamp', 'all_sprites', 1, 10);

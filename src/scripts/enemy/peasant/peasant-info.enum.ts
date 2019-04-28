@@ -1,4 +1,4 @@
 export enum PeasantInfo {
-    LIFE = 5,
+    LIFE = 1,
     DAMAGE = 5,
 }
