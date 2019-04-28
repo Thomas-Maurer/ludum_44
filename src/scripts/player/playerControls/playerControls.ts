@@ -132,7 +132,7 @@ export class PlayerControls {
             player.getPlayerSprite().setFlipX(true);
             player.getPlayerSprite().applyForce(this.negativeforceVector);
         } else {
-            if (player.anims.currentAnim !== null && (player.anims.currentAnim.key === 'playerJump' || player.anims.currentAnim.key === 'playerAttack' || player.anims.currentAnim.key === 'playerDeath')) {
+            if (player.anims.currentAnim !== null && (player.anims.currentAnim.key === 'playerJump' || player.anims.currentAnim.key === 'playerAttack' || player.anims.currentAnim.key === 'playerDeath' || player.isSucking)) {
 
             } else {
                 player.doAction = false;
@@ -142,7 +142,7 @@ export class PlayerControls {
         }
         if(this.cursors.action.isDown) {
             player.doAction = true;
-            console.log('player use action');
+            player.addPlayerbuyitemEvent();
         }
         if (this.cursors.up.isDown && player.getCanJump() && !player.isPlayerInTheAir()) {
             player.anims.play('playerJump', true);

@@ -2,6 +2,7 @@ import { PlayerControls } from "./playerControls/playerControls";
 import { Enemy } from "../enemy/enemy";
 import MainScene from "../scenes/MainScene";
 import EventsUtils from "../utils/events.utils";
+import Item from "../items/item";
 
 export default class Player extends Phaser.Physics.Matter.Sprite {
     private playerControl: PlayerControls;
@@ -17,6 +18,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     private baseDamage: number;
     private isAttacking: boolean;
     private doingDamage: boolean;
+    public isSucking: boolean;
     private isPlayerDead: boolean;
     public doAction: boolean;
     constructor(world: Phaser.Physics.Matter.World, scene: MainScene, x: number, y: number, key: string, frame?: string | integer, options?: object) {
@@ -55,11 +57,17 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         }, this);
 
         this.once('animationcomplete_playerDeath', () => {
-
-            //this.scene.restart();
             window.dispatchEvent(EventsUtils.PLAYER_DEAD);
             this.scene.audioManager.playSound(this.scene.audioManager.soundsList.DEATH);
         }, this);
+
+        this.on('animationcomplete_suck', () => {
+            this.isSucking = false;
+        });
+
+        this.once('playerbuyitem', (item: Item) => {
+            item.destroy();
+        });
 
         this.on('animationcomplete_playerAttack', function () {
             this.anims.play('playerIdle');
@@ -77,6 +85,14 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     private addPlayerTouchTargetEvent(): void {
         this.once('playertouchtarget', function (enemy: Enemy) {
             this.doDamageTo(enemy);
+        }, this);
+    }
+
+    public addPlayerbuyitemEvent(): void {
+        console.log('penis');
+        this.once('playerbuyitem', (item: Item) => {
+            item.destroy();
+            this.takeDamage(item.getHpCost());
         }, this);
     }
 
@@ -205,6 +221,12 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.isAttacking = false;
         this.addPlayerTouchTargetEvent();
     }
+
+    public suck() {
+        this.isSucking = true;
+        this.anims.play('suck',true);
+    }
+
 
     /**
      * return if the player is attacking or not
