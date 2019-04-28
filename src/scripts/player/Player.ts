@@ -3,6 +3,7 @@ import { Enemy } from "../enemy/enemy";
 import MainScene from "../scenes/MainScene";
 import EventsUtils from "../utils/events.utils";
 import Item from "../items/item";
+import {PLAYER_ANIM} from "./animTabs";
 
 export default class Player extends Phaser.Physics.Matter.Sprite {
     private playerControl: PlayerControls;
@@ -62,7 +63,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         }, this);
 
         this.on('animationcomplete_playerJump', function () {
-            this.anims.play('playerIdle');
+            this.anims.play(PLAYER_ANIM.playerIdle);
         }, this);
 
         this.once('animationcomplete_playerDeath', () => {
@@ -85,7 +86,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         });
 
         this.on('animationcomplete_playerAttack', function () {
-            this.anims.play('playerIdle');
+            this.anims.play(PLAYER_ANIM.playerIdle);
             //TODO Player attack system
             this.disableAttackState();
         }, this);
@@ -102,12 +103,12 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         const playerDeathAnims = this.generateFrameNames('vampire/deathvamp', 'all_sprites', 1, 7);
         const playerSuck = this.generateFrameNames('vampire/vampdrink', 'all_sprites', 1, 5);
 
-        this.scene.anims.create({ key: 'suck', frames: playerSuck, frameRate: 10, repeat: 0 });
-        this.scene.anims.create({ key: 'playerRun', frames: playerRunAnims, frameRate: 10, repeat: -1 });
-        this.scene.anims.create({ key: 'playerIdle', frames: playerIdleAnims, frameRate: 10, repeat: -1 });
-        this.scene.anims.create({ key: 'playerJump', frames: playerJumpAnims, frameRate: 9 });
-        this.scene.anims.create({ key: 'playerAttack', frames: playerAttackAnims, frameRate: 50 });
-        this.scene.anims.create({ key: 'playerDeath', frames: playerDeathAnims, frameRate: 13 });
+        this.scene.anims.create({ key: PLAYER_ANIM.suck, frames: playerSuck, frameRate: 10, repeat: 0 });
+        this.scene.anims.create({ key: PLAYER_ANIM.playerRun, frames: playerRunAnims, frameRate: 10, repeat: -1 });
+        this.scene.anims.create({ key: PLAYER_ANIM.playerIdle, frames: playerIdleAnims, frameRate: 10, repeat: -1 });
+        this.scene.anims.create({ key: PLAYER_ANIM.playerJump, frames: playerJumpAnims, frameRate: 9 });
+        this.scene.anims.create({ key: PLAYER_ANIM.playerAttack, frames: playerAttackAnims, frameRate: 50 });
+        this.scene.anims.create({ key: PLAYER_ANIM.playerDeath, frames: playerDeathAnims, frameRate: 13 });
     }
 
     public getPlayerControl(): PlayerControls {
@@ -169,6 +170,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
      * Handle sun damage
      */
     private handleSun() {
+        console.log(this.isInSun);
         //ignore if not in sun
         if (!this.isInSun) {
 
@@ -182,13 +184,20 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         if (this.isInSun && !this.willTakeSunDamage) {
             //  The same as above, but uses a method signature to declare it (shorter, and compatible with GSAP syntax)
             this.willTakeSunDamage = this.scene.time.delayedCall(1000, () => {
-                this.takeDamage(1);
+                if (this.isInSun) {
+                    this.takeDamage(1);
+                }
                 this.willTakeSunDamage.remove();
                 this.willTakeSunDamage = null;
 
             }, [], this);
         }
 
+    }
+
+    public disableSun(): void {
+        console.log('disable or enable sun')
+        this.isInSun = !this.isInSun;
     }
 
     /**

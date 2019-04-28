@@ -20,6 +20,8 @@ export default class MainScene extends Phaser.Scene {
   public audioManager: AudioManager;
   public playerCatCollision: any;
   public itemsCat: any;
+  public unsubscribeCelebrate: any;
+  public sunSensors: any[];
   private parralaxLayers: {
     static: {
       cloud: Phaser.GameObjects.TileSprite,
@@ -64,6 +66,7 @@ export default class MainScene extends Phaser.Scene {
     const map = Map.getInstance(this.add.tilemap('map'));
     this.map = map.tileMap;
     this.shapes = this.cache.json.get('shapes');
+    this.sunSensors = [];
     const tileset = this.map.addTilesetImage('block', 'block');
     this.playerCatCollision = this.matter.world.nextCategory();
     this.itemsCat = this.matter.world.nextCategory();
@@ -106,6 +109,7 @@ export default class MainScene extends Phaser.Scene {
     this.addCalice();
     this.addEventsListeners();
     this.generateItems();
+    this.buildSunSensor();
   }
 
   handleCollision(): void {
@@ -125,8 +129,6 @@ export default class MainScene extends Phaser.Scene {
             this.player.suck();
           }
 
-        } else if (eventData.gameObjectB == null) {
-          this.player.killPlayer();
         } else if (eventData.gameObjectB instanceof VictoryItem) {
           //TriggerVictory
           console.log(eventData.gameObjectB);
@@ -139,11 +141,38 @@ export default class MainScene extends Phaser.Scene {
             this.player.emit('playerbuyitem');
           }
         }else {
-          console.log(eventData.gameObjectB);
+          //console.log(eventData.gameObjectB);
         }
       },
       context: this
     });
+  }
+
+  buildSunSensor(): void {
+    // Create a sensor at the rectangle object created in Tiled (under the "sunSensor" layer)
+    this.map.findObject("sunSensor", (obj: any) => {
+      const sunSensor = this.matter.add.rectangle(
+          obj.x + obj.width / 2,
+          obj.y + obj.height / 2,
+          obj.width,
+          obj.height,
+          {
+            isSensor: true, // It shouldn't physically interact with other bodies
+            isStatic: true // It shouldn't move
+          }
+      );
+      this.sunSensors.push(sunSensor);
+    });
+
+    this.unsubscribeCelebrate = this.matterCollision.addOnCollideStart({
+      objectA: this.player,
+      objectB: this.sunSensors,
+      callback: () => {
+        this.player.disableSun()
+      },
+      context: this
+    });
+
   }
 
   spawnPlayer(): Player {
