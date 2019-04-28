@@ -3,6 +3,8 @@ import * as PhaserMatterCollisionPlugin from "phaser-matter-collision-plugin";
 import AudioManager from "../AudioManager";
 import { Enemy } from "../enemy/enemy";
 import { Map } from "../map-data";
+import {Peasant} from "../enemy/peasant/peasant.class";
+import {Enemies} from "../enemy/enemies.enum";
 export default class MainScene extends Phaser.Scene {
   public matterCollision: PhaserMatterCollisionPlugin;
   public map: Phaser.Tilemaps.Tilemap;
@@ -29,12 +31,11 @@ export default class MainScene extends Phaser.Scene {
     this.load.tilemapTiledJSON("map", "/assets/map/map_beta.json");
     this.load.multiatlas('all_sprites', 'assets/graphics/map/backgrounds/spritesheet.json', 'assets/graphics/map/backgrounds');
     this.load.multiatlas('block', 'assets/graphics/map/backgrounds/block.json', 'assets/graphics/map/backgrounds');
-    this.load.multiatlas(Enemy.SPRITE_ID, 'assets/graphics/char/enemy/enemy_test.json', 'assets/graphics/char/enemy');
-
 // Load body shapes from JSON file generated using PhysicsEditor
     this.load.json('shapes', 'assets/graphics/char/character/shapes_char.json');
-    this.load.multiatlas(Enemy.SPRITE_ID, 'assets/graphics/char/enemy/enemy_test.json', 'assets/graphics/char/enemy');
     this.audioManager = new AudioManager(this);
+
+    this.load.multiatlas(Enemies.SPRITE_SHEET_ID, Enemies.SPRITE_SHEET_URL, Enemies.SPRITE_SHEET_FOLDER);
   }
   create() {
     /** Build all layers maps */
@@ -57,7 +58,7 @@ export default class MainScene extends Phaser.Scene {
 
     this.player = new Player(this.matter.world, this, 64, 11 * 32, 'all_sprites', 'vampire/runvampright1.png',
         {shape: this.shapes.runvampright1});
-    this.enemy = new Enemy(this.matter.world, this, 10 *64, 0, Enemy.SPRITE_ID, 'zombie_hang');
+    this.enemy = new Peasant(this.matter.world, this, 10 *64, 0);
 
     const playerRunAnims = this.player.generateFrameNames('vampire/runvampright', 'all_sprites', 1, 10);
     const playerIdleAnims = this.player.generateFrameNames('vampire/fightvamp', 'all_sprites', 1, 10);
@@ -109,8 +110,7 @@ export default class MainScene extends Phaser.Scene {
       bg_clouds: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'bg_clouds.png'),
       bg_far: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'bg_far.png'),
       bg: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'bg.png'),
-
-    }
+    };
 
     for (const layerName in this.parralaxLayers) {
       if (this.parralaxLayers.hasOwnProperty(layerName)) {
