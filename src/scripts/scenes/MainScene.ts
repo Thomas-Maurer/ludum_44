@@ -7,7 +7,7 @@ export default class MainScene extends Phaser.Scene {
   public matterCollision: PhaserMatterCollisionPlugin;
   public map: Phaser.Tilemaps.Tilemap;
   public player: Player;
-  private audioManager: AudioManager;
+  public audioManager: AudioManager;
   private parralaxLayers: {
     bg_static: Phaser.GameObjects.TileSprite,
     bg_clouds: Phaser.GameObjects.TileSprite,
@@ -36,7 +36,6 @@ export default class MainScene extends Phaser.Scene {
     /** Build all layers maps */
     const map = Map.getInstance(this.add.tilemap('map'));
     this.map = map.tileMap;
-
     const tileset = this.map.addTilesetImage('block', 'block');
 
     this.generateParralaxLayers();

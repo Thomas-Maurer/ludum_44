@@ -1,14 +1,20 @@
 import Player from "../Player";
 import Vector2 = Phaser.Math.Vector2;
+import MainScene from "../../scenes/MainScene";
+import AudioManager from "../../AudioManager";
 
 export class PlayerControls {
     private cursors: any;
     private leftInput: string;
     private rightInput: string;
     private jumpInput: string;
-    constructor(scene: Phaser.Scene) {
+    private scene: MainScene;
+    private audioManager: AudioManager;
+    constructor(scene: MainScene) {
         this.initDefaultKeys();
         this.mappingKeys(scene);
+        this.scene = scene;
+        this.audioManager = this.scene.audioManager;
     }
 
     /**
@@ -109,6 +115,7 @@ export class PlayerControls {
         }
         if (this.cursors.up.isDown && player.getCanJump() && !player.isPlayerInTheAir()) {
             player.anims.play('playerJump', true);
+            this.audioManager.playSound(this.audioManager.soundsList.PLAYER_JUMP);
             player.desactivateJump();
             player.getPlayerSprite().setVelocityY(-11);
         }
