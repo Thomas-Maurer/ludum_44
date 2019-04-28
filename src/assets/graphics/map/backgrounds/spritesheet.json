@@ -5,7 +5,7 @@
 			"format": "RGBA8888",
 			"size": {
 				"w": 4096,
-				"h": 4080
+				"h": 4096
 			},
 			"scale": 1,
 			"frames": [
@@ -360,6 +360,31 @@
 					}
 				},
 				{
+					"filename": "icons/tdm.PNG",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 256,
+						"h": 256
+					},
+					"frame": {
+						"x": 0,
+						"y": 3840,
+						"w": 256,
+						"h": 256
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
 					"filename": "vampire/fightvamp1.png",
 					"rotated": false,
 					"trimmed": false,
@@ -374,7 +399,7 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 0,
+						"x": 256,
 						"y": 3840,
 						"w": 120,
 						"h": 120
@@ -399,7 +424,7 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 120,
+						"x": 376,
 						"y": 3840,
 						"w": 120,
 						"h": 120
@@ -424,7 +449,7 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 240,
+						"x": 496,
 						"y": 3840,
 						"w": 120,
 						"h": 120
@@ -449,7 +474,7 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 360,
+						"x": 616,
 						"y": 3840,
 						"w": 120,
 						"h": 120
@@ -474,7 +499,7 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 480,
+						"x": 736,
 						"y": 3840,
 						"w": 120,
 						"h": 120
@@ -499,7 +524,7 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 600,
+						"x": 856,
 						"y": 3840,
 						"w": 120,
 						"h": 120
@@ -524,7 +549,7 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 720,
+						"x": 976,
 						"y": 3840,
 						"w": 120,
 						"h": 120
@@ -549,7 +574,7 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 840,
+						"x": 1096,
 						"y": 3840,
 						"w": 120,
 						"h": 120
@@ -574,7 +599,7 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 960,
+						"x": 1216,
 						"y": 3840,
 						"w": 120,
 						"h": 120
@@ -599,7 +624,7 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 1080,
+						"x": 1336,
 						"y": 3840,
 						"w": 120,
 						"h": 120
@@ -624,7 +649,7 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 1200,
+						"x": 1456,
 						"y": 3840,
 						"w": 120,
 						"h": 120
@@ -649,7 +674,7 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 1320,
+						"x": 1576,
 						"y": 3840,
 						"w": 120,
 						"h": 120
@@ -674,7 +699,7 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 1440,
+						"x": 1696,
 						"y": 3840,
 						"w": 120,
 						"h": 120
@@ -699,7 +724,7 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 1560,
+						"x": 1816,
 						"y": 3840,
 						"w": 120,
 						"h": 120
@@ -724,7 +749,7 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 1680,
+						"x": 1936,
 						"y": 3840,
 						"w": 120,
 						"h": 120
@@ -749,7 +774,7 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 1800,
+						"x": 2056,
 						"y": 3840,
 						"w": 120,
 						"h": 120
@@ -774,7 +799,7 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 1920,
+						"x": 2176,
 						"y": 3840,
 						"w": 120,
 						"h": 120
@@ -799,7 +824,7 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 2040,
+						"x": 2296,
 						"y": 3840,
 						"w": 120,
 						"h": 120
@@ -824,7 +849,7 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 2160,
+						"x": 2416,
 						"y": 3840,
 						"w": 120,
 						"h": 120
@@ -849,7 +874,7 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 2280,
+						"x": 2536,
 						"y": 3840,
 						"w": 120,
 						"h": 120
@@ -874,7 +899,7 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 2400,
+						"x": 2656,
 						"y": 3840,
 						"w": 120,
 						"h": 120
@@ -899,7 +924,7 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 2520,
+						"x": 2776,
 						"y": 3840,
 						"w": 120,
 						"h": 120
@@ -924,7 +949,7 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 2640,
+						"x": 2896,
 						"y": 3840,
 						"w": 120,
 						"h": 120
@@ -949,7 +974,7 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 2760,
+						"x": 3016,
 						"y": 3840,
 						"w": 120,
 						"h": 120
@@ -974,7 +999,7 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 2880,
+						"x": 3136,
 						"y": 3840,
 						"w": 120,
 						"h": 120
@@ -999,7 +1024,7 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 3000,
+						"x": 3256,
 						"y": 3840,
 						"w": 120,
 						"h": 120
@@ -1024,7 +1049,7 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 3120,
+						"x": 3376,
 						"y": 3840,
 						"w": 120,
 						"h": 120
@@ -1049,7 +1074,7 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 3240,
+						"x": 3496,
 						"y": 3840,
 						"w": 120,
 						"h": 120
@@ -1074,7 +1099,7 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 3360,
+						"x": 3616,
 						"y": 3840,
 						"w": 120,
 						"h": 120
@@ -1099,7 +1124,7 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 3480,
+						"x": 3736,
 						"y": 3840,
 						"w": 120,
 						"h": 120
@@ -1124,8 +1149,8 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 3600,
-						"y": 3840,
+						"x": 3856,
+						"y": 3870,
 						"w": 120,
 						"h": 120
 					},
@@ -1149,8 +1174,8 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 3720,
-						"y": 3840,
+						"x": 3976,
+						"y": 3870,
 						"w": 120,
 						"h": 120
 					},
@@ -1174,8 +1199,8 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 3840,
-						"y": 3840,
+						"x": 256,
+						"y": 3960,
 						"w": 120,
 						"h": 120
 					},
@@ -1199,8 +1224,8 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 3960,
-						"y": 3870,
+						"x": 376,
+						"y": 3960,
 						"w": 120,
 						"h": 120
 					},
@@ -1224,7 +1249,7 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 0,
+						"x": 496,
 						"y": 3960,
 						"w": 120,
 						"h": 120
@@ -1249,7 +1274,7 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 120,
+						"x": 616,
 						"y": 3960,
 						"w": 120,
 						"h": 120
@@ -1274,107 +1299,7 @@
 						"h": 110
 					},
 					"frame": {
-						"x": 240,
-						"y": 3960,
-						"w": 80,
-						"h": 110
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "Poses/player_hold1.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 80,
-						"h": 110
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 80,
-						"h": 110
-					},
-					"frame": {
-						"x": 320,
-						"y": 3960,
-						"w": 80,
-						"h": 110
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "Poses/player_hold2.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 80,
-						"h": 110
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 80,
-						"h": 110
-					},
-					"frame": {
-						"x": 400,
-						"y": 3960,
-						"w": 80,
-						"h": 110
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "Poses/player_hurt.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 80,
-						"h": 110
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 80,
-						"h": 110
-					},
-					"frame": {
-						"x": 480,
-						"y": 3960,
-						"w": 80,
-						"h": 110
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "Poses/player_idle.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 80,
-						"h": 110
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 80,
-						"h": 110
-					},
-					"frame": {
-						"x": 560,
+						"x": 736,
 						"y": 3960,
 						"w": 80,
 						"h": 110
@@ -1446,7 +1371,7 @@
 					}
 				},
 				{
-					"filename": "Poses/player_jump.png",
+					"filename": "Poses/player_hold1.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1471,7 +1396,7 @@
 					}
 				},
 				{
-					"filename": "Poses/player_kick.png",
+					"filename": "Poses/player_hold2.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1496,7 +1421,7 @@
 					}
 				},
 				{
-					"filename": "Poses/player_skid.png",
+					"filename": "Poses/player_hurt.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1521,7 +1446,7 @@
 					}
 				},
 				{
-					"filename": "Poses/player_slide.png",
+					"filename": "Poses/player_idle.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1546,7 +1471,7 @@
 					}
 				},
 				{
-					"filename": "Poses/player_stand.png",
+					"filename": "Poses/player_jump.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1571,7 +1496,7 @@
 					}
 				},
 				{
-					"filename": "Poses/player_swim1.png",
+					"filename": "Poses/player_kick.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1596,7 +1521,7 @@
 					}
 				},
 				{
-					"filename": "Poses/player_swim2.png",
+					"filename": "Poses/player_skid.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1621,7 +1546,7 @@
 					}
 				},
 				{
-					"filename": "Poses/player_talk.png",
+					"filename": "Poses/player_slide.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1646,7 +1571,7 @@
 					}
 				},
 				{
-					"filename": "Poses/player_walk1.png",
+					"filename": "Poses/player_stand.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1721,7 +1646,7 @@
 					}
 				},
 				{
-					"filename": "Poses/player_walk2.png",
+					"filename": "Poses/player_swim1.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1737,6 +1662,106 @@
 					"frame": {
 						"x": 4000,
 						"y": 990,
+						"w": 80,
+						"h": 110
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_swim2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 80,
+						"h": 110
+					},
+					"frame": {
+						"x": 4000,
+						"y": 1100,
+						"w": 80,
+						"h": 110
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_talk.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 80,
+						"h": 110
+					},
+					"frame": {
+						"x": 4000,
+						"y": 1210,
+						"w": 80,
+						"h": 110
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_walk1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 80,
+						"h": 110
+					},
+					"frame": {
+						"x": 4000,
+						"y": 1320,
+						"w": 80,
+						"h": 110
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_walk2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 80,
+						"h": 110
+					},
+					"frame": {
+						"x": 4000,
+						"y": 1430,
 						"w": 80,
 						"h": 110
 					},
@@ -1801,6 +1826,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:d830c4a8a533d1cb119a6eaf2d3af42e:40ef4cd2a49f1e8faefbcdeeca7d57c7:891aeea45958f21e96a4508ee113e1b2$"
+		"smartupdate": "$TexturePacker:SmartUpdate:eef2bd0f7af2a6bfbc69481610dd3115:c73bf7da09f4bdb222afaca4b5bb84a3:891aeea45958f21e96a4508ee113e1b2$"
 	}
 }
