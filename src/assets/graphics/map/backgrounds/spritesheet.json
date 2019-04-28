@@ -35,7 +35,7 @@
 					}
 				},
 				{
-					"filename": "background/1ère scène Scrypte/all2.png",
+					"filename": "background/scene1/all2.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -60,7 +60,7 @@
 					}
 				},
 				{
-					"filename": "background/2 nd scène boucle/Arrière plan.png",
+					"filename": "background/scene2/bg_far.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -85,7 +85,7 @@
 					}
 				},
 				{
-					"filename": "background/permanent/ciel.png",
+					"filename": "background/static/sky.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -110,7 +110,7 @@
 					}
 				},
 				{
-					"filename": "background/2 nd scène boucle/plan.png",
+					"filename": "background/scene2/bg.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -135,7 +135,7 @@
 					}
 				},
 				{
-					"filename": "background/2 nd scène boucle/1er plan.png",
+					"filename": "background/scene2/foreground.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -385,7 +385,7 @@
 					}
 				},
 				{
-					"filename": "background/1ère scène Scrypte/premier plan.png",
+					"filename": "background/scene1/foreground.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1696,7 +1696,7 @@
 			"scale": 1,
 			"frames": [
 				{
-					"filename": "background/permanent/soleil.png",
+					"filename": "background/static/sun.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1721,7 +1721,7 @@
 					}
 				},
 				{
-					"filename": "background/1ère scène Scrypte/farbackground.png",
+					"filename": "background/scene1/bg_far.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1746,7 +1746,7 @@
 					}
 				},
 				{
-					"filename": "background/1ère scène Scrypte/background.png",
+					"filename": "background/scene1/bg.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1771,7 +1771,7 @@
 					}
 				},
 				{
-					"filename": "background/permanent/nuages.png",
+					"filename": "background/static/cloud.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1796,7 +1796,7 @@
 					}
 				},
 				{
-					"filename": "background/1ère scène Scrypte/crypte.png",
+					"filename": "background/scene1/crypte.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1826,6 +1826,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:aa5555779fde64224ba63ee6a7ac0faa:6d2f8a8764edfee33aefadfc440922c2:891aeea45958f21e96a4508ee113e1b2$"
+		"smartupdate": "$TexturePacker:SmartUpdate:022032822d563a2c53a3053b1bc2f800:95afcea1515bf5c32c12bc7dd7821e83:891aeea45958f21e96a4508ee113e1b2$"
 	}
 }
