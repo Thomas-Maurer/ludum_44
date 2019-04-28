@@ -3,12 +3,10 @@ import * as PhaserMatterCollisionPlugin from "phaser-matter-collision-plugin";
 import AudioManager from "../AudioManager";
 import { Enemy } from "../enemy/enemy";
 import { Map } from "../map-data";
-import {EnemiesEnum} from "../enemy/enemies.enum";
-import {Enemies} from "../enemy/enemies.class";
-import {Peasant} from "../enemy/peasant/peasant.class";
-import Item from "../items/item";
-import victoryItem from "../items/victoryItem";
+import { EnemiesEnum } from "../enemy/enemies.enum";
+import { Enemies } from "../enemy/enemies.class";
 import VictoryItem from "../items/victoryItem";
+import EventsUtils from "../utils/events.utils";
 export default class MainScene extends Phaser.Scene {
   public matterCollision: PhaserMatterCollisionPlugin;
   public map: Phaser.Tilemaps.Tilemap;
@@ -91,7 +89,7 @@ export default class MainScene extends Phaser.Scene {
     this.anims.create({ key: 'playerIdle', frames: playerIdleAnims, frameRate: 10, repeat: -1 });
     this.anims.create({ key: 'playerJump', frames: playerJumpAnims, frameRate: 9 });
     this.anims.create({ key: 'playerAttack', frames: playerAttackAnims, frameRate: 50 });
-    this.anims.create({ key: 'playerDeath', frames: playerDeathAnims, frameRate: 13});
+    this.anims.create({ key: 'playerDeath', frames: playerDeathAnims, frameRate: 13 });
 
     this.cameras.main.startFollow(this.player.getPlayerSprite(), false, 0.5, 0.5);
     // Visualize all the matter bodies in the world. Note: this will be slow so go ahead and comment
@@ -110,11 +108,11 @@ export default class MainScene extends Phaser.Scene {
         if (eventData.gameObjectB !== undefined && eventData.gameObjectB instanceof Phaser.Tilemaps.Tile) {
           this.player.setPlayerInAirValue(false);
         } else if (eventData.gameObjectB instanceof Enemy) {
-          if (this.player.getAttackstate()){
+          if (this.player.getAttackstate()) {
             this.player.emit('playertouchtarget', eventData.gameObjectB);
           }
 
-        }else if (eventData.gameObjectB == null) {
+        } else if (eventData.gameObjectB == null) {
           this.player.killPlayer();
         } else if (eventData.gameObjectB instanceof VictoryItem) {
           //TriggerVictory
@@ -127,9 +125,10 @@ export default class MainScene extends Phaser.Scene {
     });
 
     this.addCalice();
+    this.addEventsListeners();
   }
 
-  spawnPlayer(): Player{
+  spawnPlayer(): Player {
     const spawnPoint: any = this.map.findObject("spawn_player", (obj: any) => obj.name === "player");
     return new Player(this.matter.world, this, spawnPoint.x, spawnPoint.y, 'all_sprites', 'vampire/runvampright1.png');
   }
@@ -153,11 +152,23 @@ export default class MainScene extends Phaser.Scene {
   }
 
   /**
+   * listen for external events
+   */
+  private addEventsListeners() {
+    window.addEventListener('restart', (e) => {
+      this.restart();
+    });
+  }
+
+  /**
    * Trigger the victory of the player
    */
   private triggerVictory(): void {
     //TODO play win anim
     console.log('you win !')
+    //this.scene.restart();
+    window.dispatchEvent(EventsUtils.PLAYER_WIN);
+    this.audioManager.playSound(this.audioManager.soundsList.VICTORY);
   }
 
   // Fct we call each frame
