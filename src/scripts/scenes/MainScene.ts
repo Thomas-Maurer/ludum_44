@@ -122,14 +122,16 @@ export default class MainScene extends Phaser.Scene {
         cloud: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/static/cloud.png'),
       },
       scene1: {
-        bg: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/scene1/bg.png'),
+
         bg_far: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/scene1/bg_far.png'),
+        bg: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/scene1/bg.png'),
         foreground: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/scene1/foreground.png'),
       },
       scene2: {
-        foreground: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/scene2/foreground.png'),
         bg_far: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/scene2/bg_far.png'),
-        bg: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/scene2/bg.png')
+        bg: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/scene2/bg.png'),
+        foreground: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/scene2/foreground.png'),
+
       }
 
     };
