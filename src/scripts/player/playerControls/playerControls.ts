@@ -4,6 +4,7 @@ import Vector2 = Phaser.Math.Vector2;
 import KeyCodes = Phaser.Input.Keyboard.KeyCodes;
 import MainScene from "../../scenes/MainScene";
 import AudioManager from "../../AudioManager";
+import {PLAYER_ANIM, PLAYER_ANIM_DONT_CANCEL} from "../animTabs";
 
 export class PlayerControls {
     private cursors: any;
@@ -92,6 +93,10 @@ export class PlayerControls {
             });
     }
 
+    public getControls(): any{
+        return this.cursors;
+    }
+
     /**
      * Handle vector for force application
      * @param player
@@ -127,14 +132,14 @@ export class PlayerControls {
 
 
         if (this.cursors.attack.isDown) {
-            player.anims.play('playerAttack',true);
+            player.anims.play(PLAYER_ANIM.playerAttack,true);
             player.enableAttackState();
         }
 
         if(this.cursors.right.isDown){
             if (player.anims.currentAnim !== null && (player.anims.currentAnim.key === 'playerJump' || player.anims.currentAnim.key === 'playerAttack')) {
             } else {
-                player.anims.play('playerRun', true);
+                player.anims.play(PLAYER_ANIM.playerRun, true);
             }
 
             player.getPlayerSprite().setFlipX(false);
@@ -142,17 +147,17 @@ export class PlayerControls {
         } else if(this.cursors.left.isDown){
             if (player.anims.currentAnim !== null && (player.anims.currentAnim.key === 'playerJump' || player.anims.currentAnim.key === 'playerAttack')) {
             } else {
-                player.anims.play('playerRun', true);
+                player.anims.play(PLAYER_ANIM.playerRun, true);
                 //this.audioManager.playSound(this.audioManager.soundsList.PLAYER_FOOTSTEP);
             }
             player.getPlayerSprite().setFlipX(true);
             player.getPlayerSprite().applyForce(this.negativeforceVector);
         } else {
-            if (player.anims.currentAnim !== null && (player.anims.currentAnim.key === 'playerJump' || player.anims.currentAnim.key === 'playerAttack' || player.anims.currentAnim.key === 'playerDeath' || player.isSucking)) {
-
+            if (player.anims.currentAnim !== null && PLAYER_ANIM_DONT_CANCEL.hasOwnProperty(player.anims.currentAnim.key)) {
+                console.log(player.anims.currentAnim.key)
             } else {
                 player.doAction = false;
-                player.anims.play('playerIdle', true);
+                player.anims.play(PLAYER_ANIM.playerIdle, true);
             }
             player.getPlayerSprite().setVelocityX(0);
         }
@@ -160,7 +165,7 @@ export class PlayerControls {
             player.doAction = true;
         }
         if (this.cursors.up.isDown && player.getCanJump() && !player.isPlayerInTheAir()) {
-            player.anims.play('playerJump', true);
+            player.anims.play(PLAYER_ANIM.playerJump, true);
             //this.audioManager.playSound(this.audioManager.soundsList.PLAYER_JUMP);
             player.desactivateJump();
             player.getPlayerSprite().setVelocityY(-11);
