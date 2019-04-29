@@ -132,7 +132,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
      */
     protected setPhysics(x: number, y: number) {
         const matterEngine: any = Phaser.Physics.Matter;
-        const body = matterEngine.Matter.Bodies.rectangle(x, y, 50, 80, {
+        const body = matterEngine.Matter.Bodies.rectangle(x, y, 60, 120, {
             chamfer: { radius: 17 }
         });
         // add sensor
