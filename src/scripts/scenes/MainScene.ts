@@ -60,6 +60,7 @@ export default class MainScene extends Phaser.Scene {
     if (!this.audioManager) {
       this.audioManager = new AudioManager(this);
     }
+    this.load.image('sun_particle', 'assets/graphics/gameplay/sun_particle.jpg');
   }
   create() {
     /** Build all layers maps */
@@ -98,13 +99,6 @@ export default class MainScene extends Phaser.Scene {
     // Visualize all the matter bodies in the world. Note: this will be slow so go ahead and comment
     // it out after you've seen what the bodies look like.
     this.matter.world.createDebugGraphic();
-    this.matterCollision.addOnCollideStart({
-      objectA: this.player.getPlayerSprite(),
-      callback: function (eventData) {
-        //console.log(eventData.gameObjectB)
-      },
-      context: this // Context to apply to the callback function
-    });
     this.addCalice();
     this.addEventsListeners();
     this.generateItems();
@@ -129,14 +123,14 @@ export default class MainScene extends Phaser.Scene {
       this.sunSensors.push(sunSensor);
     });
 
-    this.matterCollision.addOnCollideStart({
-      objectA: this.player,
-      objectB: this.sunSensors,
-      callback: () => {
-        this.player.disableSun()
-      },
-      context: this
-    });
+    // this.matterCollision.addOnCollideStart({
+    //   objectA: this.player,
+    //   objectB: this.sunSensors,
+    //   callback: () => {
+    //     this.player.disableSun()
+    //   },
+    //   context: this
+    // });
 
     this.matterCollision.addOnCollideEnd({
       objectA: this.player,
