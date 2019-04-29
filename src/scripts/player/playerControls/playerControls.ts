@@ -115,6 +115,9 @@ export class PlayerControls {
                 player.getPlayerSprite().setVelocity(-0.3);
             }
         } else {
+            if (body.velocity.y <= -11) {
+                player.getPlayerSprite().setVelocity(-11);
+            }
             //Player touch the ground
             this.negativeforceVector = new Vector2(-0.1, 0);
             this.forceVector = new Vector2(0.1, 0);
@@ -137,8 +140,7 @@ export class PlayerControls {
             this.scene.audioManager.playSound(this.scene.audioManager.soundsList.HIT);
             player.enableAttackState();
         }
-
-        if (this.cursors.right.isDown) {
+        if (this.cursors.right.isDown && !player.isTouching.right && !player.isSucking) {
             player.setLookRight(true);
             if (player.anims.currentAnim !== null && PLAYER_ANIM_ACTION.hasOwnProperty(player.anims.currentAnim.key)) {
             } else {
@@ -147,7 +149,7 @@ export class PlayerControls {
 
             player.getPlayerSprite().setFlipX(false);
             player.getPlayerSprite().applyForce(this.forceVector);
-        } else if (this.cursors.left.isDown && !player.isTouching.left) {
+        } else if (this.cursors.left.isDown && !player.isTouching.left && !player.isSucking) {
             player.setLookLeft(true);
             if (player.anims.currentAnim !== null && PLAYER_ANIM_ACTION.hasOwnProperty(player.anims.currentAnim.key)) {
             } else {
@@ -158,7 +160,6 @@ export class PlayerControls {
             player.getPlayerSprite().applyForce(this.negativeforceVector);
         } else {
             if (player.anims.currentAnim !== null && PLAYER_ANIM_DONT_CANCEL.hasOwnProperty(player.anims.currentAnim.key)) {
-                console.log(player.anims.currentAnim.key)
             } else {
                 player.doAction = false;
                 player.anims.play(PLAYER_ANIM.playerIdle, true);
@@ -172,13 +173,13 @@ export class PlayerControls {
             player.anims.play(PLAYER_ANIM.playerJump, true);
             this.audioManager.playSound(this.audioManager.soundsList.PLAYER_JUMP);
             player.desactivateJump();
-            player.getPlayerSprite().setVelocityY(-18);
+            player.getPlayerSprite().setVelocityY(-13);
         }
     }
 
     private generateComboKeys(player: Player): void {
-        this.scene.input.keyboard.createCombo([ this.getControls().right, this.getControls().right ], { resetOnMatch: true });
-        this.scene.input.keyboard.createCombo([ this.getControls().left, this.getControls().left ], { resetOnMatch: true });
+        this.scene.input.keyboard.createCombo([ this.getControls().right, this.getControls().right ], { resetOnMatch: true, maxKeyDelay: 500 });
+        this.scene.input.keyboard.createCombo([ this.getControls().left, this.getControls().left ], { resetOnMatch: true, maxKeyDelay: 500 });
         this.scene.input.keyboard.on('keycombomatch', function () {
             if (this.allowDash) {
                 this.anims.play(PLAYER_ANIM.playerDash);

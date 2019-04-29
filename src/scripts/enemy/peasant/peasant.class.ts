@@ -38,6 +38,23 @@ export class Peasant extends Enemy implements IEnemy {
         super(world, scene, x, y, EnemiesEnum.SPRITE_SHEET_ID, Peasant.firstSpriteSheet);
         this.world = world;
         this.initAnims();
+
+        this.on('animationcomplete', (anim, frame) => {
+            this.emit('animationcomplete_' + anim.key, anim, frame);
+        });
+
+        this.on('animationcomplete_' + this.GUID + 'Fight', () => {
+            if (!this.isDead) {
+                this.isDoingAnAction = false;
+                this.anims.play(this.GUID + 'Run', true);
+                this.isRunning = true;
+            }
+        });
+
+        this.on('animationcomplete_' + this.GUID + 'Hit', () => {
+            console.log('hitfinish');
+            this.isHit = false;
+        });
     }
 
     /**
@@ -50,8 +67,8 @@ export class Peasant extends Enemy implements IEnemy {
         const peasantHitAnims = this.generateFrameNames(this.deadPeasantSpritePrefix, EnemiesEnum.SPRITE_SHEET_ID, 2, 2);
 
         this.scene.anims.create({ key: this.GUID + 'Run', frames: peasantRunAnims, frameRate: 10, repeat: -1 });
-        this.scene.anims.create({ key: this.GUID + 'Fight', frames: peasantFightAnims, frameRate: 10, repeat: -1 });
-        this.scene.anims.create({ key: this.GUID + 'Dead', frames: peasantDeadAnims, frameRate: 5, repeat: 0 });
-        this.scene.anims.create({ key: this.GUID + 'Hit', frames: peasantHitAnims, frameRate: 10, repeat: 0 });
+        this.scene.anims.create({ key: this.GUID + 'Fight', frames: peasantFightAnims, frameRate: 10});
+        this.scene.anims.create({ key: this.GUID + 'Dead', frames: peasantDeadAnims, frameRate: 5});
+        this.scene.anims.create({ key: this.GUID + 'Hit', frames: peasantHitAnims, frameRate: 1});
     }
 }
