@@ -23,11 +23,13 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     public isSucking: boolean;
     private currentEnemyDead: Enemy;
     private isPlayerDead: boolean;
+    private canSuck: boolean;
     public doAction: boolean;
     private itemWantToBuy: Item;
     private allowDash: boolean;
-    private lookRight : boolean;
-    private lookLeft : boolean;
+    private lookRight: boolean;
+    private suckHintText: Phaser.GameObjects.Text;
+    private lookLeft: boolean;
     private sensors: any;
     public isTouching: any;
     constructor(world: Phaser.Physics.Matter.World, scene: MainScene, x: number, y: number, key: string, frame?: string | integer, options?: object) {
@@ -55,14 +57,6 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.generateEventHandler();
         // Before matter's update, reset our record of which surfaces the player is touching.
         scene.matter.world.on("beforeupdate", this.resetTouching, this);
-    }
-
-    public enablePowerUp(item: Item): void {
-
-        if (item.getNameItem() === 'dashPotion') {
-            this.allowDash = true;
-        }
-
     }
 
     private resetTouching(): void {
@@ -148,7 +142,6 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
             this.doAction = false;
             if (this.itemWantToBuy !== null && this.itemWantToBuy !== undefined) {
                 this.takeDamage(this.itemWantToBuy.getHpCost());
-                this.enablePowerUp(this.itemWantToBuy);
                 this.itemWantToBuy.destroy();
                 this.itemWantToBuy = null;
             }
@@ -174,7 +167,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         const playerSuckAnims = this.generateFrameNames('vampire/vampdrink', 'all_sprites', 1, 5);
         const playerDashAnims = this.generateFrameNames('vampire/dash', 'all_sprites', 1, 4);
 
-        this.scene.anims.create({ key: PLAYER_ANIM.suck, frames: playerSuckAnims, frameRate: 5});
+        this.scene.anims.create({ key: PLAYER_ANIM.suck, frames: playerSuckAnims, frameRate: 5 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerRun, frames: playerRunAnims, frameRate: 10, repeat: -1 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerIdle, frames: playerIdleAnims, frameRate: 10, repeat: -1 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerJump, frames: playerJumpAnims, frameRate: 9 });
@@ -207,6 +200,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.handleCollision();
         this.handleActions();
         this.handleSun();
+        this.handleSuckText();
     }
 
     /**
@@ -237,6 +231,31 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     public handleActions(): void {
         // If the player is in the Air he can't do shit
         this.playerControl.handlePlayerControls(this);
+    }
+
+    /**
+     *  show or not the suck text
+     */
+    public handleSuckText(): void {
+        //display a text if player can suck corps
+        if (this.canSuck) {
+            if (!this.suckHintText) {
+                this.suckHintText = this.scene.add.text(this.x, this.y - 100, '');
+                this.suckHintText.setOrigin(0, 0);
+            }
+
+            this.suckHintText.setColor("#000000");
+            this.suckHintText.setBackgroundColor("#ffffff");
+            this.suckHintText.setText("Press [E] to suck");
+            this.suckHintText.setPosition(this.x - 50, this.y - 100);
+
+
+        }
+        else {
+            if (this.suckHintText) {
+                this.suckHintText.setText('');
+            }
+        }
     }
 
     /**
@@ -289,16 +308,23 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.scene.matterCollision.addOnCollideActive({
             objectA: this.getPlayerSprite(),
             callback: (eventData: any) => {
+                this.canSuck = false;
                 if (eventData.gameObjectB !== undefined && eventData.gameObjectB instanceof Phaser.Tilemaps.Tile) {
                     this.setPlayerInAirValue(false);
                 } else if (eventData.gameObjectB instanceof Enemy) {
                     if (this.getAttackstate()) {
                         this.emit('playertouchtarget', eventData.gameObjectB);
                     }
+
+                    if (eventData.gameObjectB.isDead) {
+                        this.canSuck = true;
+                    }
+
                     if (this.doAction && eventData.gameObjectB.isDead) {
                         this.doAction = false;
                         this.suck(eventData.gameObjectB);
                     }
+
 
                 } else if (eventData.gameObjectB instanceof VictoryItem) {
                     //TriggerVictory
@@ -310,7 +336,8 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
                         this.addItemPlayerWantToBuy(eventData.gameObjectB);
                         this.emit('playerbuyitem');
                     }
-                }else {
+                } else {
+
                     if (eventData.bodyB.isSensor === false) {
                         this.killPlayer();
                     }
