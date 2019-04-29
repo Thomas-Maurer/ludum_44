@@ -216,6 +216,7 @@ export default class MainScene extends Phaser.Scene {
     // Create a sensor at the rectangle object created in Tiled (under the "boss_sensor" layer)
     this.map.findObject("spawn_pnj", (obj: any) => {
       const merchSprite = this.add.sprite((obj.x) + obj.width / 2, obj.y + obj.height / 2, 'all_sprites', 'pnj/merch/merch1.png');
+      merchSprite.depth = 3;
       this.add.existing(merchSprite);
       merchSprite.play('pnj/merch/merch', true);
     });
@@ -263,9 +264,10 @@ export default class MainScene extends Phaser.Scene {
 
   buildTextSign(): void {
     this.map.findObject('text_spawn', (obj: any) => {
-      this.add.text(obj.x, obj.y, obj.text.text, {
+      let text = this.add.text(obj.x, obj.y, obj.text.text, {
         font: obj.text.pixelsize + "px " + obj.text.fontfamily
       });
+      text.depth = 3;
     })
   }
 
