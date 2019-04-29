@@ -139,15 +139,15 @@
          "objects":[
                 {
                  "height":0,
-                 "id":1,
+                 "id":68,
                  "name":"calice",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1570,
-                 "y":808
+                 "x":17474,
+                 "y":772
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -764,7 +764,7 @@
          "y":0
         }],
  "nextlayerid":15,
- "nextobjectid":68,
+ "nextobjectid":69,
  "orientation":"orthogonal",
  "renderorder":"left-up",
  "tiledversion":"1.2.3",
