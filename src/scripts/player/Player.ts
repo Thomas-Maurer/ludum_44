@@ -6,6 +6,7 @@ import Item from "../items/item";
 import { PLAYER_ANIM } from "./animTabs";
 import VictoryItem from "../items/victoryItem";
 import Vector2 = Phaser.Math.Vector2;
+import { BossInfo } from "../enemy/Boss/Boss-info.enum";
 
 export default class Player extends Phaser.Physics.Matter.Sprite {
     private playerControl: PlayerControls;
@@ -181,6 +182,11 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
 
         this.on('playerEnterBossRoom', () => {
             this.scene.audioManager.playMusic(this.scene.audioManager.musicsList.BOSS)
+            //send an event to display the boss hp to the player on the ui
+            const bossHpEvent: CustomEvent = new CustomEvent("BOSS_HP", {
+                detail: BossInfo.LIFE
+            });
+            window.dispatchEvent(bossHpEvent);
         }, this);
 
         this.on('animationcomplete_playerAttack', function () {
