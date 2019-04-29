@@ -149,7 +149,6 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
         this.setExistingBody(compoundBody);
         this.setFixedRotation();
         this.setFriction(0);
-        this.setOrigin(0.5, 0.65);
     }
 
     /**
@@ -269,8 +268,6 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
         this.setStatic(true);
         this.x = currentX;
         this.y = currentY;
-        this.setOrigin(0.5, 0.65);
-
     }
 
     /**
