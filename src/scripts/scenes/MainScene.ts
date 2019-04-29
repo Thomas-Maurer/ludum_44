@@ -165,14 +165,14 @@ export default class MainScene extends Phaser.Scene {
     // Create a sensor at the rectangle object created in Tiled (under the "boss_sensor" layer)
     this.map.findObject("boss_sensor", (obj: any) => {
       const bossRoom = this.matter.add.rectangle(
-          obj.x + obj.width / 2,
-          obj.y + obj.height / 2,
-          obj.width,
-          obj.height,
-          {
-            isSensor: true, // It shouldn't physically interact with other bodies
-            isStatic: true // It shouldn't move
-          }
+        obj.x + obj.width / 2,
+        obj.y + obj.height / 2,
+        obj.width,
+        obj.height,
+        {
+          isSensor: true, // It shouldn't physically interact with other bodies
+          isStatic: true // It shouldn't move
+        }
       );
       this.bossRooms.push(bossRoom);
     });
@@ -260,7 +260,7 @@ export default class MainScene extends Phaser.Scene {
     console.log('you win !');
     //this.scene.restart();
     window.dispatchEvent(EventsUtils.PLAYER_WIN);
-
+    this.audioManager.playMusic(this.audioManager.musicsList.TITLE);
     this.audioManager.playSound(this.audioManager.soundsList.VICTORY);
   }
 
