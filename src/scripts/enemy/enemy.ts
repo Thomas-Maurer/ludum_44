@@ -4,6 +4,8 @@ import { IEnemy } from "./enemy.interface";
 import MainScene from "../scenes/MainScene";
 import Player from "../player/Player";
 import Boss from "./boss/boss";
+import VictoryItem from "../items/victoryItem";
+import Item from "../items/item";
 /**
  * Enemy class
  */
@@ -67,6 +69,26 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
      * Handle collision effects
      */
     private handleCollision(): void {
+        //Handle current collision
+        this.scene.matterCollision.addOnCollideActive({
+            objectA: this,
+            callback: (eventData: any) => {
+                if (eventData.bodyA.isSensor) return; // We only care about collisions with physical objects
+                const test = false;
+                if (eventData.gameObjectB !== undefined && eventData.gameObjectB instanceof Phaser.Tilemaps.Tile) {
+                } else if (eventData.gameObjectB instanceof Enemy) {
+                } else if (eventData.gameObjectB instanceof Player) {
+                } else if (eventData.gameObjectB instanceof VictoryItem) {
+                } else if (eventData.gameObjectB instanceof Item) {
+                } else {
+                    if (eventData.bodyB.isSensor === false) {
+                        this.takeDamage(9999);
+                        setTimeout(() => this.destroySprite(), 1000);
+                    }
+                }
+            },
+            context: this
+        });
         this.scene.matterCollision.addOnCollideStart({
             objectA: [this.sensors.left, this.sensors.right],
             callback: this.onSensorCollide,
