@@ -1,6 +1,11 @@
 <template>
   <div class="gameplay" v-if="play && !dead && !win">
     <div class="dying-overlay" v-bind:class="{'active': playerHP <= 25}"></div>
+    <div class="boss-hp-container">
+      <div class="boss-hp">
+        <div class="bar"></div>
+      </div>
+    </div>
     <div
       class="icon bloodpotion"
       v-bind:class="{

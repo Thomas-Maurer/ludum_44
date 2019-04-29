@@ -26,6 +26,52 @@
         }
     }
 
+    .boss-hp-container {
+        position: fixed;
+        top: 50px;
+        width: 100%;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .boss-hp {
+            position: relative;
+            width: 350px;
+            height: 20px;
+            border: 2px #000 solid;
+            background-color: #ccc;
+
+            .bar {
+                position: absolute;
+                left: 0;
+                height: 100%;
+                background-color: #9F1A1A;
+                width: 20%;
+                animation-name: bossHpLight;
+                animation-duration: 1s;
+                animation-timing-function: linear;
+                animation-iteration-count: infinite;
+            }
+        }
+    }
+
+    @keyframes bossHpLight {
+        0% {
+            background-color: #9F1A1A;
+
+        }
+
+        50% {
+            background-color: red;
+        }
+
+        100% {
+            background-color: #9F1A1A;
+
+        }
+    }
+
     .icon {
         top: 0;
         left: 40%;
