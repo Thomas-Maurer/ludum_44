@@ -55,6 +55,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.generateAnim();
         this.generateEventHandler();
         // Before matter's update, reset our record of which surfaces the player is touching.
+        scene.matter.world.on("beforeupdate", this.resetTouching, this);
     }
 
     private resetTouching(): void {
@@ -285,7 +286,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         });
         this.scene.matterCollision.addOnCollideEnd({
             objectA: [this.sensors.bottom, this.sensors.left, this.sensors.right],
-            callback: this.resetTouching,
+            callback: this.onSensorCollide,
             context: this
         });
         //Handle current collision
@@ -338,10 +339,10 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         if (eventdata.bodyA === this.sensors.left && eventdata.gameObjectB instanceof Phaser.Tilemaps.Tile && !this.isTouching.left) {
             this.isTouching.left = true;
             if (eventdata.pair.separation > 0.5) this.x += eventdata.pair.separation - 0.5;
-        } else if (eventdata.bodyA === this.sensors.right && eventdata.gameObjectB instanceof Phaser.Tilemaps.Tile && !this.isTouching.left) {
+        } else if (eventdata.bodyA === this.sensors.right && eventdata.gameObjectB instanceof Phaser.Tilemaps.Tile && !this.isTouching.right) {
             this.isTouching.right = true;
             if (eventdata.pair.separation > 0.5) this.x -= eventdata.pair.separation - 0.5;
-        } else if (eventdata.bodyA === this.sensors.bottom && eventdata.gameObjectB instanceof Phaser.Tilemaps.Tile && !this.isTouching.left) {
+        } else if (eventdata.bodyA === this.sensors.bottom && eventdata.gameObjectB instanceof Phaser.Tilemaps.Tile && !this.isTouching.bottom) {
             this.isTouching.ground = true;
         }
     }

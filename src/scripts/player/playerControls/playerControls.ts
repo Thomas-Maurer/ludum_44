@@ -137,8 +137,8 @@ export class PlayerControls {
             this.scene.audioManager.playSound(this.scene.audioManager.soundsList.HIT);
             player.enableAttackState();
         }
-
-        if (this.cursors.right.isDown) {
+console.log(player.isTouching)
+        if (this.cursors.right.isDown && !player.isTouching.right) {
             player.setLookRight(true);
             if (player.anims.currentAnim !== null && PLAYER_ANIM_ACTION.hasOwnProperty(player.anims.currentAnim.key)) {
             } else {
