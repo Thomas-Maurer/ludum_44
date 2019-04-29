@@ -44,7 +44,7 @@ export class Enemies {
      */
     private initSpawns(world: Phaser.Physics.Matter.World, scene: MainScene) {
         this.initPeasantSpawn(world, scene);
-        // this.initPriestSpawn(world, scene);
+        this.initPriestSpawn(world, scene);
     }
 
     /**
