@@ -9,15 +9,19 @@ import VictoryItem from "../items/victoryItem";
 import EventsUtils from "../utils/events.utils";
 import Item from "../items/item";
 import BoostItem from "../items/boostItem";
+import ItemUtil from "../items/itemUtil";
 export default class MainScene extends Phaser.Scene {
   public matterCollision: PhaserMatterCollisionPlugin;
   public map: Phaser.Tilemaps.Tilemap;
+  public itemUtil: ItemUtil;
   public enemy: Enemy;
   public player: Player;
   public shapes: any;
   public audioManager: AudioManager;
   public playerCatCollision: any;
   public itemsCat: any;
+  public unsubscribeCelebrate: any;
+  public sunSensors: any[];
   private parralaxLayers: {
     static: {
       cloud: Phaser.GameObjects.TileSprite,
@@ -62,9 +66,12 @@ export default class MainScene extends Phaser.Scene {
     const map = Map.getInstance(this.add.tilemap('map'));
     this.map = map.tileMap;
     this.shapes = this.cache.json.get('shapes');
+    this.sunSensors = [];
     const tileset = this.map.addTilesetImage('block', 'block');
     this.playerCatCollision = this.matter.world.nextCategory();
     this.itemsCat = this.matter.world.nextCategory();
+
+    this.itemUtil = new ItemUtil(this);
 
     this.generateParralaxLayers();
     const worldLayer = this.map.createStaticLayer('main_tile', tileset, 0, 0);
@@ -87,20 +94,6 @@ export default class MainScene extends Phaser.Scene {
     this.player.setCollidesWith([1, this.enemies.collisionCat, this.itemsCat]);
 
 
-    const playerRunAnims = this.player.generateFrameNames('vampire/runvampright', 'all_sprites', 1, 10);
-    const playerIdleAnims = this.player.generateFrameNames('vampire/fightvamp', 'all_sprites', 1, 10);
-    const playerJumpAnims = this.player.generateFrameNames('vampire/jumpvamp', 'all_sprites', 1, 7);
-    const playerAttackAnims = this.player.generateFrameNames('vampire/fightvamp', 'all_sprites', 9, 19);
-    const playerDeathAnims = this.player.generateFrameNames('vampire/deathvamp', 'all_sprites', 1, 7);
-    const playerSuck = this.player.generateFrameNames('vampire/vampdrink', 'all_sprites', 1, 5);
-
-    this.anims.create({ key: 'suck', frames: playerSuck, frameRate: 10, repeat: 0 });
-    this.anims.create({ key: 'playerRun', frames: playerRunAnims, frameRate: 10, repeat: -1 });
-    this.anims.create({ key: 'playerIdle', frames: playerIdleAnims, frameRate: 10, repeat: -1 });
-    this.anims.create({ key: 'playerJump', frames: playerJumpAnims, frameRate: 9 });
-    this.anims.create({ key: 'playerAttack', frames: playerAttackAnims, frameRate: 50 });
-    this.anims.create({ key: 'playerDeath', frames: playerDeathAnims, frameRate: 13 });
-
     this.cameras.main.startFollow(this.player.getPlayerSprite(), false, 0.5, 0.5);
     // Visualize all the matter bodies in the world. Note: this will be slow so go ahead and comment
     // it out after you've seen what the bodies look like.
@@ -112,46 +105,37 @@ export default class MainScene extends Phaser.Scene {
       },
       context: this // Context to apply to the callback function
     });
+    this.addCalice();
+    this.addEventsListeners();
+    this.generateItems();
+    this.buildSunSensor();
+  }
 
-    this.matterCollision.addOnCollideActive({
-      objectA: this.player.getPlayerSprite(),
-      callback: (eventData: any) => {
-        if (eventData.gameObjectB !== undefined && eventData.gameObjectB instanceof Phaser.Tilemaps.Tile) {
-          this.player.setPlayerInAirValue(false);
-        } else if (eventData.gameObjectB instanceof Enemy) {
-          if (this.player.getAttackstate()) {
-            this.player.emit('playertouchtarget', eventData.gameObjectB);
+  buildSunSensor(): void {
+    // Create a sensor at the rectangle object created in Tiled (under the "sunSensor" layer)
+    this.map.findObject("sunSensor", (obj: any) => {
+      const sunSensor = this.matter.add.rectangle(
+          obj.x + obj.width / 2,
+          obj.y + obj.height / 2,
+          obj.width,
+          obj.height,
+          {
+            isSensor: true, // It shouldn't physically interact with other bodies
+            isStatic: true // It shouldn't move
           }
+      );
+      this.sunSensors.push(sunSensor);
+    });
 
-          if (this.player.doAction && eventData.gameObjectB.isDead) {
-            console.log('suck');
-            this.player.doAction = false;
-            this.player.suck();
-          }
-
-        } else if (eventData.gameObjectB == null) {
-          this.player.killPlayer();
-        } else if (eventData.gameObjectB instanceof VictoryItem) {
-          //TriggerVictory
-          console.log(eventData.gameObjectB);
-          eventData.gameObjectB.destroy();
-          this.triggerVictory();
-        } else if (eventData.gameObjectB instanceof Item) {
-          if (this.player.doAction) {
-            this.player.doAction = false;
-            this.player.emit('playerbuyitem', eventData.gameObjectB);
-            eventData.gameObjectB.destroy();
-          }
-        }else {
-          console.log(eventData.gameObjectB);
-        }
+    this.unsubscribeCelebrate = this.matterCollision.addOnCollideStart({
+      objectA: this.player,
+      objectB: this.sunSensors,
+      callback: () => {
+        this.player.disableSun()
       },
       context: this
     });
 
-    this.addCalice();
-    this.addEventsListeners();
-    this.generateItems();
   }
 
   spawnPlayer(): Player {
@@ -161,16 +145,8 @@ export default class MainScene extends Phaser.Scene {
 
   generateItems() {
     this.map.findObject("items", (obj: any) => {
-      let itemSprite = new BoostItem(this.matter.world, this, obj.x, obj.y, 'all_sprites', 'items/dashpotion1.png');
-      const itemAnim = this.player.generateFrameNames('items/dashpotion', 'all_sprites', 1, 4);
-      this.anims.create({ key: 'dashpotionAnim', frames: itemAnim, frameRate: 5, repeat: -1 });
-      itemSprite.play('dashpotionAnim');
-      itemSprite.setDensity(50);
-      itemSprite.setHpCost(10);
-      // itemSprite.setStatic(true);
-      itemSprite.setCollisionCategory(this.itemsCat);
-      itemSprite.setCollidesWith([this.playerCatCollision, 1, this.itemsCat]);
-    }
+      this.itemUtil.generateItem(obj);
+      }
     );
   }
 
@@ -193,9 +169,9 @@ export default class MainScene extends Phaser.Scene {
   /**
    * Trigger the victory of the player
    */
-  private triggerVictory(): void {
+  public triggerVictory(): void {
     //TODO play win anim
-    console.log('you win !')
+    console.log('you win !');
     //this.scene.restart();
     window.dispatchEvent(EventsUtils.PLAYER_WIN);
     this.audioManager.playSound(this.audioManager.soundsList.VICTORY);
@@ -259,13 +235,8 @@ export default class MainScene extends Phaser.Scene {
     }
 
     //Static bg
-
     //Cloud
     this.parralaxLayers.static.cloud.tilePositionX -= 0.5;
-
-
-    //Scene1 bg
-
     //bg far
     this.parralaxLayers.scene1.bg_far.setTilePosition(this.cameras.main.scrollX * 0.1, this.cameras.main.scrollY * 0.1)
     //this.parralaxLayers.scene1.foreground.setTilePosition(this.player.x, this.player.y);

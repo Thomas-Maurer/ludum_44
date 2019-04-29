@@ -3,6 +3,8 @@ import { Enemy } from "../enemy/enemy";
 import MainScene from "../scenes/MainScene";
 import EventsUtils from "../utils/events.utils";
 import Item from "../items/item";
+import {PLAYER_ANIM} from "./animTabs";
+import VictoryItem from "../items/victoryItem";
 
 export default class Player extends Phaser.Physics.Matter.Sprite {
     private playerControl: PlayerControls;
@@ -21,16 +23,26 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     public isSucking: boolean;
     private isPlayerDead: boolean;
     public doAction: boolean;
+    private itemWantToBuy: Item;
     constructor(world: Phaser.Physics.Matter.World, scene: MainScene, x: number, y: number, key: string, frame?: string | integer, options?: object) {
         super(world, x, y, key, frame, options);
         this.scene = scene;
         const matterEngine: any = Phaser.Physics.Matter;
-
         const body = matterEngine.Matter.Bodies.rectangle(x, y, 55, 100, { chamfer: { radius: 10 } });
         this.setExistingBody(body);
         scene.add.existing(this);
-        this.playerControl = new PlayerControls(scene);
-        this.scene = scene;
+
+        this.initDefaultValue();
+        this.generateAnim();
+        this.generateEventHandler();
+
+    }
+
+    /**
+     * Init the default value of the player Char
+     */
+    private initDefaultValue(): void {
+        this.playerControl = new PlayerControls(this.scene);
         this.canJump = true;
         this.canAttack = true;
         this.setFixedRotation();
@@ -41,19 +53,18 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.isInSun = true;
         this.isPlayerDead = false;
         this.doAction = false;
+    }
 
-        //TODO Better handling of event
-        this.on('animationupdate', function (anim, frame) {
-            //console.log(this.scene.shapes[anim.key.toLowerCase() + frame.index]);
-            //this.setBody(this.scene.shapes[anim.key.toLowerCase() + frame.index])
-        }, this);
-
+    /**
+     * Generate Function event handler
+     */
+    private generateEventHandler(): void {
         this.on('animationcomplete', function (anim, frame) {
             this.emit('animationcomplete_' + anim.key, anim, frame);
         }, this);
 
         this.on('animationcomplete_playerJump', function () {
-            this.anims.play('playerIdle');
+            this.anims.play(PLAYER_ANIM.playerIdle);
         }, this);
 
         this.once('animationcomplete_playerDeath', () => {
@@ -65,17 +76,40 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
             this.isSucking = false;
         });
 
-        this.once('playerbuyitem', (item: Item) => {
-            item.destroy();
+        this.on('playerbuyitem', () => {
+            console.log(this.itemWantToBuy);
+            this.doAction = false;
+            if (this.itemWantToBuy !== null && this.itemWantToBuy !== undefined) {
+                this.takeDamage(this.itemWantToBuy.getHpCost());
+                this.itemWantToBuy.destroy();
+                this.itemWantToBuy = null;
+            }
         });
 
         this.on('animationcomplete_playerAttack', function () {
-            this.anims.play('playerIdle');
+            this.anims.play(PLAYER_ANIM.playerIdle);
             //TODO Player attack system
             this.disableAttackState();
-
         }, this);
+    }
 
+    /**
+     * Create all the anim the player has
+     */
+    private generateAnim(): void {
+        const playerRunAnims = this.generateFrameNames('vampire/runvampright', 'all_sprites', 1, 10);
+        const playerIdleAnims = this.generateFrameNames('vampire/fightvamp', 'all_sprites', 1, 10);
+        const playerJumpAnims = this.generateFrameNames('vampire/jumpvamp', 'all_sprites', 1, 7);
+        const playerAttackAnims = this.generateFrameNames('vampire/fightvamp', 'all_sprites', 9, 19);
+        const playerDeathAnims = this.generateFrameNames('vampire/deathvamp', 'all_sprites', 1, 7);
+        const playerSuck = this.generateFrameNames('vampire/vampdrink', 'all_sprites', 1, 5);
+
+        this.scene.anims.create({ key: PLAYER_ANIM.suck, frames: playerSuck, frameRate: 10, repeat: 0 });
+        this.scene.anims.create({ key: PLAYER_ANIM.playerRun, frames: playerRunAnims, frameRate: 10, repeat: -1 });
+        this.scene.anims.create({ key: PLAYER_ANIM.playerIdle, frames: playerIdleAnims, frameRate: 10, repeat: -1 });
+        this.scene.anims.create({ key: PLAYER_ANIM.playerJump, frames: playerJumpAnims, frameRate: 9 });
+        this.scene.anims.create({ key: PLAYER_ANIM.playerAttack, frames: playerAttackAnims, frameRate: 50 });
+        this.scene.anims.create({ key: PLAYER_ANIM.playerDeath, frames: playerDeathAnims, frameRate: 13 });
     }
 
     public getPlayerControl(): PlayerControls {
@@ -88,12 +122,8 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         }, this);
     }
 
-    public addPlayerbuyitemEvent(): void {
-        console.log('penis');
-        this.once('playerbuyitem', (item: Item) => {
-            item.destroy();
-            this.takeDamage(item.getHpCost());
-        }, this);
+    public addItemPlayerWantToBuy(item: Item): void {
+        this.itemWantToBuy = item;
     }
 
     /**
@@ -103,6 +133,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         if (this.isPlayerDead) {
             this.killPlayer();
         }
+        this.handleCollision();
         this.handleActions();
         this.handleSun();
     }
@@ -161,6 +192,60 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
             }, [], this);
         }
 
+    }
+
+    /**
+     * Handle Player collision
+     */
+    handleCollision(): void {
+        //Handle current collision
+        this.scene.matterCollision.addOnCollideActive({
+            objectA: this.getPlayerSprite(),
+            callback: (eventData: any) => {
+                if (eventData.gameObjectB !== undefined && eventData.gameObjectB instanceof Phaser.Tilemaps.Tile) {
+                    this.setPlayerInAirValue(false);
+                } else if (eventData.gameObjectB instanceof Enemy) {
+                    if (this.getAttackstate()) {
+                        this.emit('playertouchtarget', eventData.gameObjectB);
+                    }
+
+                    if (this.doAction && eventData.gameObjectB.isDead) {
+                        console.log('suck');
+                        this.doAction = false;
+                        this.suck();
+                    }
+
+                } else if (eventData.gameObjectB instanceof VictoryItem) {
+                    //TriggerVictory
+                    console.log(eventData.gameObjectB);
+                    eventData.gameObjectB.destroy();
+                    this.scene.triggerVictory();
+                } else if (eventData.gameObjectB instanceof Item) {
+                    if (this.doAction) {
+                        this.doAction = false;
+                        this.addItemPlayerWantToBuy(eventData.gameObjectB);
+                        this.emit('playerbuyitem');
+                    }
+                }else {
+                    //console.log(eventData.gameObjectB);
+                }
+            },
+            context: this
+        });
+        // Handle end of collision
+        this.scene.matterCollision.addOnCollideEnd({
+            objectA: this.getPlayerSprite(),
+            callback: (eventData: any) => {
+                if (eventData.gameObjectB !== undefined && eventData.gameObjectB instanceof Phaser.Tilemaps.Tile) {
+                    this.setPlayerInAirValue(true);
+                }
+            },
+            context: this
+        });
+    }
+
+    public disableSun(): void {
+        this.isInSun = !this.isInSun;
     }
 
     /**

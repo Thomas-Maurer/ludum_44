@@ -25,6 +25,39 @@
         }, 
         {
          "draworder":"topdown",
+         "id":7,
+         "name":"sunSensor",
+         "objects":[
+                {
+                 "height":114,
+                 "id":8,
+                 "name":"sunSensor",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":54,
+                 "x":2758,
+                 "y":522
+                }, 
+                {
+                 "height":114,
+                 "id":9,
+                 "name":"sunSensor",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":54,
+                 "x":3275,
+                 "y":525
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":3,
          "name":"calice_spawn",
          "objects":[
@@ -127,8 +160,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":7,
- "nextobjectid":8,
+ "nextlayerid":8,
+ "nextobjectid":10,
  "orientation":"orthogonal",
  "renderorder":"left-up",
  "tiledversion":"1.2.3",
