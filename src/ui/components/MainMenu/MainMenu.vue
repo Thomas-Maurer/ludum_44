@@ -16,6 +16,10 @@
             <img src="../../../assets/graphics/ui/space.png" alt>
             <span class="control-label">Attack</span>
           </div>
+          <div class="control-type">
+            <img src="../../../assets/graphics/ui/e.png" alt>
+            <span class="control-label">Interact</span>
+          </div>
           <div class="control-type potion">
             <div class="potion-icon"></div>
             <span class="control-label">Keep it full</span>
