@@ -58,6 +58,36 @@
         }, 
         {
          "draworder":"topdown",
+         "id":8,
+         "name":"text_spawn",
+         "objects":[
+                {
+                 "height":41,
+                 "id":11,
+                 "name":"Instruct_BuyItem",
+                 "rotation":0,
+                 "text":
+                    {
+                     "color":"#ffffff",
+                     "fontfamily":"MS PGothic",
+                     "pixelsize":27,
+                     "text":"You can buy an item for a price",
+                     "wrap":true
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":363,
+                 "x":2859.5,
+                 "y":382.5
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":3,
          "name":"calice_spawn",
          "objects":[
@@ -160,8 +190,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":8,
- "nextobjectid":10,
+ "nextlayerid":9,
+ "nextobjectid":12,
  "orientation":"orthogonal",
  "renderorder":"left-up",
  "tiledversion":"1.2.3",
