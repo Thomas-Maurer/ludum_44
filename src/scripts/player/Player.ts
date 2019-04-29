@@ -6,7 +6,6 @@ import Item from "../items/item";
 import { PLAYER_ANIM } from "./animTabs";
 import VictoryItem from "../items/victoryItem";
 import Vector2 = Phaser.Math.Vector2;
-import { PeasantInfo } from "../enemy/peasant/peasant-info.enum";
 
 export default class Player extends Phaser.Physics.Matter.Sprite {
     private playerControl: PlayerControls;
@@ -132,6 +131,10 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
             this.anims.play(PLAYER_ANIM.playerIdle);
         }, this);
 
+        this.on('animationcomplete_playerHit', function () {
+            this.anims.play(PLAYER_ANIM.playerIdle);
+        }, this);
+
         this.on('animationcomplete_playerDash', function () {
             this.dash();
             this.anims.play(PLAYER_ANIM.playerIdle);
@@ -191,6 +194,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         const playerAttackAnims = this.generateFrameNames('vampire/fightvamp', 'all_sprites', 9, 19);
         const playerDeathAnims = this.generateFrameNames('vampire/deathvamp', 'all_sprites', 1, 7);
         const playerSuckAnims = this.generateFrameNames('vampire/vampdrink', 'all_sprites', 1, 5);
+        const playerHitAnims = this.generateFrameNames('vampire/hitvamp', 'all_sprites', 1, 5);
         const playerDashAnims = this.generateFrameNames('vampire/dash', 'all_sprites', 1, 4);
         const playerVictoryAnims = this.generateFrameNames('vampire/drink', 'all_sprites', 1, 14);
 
@@ -202,6 +206,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.scene.anims.create({ key: PLAYER_ANIM.playerDeath, frames: playerDeathAnims, frameRate: 13 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerDash, frames: playerDashAnims, frameRate: 13 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerDrink, frames: playerVictoryAnims, frameRate: 10});
+        this.scene.anims.create({ key: PLAYER_ANIM.playerHit, frames: playerHitAnims, frameRate: 50});
     }
 
     public getPlayerControl(): PlayerControls {
@@ -416,7 +421,6 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
      * Take damage
      */
     private takeDamage(damage: number) {
-        console.log("Player take " + damage + " damages");
         this.healthPoint -= damage;
         const playerHpEvent: CustomEvent = new CustomEvent("PLAYER_HP", {
             detail: this.healthPoint
@@ -437,6 +441,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
      * @param damage
      */
     public getDamageFromEnemy(damage: number): void {
+        this.anims.play(PLAYER_ANIM.playerHit);
         this.takeDamage(damage);
     }
 
@@ -445,7 +450,6 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
      * @param gain
      */
     private gainDamage(gain: number): void {
-        console.log("Player win " + gain + " damages");
         this.healthPoint += gain;
         if (this.healthPoint > 100) {
             this.healthPoint = 100;

@@ -45,8 +45,6 @@ export default class Boss extends Enemy implements IEnemy {
         });
 
         this.on('animationcomplete_' + this.GUID + 'Fight', () => {
-            console.log('penis')
-
             if (!this.isDead) {
                 if (this.currentPlayerInstance !== null) {
                     this.currentPlayerInstance.getDamageFromEnemy(this.info.damage);
