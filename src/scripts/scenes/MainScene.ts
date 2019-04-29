@@ -122,14 +122,14 @@ export default class MainScene extends Phaser.Scene {
       this.sunSensors.push(sunSensor);
     });
 
-    // this.matterCollision.addOnCollideStart({
-    //   objectA: this.player,
-    //   objectB: this.sunSensors,
-    //   callback: () => {
-    //     this.player.disableSun()
-    //   },
-    //   context: this
-    // });
+    this.matterCollision.addOnCollideStart({
+      objectA: this.player,
+      objectB: this.sunSensors,
+      callback: () => {
+        this.player.disableSun()
+      },
+      context: this
+    });
 
     this.matterCollision.addOnCollideEnd({
       objectA: this.player,

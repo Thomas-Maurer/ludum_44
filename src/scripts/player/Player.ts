@@ -53,6 +53,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.initDefaultValue();
         this.generateAnim();
         this.generateEventHandler();
+        this.handleCollision();
         // Before matter's update, reset our record of which surfaces the player is touching.
         scene.matter.world.on("beforeupdate", this.resetTouching, this);
     }
@@ -204,7 +205,6 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         if (this.isPlayerDead) {
             this.killPlayer();
         }
-        this.handleCollision();
         this.handleActions();
         this.handleSun();
     }
