@@ -222,9 +222,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
                     if (this.getAttackstate()) {
                         this.emit('playertouchtarget', eventData.gameObjectB);
                     }
-
                     if (this.doAction && eventData.gameObjectB.isDead) {
-                        console.log('suck');
                         this.doAction = false;
                         this.suck();
                     }
