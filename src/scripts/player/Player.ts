@@ -77,7 +77,6 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         });
 
         this.on('playerbuyitem', () => {
-            console.log(this.itemWantToBuy);
             this.doAction = false;
             if (this.itemWantToBuy !== null && this.itemWantToBuy !== undefined) {
                 this.takeDamage(this.itemWantToBuy.getHpCost());
