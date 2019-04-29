@@ -1,5 +1,6 @@
-import {Peasant} from "./peasant/peasant.class";
-import {Enemy} from "./enemy";
+import { Peasant } from "./peasant/peasant.class";
+import { Enemy } from "./enemy";
+import MainScene from "../scenes/MainScene";
 /**
  * Class initializing all enemies sprites
  */
@@ -28,7 +29,7 @@ export class Enemies {
      */
     public listOfEnemies: Array<Enemy> = [];
 
-    constructor(map: any, world: Phaser.Physics.Matter.World, scene: Phaser.Scene) {
+    constructor(map: any, world: Phaser.Physics.Matter.World, scene: MainScene) {
         this.scene = scene;
         this._collisionCat = world.nextCategory();
         this.mapObject = map;
@@ -40,8 +41,8 @@ export class Enemies {
      * @param world
      * @param scene
      */
-    private initSpawns(world: Phaser.Physics.Matter.World, scene: Phaser.Scene) {
-        this.iniPeasantSpwans(world, scene);
+    private initSpawns(world: Phaser.Physics.Matter.World, scene: MainScene) {
+        this.iniPeasantSpawn(world, scene);
     }
 
     /**
@@ -49,12 +50,12 @@ export class Enemies {
      * @param world
      * @param scene
      */
-    private iniPeasantSpwans(world: Phaser.Physics.Matter.World, scene: Phaser.Scene) {
-       this.mapObject.findObject(this.SPAWN_PEASANT, (obj: any) => {
-           let peasant = new Peasant(world, scene, obj.x, obj.y);
-           peasant.setCollisionCategory(this.collisionCat);
-           peasant.setCollidesWith([1, this.scene.playerCatCollision]);
-           this.listOfEnemies.push(peasant);
+    private iniPeasantSpawn(world: Phaser.Physics.Matter.World, scene: MainScene) {
+        this.mapObject.findObject(this.SPAWN_PEASANT, (obj: any) => {
+            let peasant = new Peasant(world, scene, obj.x, obj.y);
+            peasant.setCollisionCategory(this.collisionCat);
+            peasant.setCollidesWith([1, this.scene.playerCatCollision]);
+            this.listOfEnemies.push(peasant);
         });
     }
 
@@ -63,10 +64,14 @@ export class Enemies {
      * Check if player is 2000px to the enemy for update
      */
     public updateAllEnemies(playerX: number): void {
-        for (let enemy of this.listOfEnemies) {
+        for (let index = 0; index < this.listOfEnemies.length; index++) {
+            let enemy = this.listOfEnemies[index];
+            if (enemy.isDead) {
+                this.listOfEnemies.splice(index, 1);
+                continue;
+            }
             if (enemy.x + this.DISTANCE_TO_PLAYER >= playerX && enemy.x - this.DISTANCE_TO_PLAYER <= playerX) {
                 enemy.update();
-
             } else {
                 if (enemy.anims.isPlaying) {
                     enemy.stopAllAnims();

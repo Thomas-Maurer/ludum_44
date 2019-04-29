@@ -1,10 +1,11 @@
-import {Map} from "../map-data";
-import {EnemyGuid} from "./enemy-guid.enum";
-import {IEnemy} from "./enemy.interface";
+import { Map } from "../map-data";
+import { EnemyGuid } from "./enemy-guid.enum";
+import { IEnemy } from "./enemy.interface";
+import MainScene from "../scenes/MainScene";
 /**
  * Enemy class
  */
-export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy{
+export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
     /**
      * Current velocity
      */
@@ -15,7 +16,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy{
      */
     private currentDirection: number = 1;
 
-    protected scene: Phaser.Scene;
+    protected scene: MainScene;
 
     public isRunning = false;
     public isDead = false;
@@ -32,6 +33,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy{
     public info = {
         life:  0,
         damage:  0,
+        gain:  0,
     };
 
     /**
@@ -43,7 +45,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy{
      * @param key
      * @param frame
      */
-    constructor(world: Phaser.Physics.Matter.World, scene: Phaser.Scene, x: number, y: number, key: string, frame?: string | integer) {
+    constructor(world: Phaser.Physics.Matter.World, scene: MainScene, x: number, y: number, key: string, frame?: string | integer) {
         super(world, x, y, key, frame);
 
         this.scene = scene;
@@ -105,11 +107,11 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy{
      * @param start
      * @param end
      */
-    public generateFrameNames (key: string, atlasName: string, start: number, end: number): Phaser.Animations.Types.AnimationFrame[] {
-        return this.scene.anims.generateFrameNames(atlasName,{
+    public generateFrameNames(key: string, atlasName: string, start: number, end: number): Phaser.Animations.Types.AnimationFrame[] {
+        return this.scene.anims.generateFrameNames(atlasName, {
             start: start, end: end, zeroPad: 1,
             prefix: key, suffix: '.png'
-        } )
+        })
     }
 
     /**
@@ -157,6 +159,13 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy{
             this.currentVelocity = this.currentVelocity * -1;
             this.setFlipX(this.currentDirection === -1);
         }
+    }
+
+    /**
+     * Destroy sprite
+     */
+    public destroySprite() {
+        this.destroy();
     }
 
     /**

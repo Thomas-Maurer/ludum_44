@@ -15,19 +15,20 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     private jumpCooldownTimer: Phaser.Time.TimerEvent;
     private attackCooldownTimer: Phaser.Time.TimerEvent;
     private inAir: boolean;
-    private isInSun: boolean;
+    public isInSun: boolean;
     private willTakeSunDamage: Phaser.Time.TimerEvent;
     private healthPoint: number;
     private baseDamage: number;
     private isAttacking: boolean;
     private doingDamage: boolean;
     public isSucking: boolean;
+    private currentEnemyDead: Enemy;
     private isPlayerDead: boolean;
     public doAction: boolean;
     private itemWantToBuy: Item;
     private allowDash: boolean;
-    private lookRight : boolean;
-    private lookLeft : boolean;
+    private lookRight: boolean;
+    private lookLeft: boolean;
     constructor(world: Phaser.Physics.Matter.World, scene: MainScene, x: number, y: number, key: string, frame?: string | integer, options?: object) {
         super(world, x, y, key, frame, options);
         this.scene = scene;
@@ -71,7 +72,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
 
     private dash(): void {
         if (this.allowDash) {
-            if (this.lookRight){
+            if (this.lookRight) {
                 this.setPosition(this.x + 100, this.y);
             } else {
                 this.setPosition(this.x - 100, this.y);
@@ -99,10 +100,19 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.once('animationcomplete_playerDeath', () => {
             window.dispatchEvent(EventsUtils.PLAYER_DEAD);
             this.scene.audioManager.playSound(this.scene.audioManager.soundsList.DEATH);
+            this.scene.audioManager.playingMusic.stop();
         }, this);
 
         this.on('animationcomplete_suck', () => {
+            this.gainDamage(this.currentEnemyDead.info.gain / 5);
+            this.currentEnemyDead.destroySprite();
+            this.anims.play(PLAYER_ANIM.playerIdle);
             this.isSucking = false;
+            this.currentEnemyDead = null;
+        });
+
+        this.on('animationupdate-suck', () => {
+            this.gainDamage(this.currentEnemyDead.info.gain / 5);
         });
 
         this.on('playerbuyitem', () => {
@@ -133,13 +143,13 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         const playerSuckAnims = this.generateFrameNames('vampire/vampdrink', 'all_sprites', 1, 5);
         const playerDashAnims = this.generateFrameNames('vampire/dash', 'all_sprites', 1, 4);
 
-        this.scene.anims.create({ key: PLAYER_ANIM.suck, frames: playerSuckAnims, frameRate: 10, repeat: 0 });
+        this.scene.anims.create({ key: PLAYER_ANIM.suck, frames: playerSuckAnims, frameRate: 5});
         this.scene.anims.create({ key: PLAYER_ANIM.playerRun, frames: playerRunAnims, frameRate: 10, repeat: -1 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerIdle, frames: playerIdleAnims, frameRate: 10, repeat: -1 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerJump, frames: playerJumpAnims, frameRate: 9 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerAttack, frames: playerAttackAnims, frameRate: 50 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerDeath, frames: playerDeathAnims, frameRate: 13 });
-        this.scene.anims.create({ key: PLAYER_ANIM.playerDash, frames: playerDashAnims, frameRate: 13});
+        this.scene.anims.create({ key: PLAYER_ANIM.playerDash, frames: playerDashAnims, frameRate: 13 });
     }
 
     public getPlayerControl(): PlayerControls {
@@ -251,7 +261,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
                     }
                     if (this.doAction && eventData.gameObjectB.isDead) {
                         this.doAction = false;
-                        this.suck();
+                        this.suck(eventData.gameObjectB);
                     }
 
                 } else if (eventData.gameObjectB instanceof VictoryItem) {
@@ -285,14 +295,24 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     }
 
     public disableSun(): void {
-        this.isInSun = !this.isInSun;
+        this.isInSun = false;
+        const audioManager = this.scene.audioManager;
+        audioManager.playingMusic.stop();
+        audioManager.playMusic(audioManager.musicsList.SHOP);
+    }
+
+    public enableSun(): void {
+        this.isInSun = true;
+        const audioManager = this.scene.audioManager;
+        audioManager.playingMusic.stop();
+        audioManager.playMusic(audioManager.musicsList.WORLD);
     }
 
     /**
      * Take damage
      */
     private takeDamage(damage: number) {
-        console.log("Player take " + damage + " damages")
+        console.log("Player take " + damage + " damages");
         this.healthPoint -= damage;
         const playerHpEvent: CustomEvent = new CustomEvent("PLAYER_HP", {
             detail: this.healthPoint
@@ -304,11 +324,33 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     }
 
     /**
+     * Gain health point
+     * @param gain
+     */
+    private gainDamage(gain: number): void {
+        console.log("Player win " + gain + " damages");
+        this.healthPoint += gain;
+        if (this.healthPoint > 100) {
+            this.healthPoint = 100;
+        }
+        const playerHpEvent: CustomEvent = new CustomEvent("PLAYER_HP", {
+            detail: this.healthPoint
+        });
+        window.dispatchEvent(playerHpEvent);
+    }
+
+    /**
      * Kill the player then restart the scene
      * Show deathScreen
      */
     public killPlayer(): void {
+        //stop if already dead
+        if (this.isPlayerDead) {
+            return;
+        }
+        this.isPlayerDead = true;
         this.anims.play('playerDeath', true);
+        this.scene.audioManager.playSound(this.scene.audioManager.soundsList.PLAYER_DIE)
     }
 
     /**
@@ -350,13 +392,14 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     /**
      * Suck
      */
-    public suck() {
+    public suck(enemyDead: Enemy): void {
         if (this.isSucking) {
             return;
         }
+        this.currentEnemyDead = enemyDead;
         this.isSucking = true;
         this.anims.play('suck', true);
-        this.scene.audioManager.playSound(this.scene.audioManager.soundsList.SUCK)
+        this.scene.audioManager.playSound(this.scene.audioManager.soundsList.SUCK);
     }
 
 
