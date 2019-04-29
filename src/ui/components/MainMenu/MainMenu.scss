@@ -30,6 +30,8 @@
         }
     }
 
+
+
     .game-title {
         opacity: 0;
         transform: scale(1.5);
@@ -75,6 +77,35 @@
 
         100% {
             transform: scale(1.0)
+        }
+    }
+
+    .gameplay-elements-block {
+        color: #fff;
+        border: 1px #ccc solid;
+        display: flex;
+        padding: 20px;
+        flex-direction: column;
+
+        .gameplay-element {
+            display: flex;
+            align-items: center;
+            margin: 5px;
+
+            .icon {
+                width: 40px;
+                height: 40px;
+
+                img {
+                    height: 100%;
+                }
+            }
+
+            .label {
+                margin-left: 20px;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 0.8rem;
+            }
         }
     }
 
@@ -187,6 +218,8 @@
 
 
         }
+
+
     }
 
 
