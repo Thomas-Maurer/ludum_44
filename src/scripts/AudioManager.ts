@@ -30,7 +30,8 @@ export default class AudioManager {
         WORLD: 'world',
         CHURCH: 'church',
         SHOP: 'shop',
-        TITLE: 'title'
+        TITLE: 'title',
+        BOSS: 'boss'
     }
     constructor(scene: MainScene) {
 
