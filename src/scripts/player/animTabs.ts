@@ -8,6 +8,10 @@ export const PLAYER_ANIM: any = {
     playerDash: 'playerDash',
     playerHit: 'playerHit',
     suck: 'suck',
+    playerIdleGlasses: 'playerIdleGlasses',
+    playerJumpGlasses: 'playerJumpGlasses',
+    playerAttackGlasses: 'playerAttackGlasses',
+    playerRunGlasses: 'playerRunGlasses',
 
 };
 
@@ -18,6 +22,9 @@ export const PLAYER_ANIM_DONT_CANCEL: any = {
     playerDrink: 'playerDrink',
     playerDash: 'playerDash',
     playerHit: 'playerHit',
+    playerJumpGlasses: 'playerJumpGlasses',
+    playerAttackGlasses: 'playerAttackGlasses',
+    playerRunGlasses: 'playerRunGlasses',
     suck: 'suck',
 
 };
@@ -28,6 +35,9 @@ export const PLAYER_ANIM_ACTION: any = {
     playerDrink: 'playerDrink',
     playerDash: 'playerDash',
     playerHit: 'playerHit',
+    playerJumpGlasses: 'playerJumpGlasses',
+    playerAttackGlasses: 'playerAttackGlasses',
+    playerRunGlasses: 'playerRunGlasses',
     suck: 'suck',
 
 };

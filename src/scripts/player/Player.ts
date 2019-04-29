@@ -134,16 +134,28 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         }, this);
 
         this.on('animationcomplete_playerJump', function () {
-            this.anims.play(PLAYER_ANIM.playerIdle);
+            if (this.glasses) {
+                this.anims.play(PLAYER_ANIM.playerIdleGlasses);
+            } else {
+                this.anims.play(PLAYER_ANIM.playerIdle);
+            }
         }, this);
 
         this.on('animationcomplete_playerHit', function () {
-            this.anims.play(PLAYER_ANIM.playerIdle);
+            if (this.glasses) {
+                this.anims.play(PLAYER_ANIM.playerIdleGlasses);
+            } else {
+                this.anims.play(PLAYER_ANIM.playerIdle);
+            }
         }, this);
 
         this.on('animationcomplete_playerDash', function () {
             this.dash();
-            this.anims.play(PLAYER_ANIM.playerIdle);
+            if (this.glasses) {
+                this.anims.play(PLAYER_ANIM.playerIdleGlasses);
+            } else {
+                this.anims.play(PLAYER_ANIM.playerIdle);
+            }
         }, this);
 
         this.on('animationcomplete_playerDrink', function () {
@@ -158,7 +170,11 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.on('animationcomplete_suck', () => {
             this.gainDamage(this.currentEnemyDead.info.gain / 5);
             this.currentEnemyDead.destroySprite();
-            this.anims.play(PLAYER_ANIM.playerIdle);
+            if (this.glasses) {
+                this.anims.play(PLAYER_ANIM.playerIdleGlasses);
+            } else {
+                this.anims.play(PLAYER_ANIM.playerIdle);
+            }
             this.isSucking = false;
             this.currentEnemyDead = null;
         });
@@ -236,6 +252,11 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.scene.anims.create({ key: PLAYER_ANIM.playerDash, frames: playerDashAnims, frameRate: 13 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerDrink, frames: playerVictoryAnims, frameRate: 10 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerHit, frames: playerHitAnims, frameRate: 50 });
+
+        this.scene.anims.create({ key: PLAYER_ANIM.playerIdleGlasses, frames: playerGlassesOnIdleAnims, frameRate: 10 });
+        this.scene.anims.create({ key: PLAYER_ANIM.playerRunGlasses, frames: playerGlassesOnRunAnims, frameRate: 10 });
+        this.scene.anims.create({ key: PLAYER_ANIM.playerAttackGlasses, frames: playerGlassesOnAttackAnims, frameRate: 50 });
+        this.scene.anims.create({ key: PLAYER_ANIM.playerJumpGlasses, frames: playerGlassesOnJumpAnims, frameRate: 12 });
     }
 
     public getPlayerControl(): PlayerControls {
