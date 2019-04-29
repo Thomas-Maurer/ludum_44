@@ -29,16 +29,17 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     private lookRight : boolean;
     private lookLeft : boolean;
     private sensors: any;
+    public isTouching: any;
     constructor(world: Phaser.Physics.Matter.World, scene: MainScene, x: number, y: number, key: string, frame?: string | integer, options?: object) {
         super(world, x, y, key, frame, options);
         this.scene = scene;
         const matterEngine: any = Phaser.Physics.Matter;
-        let body = matterEngine.Matter.Bodies.rectangle(x, y, 55, 95, { chamfer: { radius: 8 } });
+        const body = matterEngine.Matter.Bodies.rectangle(x, y, 55, 95, { chamfer: { radius: 8 } });
 
         this.sensors = {
-            bottom: matterEngine.Matter.Bodies.rectangle(x, y, this.height * 0.45, this.width * 0.05, { isSensor: true }),
-            left: matterEngine.Matter.Bodies.rectangle(x, y, 2, this.height * 0.5, { isSensor: true }),
-            right: matterEngine.Matter.Bodies.rectangle(x, y, 2, this.height * 0.5, { isSensor: true })
+            bottom: matterEngine.Matter.Bodies.rectangle(x, y + 95*0.53, this.width * 0.25, this.width * 0.05, { isSensor: true }),
+            left: matterEngine.Matter.Bodies.rectangle(x - 55*0.53, y, 9, this.height * 0.55, { isSensor: true }),
+            right: matterEngine.Matter.Bodies.rectangle(x + 55*0.53, y, 9, this.height * 0.55, { isSensor: true })
         };
 
         const compoundBody = matterEngine.Matter.Body.create({
@@ -52,6 +53,13 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.initDefaultValue();
         this.generateAnim();
         this.generateEventHandler();
+        // Before matter's update, reset our record of which surfaces the player is touching.
+    }
+
+    private resetTouching(): void {
+        this.isTouching.left = false;
+        this.isTouching.right = false;
+        this.isTouching.ground = false;
     }
 
     /**
@@ -62,7 +70,6 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.canJump = true;
         this.canAttack = true;
         this.setFixedRotation();
-        //this.setFriction(0, 0.05, 0);
         this.inAir = true;
         this.healthPoint = 100;
         this.baseDamage = 1;
@@ -70,6 +77,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.isPlayerDead = false;
         this.doAction = false;
         this.allowDash = false;
+        this.isTouching = { left: false, right: false, ground: false };
     }
 
     public setLookRight(value: boolean): void {
@@ -174,17 +182,6 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         }, this);
     }
 
-    private generateComboKeys(): void {
-        this.scene.input.keyboard.createCombo([this.playerControl.getControls().right, this.playerControl.getControls().right], { resetOnMatch: true });
-        this.scene.input.keyboard.createCombo([this.playerControl.getControls().left, this.playerControl.getControls().left], { resetOnMatch: true });
-        this.scene.input.keyboard.on('keycombomatch', function (event) {
-            console.log(this)
-            this.anims.play(PLAYER_ANIM.playerDash, true);
-            console.log(this.anims.currentAnim.key);
-
-        }, this);
-    }
-
     public addItemPlayerWantToBuy(item: Item): void {
         this.itemWantToBuy = item;
     }
@@ -261,6 +258,22 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
      * Handle Player collision
      */
     handleCollision(): void {
+
+        this.scene.matterCollision.addOnCollideStart({
+            objectA: [this.sensors.bottom, this.sensors.left, this.sensors.right],
+            callback: this.onSensorCollide,
+            context: this
+        });
+        this.scene.matterCollision.addOnCollideActive({
+            objectA: [this.sensors.bottom, this.sensors.left, this.sensors.right],
+            callback: this.onSensorCollide,
+            context: this
+        });
+        this.scene.matterCollision.addOnCollideEnd({
+            objectA: [this.sensors.bottom, this.sensors.left, this.sensors.right],
+            callback: this.resetTouching,
+            context: this
+        });
         //Handle current collision
         this.scene.matterCollision.addOnCollideActive({
             objectA: this.getPlayerSprite(),
@@ -304,6 +317,19 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
             },
             context: this
         });
+    }
+
+    onSensorCollide(eventdata) {
+        if (eventdata.bodyB.isSensor) return; // We only care about collisions with physical objects
+        if (eventdata.bodyA === this.sensors.left && eventdata.gameObjectB instanceof Phaser.Tilemaps.Tile && !this.isTouching.left) {
+            this.isTouching.left = true;
+            if (eventdata.pair.separation > 0.5) this.x += eventdata.pair.separation - 0.5;
+        } else if (eventdata.bodyA === this.sensors.right && eventdata.gameObjectB instanceof Phaser.Tilemaps.Tile && !this.isTouching.left) {
+            this.isTouching.right = true;
+            if (eventdata.pair.separation > 0.5) this.x -= eventdata.pair.separation - 0.5;
+        } else if (eventdata.bodyA === this.sensors.bottom && eventdata.gameObjectB instanceof Phaser.Tilemaps.Tile && !this.isTouching.left) {
+            this.isTouching.ground = true;
+        }
     }
 
     public disableSun(): void {
