@@ -137,8 +137,7 @@ export class PlayerControls {
             this.scene.audioManager.playSound(this.scene.audioManager.soundsList.HIT);
             player.enableAttackState();
         }
-
-        if (this.cursors.right.isDown) {
+        if (this.cursors.right.isDown && !player.isTouching.right) {
             player.setLookRight(true);
             if (player.anims.currentAnim !== null && PLAYER_ANIM_ACTION.hasOwnProperty(player.anims.currentAnim.key)) {
             } else {
@@ -147,7 +146,7 @@ export class PlayerControls {
 
             player.getPlayerSprite().setFlipX(false);
             player.getPlayerSprite().applyForce(this.forceVector);
-        } else if (this.cursors.left.isDown) {
+        } else if (this.cursors.left.isDown && !player.isTouching.left) {
             player.setLookLeft(true);
             if (player.anims.currentAnim !== null && PLAYER_ANIM_ACTION.hasOwnProperty(player.anims.currentAnim.key)) {
             } else {
@@ -158,7 +157,6 @@ export class PlayerControls {
             player.getPlayerSprite().applyForce(this.negativeforceVector);
         } else {
             if (player.anims.currentAnim !== null && PLAYER_ANIM_DONT_CANCEL.hasOwnProperty(player.anims.currentAnim.key)) {
-                console.log(player.anims.currentAnim.key)
             } else {
                 player.doAction = false;
                 player.anims.play(PLAYER_ANIM.playerIdle, true);
@@ -168,11 +166,11 @@ export class PlayerControls {
         if (this.cursors.action.isDown) {
             player.doAction = true;
         }
-        if (this.cursors.up.isDown && player.getCanJump() && !player.isPlayerInTheAir()) {
+        if (this.cursors.up.isDown && player.getCanJump() && !player.isPlayerInTheAir() && player.isTouching.ground) {
             player.anims.play(PLAYER_ANIM.playerJump, true);
             this.audioManager.playSound(this.audioManager.soundsList.PLAYER_JUMP);
             player.desactivateJump();
-            player.getPlayerSprite().setVelocityY(-18);
+            player.getPlayerSprite().setVelocityY(-13);
         }
     }
 

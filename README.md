@@ -1,6 +1,6 @@
-# Phaser 3 Typescript Boilerplate
+# Vampire Quest
 
-Example of Phaser 3 running with typescript, Webpack, and sass
+Game made for Ludum Dare 44, Vampire quest is a game where you must suck the blood of your ennemies to stay alive.
 
 ## Install
 
@@ -21,22 +21,3 @@ npm run dev
 ```
 
 This will launch a Webserver on http://localhost:8080 and watch for changes
-
-## Informations
-
-The main game script is :
-
-/src/**app.ts**
-
-The main Scene (used for the demo) is :
-
-/src/scripts/scenes/**MainScene.ts**
-
-The typescript definition file for phaser can be found in :
-
-/node_modules/phaser3-docs/typescript/**phaser.d.ts**
-
-### Links
-
-- [Phaser Website](https://phaser.io/)
-- [Phaser 3 documentation](https://photonstorm.github.io/phaser3-docs/)

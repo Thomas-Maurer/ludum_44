@@ -51,7 +51,7 @@ export default class MainScene extends Phaser.Scene {
 
   }
   preload() {
-    this.load.tilemapTiledJSON("map", "/assets/map/map_beta.json");
+    this.load.tilemapTiledJSON("map", "assets/map/map_beta.json");
     this.load.multiatlas('all_sprites', 'assets/graphics/map/backgrounds/spritesheet.json', 'assets/graphics/map/backgrounds');
     this.load.multiatlas('block', 'assets/graphics/map/backgrounds/block.json', 'assets/graphics/map/backgrounds');
     // Load body shapes from JSON file generated using PhysicsEditor
@@ -98,13 +98,6 @@ export default class MainScene extends Phaser.Scene {
     // Visualize all the matter bodies in the world. Note: this will be slow so go ahead and comment
     // it out after you've seen what the bodies look like.
     this.matter.world.createDebugGraphic();
-    this.matterCollision.addOnCollideStart({
-      objectA: this.player.getPlayerSprite(),
-      callback: function (eventData) {
-        //console.log(eventData.gameObjectB)
-      },
-      context: this // Context to apply to the callback function
-    });
     this.addCalice();
     this.addEventsListeners();
     this.generateItems();
@@ -129,14 +122,14 @@ export default class MainScene extends Phaser.Scene {
       this.sunSensors.push(sunSensor);
     });
 
-    this.matterCollision.addOnCollideStart({
-      objectA: this.player,
-      objectB: this.sunSensors,
-      callback: () => {
-        this.player.disableSun()
-      },
-      context: this
-    });
+    // this.matterCollision.addOnCollideStart({
+    //   objectA: this.player,
+    //   objectB: this.sunSensors,
+    //   callback: () => {
+    //     this.player.disableSun()
+    //   },
+    //   context: this
+    // });
 
     this.matterCollision.addOnCollideEnd({
       objectA: this.player,

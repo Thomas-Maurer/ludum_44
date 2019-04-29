@@ -267,8 +267,8 @@
     <property name="collide" type="bool" value="true"/>
    </properties>
    <objectgroup draworder="index">
-    <object id="1" x="0.333333" y="0">
-     <polygon points="0,0 64,-0.666667 63.3333,64"/>
+    <object id="1" x="0.583333" y="0.987113">
+     <polygon points="0,0 63.25,-0.65378 62.5911,62.7629"/>
     </object>
    </objectgroup>
   </tile>
@@ -498,7 +498,7 @@
    </properties>
   </tile>
  </tileset>
- <imagelayer id="1" name="background">
+ <imagelayer name="background">
   <image source="../graphics/map/backgrounds/crypte.png" width="2000" height="960"/>
  </imagelayer>
  <layer id="11" name="main_tile" width="293" height="15">
@@ -514,17 +514,17 @@
   <object id="15" name="sunSensor" x="169" y="637" width="188" height="130"/>
   <object id="44" name="sunSensor" x="11318.7" y="385.333" width="653.333" height="317.333"/>
  </objectgroup>
- <objectgroup id="8" name="text_spawn">
+ <objectgroup name="text_spawn">
   <object id="11" name="Instruct_BuyItem" x="2859.5" y="382.5" width="363" height="41">
    <text fontfamily="MS PGothic" pixelsize="27" wrap="1" color="#ffffff">You can buy an item for a price</text>
   </object>
  </objectgroup>
- <objectgroup id="3" name="calice_spawn">
+ <objectgroup name="calice_spawn">
   <object id="1" name="calice" x="1570" y="808">
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="6" name="items">
+ <objectgroup name="items">
   <object id="5" x="3105" y="615">
    <point/>
   </object>
@@ -532,7 +532,7 @@
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="4" name="spawn_peasant">
+ <objectgroup name="spawn_peasant">
   <object id="2" x="706" y="680">
    <point/>
   </object>
@@ -657,7 +657,7 @@
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="5" name="spawn_player">
+ <objectgroup name="spawn_player">
   <object id="4" name="player" x="261" y="736">
    <point/>
   </object>
