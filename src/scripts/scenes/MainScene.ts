@@ -12,13 +12,11 @@ export default class MainScene extends Phaser.Scene {
   public matterCollision: PhaserMatterCollisionPlugin;
   public map: Phaser.Tilemaps.Tilemap;
   public itemUtil: ItemUtil;
-  public enemy: Enemy;
   public player: Player;
   public shapes: any;
   public audioManager: AudioManager;
   public playerCatCollision: any;
   public itemsCat: any;
-  public unsubscribeCelebrate: any;
   public sunSensors: any[];
   private parralaxLayers: {
     static: {
@@ -126,7 +124,16 @@ export default class MainScene extends Phaser.Scene {
       this.sunSensors.push(sunSensor);
     });
 
-    this.unsubscribeCelebrate = this.matterCollision.addOnCollideStart({
+    this.matterCollision.addOnCollideStart({
+      objectA: this.player,
+      objectB: this.sunSensors,
+      callback: () => {
+        this.player.disableSun()
+      },
+      context: this
+    });
+
+    this.matterCollision.addOnCollideEnd({
       objectA: this.player,
       objectB: this.sunSensors,
       callback: () => {

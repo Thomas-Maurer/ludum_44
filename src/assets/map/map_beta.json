@@ -30,26 +30,26 @@
          "name":"sunSensor",
          "objects":[
                 {
-                 "height":114,
-                 "id":8,
+                 "height":316,
+                 "id":13,
                  "name":"sunSensor",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":54,
-                 "x":2693,
-                 "y":522
+                 "width":576,
+                 "x":2752,
+                 "y":320
                 }, 
                 {
-                 "height":114,
-                 "id":9,
-                 "name":"sunSensor",
+                 "height":0,
+                 "id":14,
+                 "name":"",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":54,
-                 "x":3335,
-                 "y":525
+                 "width":0,
+                 "x":1968,
+                 "y":-144
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -192,7 +192,7 @@
          "y":0
         }],
  "nextlayerid":9,
- "nextobjectid":12,
+ "nextobjectid":15,
  "orientation":"orthogonal",
  "renderorder":"left-up",
  "tiledversion":"1.2.3",
