@@ -17,7 +17,8 @@ export default class AudioManager {
         PEASANT_DIE: 'peasantDie',
         PLAYER_DIE: 'playerDie',
         HIT: 'hit',
-        HEARTH_BEAT: 'hearth_beat'
+        HEARTH_BEAT: 'hearth_beat',
+        PLAYER_HURT: 'hurt'
     };
     /**
      * List of music (.mp3)
