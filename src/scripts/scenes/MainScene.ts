@@ -18,6 +18,7 @@ export default class MainScene extends Phaser.Scene {
   public playerCatCollision: any;
   public itemsCat: any;
   public sunSensors: any[];
+  public musicCanPlay: boolean = false;
   public win: boolean = false;
   private parralaxLayers: {
     static: {
@@ -125,7 +126,7 @@ export default class MainScene extends Phaser.Scene {
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
       objectB: this.sunSensors,
-      callback: (eventData:any) => {
+      callback: (eventData: any) => {
         if (eventData.bodyA.isSensor) return; // We only care about collisions with physical objects
         this.player.disableSun()
       },
@@ -135,7 +136,7 @@ export default class MainScene extends Phaser.Scene {
     this.matterCollision.addOnCollideEnd({
       objectA: this.player,
       objectB: this.sunSensors,
-      callback: (eventData:any) => {
+      callback: (eventData: any) => {
         if (eventData.bodyA.isSensor) return; // We only care about collisions with physical objects
         if (this.player.isInSun) {
           this.player.disableSun()
@@ -182,6 +183,10 @@ export default class MainScene extends Phaser.Scene {
    * listen for external events
    */
   private addEventsListeners() {
+    // User clicked on play
+    window.addEventListener('play', (e) => {
+      this.musicCanPlay = true;
+    });
     window.addEventListener('restart', (e) => {
       this.restart();
     });

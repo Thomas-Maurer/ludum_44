@@ -2,28 +2,33 @@
   <div>
     <!-- enable here  -->
     <div class="main-menu" v-if="!play">
-      <div class="main-menu-block">
-        <div class="game-title">LOREM IPSUM</div>
+      <div class="game-title">LOREM IPSUM</div>
 
-        <div class="btn play-btn" @click="setPlay()">PLAY</div>
+      <div class="loading-block">
+        <div class="loading-label" v-bind:class="{'active': loading}">Loading ...</div>
+        <div class="start-info" v-bind:class="{'active': !loading}">
+          Press
+          <img src="../../../assets/graphics/ui/enter.png" alt>
+          to play
+        </div>
+      </div>
 
-        <div class="controls-block">
-          <div class="control-type">
-            <img src="../../../assets/graphics/ui/arrow_keys.png" alt>
-            <span class="control-label">Move</span>
-          </div>
-          <div class="control-type">
-            <img src="../../../assets/graphics/ui/space.png" alt>
-            <span class="control-label">Attack</span>
-          </div>
-          <div class="control-type">
-            <img src="../../../assets/graphics/ui/e.png" alt>
-            <span class="control-label">Interact</span>
-          </div>
-          <div class="control-type potion">
-            <div class="potion-icon"></div>
-            <span class="control-label">Keep it full</span>
-          </div>
+      <div class="controls-block">
+        <div class="control-type">
+          <img src="../../../assets/graphics/ui/arrow_keys.png" alt>
+          <span class="control-label">Move</span>
+        </div>
+        <div class="control-type">
+          <img src="../../../assets/graphics/ui/space.png" alt>
+          <span class="control-label">Attack</span>
+        </div>
+        <div class="control-type">
+          <img src="../../../assets/graphics/ui/e.png" alt>
+          <span class="control-label">Interact</span>
+        </div>
+        <div class="control-type potion">
+          <div class="potion-icon"></div>
+          <span class="control-label">Keep it full</span>
         </div>
       </div>
     </div>
