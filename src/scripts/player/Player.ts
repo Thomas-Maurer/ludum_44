@@ -227,7 +227,9 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
                         this.emit('playerbuyitem');
                     }
                 }else {
-                    //console.log(eventData.gameObjectB);
+                    if (eventData.bodyB.isSensor === false) {
+                        this.killPlayer();
+                    }
                 }
             },
             context: this
