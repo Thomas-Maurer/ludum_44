@@ -57,6 +57,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.generateAnim();
         this.generateEventHandler();
         this.handleCollision();
+        this.takeDamage(0); //send a hp update to the ui
         // Before matter's update, reset our record of which surfaces the player is touching.
         scene.matter.world.on("beforeupdate", this.resetTouching, this);
     }
