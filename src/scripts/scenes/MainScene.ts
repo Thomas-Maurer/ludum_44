@@ -272,6 +272,8 @@ export default class MainScene extends Phaser.Scene {
 
   spawnPlayer(): Player {
     const spawnPoint: any = this.map.findObject("spawn_player", (obj: any) => obj.name === "player");
+    const bossRoomSprite = this.add.sprite((spawnPoint.x - 2) + spawnPoint.width / 2, spawnPoint.y - 50, 'all_sprites_background', 'background/scene1/crypte.png');
+    bossRoomSprite.setDepth(0);
     return new Player(this.matter.world, this, spawnPoint.x, spawnPoint.y, 'all_sprites', 'vampire/runvampright1.png');
   }
 

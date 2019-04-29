@@ -5,78 +5,78 @@
 			"format": "RGBA8888",
 			"size": {
 				"w": 4096,
-				"h": 3840
+				"h": 3289
 			},
 			"scale": 1,
 			"frames": [
-				{
-					"filename": "background/boss_room.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 2000,
-						"h": 960
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 2000,
-						"h": 960
-					},
-					"frame": {
-						"x": 0,
-						"y": 0,
-						"w": 2000,
-						"h": 960
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "background/scene1/bg.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 4096,
-						"h": 960
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 4096,
-						"h": 960
-					},
-					"frame": {
-						"x": 0,
-						"y": 960,
-						"w": 4096,
-						"h": 960
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
 				{
 					"filename": "background/scene1/crypte.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 2000,
+						"w": 397,
+						"h": 409
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 397,
+						"h": 409
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 397,
+						"h": 409
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "background/scene2/bg_far.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 4096,
 						"h": 960
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 2000,
+						"w": 4096,
 						"h": 960
 					},
 					"frame": {
 						"x": 0,
-						"y": 1920,
-						"w": 2000,
+						"y": 409,
+						"w": 4096,
+						"h": 960
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "background/scene2/foreground.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 4096,
+						"h": 960
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 4096,
+						"h": 960
+					},
+					"frame": {
+						"x": 0,
+						"y": 1369,
+						"w": 4096,
 						"h": 960
 					},
 					"anchor": {
@@ -99,8 +99,8 @@
 						"h": 960
 					},
 					"frame": {
-						"x": 2000,
-						"y": 1920,
+						"x": 0,
+						"y": 2329,
 						"w": 2000,
 						"h": 960
 					},
@@ -124,33 +124,8 @@
 						"h": 960
 					},
 					"frame": {
-						"x": 0,
-						"y": 2880,
-						"w": 2000,
-						"h": 960
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "background/static/sun.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 2000,
-						"h": 960
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 2000,
-						"h": 960
-					},
-					"frame": {
 						"x": 2000,
-						"y": 2880,
+						"y": 2329,
 						"w": 2000,
 						"h": 960
 					},
@@ -171,23 +146,23 @@
 			"scale": 1,
 			"frames": [
 				{
-					"filename": "background/scene1/bg_far.png",
+					"filename": "background/static/sun.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 4096,
+						"w": 2000,
 						"h": 960
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 4096,
+						"w": 2000,
 						"h": 960
 					},
 					"frame": {
 						"x": 0,
 						"y": 0,
-						"w": 4096,
+						"w": 2000,
 						"h": 960
 					},
 					"anchor": {
@@ -196,7 +171,32 @@
 					}
 				},
 				{
-					"filename": "background/scene1/foreground.png",
+					"filename": "background/boss_room.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 2000,
+						"h": 960
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 2000,
+						"h": 960
+					},
+					"frame": {
+						"x": 2000,
+						"y": 0,
+						"w": 2000,
+						"h": 960
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "background/scene1/bg.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -246,7 +246,7 @@
 					}
 				},
 				{
-					"filename": "background/scene2/foreground.png",
+					"filename": "background/scene1/foreground.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -282,7 +282,7 @@
 			"scale": 1,
 			"frames": [
 				{
-					"filename": "background/scene2/bg_far.png",
+					"filename": "background/scene1/bg_far.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -312,6 +312,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:aa509066ff780c8d46ae4b7307497bfe:5a66ec3d3de751b312a09235e4c227b6:4c9a473f4f9c07e50ff349538c5fe79a$"
+		"smartupdate": "$TexturePacker:SmartUpdate:1b4a583cde01092bf2c7e96a9bbd1cf0:766d62f22534273e2fcad78fc1aed5eb:4c9a473f4f9c07e50ff349538c5fe79a$"
 	}
 }
