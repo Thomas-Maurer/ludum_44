@@ -17,12 +17,14 @@ export class PlayerControls {
     private audioManager: AudioManager;
     private negativeforceVector: Vector2;
     private forceVector: Vector2;
+    private speed: number;
     constructor(scene: MainScene, player: Player) {
         this.initDefaultKeys();
         this.mappingKeys(scene);
         this.scene = scene;
         this.audioManager = this.scene.audioManager;
         this.generateComboKeys(player);
+        this.speed = 0.2;
     }
 
     /**
@@ -109,10 +111,10 @@ export class PlayerControls {
             // Player is in the Air
             this.forceVector = new Vector2(0.1, 0);
             this.negativeforceVector = new Vector2(-0.1, 0);
-            if (body.velocity.x >= 0.3) {
-                player.getPlayerSprite().setVelocity(0.3);
-            } else if (body.velocity.x <= -0.3) {
-                player.getPlayerSprite().setVelocity(-0.3);
+            if (body.velocity.x >= this.speed) {
+                player.getPlayerSprite().setVelocity(this.speed);
+            } else if (body.velocity.x <= -this.speed) {
+                player.getPlayerSprite().setVelocity(-this.speed);
             }
         } else {
             if (body.velocity.y <= -11) {
