@@ -60,6 +60,14 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         scene.matter.world.on("beforeupdate", this.resetTouching, this);
     }
 
+    public enablePowerUp(item: Item): void {
+
+        if (item.getNameItem() === 'dashPotion') {
+            this.allowDash = true;
+        }
+
+    }
+
     private resetTouching(): void {
         this.isTouching.left = false;
         this.isTouching.right = false;
@@ -308,6 +316,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.scene.matterCollision.addOnCollideActive({
             objectA: this.getPlayerSprite(),
             callback: (eventData: any) => {
+                if (eventData.bodyA.isSensor) return; // We only care about collisions with physical objects
                 this.canSuck = false;
                 if (eventData.gameObjectB !== undefined && eventData.gameObjectB instanceof Phaser.Tilemaps.Tile) {
                     this.setPlayerInAirValue(false);
