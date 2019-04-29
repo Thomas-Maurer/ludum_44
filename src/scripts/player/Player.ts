@@ -6,6 +6,7 @@ import Item from "../items/item";
 import { PLAYER_ANIM } from "./animTabs";
 import VictoryItem from "../items/victoryItem";
 import Vector2 = Phaser.Math.Vector2;
+import { PeasantInfo } from "../enemy/peasant/peasant-info.enum";
 
 export default class Player extends Phaser.Physics.Matter.Sprite {
     private playerControl: PlayerControls;
@@ -40,7 +41,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         const body = matterEngine.Matter.Bodies.rectangle(x, y, 55, 95, { chamfer: { radius: 12 } });
 
         this.sensors = {
-            bottom: matterEngine.Matter.Bodies.rectangle(x, y + 95 * 0.53, 55 , this.width * 0.05, { isSensor: true }),
+            bottom: matterEngine.Matter.Bodies.rectangle(x, y + 95 * 0.53, 55, this.width * 0.05, { isSensor: true }),
             left: matterEngine.Matter.Bodies.rectangle(x - 55 * 0.53, y, 9, this.height * 0.25, { isSensor: true }),
             right: matterEngine.Matter.Bodies.rectangle(x + 55 * 0.53, y, 9, this.height * 0.25, { isSensor: true })
         };
@@ -57,6 +58,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.generateAnim();
         this.generateEventHandler();
         this.handleCollision();
+        this.takeDamage(0); //send a hp update to the ui
         // Before matter's update, reset our record of which surfaces the player is touching.
         scene.matter.world.on("beforeupdate", this.resetTouching, this);
     }
@@ -157,6 +159,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
             if (this.itemWantToBuy !== null && this.itemWantToBuy !== undefined) {
                 this.enablePowerUp(this.itemWantToBuy);
                 this.takeDamage(this.itemWantToBuy.getHpCost());
+                this.generateHpAnim("-" + this.itemWantToBuy.getHpCost());
                 this.itemWantToBuy.destroy();
                 this.itemWantToBuy = null;
             }
@@ -409,9 +412,22 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
             detail: this.healthPoint
         });
         window.dispatchEvent(playerHpEvent);
+
+        //play a sound if less than 25 hp
+        if (this.healthPoint <= 25) {
+            this.scene.audioManager.playSound(this.scene.audioManager.soundsList.HEARTH_BEAT);
+        }
         if (this.healthPoint <= 0) {
             this.killPlayer();
         }
+    }
+
+    /**
+     * Player get damage from enemy
+     * @param damage
+     */
+    public getDamageFromEnemy(damage: number): void {
+        this.takeDamage(damage);
     }
 
     /**
@@ -491,6 +507,37 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.isSucking = true;
         this.anims.play('suck', true);
         this.scene.audioManager.playSound(this.scene.audioManager.soundsList.SUCK);
+
+        this.generateHpAnim("+" + PeasantInfo.GAIN + "");
+
+
+    }
+
+    /**
+     * Display an animated number informing about live won or loss
+     */
+    private generateHpAnim(value: string) {
+        const duration = 1000;
+        const text = this.scene.add.text(this.x, this.y, value, { fontFamily: "Arial", fontSize: 30, color: "#FF0000" });
+        this.scene.tweens.add({
+            targets: text,
+            x: this.scene.cameras.main.scrollX + window.innerWidth,
+            y: this.scene.cameras.main.scrollY + 100,
+            ease: 'Sine.easeIn',
+            duration: duration
+        });
+
+        if (value.charAt(0) === "-") {
+            this.scene.audioManager.playSound(this.scene.audioManager.soundsList.PLAYER_LOOSE_HP)
+        } else {
+            this.scene.audioManager.playSound(this.scene.audioManager.soundsList.PLAYER_GAIN_HP)
+        }
+
+        //destroy text after duration
+        setTimeout(() => {
+            text.destroy();
+        }, duration);
+
     }
 
 

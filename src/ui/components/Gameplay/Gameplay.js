@@ -9,7 +9,9 @@ export default {
         'playerHP',
         'potion',
         'glass',
-        'umbrella'
+        'umbrella',
+        'dead',
+        'win'
     ]),
     data() {
         return {

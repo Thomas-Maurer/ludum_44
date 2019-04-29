@@ -13,7 +13,7 @@ export class Enemies {
      * Distance while the enemy will start update in px
      * @type {number}
      */
-    private DISTANCE_TO_PLAYER = 3000;
+    private DISTANCE_TO_PLAYER = 1920;
 
     private mapObject: any;
     private scene: any;

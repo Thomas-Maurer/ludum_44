@@ -4,8 +4,8 @@
 			"image": "enemies.png",
 			"format": "RGBA8888",
 			"size": {
-				"w": 255,
-				"h": 1694
+				"w": 256,
+				"h": 1805
 			},
 			"scale": 1,
 			"frames": [
@@ -24,8 +24,8 @@
 						"h": 103
 					},
 					"frame": {
-						"x": 3,
-						"y": 3,
+						"x": 2,
+						"y": 2,
 						"w": 92,
 						"h": 103
 					}
@@ -45,14 +45,14 @@
 						"h": 105
 					},
 					"frame": {
-						"x": 101,
-						"y": 3,
+						"x": 98,
+						"y": 2,
 						"w": 88,
 						"h": 105
 					}
 				},
 				{
-					"filename": "fightpriest1.png",
+					"filename": "runpaysan7.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -60,16 +60,37 @@
 						"h": 120
 					},
 					"spriteSourceSize": {
-						"x": 25,
-						"y": 12,
-						"w": 57,
-						"h": 108
+						"x": 19,
+						"y": 18,
+						"w": 62,
+						"h": 102
 					},
 					"frame": {
-						"x": 195,
-						"y": 3,
-						"w": 57,
-						"h": 108
+						"x": 190,
+						"y": 2,
+						"w": 62,
+						"h": 102
+					}
+				},
+				{
+					"filename": "runpriest1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 27,
+						"y": 13,
+						"w": 58,
+						"h": 107
+					},
+					"frame": {
+						"x": 190,
+						"y": 108,
+						"w": 58,
+						"h": 107
 					}
 				},
 				{
@@ -87,8 +108,8 @@
 						"h": 103
 					},
 					"frame": {
-						"x": 3,
-						"y": 112,
+						"x": 2,
+						"y": 109,
 						"w": 88,
 						"h": 103
 					}
@@ -108,31 +129,10 @@
 						"h": 97
 					},
 					"frame": {
-						"x": 97,
-						"y": 114,
+						"x": 94,
+						"y": 111,
 						"w": 90,
 						"h": 97
-					}
-				},
-				{
-					"filename": "runpriest1.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 27,
-						"y": 13,
-						"w": 58,
-						"h": 107
-					},
-					"frame": {
-						"x": 193,
-						"y": 117,
-						"w": 58,
-						"h": 107
 					}
 				},
 				{
@@ -150,14 +150,14 @@
 						"h": 105
 					},
 					"frame": {
-						"x": 97,
-						"y": 217,
+						"x": 94,
+						"y": 212,
 						"w": 83,
 						"h": 105
 					}
 				},
 				{
-					"filename": "runpaysan7.png",
+					"filename": "runpaysan2.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -165,15 +165,15 @@
 						"h": 120
 					},
 					"spriteSourceSize": {
-						"x": 19,
+						"x": 26,
 						"y": 18,
-						"w": 62,
+						"w": 73,
 						"h": 102
 					},
 					"frame": {
-						"x": 186,
-						"y": 230,
-						"w": 62,
+						"x": 181,
+						"y": 219,
+						"w": 73,
 						"h": 102
 					}
 				},
@@ -192,8 +192,8 @@
 						"h": 100
 					},
 					"frame": {
-						"x": 3,
-						"y": 221,
+						"x": 2,
+						"y": 216,
 						"w": 87,
 						"h": 100
 					}
@@ -213,8 +213,8 @@
 						"h": 101
 					},
 					"frame": {
-						"x": 3,
-						"y": 327,
+						"x": 2,
+						"y": 320,
 						"w": 86,
 						"h": 101
 					}
@@ -234,14 +234,14 @@
 						"h": 100
 					},
 					"frame": {
-						"x": 95,
-						"y": 328,
+						"x": 92,
+						"y": 321,
 						"w": 85,
 						"h": 100
 					}
 				},
 				{
-					"filename": "fightpriest3.png",
+					"filename": "fightpriest5.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -251,13 +251,13 @@
 					"spriteSourceSize": {
 						"x": 28,
 						"y": 17,
-						"w": 60,
+						"w": 69,
 						"h": 103
 					},
 					"frame": {
-						"x": 186,
-						"y": 338,
-						"w": 60,
+						"x": 181,
+						"y": 325,
+						"w": 69,
 						"h": 103
 					}
 				},
@@ -276,8 +276,8 @@
 						"h": 91
 					},
 					"frame": {
-						"x": 3,
-						"y": 434,
+						"x": 2,
+						"y": 425,
 						"w": 96,
 						"h": 91
 					}
@@ -297,14 +297,14 @@
 						"h": 101
 					},
 					"frame": {
-						"x": 105,
-						"y": 434,
+						"x": 102,
+						"y": 425,
 						"w": 74,
 						"h": 101
 					}
 				},
 				{
-					"filename": "runpriest2.png",
+					"filename": "fightpriest4.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -312,16 +312,16 @@
 						"h": 120
 					},
 					"spriteSourceSize": {
-						"x": 25,
-						"y": 12,
-						"w": 57,
-						"h": 108
+						"x": 28,
+						"y": 17,
+						"w": 68,
+						"h": 103
 					},
 					"frame": {
-						"x": 185,
-						"y": 447,
-						"w": 57,
-						"h": 108
+						"x": 180,
+						"y": 432,
+						"w": 68,
+						"h": 103
 					}
 				},
 				{
@@ -339,8 +339,8 @@
 						"h": 94
 					},
 					"frame": {
-						"x": 3,
-						"y": 531,
+						"x": 2,
+						"y": 520,
 						"w": 91,
 						"h": 94
 					}
@@ -360,136 +360,10 @@
 						"h": 103
 					},
 					"frame": {
-						"x": 100,
-						"y": 541,
+						"x": 97,
+						"y": 530,
 						"w": 76,
 						"h": 103
-					}
-				},
-				{
-					"filename": "fightpriest5.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 28,
-						"y": 17,
-						"w": 69,
-						"h": 103
-					},
-					"frame": {
-						"x": 182,
-						"y": 561,
-						"w": 69,
-						"h": 103
-					}
-				},
-				{
-					"filename": "fightpaysan1.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 20,
-						"y": 26,
-						"w": 90,
-						"h": 94
-					},
-					"frame": {
-						"x": 3,
-						"y": 631,
-						"w": 90,
-						"h": 94
-					}
-				},
-				{
-					"filename": "runpaysan2.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 26,
-						"y": 18,
-						"w": 73,
-						"h": 102
-					},
-					"frame": {
-						"x": 99,
-						"y": 650,
-						"w": 73,
-						"h": 102
-					}
-				},
-				{
-					"filename": "fightpriest4.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 28,
-						"y": 17,
-						"w": 68,
-						"h": 103
-					},
-					"frame": {
-						"x": 178,
-						"y": 670,
-						"w": 68,
-						"h": 103
-					}
-				},
-				{
-					"filename": "fightpriest7.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 28,
-						"y": 17,
-						"w": 82,
-						"h": 103
-					},
-					"frame": {
-						"x": 3,
-						"y": 731,
-						"w": 82,
-						"h": 103
-					}
-				},
-				{
-					"filename": "deathpaysan4.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 31,
-						"y": 21,
-						"w": 80,
-						"h": 99
-					},
-					"frame": {
-						"x": 91,
-						"y": 758,
-						"w": 80,
-						"h": 99
 					}
 				},
 				{
@@ -508,9 +382,30 @@
 					},
 					"frame": {
 						"x": 177,
-						"y": 779,
+						"y": 539,
 						"w": 75,
 						"h": 99
+					}
+				},
+				{
+					"filename": "fightpaysan1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 20,
+						"y": 26,
+						"w": 90,
+						"h": 94
+					},
+					"frame": {
+						"x": 2,
+						"y": 618,
+						"w": 90,
+						"h": 94
 					}
 				},
 				{
@@ -528,51 +423,9 @@
 						"h": 99
 					},
 					"frame": {
-						"x": 3,
-						"y": 840,
+						"x": 96,
+						"y": 637,
 						"w": 75,
-						"h": 99
-					}
-				},
-				{
-					"filename": "runpaysan10.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 27,
-						"y": 31,
-						"w": 80,
-						"h": 87
-					},
-					"frame": {
-						"x": 84,
-						"y": 863,
-						"w": 80,
-						"h": 87
-					}
-				},
-				{
-					"filename": "deathpriest2.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 23,
-						"y": 21,
-						"w": 69,
-						"h": 99
-					},
-					"frame": {
-						"x": 3,
-						"y": 945,
-						"w": 69,
 						"h": 99
 					}
 				},
@@ -591,56 +444,56 @@
 						"h": 90
 					},
 					"frame": {
-						"x": 170,
-						"y": 884,
+						"x": 175,
+						"y": 642,
 						"w": 77,
 						"h": 90
 					}
 				},
 				{
-					"filename": "runpaysan6.png",
+					"filename": "speedfightpaysan3.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 120,
+						"w": 132,
 						"h": 120
 					},
 					"spriteSourceSize": {
-						"x": 10,
-						"y": 25,
-						"w": 71,
-						"h": 95
+						"x": 24,
+						"y": 30,
+						"w": 77,
+						"h": 90
 					},
 					"frame": {
-						"x": 78,
-						"y": 956,
-						"w": 71,
-						"h": 95
+						"x": 175,
+						"y": 736,
+						"w": 77,
+						"h": 90
 					}
 				},
 				{
-					"filename": "fightpriest2.png",
+					"filename": "speedfightpaysan1.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 120,
+						"w": 132,
 						"h": 120
 					},
 					"spriteSourceSize": {
-						"x": 27,
-						"y": 13,
-						"w": 57,
-						"h": 107
+						"x": 26,
+						"y": 26,
+						"w": 90,
+						"h": 94
 					},
 					"frame": {
-						"x": 3,
-						"y": 1050,
-						"w": 57,
-						"h": 107
+						"x": 2,
+						"y": 716,
+						"w": 90,
+						"h": 94
 					}
 				},
 				{
-					"filename": "fightpaysan6.png",
+					"filename": "deathpriest2.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -648,20 +501,20 @@
 						"h": 120
 					},
 					"spriteSourceSize": {
-						"x": 21,
-						"y": 33,
-						"w": 96,
-						"h": 87
+						"x": 23,
+						"y": 21,
+						"w": 69,
+						"h": 99
 					},
 					"frame": {
-						"x": 155,
-						"y": 980,
-						"w": 96,
-						"h": 87
+						"x": 96,
+						"y": 740,
+						"w": 69,
+						"h": 99
 					}
 				},
 				{
-					"filename": "deathpaysan5.png",
+					"filename": "fightpriest7.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -669,16 +522,79 @@
 						"h": 120
 					},
 					"spriteSourceSize": {
-						"x": 33,
-						"y": 37,
-						"w": 74,
-						"h": 83
+						"x": 28,
+						"y": 17,
+						"w": 82,
+						"h": 103
 					},
 					"frame": {
-						"x": 66,
-						"y": 1057,
-						"w": 74,
-						"h": 83
+						"x": 169,
+						"y": 830,
+						"w": 82,
+						"h": 103
+					}
+				},
+				{
+					"filename": "fightpaysan2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 14,
+						"y": 30,
+						"w": 89,
+						"h": 90
+					},
+					"frame": {
+						"x": 2,
+						"y": 814,
+						"w": 89,
+						"h": 90
+					}
+				},
+				{
+					"filename": "fightpriest3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 28,
+						"y": 17,
+						"w": 60,
+						"h": 103
+					},
+					"frame": {
+						"x": 95,
+						"y": 843,
+						"w": 60,
+						"h": 103
+					}
+				},
+				{
+					"filename": "speedfightpaysan2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 132,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 20,
+						"y": 30,
+						"w": 89,
+						"h": 90
+					},
+					"frame": {
+						"x": 2,
+						"y": 908,
+						"w": 89,
+						"h": 90
 					}
 				},
 				{
@@ -696,10 +612,199 @@
 						"h": 85
 					},
 					"frame": {
-						"x": 146,
-						"y": 1073,
+						"x": 159,
+						"y": 937,
 						"w": 95,
 						"h": 85
+					}
+				},
+				{
+					"filename": "fightpriest1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 25,
+						"y": 12,
+						"w": 57,
+						"h": 108
+					},
+					"frame": {
+						"x": 95,
+						"y": 950,
+						"w": 57,
+						"h": 108
+					}
+				},
+				{
+					"filename": "deathpaysan4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 31,
+						"y": 21,
+						"w": 80,
+						"h": 99
+					},
+					"frame": {
+						"x": 2,
+						"y": 1002,
+						"w": 80,
+						"h": 99
+					}
+				},
+				{
+					"filename": "fightpaysan6.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 21,
+						"y": 33,
+						"w": 96,
+						"h": 87
+					},
+					"frame": {
+						"x": 156,
+						"y": 1026,
+						"w": 96,
+						"h": 87
+					}
+				},
+				{
+					"filename": "runpriest2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 25,
+						"y": 12,
+						"w": 57,
+						"h": 108
+					},
+					"frame": {
+						"x": 86,
+						"y": 1062,
+						"w": 57,
+						"h": 108
+					}
+				},
+				{
+					"filename": "runpaysan10.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 27,
+						"y": 31,
+						"w": 80,
+						"h": 87
+					},
+					"frame": {
+						"x": 2,
+						"y": 1105,
+						"w": 80,
+						"h": 87
+					}
+				},
+				{
+					"filename": "speedfightpaysan4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 132,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 29,
+						"y": 35,
+						"w": 95,
+						"h": 85
+					},
+					"frame": {
+						"x": 147,
+						"y": 1117,
+						"w": 95,
+						"h": 85
+					}
+				},
+				{
+					"filename": "fightpriest2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 27,
+						"y": 13,
+						"w": 57,
+						"h": 107
+					},
+					"frame": {
+						"x": 86,
+						"y": 1174,
+						"w": 57,
+						"h": 107
+					}
+				},
+				{
+					"filename": "runpaysan6.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 10,
+						"y": 25,
+						"w": 71,
+						"h": 95
+					},
+					"frame": {
+						"x": 2,
+						"y": 1196,
+						"w": 71,
+						"h": 95
+					}
+				},
+				{
+					"filename": "speedfightpaysan5.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 132,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 31,
+						"y": 39,
+						"w": 96,
+						"h": 81
+					},
+					"frame": {
+						"x": 147,
+						"y": 1206,
+						"w": 96,
+						"h": 81
 					}
 				},
 				{
@@ -717,8 +822,8 @@
 						"h": 107
 					},
 					"frame": {
-						"x": 66,
-						"y": 1146,
+						"x": 77,
+						"y": 1285,
 						"w": 57,
 						"h": 107
 					}
@@ -738,14 +843,14 @@
 						"h": 109
 					},
 					"frame": {
-						"x": 3,
-						"y": 1163,
+						"x": 2,
+						"y": 1295,
 						"w": 55,
 						"h": 109
 					}
 				},
 				{
-					"filename": "fightpaysan2.png",
+					"filename": "fightpaysan8.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -753,16 +858,37 @@
 						"h": 120
 					},
 					"spriteSourceSize": {
-						"x": 14,
-						"y": 30,
-						"w": 89,
-						"h": 90
+						"x": 25,
+						"y": 39,
+						"w": 95,
+						"h": 81
 					},
 					"frame": {
-						"x": 129,
-						"y": 1164,
-						"w": 89,
-						"h": 90
+						"x": 138,
+						"y": 1291,
+						"w": 95,
+						"h": 81
+					}
+				},
+				{
+					"filename": "speedfightpaysan6.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 132,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 37,
+						"y": 40,
+						"w": 95,
+						"h": 80
+					},
+					"frame": {
+						"x": 138,
+						"y": 1376,
+						"w": 95,
+						"h": 80
 					}
 				},
 				{
@@ -780,8 +906,8 @@
 						"h": 108
 					},
 					"frame": {
-						"x": 64,
-						"y": 1259,
+						"x": 61,
+						"y": 1396,
 						"w": 55,
 						"h": 108
 					}
@@ -801,14 +927,14 @@
 						"h": 107
 					},
 					"frame": {
-						"x": 3,
-						"y": 1278,
+						"x": 2,
+						"y": 1408,
 						"w": 55,
 						"h": 107
 					}
 				},
 				{
-					"filename": "fightpaysan8.png",
+					"filename": "deathpaysan5.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -816,37 +942,16 @@
 						"h": 120
 					},
 					"spriteSourceSize": {
-						"x": 25,
-						"y": 39,
-						"w": 95,
-						"h": 81
+						"x": 33,
+						"y": 37,
+						"w": 74,
+						"h": 83
 					},
 					"frame": {
-						"x": 125,
-						"y": 1260,
-						"w": 95,
-						"h": 81
-					}
-				},
-				{
-					"filename": "runpaysan5.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 12,
-						"y": 28,
-						"w": 65,
-						"h": 90
-					},
-					"frame": {
-						"x": 125,
-						"y": 1347,
-						"w": 65,
-						"h": 90
+						"x": 120,
+						"y": 1460,
+						"w": 74,
+						"h": 83
 					}
 				},
 				{
@@ -864,8 +969,8 @@
 						"h": 104
 					},
 					"frame": {
-						"x": 64,
-						"y": 1373,
+						"x": 61,
+						"y": 1508,
 						"w": 55,
 						"h": 104
 					}
@@ -885,8 +990,8 @@
 						"h": 98
 					},
 					"frame": {
-						"x": 3,
-						"y": 1391,
+						"x": 2,
+						"y": 1519,
 						"w": 55,
 						"h": 98
 					}
@@ -906,14 +1011,14 @@
 						"h": 96
 					},
 					"frame": {
-						"x": 196,
-						"y": 1347,
+						"x": 198,
+						"y": 1460,
 						"w": 55,
 						"h": 96
 					}
 				},
 				{
-					"filename": "runpriest10.png",
+					"filename": "runpaysan5.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -921,16 +1026,16 @@
 						"h": 120
 					},
 					"spriteSourceSize": {
-						"x": 26,
-						"y": 24,
-						"w": 61,
-						"h": 94
+						"x": 12,
+						"y": 28,
+						"w": 65,
+						"h": 90
 					},
 					"frame": {
-						"x": 125,
-						"y": 1443,
-						"w": 61,
-						"h": 94
+						"x": 120,
+						"y": 1547,
+						"w": 65,
+						"h": 90
 					}
 				},
 				{
@@ -948,8 +1053,8 @@
 						"h": 99
 					},
 					"frame": {
-						"x": 64,
-						"y": 1483,
+						"x": 61,
+						"y": 1616,
 						"w": 51,
 						"h": 99
 					}
@@ -969,10 +1074,31 @@
 						"h": 83
 					},
 					"frame": {
-						"x": 3,
-						"y": 1495,
+						"x": 2,
+						"y": 1621,
 						"w": 52,
 						"h": 83
+					}
+				},
+				{
+					"filename": "runpriest10.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 26,
+						"y": 24,
+						"w": 61,
+						"h": 94
+					},
+					"frame": {
+						"x": 189,
+						"y": 1560,
+						"w": 61,
+						"h": 94
 					}
 				},
 				{
@@ -990,8 +1116,8 @@
 						"h": 57
 					},
 					"frame": {
-						"x": 121,
-						"y": 1543,
+						"x": 116,
+						"y": 1658,
 						"w": 74,
 						"h": 57
 					}
@@ -1011,10 +1137,31 @@
 						"h": 57
 					},
 					"frame": {
-						"x": 3,
-						"y": 1588,
+						"x": 2,
+						"y": 1719,
 						"w": 74,
 						"h": 57
+					}
+				},
+				{
+					"filename": "deathpaysan9.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 120,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 30,
+						"y": 97,
+						"w": 73,
+						"h": 23
+					},
+					"frame": {
+						"x": 2,
+						"y": 1780,
+						"w": 73,
+						"h": 23
 					}
 				},
 				{
@@ -1032,8 +1179,8 @@
 						"h": 40
 					},
 					"frame": {
-						"x": 3,
-						"y": 1651,
+						"x": 80,
+						"y": 1719,
 						"w": 74,
 						"h": 40
 					}
@@ -1053,8 +1200,8 @@
 						"h": 40
 					},
 					"frame": {
-						"x": 83,
-						"y": 1606,
+						"x": 80,
+						"y": 1763,
 						"w": 74,
 						"h": 40
 					}
@@ -1074,8 +1221,8 @@
 						"h": 27
 					},
 					"frame": {
-						"x": 163,
-						"y": 1606,
+						"x": 158,
+						"y": 1719,
 						"w": 73,
 						"h": 27
 					}
@@ -1095,8 +1242,8 @@
 						"h": 27
 					},
 					"frame": {
-						"x": 163,
-						"y": 1639,
+						"x": 158,
+						"y": 1750,
 						"w": 73,
 						"h": 27
 					}
@@ -1116,8 +1263,8 @@
 						"h": 27
 					},
 					"frame": {
-						"x": 163,
-						"y": 1639,
+						"x": 158,
+						"y": 1750,
 						"w": 73,
 						"h": 27
 					}
@@ -1137,8 +1284,8 @@
 						"h": 27
 					},
 					"frame": {
-						"x": 163,
-						"y": 1639,
+						"x": 158,
+						"y": 1750,
 						"w": 73,
 						"h": 27
 					}
@@ -1158,31 +1305,10 @@
 						"h": 27
 					},
 					"frame": {
-						"x": 163,
-						"y": 1639,
+						"x": 158,
+						"y": 1750,
 						"w": 73,
 						"h": 27
-					}
-				},
-				{
-					"filename": "deathpaysan9.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 30,
-						"y": 97,
-						"w": 73,
-						"h": 23
-					},
-					"frame": {
-						"x": 83,
-						"y": 1652,
-						"w": 73,
-						"h": 23
 					}
 				}
 			]
@@ -1191,6 +1317,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:85a3d1b8d76d7ae54f7711fe9341e618:b466475582e31cade3a6f265e7e4b04b:9b2a76c8b2a408b3f0547a4eddda1e06$"
+		"smartupdate": "$TexturePacker:SmartUpdate:2709a4bd6869631786cb57d483bdf39b:a40c05f9617b1d810a43f29b47510bef:9b2a76c8b2a408b3f0547a4eddda1e06$"
 	}
 }
