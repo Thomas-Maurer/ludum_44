@@ -26,6 +26,91 @@
         }
     }
 
+    .sun-icon {
+        position: fixed;
+        top: 0;
+        left: 0;
+        margin: 50px;
+
+        &.active {
+            animation-name: sunIconImpule;
+            animation-duration: 1s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+    }
+
+    @keyframes sunIconImpule {
+        0% {
+            transform: scale(1.0)
+        }
+
+        50% {
+            transform: scale(1.1)
+        }
+
+        100% {
+            transform: scale(1.0)
+        }
+    }
+
+    .boss-hp-container {
+        position: fixed;
+        top: 50px;
+        width: 100%;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .boss-hp {
+            position: relative;
+            width: 350px;
+            height: 20px;
+            border: 2px #000 solid;
+            background-color: #ccc;
+
+            .boss-icon {
+                position: absolute;
+                left: -25px;
+                z-index: 2;
+                margin-top: -20px;
+                height: 50px;
+
+                img {
+                    height: 100%;
+                }
+            }
+
+            .bar {
+                position: absolute;
+                left: 0;
+                height: 100%;
+                background-color: #9F1A1A;
+                animation-name: bossHpLight;
+                animation-duration: 1s;
+                animation-timing-function: linear;
+                animation-iteration-count: infinite;
+            }
+        }
+    }
+
+    @keyframes bossHpLight {
+        0% {
+            background-color: #9F1A1A;
+
+        }
+
+        50% {
+            background-color: red;
+        }
+
+        100% {
+            background-color: #9F1A1A;
+
+        }
+    }
+
     .icon {
         top: 0;
         left: 40%;

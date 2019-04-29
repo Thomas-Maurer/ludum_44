@@ -20,7 +20,8 @@ export default class AudioManager {
         HEARTH_BEAT: 'hearth_beat',
         PLAYER_HURT: 'hurt',
         PLAYER_GAIN_HP: 'gain_hp',
-        PLAYER_LOOSE_HP: 'loose_hp'
+        PLAYER_LOOSE_HP: 'loose_hp',
+        FART: 'fart'
     };
     /**
      * List of music (.mp3)
@@ -28,7 +29,9 @@ export default class AudioManager {
     public musicsList = {
         WORLD: 'world',
         CHURCH: 'church',
-        SHOP: 'shop'
+        SHOP: 'shop',
+        TITLE: 'title',
+        BOSS: 'boss'
     }
     constructor(scene: MainScene) {
 
@@ -39,7 +42,7 @@ export default class AudioManager {
             if (this.soundsList.hasOwnProperty(soundName)) {
                 const soundFileName = this.soundsList[soundName];
                 this.scene.load.audio(soundFileName, 'assets/sounds/' + soundFileName + '.wav');
-                console.log("Sound " + soundFileName + " loaded from " + soundFileName)
+                // console.log("Sound " + soundFileName + " loaded from " + soundFileName)
             }
         }
 
@@ -48,7 +51,7 @@ export default class AudioManager {
             if (this.musicsList.hasOwnProperty(soundName)) {
                 const soundFileName = this.musicsList[soundName];
                 this.scene.load.audio(soundFileName, 'assets/sounds/' + soundFileName + '.mp3');
-                console.log("Music " + soundFileName + " loaded from " + soundFileName)
+                // console.log("Music " + soundFileName + " loaded from " + soundFileName)
             }
         }
 
@@ -68,7 +71,8 @@ export default class AudioManager {
      */
     public playMusic(musicName: string, options?: SoundConfig) {
         //Stop if music can't play
-        if (!this.scene.musicCanPlay) {
+        //except for title music
+        if (!this.scene.musicCanPlay && musicName !== this.musicsList.TITLE) {
             return;
         }
         if (!options) {

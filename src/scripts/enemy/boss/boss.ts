@@ -40,13 +40,10 @@ export default class Boss extends Enemy implements IEnemy {
         this.world = world;
         this.initAnims();
         this.on('animationcomplete', (anim, frame) => {
-            console.log(anim.key)
             this.emit('animationcomplete_' + anim.key, anim, frame);
         });
 
         this.on('animationcomplete_' + this.GUID + 'Fight', () => {
-            console.log('penis')
-
             if (!this.isDead) {
                 if (this.currentPlayerInstance !== null) {
                     this.currentPlayerInstance.getDamageFromEnemy(this.info.damage);
@@ -59,6 +56,10 @@ export default class Boss extends Enemy implements IEnemy {
 
         this.on('animationcomplete_' + this.GUID + 'Hit', () => {
             this.isHit = false;
+        });
+
+        this.on('animationcomplete_' + this.GUID + 'Dead', () => {
+            this.scene.caliceSprite.visible = true;
         });
     }
 

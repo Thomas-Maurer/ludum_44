@@ -9,6 +9,7 @@ import VictoryItem from "../items/victoryItem";
 import EventsUtils from "../utils/events.utils";
 import ItemUtil from "../items/itemUtil";
 import Boss from "../enemy/boss/boss";
+import { PLAYER_ANIM } from "../player/animTabs";
 export default class MainScene extends Phaser.Scene {
   public bullets: any;
   public matterCollision: PhaserMatterCollisionPlugin;
@@ -22,9 +23,12 @@ export default class MainScene extends Phaser.Scene {
   public playerCatCollision: any;
   public itemsCat: any;
   public fps: any;
-  public sunSensors: any[];
+  public sunSensors: any[] = [];
+  public bossRooms: any[] = [];
+  public shopZone: any[] = [];
   public musicCanPlay: boolean = false;
   public win: boolean = false;
+  public caliceSprite: VictoryItem;
   private parralaxLayers: {
     static: {
       cloud: Phaser.GameObjects.TileSprite,
@@ -76,6 +80,7 @@ export default class MainScene extends Phaser.Scene {
     this.map = map.tileMap;
     this.shapes = this.cache.json.get('shapes');
     this.sunSensors = [];
+    this.bossRooms = [];
     const tileset = this.map.addTilesetImage('block', 'block');
     this.playerCatCollision = this.matter.world.nextCategory();
     this.itemsCat = this.matter.world.nextCategory();
@@ -85,6 +90,8 @@ export default class MainScene extends Phaser.Scene {
     this.generateParralaxLayers();
     const worldLayer = this.map.createStaticLayer('main_tile', tileset, 0, 0);
     const worldLayerCollide = this.map.createStaticLayer('collide', tileset, 0, 0);
+    worldLayer.depth = 1;
+    worldLayerCollide.depth = 2;
 
     this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
     this.matter.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
@@ -96,6 +103,7 @@ export default class MainScene extends Phaser.Scene {
     this.matter.world.convertTilemapLayer(worldLayerCollide);
     this.matter.world.convertTilemapLayer(worldLayer);
     this.player = this.spawnPlayer();
+    this.player.setDepth(3);
 
     this.enemies = new Enemies(this.map, this.matter.world, this);
 
@@ -113,8 +121,11 @@ export default class MainScene extends Phaser.Scene {
     this.addEventsListeners();
     this.generateItems();
     this.buildSunSensor();
+    this.buildShopSensor();
+    this.buildBossRoomSensor();
     this.buildTextSign();
-    this.audioManager.playMusic(this.audioManager.musicsList.WORLD);
+    this.generatePnj();
+    this.audioManager.playMusic(this.audioManager.musicsList.TITLE);
     this.boss = this.spawnBoss();
   }
 
@@ -162,6 +173,94 @@ export default class MainScene extends Phaser.Scene {
 
   }
 
+  buildShopSensor(): void {
+    // Create a sensor at the rectangle object created in Tiled (under the "sunSensor" layer)
+    this.map.findObject("sunSensor", (obj: any) => {
+      const shopZone = this.matter.add.rectangle(
+        obj.x + obj.width / 2,
+        obj.y + obj.height / 2,
+        obj.width,
+        obj.height,
+        {
+          isSensor: true, // It shouldn't physically interact with other bodies
+          isStatic: true // It shouldn't move
+        }
+      );
+      this.shopZone.push(shopZone);
+    });
+
+    this.matterCollision.addOnCollideStart({
+      objectA: this.player,
+      objectB: this.shopZone,
+      callback: (eventData: any) => {
+        this.player.emit('playerEnterShop');
+      },
+      context: this
+    });
+
+    this.matterCollision.addOnCollideEnd({
+      objectA: this.player,
+      objectB: this.shopZone,
+      callback: (eventData: any) => {
+        if (eventData.bodyA.isSensor) return; // We only care about collisions with physical objects
+        this.player.emit('playerLeaveShop');
+      },
+      context: this
+    });
+
+  }
+
+  generatePnj(): void {
+    const pnjAnim = this.player.generateFrameNames('pnj/merch/merch', 'all_sprites', 1, 5);
+    this.anims.create({ key: 'pnj/merch/merch', frames: pnjAnim, frameRate: 5, repeat: -1 });
+    // Create a sensor at the rectangle object created in Tiled (under the "boss_sensor" layer)
+    this.map.findObject("spawn_pnj", (obj: any) => {
+      const merchSprite = this.add.sprite((obj.x) + obj.width / 2, obj.y + obj.height / 2, 'all_sprites', 'pnj/merch/merch1.png');
+      this.add.existing(merchSprite);
+      merchSprite.play('pnj/merch/merch', true);
+    });
+  }
+
+  buildBossRoomSensor(): void {
+    // Create a sensor at the rectangle object created in Tiled (under the "boss_sensor" layer)
+    this.map.findObject("boss_sensor", (obj: any) => {
+      const bossRoom = this.matter.add.rectangle(
+        obj.x + obj.width / 2,
+        obj.y + obj.height / 2,
+        obj.width,
+        obj.height,
+        {
+          isSensor: true, // It shouldn't physically interact with other bodies
+          isStatic: true // It shouldn't move
+        }
+      );
+      const bossRoomSprite = this.add.sprite((obj.x + 8) + obj.width / 2, obj.y + obj.height / 2, 'all_sprites_background', 'background/boss_room.png');
+      bossRoomSprite.setDepth(0);
+      this.bossRooms.push(bossRoom);
+    });
+
+    this.matterCollision.addOnCollideStart({
+      objectA: this.player,
+      objectB: this.bossRooms,
+      callback: (eventData: any) => {
+        if (eventData.bodyA.isSensor) return; // We only care about collisions with physical objects
+        this.player.emit('playerEnterBossRoom');
+      },
+      context: this
+    });
+
+    this.matterCollision.addOnCollideEnd({
+      objectA: this.player,
+      objectB: this.bossRooms,
+      callback: (eventData: any) => {
+        if (eventData.bodyA.isSensor) return; // We only care about collisions with physical objects
+        this.player.emit('playerLeaveBossRoom');
+      },
+      context: this
+    });
+
+  }
+
   buildTextSign(): void {
     this.map.findObject('text_spawn', (obj: any) => {
       this.add.text(obj.x, obj.y, obj.text.text, {
@@ -202,6 +301,8 @@ export default class MainScene extends Phaser.Scene {
     // User clicked on play
     window.addEventListener('play', (e) => {
       this.musicCanPlay = true;
+      this.audioManager.playMusic(this.audioManager.musicsList.WORLD);
+      this.audioManager.playSound(this.audioManager.soundsList.FART);
     });
     window.addEventListener('restart', (e) => {
       this.restart();
@@ -218,22 +319,23 @@ export default class MainScene extends Phaser.Scene {
     }
     this.win = true;
     //TODO play win anim
-    console.log('you win !');
+
     //this.scene.restart();
     window.dispatchEvent(EventsUtils.PLAYER_WIN);
-
+    this.audioManager.playMusic(this.audioManager.musicsList.TITLE);
     this.audioManager.playSound(this.audioManager.soundsList.VICTORY);
   }
 
   private addCalice(): void {
     const spawnPoint: any = this.map.findObject("calice_spawn", (obj: any) => obj.name === "calice");
-    let caliceSprite = new VictoryItem(this.matter.world, this, spawnPoint.x, spawnPoint.y, 'all_sprites', 'items/calice1.png');
+    this.caliceSprite = new VictoryItem(this.matter.world, this, spawnPoint.x, spawnPoint.y, 'all_sprites', 'items/calice1.png');
     const caliceAnim = this.player.generateFrameNames('items/calice', 'all_sprites', 1, 2);
     this.anims.create({ key: 'caliceAnim', frames: caliceAnim, frameRate: 10, repeat: -1 });
-    caliceSprite.play('caliceAnim');
-    caliceSprite.setStatic(true);
-    caliceSprite.setCollisionCategory(1);
-    caliceSprite.setCollidesWith([this.playerCatCollision]);
+    this.caliceSprite.play('caliceAnim');
+    this.caliceSprite.visible = false;
+    this.caliceSprite.setStatic(true);
+    this.caliceSprite.setCollisionCategory(1);
+    this.caliceSprite.setCollidesWith([this.playerCatCollision]);
   }
   // Fct we call each frame
   /**
