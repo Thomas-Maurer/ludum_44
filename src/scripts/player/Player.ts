@@ -3,7 +3,7 @@ import { Enemy } from "../enemy/enemy";
 import MainScene from "../scenes/MainScene";
 import EventsUtils from "../utils/events.utils";
 import Item from "../items/item";
-import {PLAYER_ANIM} from "./animTabs";
+import { PLAYER_ANIM } from "./animTabs";
 import VictoryItem from "../items/victoryItem";
 import Vector2 = Phaser.Math.Vector2;
 
@@ -152,6 +152,17 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         }, this);
     }
 
+    private generateComboKeys(): void {
+        this.scene.input.keyboard.createCombo([this.playerControl.getControls().right, this.playerControl.getControls().right], { resetOnMatch: true });
+        this.scene.input.keyboard.createCombo([this.playerControl.getControls().left, this.playerControl.getControls().left], { resetOnMatch: true });
+        this.scene.input.keyboard.on('keycombomatch', function (event) {
+            console.log(this)
+            this.anims.play(PLAYER_ANIM.playerDash, true);
+            console.log(this.anims.currentAnim.key);
+
+        }, this);
+    }
+
     public addItemPlayerWantToBuy(item: Item): void {
         this.itemWantToBuy = item;
     }
@@ -255,7 +266,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
                         this.addItemPlayerWantToBuy(eventData.gameObjectB);
                         this.emit('playerbuyitem');
                     }
-                }else {
+                } else {
                     if (eventData.bodyB.isSensor === false) {
                         this.killPlayer();
                     }
@@ -338,9 +349,16 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.addPlayerTouchTargetEvent();
     }
 
+    /**
+     * Suck
+     */
     public suck() {
+        if (this.isSucking) {
+            return;
+        }
         this.isSucking = true;
-        this.anims.play('suck',true);
+        this.anims.play('suck', true);
+        this.scene.audioManager.playSound(this.scene.audioManager.soundsList.SUCK)
     }
 
 
