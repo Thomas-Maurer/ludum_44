@@ -123,7 +123,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
         if (bodyB.gameObject instanceof Player) {
             if (bodyB.gameObject.getAttackstate()) {
                 // player attack before
-            } else if (!this.isDead && !this.isHit) {
+            } else if (!this.isDead && !this.isHit && this.GUID !== EnemyGuid.PRIEST) {
                 this.attackPlayer(bodyA, bodyB.gameObject);
             }
         } else {

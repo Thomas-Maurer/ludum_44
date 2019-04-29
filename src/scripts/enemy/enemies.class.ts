@@ -14,7 +14,7 @@ export class Enemies {
      * Distance while the enemy will start update in px
      * @type {number}
      */
-    private DISTANCE_TO_PLAYER = 1920;
+    private DISTANCE_TO_PLAYER = 1500;
 
     private mapObject: any;
     private scene: any;
@@ -44,7 +44,7 @@ export class Enemies {
      */
     private initSpawns(world: Phaser.Physics.Matter.World, scene: MainScene) {
         this.initPeasantSpawn(world, scene);
-        this.initPriestSpawn(world, scene);
+        // this.initPriestSpawn(world, scene);
     }
 
     /**
