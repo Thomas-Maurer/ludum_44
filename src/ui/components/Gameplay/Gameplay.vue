@@ -1,6 +1,12 @@
 <template>
   <div class="gameplay" v-if="play && !dead && !win">
     <div class="dying-overlay" v-bind:class="{'active': playerHP <= 25}"></div>
+
+    <div class="sun-icon" v-bind:class="{'active': isInSun}">
+      <img src="../../../assets/graphics/ui/sun.png" v-show="!isInSun">
+      <img src="../../../assets/graphics/ui/sun_active.png" v-show="isInSun">
+    </div>
+
     <div class="boss-hp-container" v-show="bossBarEnabled">
       <div class="boss-hp">
         <div class="boss-icon">

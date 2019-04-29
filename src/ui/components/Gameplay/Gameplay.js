@@ -14,7 +14,8 @@ export default {
         'win',
         'bossHp',
         'bossHpPercent',
-        'bossBarEnabled'
+        'bossBarEnabled',
+        'isInSun'
     ]),
     data() {
         return {
@@ -36,6 +37,9 @@ export default {
             });
             window.addEventListener('PLAYER_POTION', (e) => {
                 this.$store.commit("setPotion", true);
+            });
+            window.addEventListener('PLAYER_SUN_STATE', (e) => {
+                this.$store.commit("setSun", e.detail);
             });
             window.addEventListener('PLAYER_UMBRELLA', (e) => {
                 this.$store.commit("setUmbrella", true);

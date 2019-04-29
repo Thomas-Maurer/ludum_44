@@ -39,6 +39,7 @@ export default {
             window.dispatchEvent(event);
             this.$store.commit("setDead", false);
             this.$store.commit("setWin", false);
+            this.$store.commit("setBossHp", 0);
         },
         handleEnterKey() {
             // Retry if player dead or won
