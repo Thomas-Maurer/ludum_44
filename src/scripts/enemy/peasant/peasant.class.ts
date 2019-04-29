@@ -48,10 +48,10 @@ export class Peasant extends Enemy implements IEnemy {
         const peasantDeadAnims = this.generateFrameNames(this.deadPeasantSpritePrefix, EnemiesEnum.SPRITE_SHEET_ID, 2, 9);
         const peasantHitAnims = this.generateFrameNames(this.deadPeasantSpritePrefix, EnemiesEnum.SPRITE_SHEET_ID, 2, 2);
 
-        this.scene.anims.create({ key: 'peasantRun', frames: peasantRunAnims, frameRate: 10, repeat: -1 });
-        this.scene.anims.create({ key: 'peasantFight', frames: peasantFightAnims, frameRate: 10, repeat: -1 });
-        this.scene.anims.create({ key: 'peasantDead', frames: peasantDeadAnims, frameRate: 5, repeat: 0 });
-        this.scene.anims.create({ key: 'peasantHit', frames: peasantHitAnims, frameRate: 10, repeat: 0 });
+        this.scene.anims.create({ key: this.GUID + 'Run', frames: peasantRunAnims, frameRate: 10, repeat: -1 });
+        this.scene.anims.create({ key: this.GUID + 'Fight', frames: peasantFightAnims, frameRate: 10, repeat: -1 });
+        this.scene.anims.create({ key: this.GUID + 'Dead', frames: peasantDeadAnims, frameRate: 5, repeat: 0 });
+        this.scene.anims.create({ key: this.GUID + 'Hit', frames: peasantHitAnims, frameRate: 10, repeat: 0 });
     }
 
     public suck() {
