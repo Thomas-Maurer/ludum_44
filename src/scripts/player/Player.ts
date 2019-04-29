@@ -180,6 +180,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         }, this);
 
         this.on('playerEnterBossRoom', () => {
+            this.scene.audioManager.playMusic(this.scene.audioManager.musicsList.BOSS)
         }, this);
 
         this.on('animationcomplete_playerAttack', function () {
@@ -211,8 +212,8 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.scene.anims.create({ key: PLAYER_ANIM.playerAttack, frames: playerAttackAnims, frameRate: 50 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerDeath, frames: playerDeathAnims, frameRate: 13 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerDash, frames: playerDashAnims, frameRate: 13 });
-        this.scene.anims.create({ key: PLAYER_ANIM.playerDrink, frames: playerVictoryAnims, frameRate: 10});
-        this.scene.anims.create({ key: PLAYER_ANIM.playerHit, frames: playerHitAnims, frameRate: 50});
+        this.scene.anims.create({ key: PLAYER_ANIM.playerDrink, frames: playerVictoryAnims, frameRate: 10 });
+        this.scene.anims.create({ key: PLAYER_ANIM.playerHit, frames: playerHitAnims, frameRate: 50 });
     }
 
     public getPlayerControl(): PlayerControls {
