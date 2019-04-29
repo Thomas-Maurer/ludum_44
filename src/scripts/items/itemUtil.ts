@@ -11,15 +11,14 @@ export default class ItemUtil {
      * generate random item on spawn
      */
     public generateItem(obj: any): void {
-        let boostItem = new BoostItem(this.scene.matter.world, this.scene, obj.x, obj.y, 'all_sprites', 'items/dashpotion1.png');
+        let itemSprite = new BoostItem(this.scene.matter.world, this.scene, obj.x, obj.y, 'all_sprites', 'items/dashpotion1.png');
         const itemAnim = this.scene.player.generateFrameNames('items/dashpotion', 'all_sprites', 1, 4);
         this.scene.anims.create({ key: 'dashpotionAnim', frames: itemAnim, frameRate: 5, repeat: -1 });
-        boostItem.play('dashpotionAnim');
-        boostItem.setDensity(50);
-        boostItem.setHpCost(10);
-        boostItem.setItemName('dashPotion');
+        itemSprite.play('dashpotionAnim');
+        itemSprite.setDensity(50);
+        itemSprite.setHpCost(10);
         // itemSprite.setStatic(true);
-        boostItem.setCollisionCategory(this.scene.itemsCat);
-        boostItem.setCollidesWith([this.scene.playerCatCollision, 1, this.scene.itemsCat]);
+        itemSprite.setCollisionCategory(this.scene.itemsCat);
+        itemSprite.setCollidesWith([this.scene.playerCatCollision, 1, this.scene.itemsCat]);
     }
 }
