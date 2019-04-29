@@ -235,13 +235,8 @@ export default class MainScene extends Phaser.Scene {
     }
 
     //Static bg
-
     //Cloud
     this.parralaxLayers.static.cloud.tilePositionX -= 0.5;
-
-
-    //Scene1 bg
-
     //bg far
     this.parralaxLayers.scene1.bg_far.setTilePosition(this.cameras.main.scrollX * 0.1, this.cameras.main.scrollY * 0.1)
     //this.parralaxLayers.scene1.foreground.setTilePosition(this.player.x, this.player.y);

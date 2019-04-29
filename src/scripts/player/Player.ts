@@ -198,6 +198,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
      * Handle Player collision
      */
     handleCollision(): void {
+        //Handle current collision
         this.scene.matterCollision.addOnCollideActive({
             objectA: this.getPlayerSprite(),
             callback: (eventData: any) => {
@@ -227,6 +228,16 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
                     }
                 }else {
                     //console.log(eventData.gameObjectB);
+                }
+            },
+            context: this
+        });
+        // Handle end of collision
+        this.scene.matterCollision.addOnCollideEnd({
+            objectA: this.getPlayerSprite(),
+            callback: (eventData: any) => {
+                if (eventData.gameObjectB !== undefined && eventData.gameObjectB instanceof Phaser.Tilemaps.Tile) {
+                    this.setPlayerInAirValue(true);
                 }
             },
             context: this
