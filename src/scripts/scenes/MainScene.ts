@@ -51,7 +51,7 @@ export default class MainScene extends Phaser.Scene {
 
   }
   preload() {
-    this.load.tilemapTiledJSON("map", "/assets/map/map_beta.json");
+    this.load.tilemapTiledJSON("map", "assets/map/map_beta.json");
     this.load.multiatlas('all_sprites', 'assets/graphics/map/backgrounds/spritesheet.json', 'assets/graphics/map/backgrounds');
     this.load.multiatlas('block', 'assets/graphics/map/backgrounds/block.json', 'assets/graphics/map/backgrounds');
     // Load body shapes from JSON file generated using PhysicsEditor
