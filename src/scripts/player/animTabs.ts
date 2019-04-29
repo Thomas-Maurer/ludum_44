@@ -17,3 +17,11 @@ export const PLAYER_ANIM_DONT_CANCEL: any = {
     suck: 'suck',
 
 };
+
+export const PLAYER_ANIM_ACTION: any = {
+    playerJump: 'playerJump',
+    playerAttack: 'playerAttack',
+    playerDash: 'playerDash',
+    suck: 'suck',
+
+};
