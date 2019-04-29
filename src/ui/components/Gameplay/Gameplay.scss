@@ -35,6 +35,8 @@
         align-items: center;
         justify-content: center;
 
+
+
         .boss-hp {
             position: relative;
             width: 350px;
@@ -42,12 +44,23 @@
             border: 2px #000 solid;
             background-color: #ccc;
 
+            .boss-icon {
+                position: absolute;
+                left: -25px;
+                z-index: 2;
+                margin-top: -20px;
+                height: 50px;
+
+                img {
+                    height: 100%;
+                }
+            }
+
             .bar {
                 position: absolute;
                 left: 0;
                 height: 100%;
                 background-color: #9F1A1A;
-                width: 20%;
                 animation-name: bossHpLight;
                 animation-duration: 1s;
                 animation-timing-function: linear;

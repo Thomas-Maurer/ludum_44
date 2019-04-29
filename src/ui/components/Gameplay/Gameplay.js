@@ -11,7 +11,10 @@ export default {
         'glass',
         'umbrella',
         'dead',
-        'win'
+        'win',
+        'bossHp',
+        'bossHpPercent',
+        'bossBarEnabled'
     ]),
     data() {
         return {
@@ -24,6 +27,9 @@ export default {
 
             window.addEventListener('PLAYER_HP', (e) => {
                 this.$store.commit("setPlayerHP", e.detail);
+            });
+            window.addEventListener('BOSS_HP', (e) => {
+                this.$store.commit("setBossHp", e.detail);
             });
             window.addEventListener('PLAYER_GLASS', (e) => {
                 this.$store.commit("setGlass", true);
