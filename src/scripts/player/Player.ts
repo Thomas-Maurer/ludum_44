@@ -15,7 +15,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     private jumpCooldownTimer: Phaser.Time.TimerEvent;
     private attackCooldownTimer: Phaser.Time.TimerEvent;
     private inAir: boolean;
-    private isInSun: boolean;
+    public isInSun: boolean;
     private willTakeSunDamage: Phaser.Time.TimerEvent;
     private healthPoint: number;
     private baseDamage: number;
@@ -26,8 +26,8 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     public doAction: boolean;
     private itemWantToBuy: Item;
     private allowDash: boolean;
-    private lookRight : boolean;
-    private lookLeft : boolean;
+    private lookRight: boolean;
+    private lookLeft: boolean;
     constructor(world: Phaser.Physics.Matter.World, scene: MainScene, x: number, y: number, key: string, frame?: string | integer, options?: object) {
         super(world, x, y, key, frame, options);
         this.scene = scene;
@@ -71,7 +71,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
 
     private dash(): void {
         if (this.allowDash) {
-            if (this.lookRight){
+            if (this.lookRight) {
                 this.setPosition(this.x + 100, this.y);
             } else {
                 this.setPosition(this.x - 100, this.y);
@@ -99,6 +99,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.once('animationcomplete_playerDeath', () => {
             window.dispatchEvent(EventsUtils.PLAYER_DEAD);
             this.scene.audioManager.playSound(this.scene.audioManager.soundsList.DEATH);
+            this.scene.audioManager.playingMusic.stop();
         }, this);
 
         this.on('animationcomplete_suck', () => {
@@ -139,7 +140,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.scene.anims.create({ key: PLAYER_ANIM.playerJump, frames: playerJumpAnims, frameRate: 9 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerAttack, frames: playerAttackAnims, frameRate: 50 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerDeath, frames: playerDeathAnims, frameRate: 13 });
-        this.scene.anims.create({ key: PLAYER_ANIM.playerDash, frames: playerDashAnims, frameRate: 13});
+        this.scene.anims.create({ key: PLAYER_ANIM.playerDash, frames: playerDashAnims, frameRate: 13 });
     }
 
     public getPlayerControl(): PlayerControls {
@@ -285,7 +286,17 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     }
 
     public disableSun(): void {
-        this.isInSun = !this.isInSun;
+        this.isInSun = false;
+        const audioManager = this.scene.audioManager;
+        audioManager.playingMusic.stop();
+        audioManager.playMusic(audioManager.musicsList.SHOP);
+    }
+
+    public enableSun(): void {
+        this.isInSun = true;
+        const audioManager = this.scene.audioManager;
+        audioManager.playingMusic.stop();
+        audioManager.playMusic(audioManager.musicsList.WORLD);
     }
 
     /**
@@ -308,7 +319,13 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
      * Show deathScreen
      */
     public killPlayer(): void {
+        //stop if already dead
+        if (this.isPlayerDead) {
+            return;
+        }
+        this.isPlayerDead = true;
         this.anims.play('playerDeath', true);
+        this.scene.audioManager.playSound(this.scene.audioManager.soundsList.PLAYER_DIE)
     }
 
     /**
