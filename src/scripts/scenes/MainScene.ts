@@ -21,6 +21,7 @@ export default class MainScene extends Phaser.Scene {
   public itemsCat: any;
   public fps: any;
   public sunSensors: any[];
+  public bossRooms: any[];
   public musicCanPlay: boolean = false;
   public win: boolean = false;
   private parralaxLayers: {
@@ -73,6 +74,7 @@ export default class MainScene extends Phaser.Scene {
     this.map = map.tileMap;
     this.shapes = this.cache.json.get('shapes');
     this.sunSensors = [];
+    this.bossRooms = [];
     const tileset = this.map.addTilesetImage('block', 'block');
     this.playerCatCollision = this.matter.world.nextCategory();
     this.itemsCat = this.matter.world.nextCategory();
@@ -152,6 +154,44 @@ export default class MainScene extends Phaser.Scene {
           this.player.enableSun();
         }
 
+      },
+      context: this
+    });
+
+  }
+
+  buildBossRoomSensor(): void {
+    // Create a sensor at the rectangle object created in Tiled (under the "boss_sensor" layer)
+    this.map.findObject("boss_sensor", (obj: any) => {
+      const bossRoom = this.matter.add.rectangle(
+          obj.x + obj.width / 2,
+          obj.y + obj.height / 2,
+          obj.width,
+          obj.height,
+          {
+            isSensor: true, // It shouldn't physically interact with other bodies
+            isStatic: true // It shouldn't move
+          }
+      );
+      this.bossRooms.push(bossRoom);
+    });
+
+    this.matterCollision.addOnCollideStart({
+      objectA: this.player,
+      objectB: this.bossRooms,
+      callback: (eventData: any) => {
+        if (eventData.bodyA.isSensor) return; // We only care about collisions with physical objects
+        this.player.emit('playerEnterBossRoom');
+      },
+      context: this
+    });
+
+    this.matterCollision.addOnCollideEnd({
+      objectA: this.player,
+      objectB: this.bossRooms,
+      callback: (eventData: any) => {
+        if (eventData.bodyA.isSensor) return; // We only care about collisions with physical objects
+        this.player.emit('playerLeaveBossRoom');
       },
       context: this
     });

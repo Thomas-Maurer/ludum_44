@@ -157,6 +157,28 @@
         }, 
         {
          "draworder":"topdown",
+         "id":15,
+         "name":"boss_sensor",
+         "objects":[
+                {
+                 "height":714,
+                 "id":69,
+                 "name":"boss_room",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":1730,
+                 "x":16896,
+                 "y":128
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":6,
          "name":"items",
          "objects":[
@@ -763,8 +785,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":15,
- "nextobjectid":69,
+ "nextlayerid":16,
+ "nextobjectid":71,
  "orientation":"orthogonal",
  "renderorder":"left-up",
  "tiledversion":"1.2.3",
