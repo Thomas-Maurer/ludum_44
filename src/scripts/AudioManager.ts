@@ -36,7 +36,7 @@ export default class AudioManager {
 
         // preload all musics
         for (const soundName in this.musicsList) {
-            if (this.soundsList.hasOwnProperty(soundName)) {
+            if (this.musicsList.hasOwnProperty(soundName)) {
                 const soundFileName = this.musicsList[soundName];
                 this.scene.load.audio(soundFileName, 'assets/sounds/' + soundFileName + '.mp3');
                 console.log("Music " + soundFileName + " loaded from " + soundFileName)

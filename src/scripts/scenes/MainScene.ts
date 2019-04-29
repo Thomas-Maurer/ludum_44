@@ -110,6 +110,7 @@ export default class MainScene extends Phaser.Scene {
     this.generateItems();
     this.buildSunSensor();
     this.buildTextSign();
+    this.audioManager.playMusic(this.audioManager.musicsList.WORLD);
   }
 
   buildSunSensor(): void {

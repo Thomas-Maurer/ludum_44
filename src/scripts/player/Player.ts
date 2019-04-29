@@ -26,8 +26,8 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     public doAction: boolean;
     private itemWantToBuy: Item;
     private allowDash: boolean;
-    private lookRight : boolean;
-    private lookLeft : boolean;
+    private lookRight: boolean;
+    private lookLeft: boolean;
     constructor(world: Phaser.Physics.Matter.World, scene: MainScene, x: number, y: number, key: string, frame?: string | integer, options?: object) {
         super(world, x, y, key, frame, options);
         this.scene = scene;
@@ -71,7 +71,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
 
     private dash(): void {
         if (this.allowDash) {
-            if (this.lookRight){
+            if (this.lookRight) {
                 this.setPosition(this.x + 100, this.y);
             } else {
                 this.setPosition(this.x - 100, this.y);
@@ -99,6 +99,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.once('animationcomplete_playerDeath', () => {
             window.dispatchEvent(EventsUtils.PLAYER_DEAD);
             this.scene.audioManager.playSound(this.scene.audioManager.soundsList.DEATH);
+            this.scene.audioManager.playingMusic.stop();
         }, this);
 
         this.on('animationcomplete_suck', () => {
@@ -139,7 +140,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.scene.anims.create({ key: PLAYER_ANIM.playerJump, frames: playerJumpAnims, frameRate: 9 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerAttack, frames: playerAttackAnims, frameRate: 50 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerDeath, frames: playerDeathAnims, frameRate: 13 });
-        this.scene.anims.create({ key: PLAYER_ANIM.playerDash, frames: playerDashAnims, frameRate: 13});
+        this.scene.anims.create({ key: PLAYER_ANIM.playerDash, frames: playerDashAnims, frameRate: 13 });
     }
 
     public getPlayerControl(): PlayerControls {
