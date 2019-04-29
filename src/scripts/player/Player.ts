@@ -422,12 +422,20 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.isInSun = false;
         const audioManager = this.scene.audioManager;
         audioManager.playMusic(audioManager.musicsList.SHOP);
+        const sunEvent: CustomEvent = new CustomEvent("PLAYER_SUN_STATE", {
+            detail: false
+        });
+        window.dispatchEvent(sunEvent);
     }
 
     public enableSun(): void {
         this.isInSun = true;
         const audioManager = this.scene.audioManager;
         audioManager.playMusic(audioManager.musicsList.WORLD);
+        const sunEvent: CustomEvent = new CustomEvent("PLAYER_SUN_STATE", {
+            detail: true
+        });
+        window.dispatchEvent(sunEvent);
     }
 
     /**

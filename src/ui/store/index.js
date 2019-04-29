@@ -16,6 +16,7 @@ export default new Vuex.Store({
         bossHp: 50,
         bossHpPercent: 100,
         bossBarEnabled: false,
+        isInSun: false
     },
     mutations: {
         setPlay(state, value) {
@@ -30,6 +31,9 @@ export default new Vuex.Store({
         setPotion(state, value) {
             state.potion = value;
         },
+        setSun(state, value) {
+            state.isInSun = value;
+        },
         setUmbrella(state, value) {
             state.umbrella = value;
         },
@@ -42,7 +46,13 @@ export default new Vuex.Store({
         setBossHp(state, value) {
             state.bossHp = value;
             state.bossHpPercent = (value / state.bossBaseHp) * 100;
+            //disable bar if 0 hp
+            if (value === 0) {
+                state.bossBarEnabled = false;
+                return;
+            }
             state.bossBarEnabled = true;
+
         }
     },
     actions: {
