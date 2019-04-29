@@ -211,10 +211,12 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     update() {
         if (this.isPlayerDead) {
             this.killPlayer();
+        } else {
+            this.handleActions();
+            this.handleSun();
+            this.handleSuckText();
         }
-        this.handleActions();
-        this.handleSun();
-        this.handleSuckText();
+
     }
 
     /**

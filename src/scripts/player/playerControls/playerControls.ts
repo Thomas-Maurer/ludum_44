@@ -140,7 +140,7 @@ export class PlayerControls {
             this.scene.audioManager.playSound(this.scene.audioManager.soundsList.HIT);
             player.enableAttackState();
         }
-        if (this.cursors.right.isDown && !player.isTouching.right) {
+        if (this.cursors.right.isDown && !player.isTouching.right && !player.isSucking) {
             player.setLookRight(true);
             if (player.anims.currentAnim !== null && PLAYER_ANIM_ACTION.hasOwnProperty(player.anims.currentAnim.key)) {
             } else {
@@ -149,7 +149,7 @@ export class PlayerControls {
 
             player.getPlayerSprite().setFlipX(false);
             player.getPlayerSprite().applyForce(this.forceVector);
-        } else if (this.cursors.left.isDown && !player.isTouching.left) {
+        } else if (this.cursors.left.isDown && !player.isTouching.left && !player.isSucking) {
             player.setLookLeft(true);
             if (player.anims.currentAnim !== null && PLAYER_ANIM_ACTION.hasOwnProperty(player.anims.currentAnim.key)) {
             } else {

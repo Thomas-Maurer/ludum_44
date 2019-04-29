@@ -17,6 +17,7 @@ export default class MainScene extends Phaser.Scene {
   public audioManager: AudioManager;
   public playerCatCollision: any;
   public itemsCat: any;
+  public fps: any;
   public sunSensors: any[];
   public musicCanPlay: boolean = false;
   public win: boolean = false;
@@ -47,6 +48,7 @@ export default class MainScene extends Phaser.Scene {
     super({
       key: "MainScene",
     });
+    this.fps = 60;
 
     this.win = false;
 
