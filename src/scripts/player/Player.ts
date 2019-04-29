@@ -5,6 +5,7 @@ import EventsUtils from "../utils/events.utils";
 import Item from "../items/item";
 import { PLAYER_ANIM } from "./animTabs";
 import VictoryItem from "../items/victoryItem";
+import Vector2 = Phaser.Math.Vector2;
 
 export default class Player extends Phaser.Physics.Matter.Sprite {
     private playerControl: PlayerControls;
@@ -39,9 +40,9 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         const body = matterEngine.Matter.Bodies.rectangle(x, y, 55, 95, { chamfer: { radius: 12 } });
 
         this.sensors = {
-            bottom: matterEngine.Matter.Bodies.rectangle(x, y + 95*0.53, this.width * 0.25, this.width * 0.05, { isSensor: true }),
-            left: matterEngine.Matter.Bodies.rectangle(x - 55*0.53, y, 9, this.height * 0.25, { isSensor: true }),
-            right: matterEngine.Matter.Bodies.rectangle(x + 55*0.53, y, 9, this.height * 0.25, { isSensor: true })
+            bottom: matterEngine.Matter.Bodies.rectangle(x, y + 95 * 0.53, 55 , this.width * 0.05, { isSensor: true }),
+            left: matterEngine.Matter.Bodies.rectangle(x - 55 * 0.53, y, 9, this.height * 0.25, { isSensor: true }),
+            right: matterEngine.Matter.Bodies.rectangle(x + 55 * 0.53, y, 9, this.height * 0.25, { isSensor: true })
         };
 
         const compoundBody = matterEngine.Matter.Body.create({
@@ -55,8 +56,17 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.initDefaultValue();
         this.generateAnim();
         this.generateEventHandler();
+        this.handleCollision();
         // Before matter's update, reset our record of which surfaces the player is touching.
         scene.matter.world.on("beforeupdate", this.resetTouching, this);
+    }
+
+    public enablePowerUp(item: Item): void {
+
+        if (item.getNameItem() === 'dashPotion') {
+            this.allowDash = true;
+        }
+
     }
 
     private resetTouching(): void {
@@ -76,7 +86,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.inAir = true;
         this.healthPoint = 100;
         this.baseDamage = 1;
-        this.isInSun = true;
+        this.isInSun = false;
         this.isPlayerDead = false;
         this.doAction = false;
         this.allowDash = false;
@@ -96,9 +106,14 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     private dash(): void {
         if (this.allowDash) {
             if (this.lookRight) {
-                this.setPosition(this.x + 100, this.y);
+                let force = new Vector2(0.5, 0)
+                this.applyForce(force);
+
+                // this.setPosition(this.x + 100, this.y);
             } else {
-                this.setPosition(this.x - 100, this.y);
+                let force = new Vector2(-0.5, 0)
+                this.applyForce(force);
+                // this.setPosition(this.x - 100, this.y);
             }
         }
     }
@@ -123,7 +138,6 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.once('animationcomplete_playerDeath', () => {
             window.dispatchEvent(EventsUtils.PLAYER_DEAD);
             this.scene.audioManager.playSound(this.scene.audioManager.soundsList.DEATH);
-            this.scene.audioManager.playingMusic.stop();
         }, this);
 
         this.on('animationcomplete_suck', () => {
@@ -141,6 +155,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.on('playerbuyitem', () => {
             this.doAction = false;
             if (this.itemWantToBuy !== null && this.itemWantToBuy !== undefined) {
+                this.enablePowerUp(this.itemWantToBuy);
                 this.takeDamage(this.itemWantToBuy.getHpCost());
                 this.itemWantToBuy.destroy();
                 this.itemWantToBuy = null;
@@ -196,11 +211,12 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     update() {
         if (this.isPlayerDead) {
             this.killPlayer();
+        } else {
+            this.handleActions();
+            this.handleSun();
+            this.handleSuckText();
         }
-        this.handleCollision();
-        this.handleActions();
-        this.handleSun();
-        this.handleSuckText();
+
     }
 
     /**
@@ -246,7 +262,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
 
             this.suckHintText.setColor("#000000");
             this.suckHintText.setBackgroundColor("#ffffff");
-            this.suckHintText.setText("Press [E] to suck");
+            this.suckHintText.setText("Press [E] to suck his blood");
             this.suckHintText.setPosition(this.x - 50, this.y - 100);
 
 
@@ -308,6 +324,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.scene.matterCollision.addOnCollideActive({
             objectA: this.getPlayerSprite(),
             callback: (eventData: any) => {
+                if (eventData.bodyA.isSensor) return; // We only care about collisions with physical objects
                 this.canSuck = false;
                 if (eventData.gameObjectB !== undefined && eventData.gameObjectB instanceof Phaser.Tilemaps.Tile) {
                     this.setPlayerInAirValue(false);
@@ -373,14 +390,12 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     public disableSun(): void {
         this.isInSun = false;
         const audioManager = this.scene.audioManager;
-        audioManager.playingMusic.stop();
         audioManager.playMusic(audioManager.musicsList.SHOP);
     }
 
     public enableSun(): void {
         this.isInSun = true;
         const audioManager = this.scene.audioManager;
-        audioManager.playingMusic.stop();
         audioManager.playMusic(audioManager.musicsList.WORLD);
     }
 

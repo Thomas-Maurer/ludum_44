@@ -19,6 +19,7 @@ export default class MainScene extends Phaser.Scene {
   public itemsCat: any;
   public fps: any;
   public sunSensors: any[];
+  public musicCanPlay: boolean = false;
   public win: boolean = false;
   private parralaxLayers: {
     static: {
@@ -77,14 +78,16 @@ export default class MainScene extends Phaser.Scene {
 
     this.generateParralaxLayers();
     const worldLayer = this.map.createStaticLayer('main_tile', tileset, 0, 0);
+    const worldLayerCollide = this.map.createStaticLayer('collide', tileset, 0, 0);
 
     this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
     this.matter.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
-    worldLayer.setCollisionByProperty({ collide: true });
+    worldLayerCollide.setCollisionByProperty({ collide: true });
 
     // Get the layers registered with Matter. Any colliding tiles will be given a Matter body. We
     // haven't mapped out custom collision shapes in Tiled so each colliding tile will get a default
     // rectangle body (similar to AP).
+    this.matter.world.convertTilemapLayer(worldLayerCollide);
     this.matter.world.convertTilemapLayer(worldLayer);
     this.player = this.spawnPlayer();
 
@@ -124,19 +127,21 @@ export default class MainScene extends Phaser.Scene {
       this.sunSensors.push(sunSensor);
     });
 
-    // this.matterCollision.addOnCollideStart({
-    //   objectA: this.player,
-    //   objectB: this.sunSensors,
-    //   callback: () => {
-    //     this.player.disableSun()
-    //   },
-    //   context: this
-    // });
+    this.matterCollision.addOnCollideStart({
+      objectA: this.player,
+      objectB: this.sunSensors,
+      callback: (eventData: any) => {
+        if (eventData.bodyA.isSensor) return; // We only care about collisions with physical objects
+        this.player.disableSun()
+      },
+      context: this
+    });
 
     this.matterCollision.addOnCollideEnd({
       objectA: this.player,
       objectB: this.sunSensors,
-      callback: () => {
+      callback: (eventData: any) => {
+        if (eventData.bodyA.isSensor) return; // We only care about collisions with physical objects
         if (this.player.isInSun) {
           this.player.disableSun()
         }
@@ -182,6 +187,10 @@ export default class MainScene extends Phaser.Scene {
    * listen for external events
    */
   private addEventsListeners() {
+    // User clicked on play
+    window.addEventListener('play', (e) => {
+      this.musicCanPlay = true;
+    });
     window.addEventListener('restart', (e) => {
       this.restart();
     });

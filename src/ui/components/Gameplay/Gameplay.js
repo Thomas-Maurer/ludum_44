@@ -13,7 +13,8 @@ export default {
     ]),
     data() {
         return {
-            listen: false
+            listen: false,
+
         }
     },
     methods: {

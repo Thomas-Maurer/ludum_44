@@ -115,6 +115,9 @@ export class PlayerControls {
                 player.getPlayerSprite().setVelocity(-0.3);
             }
         } else {
+            if (body.velocity.y <= -11) {
+                player.getPlayerSprite().setVelocity(-11);
+            }
             //Player touch the ground
             this.negativeforceVector = new Vector2(-0.1, 0);
             this.forceVector = new Vector2(0.1, 0);
@@ -175,8 +178,8 @@ export class PlayerControls {
     }
 
     private generateComboKeys(player: Player): void {
-        this.scene.input.keyboard.createCombo([ this.getControls().right, this.getControls().right ], { resetOnMatch: true });
-        this.scene.input.keyboard.createCombo([ this.getControls().left, this.getControls().left ], { resetOnMatch: true });
+        this.scene.input.keyboard.createCombo([ this.getControls().right, this.getControls().right ], { resetOnMatch: true, maxKeyDelay: 500 });
+        this.scene.input.keyboard.createCombo([ this.getControls().left, this.getControls().left ], { resetOnMatch: true, maxKeyDelay: 500 });
         this.scene.input.keyboard.on('keycombomatch', function () {
             if (this.allowDash) {
                 this.anims.play(PLAYER_ANIM.playerDash);
