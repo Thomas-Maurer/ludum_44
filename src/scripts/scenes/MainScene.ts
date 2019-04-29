@@ -21,9 +21,9 @@ export default class MainScene extends Phaser.Scene {
   public playerCatCollision: any;
   public itemsCat: any;
   public fps: any;
-  public sunSensors: any[];
-  public bossRooms: any[];
-  public shopZone: any[];
+  public sunSensors: any[] = [];
+  public bossRooms: any[] = [];
+  public shopZone: any[] = [];
   public musicCanPlay: boolean = false;
   public win: boolean = false;
   private parralaxLayers: {
