@@ -22,6 +22,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     private isAttacking: boolean;
     private doingDamage: boolean;
     public isSucking: boolean;
+    private currentEnemyDead: Enemy;
     private isPlayerDead: boolean;
     public doAction: boolean;
     private itemWantToBuy: Item;
@@ -102,6 +103,8 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         }, this);
 
         this.on('animationcomplete_suck', () => {
+            this.currentEnemyDead.destroySprite();
+            this.anims.play(PLAYER_ANIM.playerIdle);
             this.isSucking = false;
         });
 
@@ -133,7 +136,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         const playerSuckAnims = this.generateFrameNames('vampire/vampdrink', 'all_sprites', 1, 5);
         const playerDashAnims = this.generateFrameNames('vampire/dash', 'all_sprites', 1, 4);
 
-        this.scene.anims.create({ key: PLAYER_ANIM.suck, frames: playerSuckAnims, frameRate: 10, repeat: 0 });
+        this.scene.anims.create({ key: PLAYER_ANIM.suck, frames: playerSuckAnims, frameRate: 5});
         this.scene.anims.create({ key: PLAYER_ANIM.playerRun, frames: playerRunAnims, frameRate: 10, repeat: -1 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerIdle, frames: playerIdleAnims, frameRate: 10, repeat: -1 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerJump, frames: playerJumpAnims, frameRate: 9 });
@@ -251,7 +254,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
                     }
                     if (this.doAction && eventData.gameObjectB.isDead) {
                         this.doAction = false;
-                        this.suck();
+                        this.suck(eventData.gameObjectB);
                     }
 
                 } else if (eventData.gameObjectB instanceof VictoryItem) {
@@ -350,10 +353,11 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     /**
      * Suck
      */
-    public suck() {
+    public suck(enemyDead: Enemy): void {
         if (this.isSucking) {
             return;
         }
+        this.currentEnemyDead = enemyDead;
         this.isSucking = true;
         this.anims.play('suck', true);
         this.scene.audioManager.playSound(this.scene.audioManager.soundsList.SUCK)

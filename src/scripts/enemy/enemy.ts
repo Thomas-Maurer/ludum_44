@@ -160,6 +160,13 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy{
     }
 
     /**
+     * Destroy sprite
+     */
+    public destroySprite() {
+        this.destroy();
+    }
+
+    /**
      * Add a dead sensor to the corps
      */
     private addDeadSensor(): void {

@@ -63,10 +63,14 @@ export class Enemies {
      * Check if player is 2000px to the enemy for update
      */
     public updateAllEnemies(playerX: number): void {
-        for (let enemy of this.listOfEnemies) {
+        for (let index = 0; index < this.listOfEnemies.length; index++) {
+            let enemy = this.listOfEnemies[index];
+            if (enemy.isDead) {
+                this.listOfEnemies.splice(index, 1);
+                continue;
+            }
             if (enemy.x + this.DISTANCE_TO_PLAYER >= playerX && enemy.x - this.DISTANCE_TO_PLAYER <= playerX) {
                 enemy.update();
-
             } else {
                 if (enemy.anims.isPlaying) {
                     enemy.stopAllAnims();
