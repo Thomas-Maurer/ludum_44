@@ -22,7 +22,7 @@ export default class Boss extends Enemy implements IEnemy {
      * Sprite prefix for fight
      * @type {string}
      */
-    private readonly fightBossSpritePrefix = 'boss/fight';
+    private readonly fightBossSpritePrefix = 'boss/fightboss';
     /**
      * First frame to show
      * @type {string}
@@ -39,6 +39,27 @@ export default class Boss extends Enemy implements IEnemy {
         super(world, scene, x, y, EnemiesEnum.SPRITE_SHEET_BOSS, Boss.firstSpriteSheet);
         this.world = world;
         this.initAnims();
+        this.on('animationcomplete', (anim, frame) => {
+            console.log(anim.key)
+            this.emit('animationcomplete_' + anim.key, anim, frame);
+        });
+
+        this.on('animationcomplete_' + this.GUID + 'Fight', () => {
+            console.log('penis')
+
+            if (!this.isDead) {
+                if (this.currentPlayerInstance !== null) {
+                    this.currentPlayerInstance.getDamageFromEnemy(this.info.damage);
+                }
+                this.isDoingAnAction = false;
+                this.anims.play(this.GUID + 'Run', true);
+                this.isRunning = true;
+            }
+        });
+
+        this.on('animationcomplete_' + this.GUID + 'Hit', () => {
+            this.isHit = false;
+        });
     }
 
     /**
@@ -51,8 +72,8 @@ export default class Boss extends Enemy implements IEnemy {
         });
         // add sensor
         this.sensors = {
-            left: matterEngine.Matter.Bodies.rectangle(x - 50, y, 20, 50, { isSensor: true, label: 'left' }),
-            right: matterEngine.Matter.Bodies.rectangle(x + 50, y, 20, 50, { isSensor: true, label: 'right' })
+            left: matterEngine.Matter.Bodies.rectangle(x - 125, y, 50, 150, { isSensor: true, label: 'left' }),
+            right: matterEngine.Matter.Bodies.rectangle(x + 125, y, 50, 150, { isSensor: true, label: 'right' })
         };
 
         const compoundBody = matterEngine.Matter.Body.create({
@@ -77,9 +98,9 @@ export default class Boss extends Enemy implements IEnemy {
         const BossHitAnims = this.generateFrameNames(this.deadBossSpritePrefix, EnemiesEnum.SPRITE_SHEET_BOSS, 2, 2);
 
         this.scene.anims.create({ key: this.GUID + 'Run', frames: BossRunAnims, frameRate: 10, repeat: -1 });
-        this.scene.anims.create({ key: this.GUID + 'Fight', frames: BossFightAnims, frameRate: 20, repeat: -1 });
+        this.scene.anims.create({ key: this.GUID + 'Fight', frames: BossFightAnims, frameRate: 20 });
         this.scene.anims.create({ key: this.GUID + 'Dead', frames: BossDeadAnims, frameRate: 5, repeat: 0 });
-        this.scene.anims.create({ key: this.GUID + 'Hit', frames: BossRunAnims, frameRate: 10, repeat: 0 });
+        this.scene.anims.create({ key: this.GUID + 'Hit', frames: BossHitAnims, frameRate: 10, repeat: 0 });
     }
 
     /**
@@ -115,7 +136,6 @@ export default class Boss extends Enemy implements IEnemy {
         // console.log(map.isExistTile(tileX/64, tileY/64));
 
         if (!map.isExistTile(tileX/64, tileY/64)) {
-            console.log('jexiste');
             this.currentDirection = this.currentDirection * -1;
             this.currentVelocity = this.currentVelocity * -1;
             this.setFlipX(this.currentDirection === -1);
