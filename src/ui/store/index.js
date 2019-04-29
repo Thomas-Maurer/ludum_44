@@ -11,7 +11,6 @@ export default new Vuex.Store({
         win: false,
         potion: false,
         glass: false,
-
         umbrella: false
     },
     mutations: {

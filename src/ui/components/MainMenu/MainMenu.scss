@@ -1,5 +1,5 @@
 .main-menu {
-    user-select: none;
+    user-select: none !important;
     position: absolute;
     top: 0;
     left: 0;
@@ -31,16 +31,84 @@
     }
 
     .game-title {
-        font-size: 3rem;
+        opacity: 0;
+        transform: scale(1.5);
+        height: 40%;
+        animation-name: gameTitleAnim;
+        animation-duration: 1.5s;
+        animation-delay: 1s;
+        animation-fill-mode: forwards;
+
+
+        img {
+            height: 100%;
+            animation-name: gameTitleBreath;
+            animation-duration: 11s;
+            animation-delay: 2s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
     }
 
-    .loading-block {
+
+
+    @keyframes gameTitleAnim {
+        from {
+            opacity: 0;
+            transform: scale(1.5);
+        }
+
+        to {
+            opacity: 1.0;
+            transform: scale(1.0)
+        }
+    }
+
+    @keyframes gameTitleBreath {
+        0% {
+            transform: scale(1.0);
+        }
+
+        50% {
+            transform: scale(1.1)
+        }
+
+        100% {
+            transform: scale(1.0)
+        }
+    }
+
+    .credits {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        margin: 10px;
+        font-family: Arial;
+        color: #4b4b4b;
+
+        h1 {
+            font-size: 0.8rem;
+            margin: 0;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+
+            li {
+                font-size: 0.7rem;
+            }
+        }
+    }
+
+    .continue-block {
         margin: 30px;
         font-size: 2rem;
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        animation: flash 1s infinite;
 
         .loading-label {
             opacity: 0;
@@ -48,7 +116,7 @@
 
             &.active {
                 opacity: 1.0;
-                animation: flash 1s infinite;
+
             }
         }
 
@@ -75,43 +143,52 @@
 
     }
 
-    .controls-block {
-
-        color: #fff;
-        border: 1px #ccc solid;
+    .tutorial-block {
         display: flex;
-        padding: 20px;
 
-        .game-title {
-            font-size: 1.5rem;
+        .lore-block {
+            max-width: 250px;
+            margin-right: 75px;
         }
 
+        .controls-block {
 
-
-        .control-type {
+            color: #fff;
+            border: 1px #ccc solid;
             display: flex;
-            flex-direction: column;
-            margin: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            padding: 20px;
 
-            .control-label {
-                margin-top: 20px;
+            .game-title {
+                font-size: 1.5rem;
             }
 
-            .potion-icon {
-                width: 45px;
-                height: 45px;
-                background-image: url('../../../assets/graphics/ui/bloodpotion.png');
-                background-size: auto 100%;
-                background-position: -720px 0px;
+            .control-type {
+                display: flex;
+                flex-direction: column;
+                margin: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                .control-label {
+                    margin-top: 20px;
+                }
+
+                .potion-icon {
+                    width: 45px;
+                    height: 45px;
+                    background-image: url('../../../assets/graphics/ui/bloodpotion.png');
+                    background-size: auto 100%;
+                    background-position: -720px 0px;
+                }
             }
+
+
+
         }
-
-
-
     }
+
+
 
 
 
