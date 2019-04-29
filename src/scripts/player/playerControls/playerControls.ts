@@ -4,7 +4,7 @@ import Vector2 = Phaser.Math.Vector2;
 import KeyCodes = Phaser.Input.Keyboard.KeyCodes;
 import MainScene from "../../scenes/MainScene";
 import AudioManager from "../../AudioManager";
-import {PLAYER_ANIM, PLAYER_ANIM_DONT_CANCEL} from "../animTabs";
+import { PLAYER_ANIM, PLAYER_ANIM_ACTION, PLAYER_ANIM_DONT_CANCEL } from "../animTabs";
 
 export class PlayerControls {
     private cursors: any;
@@ -17,11 +17,12 @@ export class PlayerControls {
     private audioManager: AudioManager;
     private negativeforceVector: Vector2;
     private forceVector: Vector2;
-    constructor(scene: MainScene) {
+    constructor(scene: MainScene, player: Player) {
         this.initDefaultKeys();
         this.mappingKeys(scene);
         this.scene = scene;
         this.audioManager = this.scene.audioManager;
+        this.generateComboKeys(player);
     }
 
     /**
@@ -93,7 +94,7 @@ export class PlayerControls {
             });
     }
 
-    public getControls(): any{
+    public getControls(): any {
         return this.cursors;
     }
 
@@ -103,7 +104,7 @@ export class PlayerControls {
      * @param body
      */
 
-    private handlePlayerControlInAir(player: Player, body: any): void{
+    private handlePlayerControlInAir(player: Player, body: any): void {
         if (!player.isPlayerInTheAir()) {
             // Player is in the Air
             this.forceVector = new Vector2(0.1, 0);
@@ -131,21 +132,24 @@ export class PlayerControls {
         this.handlePlayerControlInAir(player, body);
 
 
-        if (this.cursors.attack.isDown) {
-            player.anims.play(PLAYER_ANIM.playerAttack,true);
+        if (this.cursors.attack.isDown && player.canAttack) {
+            player.anims.play(PLAYER_ANIM.playerAttack, true);
+            this.scene.audioManager.playSound(this.scene.audioManager.soundsList.HIT);
             player.enableAttackState();
         }
 
-        if(this.cursors.right.isDown){
-            if (player.anims.currentAnim !== null && (player.anims.currentAnim.key === 'playerJump' || player.anims.currentAnim.key === 'playerAttack')) {
+        if (this.cursors.right.isDown) {
+            player.setLookRight(true);
+            if (player.anims.currentAnim !== null && PLAYER_ANIM_ACTION.hasOwnProperty(player.anims.currentAnim.key)) {
             } else {
                 player.anims.play(PLAYER_ANIM.playerRun, true);
             }
 
             player.getPlayerSprite().setFlipX(false);
             player.getPlayerSprite().applyForce(this.forceVector);
-        } else if(this.cursors.left.isDown){
-            if (player.anims.currentAnim !== null && (player.anims.currentAnim.key === 'playerJump' || player.anims.currentAnim.key === 'playerAttack')) {
+        } else if (this.cursors.left.isDown) {
+            player.setLookLeft(true);
+            if (player.anims.currentAnim !== null && PLAYER_ANIM_ACTION.hasOwnProperty(player.anims.currentAnim.key)) {
             } else {
                 player.anims.play(PLAYER_ANIM.playerRun, true);
                 //this.audioManager.playSound(this.audioManager.soundsList.PLAYER_FOOTSTEP);
@@ -161,15 +165,25 @@ export class PlayerControls {
             }
             player.getPlayerSprite().setVelocityX(0);
         }
-        if(this.cursors.action.isDown) {
+        if (this.cursors.action.isDown) {
             player.doAction = true;
         }
         if (this.cursors.up.isDown && player.getCanJump() && !player.isPlayerInTheAir()) {
             player.anims.play(PLAYER_ANIM.playerJump, true);
-            //this.audioManager.playSound(this.audioManager.soundsList.PLAYER_JUMP);
+            this.audioManager.playSound(this.audioManager.soundsList.PLAYER_JUMP);
             player.desactivateJump();
-            player.getPlayerSprite().setVelocityY(-11);
+            player.getPlayerSprite().setVelocityY(-18);
         }
+    }
+
+    private generateComboKeys(player: Player): void {
+        this.scene.input.keyboard.createCombo([ this.getControls().right, this.getControls().right ], { resetOnMatch: true });
+        this.scene.input.keyboard.createCombo([ this.getControls().left, this.getControls().left ], { resetOnMatch: true });
+        this.scene.input.keyboard.on('keycombomatch', function () {
+            if (this.allowDash) {
+                this.anims.play(PLAYER_ANIM.playerDash);
+            }
+        }, player);
     }
 
 }
