@@ -34,12 +34,20 @@
     </div>
     <div class="death-screen" v-if="dead">
       <h1>YOU ARE DEAD</h1>
-      <div class="btn replay-btn" @click="retry()">RETRY</div>
+      <div class="replay-info">
+        Press
+        <img src="../../../assets/graphics/ui/enter.png" alt>
+        to retry
+      </div>
     </div>
 
     <div class="win-screen" v-if="win">
       <h1>YOU WON</h1>
-      <div class="btn replay-btn" @click="retry()">REPLAY</div>
+      <div class="replay-info">
+        Press
+        <img src="../../../assets/graphics/ui/enter.png" alt>
+        to replay
+      </div>
     </div>
   </div>
 </template>
