@@ -17,6 +17,8 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
      */
     private currentDirection: number = 1;
 
+    public currentPlayerInstance: Player;
+
     protected scene: MainScene;
 
     public isRunning = false;
@@ -73,6 +75,11 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
             callback: this.onSensorCollide,
             context: this
         });
+        this.scene.matterCollision.addOnCollideEnd({
+            objectA: [this.sensors.left, this.sensors.right],
+            callback: () => this.currentPlayerInstance = null,
+            context: this
+        });
     }
 
     /**
@@ -90,8 +97,10 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
         // the player doesn't move.
         if (bodyB.isSensor ) return; // We only care about collisions with physical objects
         if (bodyB.gameObject instanceof Player) {
-            if (!this.isDead && !this.isHit) {
-                this.attackPlayer(bodyA);
+            if (bodyB.gameObject.getAttackstate()) {
+                // player attack before
+            } else if (!this.isDead && !this.isHit) {
+                this.attackPlayer(bodyA, bodyB.gameObject);
             }
         } else {
             if (bodyA === this.sensors.left) {
@@ -153,8 +162,6 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
             this.isRunning = true;
         }
 
-        // this.attackPlayer();
-
         // mak the enemy pnj always move
         this.setVelocityCustom();
     }
@@ -162,7 +169,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
     /**
      * Attack player
      */
-    private attackPlayer(bodyA: any): void {
+    private attackPlayer(bodyA: any, playerInstance: Player): void {
         if (bodyA === this.sensors.left) {
             if (this.currentDirection !== -1) {
                 this.currentDirection = -1;
@@ -178,6 +185,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
         }
         this.isDoingAnAction = true;
         this.anims.play(this.GUID + 'Fight', true);
+        this.currentPlayerInstance = playerInstance;
     }
 
     /**
@@ -271,8 +279,9 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
         if (this.isHit || this.isDead) {
             return;
         }
-        this.info.life = this.info.life - damage;
+        this.currentPlayerInstance = null;
 
+        this.info.life = this.info.life - damage;
         if (this.info.life <= 0) {
             this.isDead = true;
             this.setStatic(true);
@@ -282,7 +291,6 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
         } else {
             this.stopAllAnims();
             this.isHit = true;
-            console.log(this.isHit);
             this.isRunning = false;
             this.anims.play(this.GUID + 'Hit', true);
         }

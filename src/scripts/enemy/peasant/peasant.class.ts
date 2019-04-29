@@ -20,7 +20,7 @@ export class Peasant extends Enemy implements IEnemy {
      * Sprite prefix for fight
      * @type {string}
      */
-    private readonly fightPeasantSpritePrefix = 'fightpaysan';
+    private readonly fightPeasantSpritePrefix = 'speedfightpaysan';
     /**
      * First frame to show
      * @type {string}
@@ -45,6 +45,9 @@ export class Peasant extends Enemy implements IEnemy {
 
         this.on('animationcomplete_' + this.GUID + 'Fight', () => {
             if (!this.isDead) {
+                if (this.currentPlayerInstance !== null) {
+                    this.currentPlayerInstance.getDamageFromEnemy(this.info.damage);
+                }
                 this.isDoingAnAction = false;
                 this.anims.play(this.GUID + 'Run', true);
                 this.isRunning = true;
@@ -52,7 +55,6 @@ export class Peasant extends Enemy implements IEnemy {
         });
 
         this.on('animationcomplete_' + this.GUID + 'Hit', () => {
-            console.log('hitfinish');
             this.isHit = false;
         });
     }
@@ -68,7 +70,7 @@ export class Peasant extends Enemy implements IEnemy {
 
         this.scene.anims.create({ key: this.GUID + 'Run', frames: peasantRunAnims, frameRate: 10, repeat: -1 });
         this.scene.anims.create({ key: this.GUID + 'Fight', frames: peasantFightAnims, frameRate: 10});
-        this.scene.anims.create({ key: this.GUID + 'Dead', frames: peasantDeadAnims, frameRate: 5});
+        this.scene.anims.create({ key: this.GUID + 'Dead', frames: peasantDeadAnims, frameRate: 8});
         this.scene.anims.create({ key: this.GUID + 'Hit', frames: peasantHitAnims, frameRate: 1});
     }
 }
