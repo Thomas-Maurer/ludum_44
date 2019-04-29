@@ -5,7 +5,6 @@ import EventsUtils from "../utils/events.utils";
 import Item from "../items/item";
 import { PLAYER_ANIM } from "./animTabs";
 import VictoryItem from "../items/victoryItem";
-import Vector2 = Phaser.Math.Vector2;
 
 export default class Player extends Phaser.Physics.Matter.Sprite {
     private playerControl: PlayerControls;
@@ -27,16 +26,29 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     public doAction: boolean;
     private itemWantToBuy: Item;
     private allowDash: boolean;
-    private lookRight: boolean;
-    private lookLeft: boolean;
+    private lookRight : boolean;
+    private lookLeft : boolean;
+    private sensors: any;
     constructor(world: Phaser.Physics.Matter.World, scene: MainScene, x: number, y: number, key: string, frame?: string | integer, options?: object) {
         super(world, x, y, key, frame, options);
         this.scene = scene;
         const matterEngine: any = Phaser.Physics.Matter;
-        const body = matterEngine.Matter.Bodies.rectangle(x, y, 55, 100, { chamfer: { radius: 10 } });
-        this.setExistingBody(body);
-        scene.add.existing(this);
+        let body = matterEngine.Matter.Bodies.rectangle(x, y, 55, 95, { chamfer: { radius: 8 } });
 
+        this.sensors = {
+            bottom: matterEngine.Matter.Bodies.rectangle(x, y, this.height * 0.45, this.width * 0.05, { isSensor: true }),
+            left: matterEngine.Matter.Bodies.rectangle(x, y, 2, this.height * 0.5, { isSensor: true }),
+            right: matterEngine.Matter.Bodies.rectangle(x, y, 2, this.height * 0.5, { isSensor: true })
+        };
+
+        const compoundBody = matterEngine.Matter.Body.create({
+            parts: [body, this.sensors.bottom, this.sensors.left, this.sensors.right],
+            frictionStatic: 0,
+            frictionAir: 0.02,
+            friction: 0.1
+        });
+        this.setExistingBody(compoundBody);
+        scene.add.existing(this);
         this.initDefaultValue();
         this.generateAnim();
         this.generateEventHandler();
@@ -50,7 +62,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.canJump = true;
         this.canAttack = true;
         this.setFixedRotation();
-        this.setFriction(0, 0.05, 0);
+        //this.setFriction(0, 0.05, 0);
         this.inAir = true;
         this.healthPoint = 100;
         this.baseDamage = 1;
@@ -275,7 +287,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
                         this.addItemPlayerWantToBuy(eventData.gameObjectB);
                         this.emit('playerbuyitem');
                     }
-                } else {
+                }else {
                     if (eventData.bodyB.isSensor === false) {
                         this.killPlayer();
                     }

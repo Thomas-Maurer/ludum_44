@@ -172,15 +172,17 @@ export class PlayerControls {
             player.anims.play(PLAYER_ANIM.playerJump, true);
             this.audioManager.playSound(this.audioManager.soundsList.PLAYER_JUMP);
             player.desactivateJump();
-            player.getPlayerSprite().setVelocityY(-11);
+            player.getPlayerSprite().setVelocityY(-18);
         }
     }
 
     private generateComboKeys(player: Player): void {
-        this.scene.input.keyboard.createCombo([this.getControls().right, this.getControls().right], { resetOnMatch: true });
-        this.scene.input.keyboard.createCombo([this.getControls().left, this.getControls().left], { resetOnMatch: true });
-        this.scene.input.keyboard.on('keycombomatch', function (event) {
-            this.anims.play(PLAYER_ANIM.playerDash);
+        this.scene.input.keyboard.createCombo([ this.getControls().right, this.getControls().right ], { resetOnMatch: true });
+        this.scene.input.keyboard.createCombo([ this.getControls().left, this.getControls().left ], { resetOnMatch: true });
+        this.scene.input.keyboard.on('keycombomatch', function () {
+            if (this.allowDash) {
+                this.anims.play(PLAYER_ANIM.playerDash);
+            }
         }, player);
     }
 
