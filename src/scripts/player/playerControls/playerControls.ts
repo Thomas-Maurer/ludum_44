@@ -132,8 +132,9 @@ export class PlayerControls {
         this.handlePlayerControlInAir(player, body);
 
 
-        if (this.cursors.attack.isDown) {
+        if (this.cursors.attack.isDown && player.canAttack) {
             player.anims.play(PLAYER_ANIM.playerAttack, true);
+            this.scene.audioManager.playSound(this.scene.audioManager.soundsList.HIT);
             player.enableAttackState();
         }
 

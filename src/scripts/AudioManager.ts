@@ -13,7 +13,8 @@ export default class AudioManager {
         DEATH: 'death',
         SUCK: 'suck',
         PEASANT_DIE: 'peasantDie',
-        PLAYER_DIE: 'playerDie'
+        PLAYER_DIE: 'playerDie',
+        HIT: 'hit'
     };
     /**
      * List of music (.mp3)
