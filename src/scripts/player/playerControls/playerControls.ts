@@ -59,6 +59,22 @@ export class PlayerControls {
     }
 
     /**
+     * CHange the attack control key
+     * @param value
+     */
+    public changeAttackKey(value: KeyCodes): void {
+        this.attackInput = value;
+    }
+
+    /**
+     * CHange the action control key
+     * @param value
+     */
+    public changeActionKey(value: KeyCodes): void {
+        this.actionInput = value;
+    }
+
+    /**
      * Map the Keys to the events
      * @param scene
      */
