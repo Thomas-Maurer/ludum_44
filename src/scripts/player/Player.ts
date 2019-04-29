@@ -4,6 +4,7 @@ import MainScene from "../scenes/MainScene";
 import EventsUtils from "../utils/events.utils";
 import Item from "../items/item";
 import {PLAYER_ANIM} from "./animTabs";
+import VictoryItem from "../items/victoryItem";
 
 export default class Player extends Phaser.Physics.Matter.Sprite {
     private playerControl: PlayerControls;
@@ -132,6 +133,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         if (this.isPlayerDead) {
             this.killPlayer();
         }
+        this.handleCollision();
         this.handleActions();
         this.handleSun();
     }
@@ -190,6 +192,45 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
             }, [], this);
         }
 
+    }
+
+    /**
+     * Handle Player collision
+     */
+    handleCollision(): void {
+        this.scene.matterCollision.addOnCollideActive({
+            objectA: this.getPlayerSprite(),
+            callback: (eventData: any) => {
+                if (eventData.gameObjectB !== undefined && eventData.gameObjectB instanceof Phaser.Tilemaps.Tile) {
+                    this.setPlayerInAirValue(false);
+                } else if (eventData.gameObjectB instanceof Enemy) {
+                    if (this.getAttackstate()) {
+                        this.emit('playertouchtarget', eventData.gameObjectB);
+                    }
+
+                    if (this.doAction && eventData.gameObjectB.isDead) {
+                        console.log('suck');
+                        this.doAction = false;
+                        this.suck();
+                    }
+
+                } else if (eventData.gameObjectB instanceof VictoryItem) {
+                    //TriggerVictory
+                    console.log(eventData.gameObjectB);
+                    eventData.gameObjectB.destroy();
+                    this.scene.triggerVictory();
+                } else if (eventData.gameObjectB instanceof Item) {
+                    if (this.doAction) {
+                        this.doAction = false;
+                        this.addItemPlayerWantToBuy(eventData.gameObjectB);
+                        this.emit('playerbuyitem');
+                    }
+                }else {
+                    //console.log(eventData.gameObjectB);
+                }
+            },
+            context: this
+        });
     }
 
     public disableSun(): void {

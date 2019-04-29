@@ -105,47 +105,10 @@ export default class MainScene extends Phaser.Scene {
       },
       context: this // Context to apply to the callback function
     });
-    this.handleCollision();
     this.addCalice();
     this.addEventsListeners();
     this.generateItems();
     this.buildSunSensor();
-  }
-
-  handleCollision(): void {
-    this.matterCollision.addOnCollideActive({
-      objectA: this.player.getPlayerSprite(),
-      callback: (eventData: any) => {
-        if (eventData.gameObjectB !== undefined && eventData.gameObjectB instanceof Phaser.Tilemaps.Tile) {
-          this.player.setPlayerInAirValue(false);
-        } else if (eventData.gameObjectB instanceof Enemy) {
-          if (this.player.getAttackstate()) {
-            this.player.emit('playertouchtarget', eventData.gameObjectB);
-          }
-
-          if (this.player.doAction && eventData.gameObjectB.isDead) {
-            console.log('suck');
-            this.player.doAction = false;
-            this.player.suck();
-          }
-
-        } else if (eventData.gameObjectB instanceof VictoryItem) {
-          //TriggerVictory
-          console.log(eventData.gameObjectB);
-          eventData.gameObjectB.destroy();
-          this.triggerVictory();
-        } else if (eventData.gameObjectB instanceof Item) {
-          if (this.player.doAction) {
-            this.player.doAction = false;
-            this.player.addItemPlayerWantToBuy(eventData.gameObjectB);
-            this.player.emit('playerbuyitem');
-          }
-        }else {
-          //console.log(eventData.gameObjectB);
-        }
-      },
-      context: this
-    });
   }
 
   buildSunSensor(): void {
@@ -206,9 +169,9 @@ export default class MainScene extends Phaser.Scene {
   /**
    * Trigger the victory of the player
    */
-  private triggerVictory(): void {
+  public triggerVictory(): void {
     //TODO play win anim
-    console.log('you win !')
+    console.log('you win !');
     //this.scene.restart();
     window.dispatchEvent(EventsUtils.PLAYER_WIN);
     this.audioManager.playSound(this.audioManager.soundsList.VICTORY);
