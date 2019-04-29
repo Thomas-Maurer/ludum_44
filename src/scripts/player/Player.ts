@@ -6,7 +6,7 @@ import Item from "../items/item";
 import { PLAYER_ANIM } from "./animTabs";
 import VictoryItem from "../items/victoryItem";
 import Vector2 = Phaser.Math.Vector2;
-import { PeasantInfo } from "../enemy/peasant/peasant-info.enum";
+import { BossInfo } from "../enemy/Boss/Boss-info.enum";
 
 export default class Player extends Phaser.Physics.Matter.Sprite {
     private playerControl: PlayerControls;
@@ -34,6 +34,8 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     private lookLeft: boolean;
     private sensors: any;
     public isTouching: any;
+    public glasses: boolean;
+
     constructor(world: Phaser.Physics.Matter.World, scene: MainScene, x: number, y: number, key: string, frame?: string | integer, options?: object) {
         super(world, x, y, key, frame, options);
         this.scene = scene;
@@ -67,6 +69,8 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
 
         if (item.getNameItem() === 'dashPotion') {
             this.allowDash = true;
+        } else if (item.getNameItem() === 'glasses') {
+            this.glasses = true;
         }
 
     }
@@ -92,6 +96,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.isPlayerDead = false;
         this.doAction = false;
         this.allowDash = false;
+        this.glasses = false;
         this.isTouching = { left: false, right: false, ground: false };
     }
 
@@ -129,12 +134,28 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         }, this);
 
         this.on('animationcomplete_playerJump', function () {
-            this.anims.play(PLAYER_ANIM.playerIdle);
+                this.anims.play(PLAYER_ANIM.playerIdle);
+        }, this);
+
+        this.on('animationcomplete_playerJumpGlasses', function () {
+                this.anims.play(PLAYER_ANIM.playerIdleGlasses);
+        }, this);
+
+        this.on('animationcomplete_playerHit', function () {
+            if (this.glasses) {
+                this.anims.play(PLAYER_ANIM.playerIdleGlasses);
+            } else {
+                this.anims.play(PLAYER_ANIM.playerIdle);
+            }
         }, this);
 
         this.on('animationcomplete_playerDash', function () {
             this.dash();
-            this.anims.play(PLAYER_ANIM.playerIdle);
+            if (this.glasses) {
+                this.anims.play(PLAYER_ANIM.playerIdleGlasses);
+            } else {
+                this.anims.play(PLAYER_ANIM.playerIdle);
+            }
         }, this);
 
         this.on('animationcomplete_playerDrink', function () {
@@ -149,7 +170,11 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.on('animationcomplete_suck', () => {
             this.gainDamage(this.currentEnemyDead.info.gain / 5);
             this.currentEnemyDead.destroySprite();
-            this.anims.play(PLAYER_ANIM.playerIdle);
+            if (this.glasses) {
+                this.anims.play(PLAYER_ANIM.playerIdleGlasses);
+            } else {
+                this.anims.play(PLAYER_ANIM.playerIdle);
+            }
             this.isSucking = false;
             this.currentEnemyDead = null;
         });
@@ -173,8 +198,34 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
             this.anims.play(PLAYER_ANIM.playerDrink);
         }, this);
 
+        this.on('playerLeaveBossRoom', () => {
+        }, this);
+
+        this.on('playerEnterBossRoom', () => {
+            this.scene.audioManager.playMusic(this.scene.audioManager.musicsList.BOSS)
+            //send an event to display the boss hp to the player on the ui
+            const bossHpEvent: CustomEvent = new CustomEvent("BOSS_HP", {
+                detail: BossInfo.LIFE
+            });
+            window.dispatchEvent(bossHpEvent);
+        }, this);
+
+        this.on('playerLeaveShop', () => {
+            this.scene.audioManager.playMusic(this.scene.audioManager.musicsList.WORLD);
+        }, this);
+
+        this.on('playerEnterShop', () => {
+            this.scene.audioManager.playMusic(this.scene.audioManager.musicsList.SHOP);
+        }, this);
+
         this.on('animationcomplete_playerAttack', function () {
             this.anims.play(PLAYER_ANIM.playerIdle);
+            //TODO Player attack system
+            this.disableAttackState();
+        }, this);
+
+        this.on('animationcomplete_playerAttackGlasses', function () {
+            this.anims.play(PLAYER_ANIM.playerIdleGlasses);
             //TODO Player attack system
             this.disableAttackState();
         }, this);
@@ -191,8 +242,14 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         const playerAttackAnims = this.generateFrameNames('vampire/fightvamp', 'all_sprites', 9, 19);
         const playerDeathAnims = this.generateFrameNames('vampire/deathvamp', 'all_sprites', 1, 7);
         const playerSuckAnims = this.generateFrameNames('vampire/vampdrink', 'all_sprites', 1, 5);
+        const playerHitAnims = this.generateFrameNames('vampire/hitvamp', 'all_sprites', 1, 5);
         const playerDashAnims = this.generateFrameNames('vampire/dash', 'all_sprites', 1, 4);
         const playerVictoryAnims = this.generateFrameNames('vampire/drink', 'all_sprites', 1, 14);
+
+        const playerGlassesOnAttackAnims = this.generateFrameNames('vampire/lunettes/glassesfightvamp', 'all_sprites', 1, 19);
+        const playerGlassesOnJumpAnims = this.generateFrameNames('vampire/lunettes/glassesjumpvamp', 'all_sprites', 1, 7);
+        const playerGlassesOnRunAnims = this.generateFrameNames('vampire/lunettes/glassesrunvampright', 'all_sprites', 1, 10);
+        const playerGlassesOnIdleAnims = this.generateFrameNames('vampire/lunettes/glassesfightvamp', 'all_sprites', 1, 9);
 
         this.scene.anims.create({ key: PLAYER_ANIM.suck, frames: playerSuckAnims, frameRate: 5 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerRun, frames: playerRunAnims, frameRate: 10, repeat: -1 });
@@ -201,7 +258,13 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.scene.anims.create({ key: PLAYER_ANIM.playerAttack, frames: playerAttackAnims, frameRate: 50 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerDeath, frames: playerDeathAnims, frameRate: 13 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerDash, frames: playerDashAnims, frameRate: 13 });
-        this.scene.anims.create({ key: PLAYER_ANIM.playerDrink, frames: playerVictoryAnims, frameRate: 10});
+        this.scene.anims.create({ key: PLAYER_ANIM.playerDrink, frames: playerVictoryAnims, frameRate: 10 });
+        this.scene.anims.create({ key: PLAYER_ANIM.playerHit, frames: playerHitAnims, frameRate: 50 });
+
+        this.scene.anims.create({ key: PLAYER_ANIM.playerIdleGlasses, frames: playerGlassesOnIdleAnims, frameRate: 10 });
+        this.scene.anims.create({ key: PLAYER_ANIM.playerRunGlasses, frames: playerGlassesOnRunAnims, frameRate: 10 });
+        this.scene.anims.create({ key: PLAYER_ANIM.playerAttackGlasses, frames: playerGlassesOnAttackAnims, frameRate: 50 });
+        this.scene.anims.create({ key: PLAYER_ANIM.playerJumpGlasses, frames: playerGlassesOnJumpAnims, frameRate: 12 });
     }
 
     public getPlayerControl(): PlayerControls {
@@ -300,11 +363,17 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
                 this.willTakeSunDamage = null;
             }
         }
+        let sunDamage = 1;
+        let delaySunDamage = 1000;
 
         if (this.isInSun && !this.willTakeSunDamage) {
+            // If we have glasses just double the time before we take sun damage
+            if (this.glasses) {
+                delaySunDamage = delaySunDamage * 2;
+            }
             //  The same as above, but uses a method signature to declare it (shorter, and compatible with GSAP syntax)
-            this.willTakeSunDamage = this.scene.time.delayedCall(1000, () => {
-                this.takeDamage(1);
+            this.willTakeSunDamage = this.scene.time.delayedCall(delaySunDamage, () => {
+                this.takeDamage(sunDamage);
                 this.willTakeSunDamage.remove();
                 this.willTakeSunDamage = null;
 
@@ -402,26 +471,30 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
 
     public disableSun(): void {
         this.isInSun = false;
-        const audioManager = this.scene.audioManager;
-        audioManager.playMusic(audioManager.musicsList.SHOP);
+        const sunEvent: CustomEvent = new CustomEvent("PLAYER_SUN_STATE", {
+            detail: false
+        });
+        window.dispatchEvent(sunEvent);
     }
 
     public enableSun(): void {
         this.isInSun = true;
-        const audioManager = this.scene.audioManager;
-        audioManager.playMusic(audioManager.musicsList.WORLD);
+        const sunEvent: CustomEvent = new CustomEvent("PLAYER_SUN_STATE", {
+            detail: true
+        });
+        window.dispatchEvent(sunEvent);
     }
 
     /**
      * Take damage
      */
     private takeDamage(damage: number) {
-        console.log("Player take " + damage + " damages");
         this.healthPoint -= damage;
         const playerHpEvent: CustomEvent = new CustomEvent("PLAYER_HP", {
             detail: this.healthPoint
         });
         window.dispatchEvent(playerHpEvent);
+
 
         //play a sound if less than 25 hp
         if (this.healthPoint <= 25) {
@@ -437,6 +510,8 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
      * @param damage
      */
     public getDamageFromEnemy(damage: number): void {
+        this.scene.audioManager.playSound(this.scene.audioManager.soundsList.PLAYER_HURT);
+        this.anims.play(PLAYER_ANIM.playerHit);
         this.takeDamage(damage);
     }
 
@@ -445,7 +520,6 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
      * @param gain
      */
     private gainDamage(gain: number): void {
-        console.log("Player win " + gain + " damages");
         this.healthPoint += gain;
         if (this.healthPoint > 100) {
             this.healthPoint = 100;

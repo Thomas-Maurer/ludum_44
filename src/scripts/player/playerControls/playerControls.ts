@@ -136,7 +136,11 @@ export class PlayerControls {
 
 
         if (this.cursors.attack.isDown && player.canAttack) {
-            player.anims.play(PLAYER_ANIM.playerAttack, true);
+            if (player.glasses) {
+                player.anims.play(PLAYER_ANIM.playerAttackGlasses, true);
+            } else {
+                player.anims.play(PLAYER_ANIM.playerAttack, true);
+            }
             this.scene.audioManager.playSound(this.scene.audioManager.soundsList.HIT);
             player.enableAttackState();
         }
@@ -144,7 +148,11 @@ export class PlayerControls {
             player.setLookRight(true);
             if (player.anims.currentAnim !== null && PLAYER_ANIM_ACTION.hasOwnProperty(player.anims.currentAnim.key)) {
             } else {
-                player.anims.play(PLAYER_ANIM.playerRun, true);
+                if (player.glasses) {
+                    player.anims.play(PLAYER_ANIM.playerRunGlasses, true);
+                } else {
+                    player.anims.play(PLAYER_ANIM.playerRun, true);
+                }
             }
 
             player.getPlayerSprite().setFlipX(false);
@@ -153,7 +161,11 @@ export class PlayerControls {
             player.setLookLeft(true);
             if (player.anims.currentAnim !== null && PLAYER_ANIM_ACTION.hasOwnProperty(player.anims.currentAnim.key)) {
             } else {
-                player.anims.play(PLAYER_ANIM.playerRun, true);
+                if (player.glasses) {
+                    player.anims.play(PLAYER_ANIM.playerRunGlasses, true);
+                } else {
+                    player.anims.play(PLAYER_ANIM.playerRun, true);
+                }
                 //this.audioManager.playSound(this.audioManager.soundsList.PLAYER_FOOTSTEP);
             }
             player.getPlayerSprite().setFlipX(true);
@@ -162,7 +174,11 @@ export class PlayerControls {
             if (player.anims.currentAnim !== null && PLAYER_ANIM_DONT_CANCEL.hasOwnProperty(player.anims.currentAnim.key)) {
             } else {
                 player.doAction = false;
-                player.anims.play(PLAYER_ANIM.playerIdle, true);
+                if (player.glasses) {
+                    player.anims.play(PLAYER_ANIM.playerIdleGlasses, true);
+                } else {
+                    player.anims.play(PLAYER_ANIM.playerIdle, true);
+                }
             }
             player.getPlayerSprite().setVelocityX(0);
         }
@@ -170,7 +186,11 @@ export class PlayerControls {
             player.doAction = true;
         }
         if (this.cursors.up.isDown && player.getCanJump() && !player.isPlayerInTheAir() && player.isTouching.ground) {
-            player.anims.play(PLAYER_ANIM.playerJump, true);
+            if (player.glasses) {
+                player.anims.play(PLAYER_ANIM.playerJumpGlasses, true);
+            } else {
+                player.anims.play(PLAYER_ANIM.playerJump, true);
+            }
             this.audioManager.playSound(this.audioManager.soundsList.PLAYER_JUMP);
             player.desactivateJump();
             player.getPlayerSprite().setVelocityY(-13);

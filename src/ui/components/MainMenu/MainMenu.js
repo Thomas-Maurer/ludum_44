@@ -5,7 +5,8 @@ export default {
     name: "MainMenu",
     data() {
         return {
-            loading: true
+            loading: true,
+            tutorial: false
         }
     },
     computed: mapState([
@@ -38,6 +39,7 @@ export default {
             window.dispatchEvent(event);
             this.$store.commit("setDead", false);
             this.$store.commit("setWin", false);
+            this.$store.commit("setBossHp", 0);
         },
         handleEnterKey() {
             // Retry if player dead or won
@@ -47,7 +49,13 @@ export default {
             }
 
             //set play if not already playing
+
+
             if (!this.play) {
+                if (!this.tutorial) {
+                    this.tutorial = true;
+                    return;
+                }
                 this.setPlay();
                 return;
             }
@@ -61,6 +69,6 @@ export default {
         this.initEventsListeners();
         setTimeout(() => {
             this.loading = false;
-        }, 5000);
+        }, 10000);
     },
 };
