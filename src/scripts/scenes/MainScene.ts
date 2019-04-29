@@ -11,10 +11,12 @@ import ItemUtil from "../items/itemUtil";
 import Boss from "../enemy/boss/boss";
 import { PLAYER_ANIM } from "../player/animTabs";
 export default class MainScene extends Phaser.Scene {
+  public bullets: any;
   public matterCollision: PhaserMatterCollisionPlugin;
   public map: Phaser.Tilemaps.Tilemap;
   public itemUtil: ItemUtil;
   public player: Player;
+  public static PLAYER_CAT;
   public shapes: any;
   public boss: Boss;
   public audioManager: AudioManager;
@@ -72,6 +74,7 @@ export default class MainScene extends Phaser.Scene {
     }
   }
   create() {
+
     /** Build all layers maps */
     const map = Map.getInstance(this.add.tilemap('map'));
     this.map = map.tileMap;
@@ -105,6 +108,7 @@ export default class MainScene extends Phaser.Scene {
     this.enemies = new Enemies(this.map, this.matter.world, this);
 
     this.player.setCollisionCategory(this.playerCatCollision);
+    MainScene.PLAYER_CAT = this.playerCatCollision;
     // 1 is the collision category of the tile with tiled
     this.player.setCollidesWith([1, this.enemies.collisionCat, this.itemsCat]);
 
@@ -402,6 +406,5 @@ export default class MainScene extends Phaser.Scene {
     this.updateParralax();
     this.enemies.updateAllEnemies(this.player.x);
     this.boss.update();
-
   }
 }

@@ -7,6 +7,7 @@ import { PLAYER_ANIM } from "./animTabs";
 import VictoryItem from "../items/victoryItem";
 import Vector2 = Phaser.Math.Vector2;
 import { BossInfo } from "../enemy/Boss/Boss-info.enum";
+import {Bullet} from "../enemy/priest/bullet.class";
 
 export default class Player extends Phaser.Physics.Matter.Sprite {
     private playerControl: PlayerControls;
@@ -436,7 +437,6 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
                         this.emit('playerbuyitem');
                     }
                 } else {
-
                     if (eventData.bodyB.isSensor === false) {
                         this.killPlayer();
                     }
@@ -457,7 +457,11 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     }
 
     onSensorCollide(eventdata) {
-        if (eventdata.bodyB.isSensor) return; // We only care about collisions with physical objects
+        if (eventdata.bodyB.isSensor) return;
+        if ( eventdata.gameObjectB instanceof Bullet) {
+            this.takeDamage(eventdata.gameObjectB.DAMAGE);
+            eventdata.gameObjectB.destroy();
+        }// We only care about collisions with physical objects
         if (eventdata.bodyA === this.sensors.left && eventdata.gameObjectB instanceof Phaser.Tilemaps.Tile && !this.isTouching.left) {
             this.isTouching.left = true;
             if (eventdata.pair.separation > 0.5) this.x += eventdata.pair.separation - 0.5;
