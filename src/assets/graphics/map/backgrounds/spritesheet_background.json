@@ -1,0 +1,241 @@
+{
+	"textures": [
+		{
+			"image": "spritesheet_background-0.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 4096,
+				"h": 3840
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "background/static/sky.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 2000,
+						"h": 960
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 2000,
+						"h": 960
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 2000,
+						"h": 960
+					}
+				},
+				{
+					"filename": "background/static/sun.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 2000,
+						"h": 960
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 2000,
+						"h": 960
+					},
+					"frame": {
+						"x": 2000,
+						"y": 0,
+						"w": 2000,
+						"h": 960
+					}
+				},
+				{
+					"filename": "background/scene1/crypte.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 2000,
+						"h": 960
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 2000,
+						"h": 960
+					},
+					"frame": {
+						"x": 0,
+						"y": 960,
+						"w": 2000,
+						"h": 960
+					}
+				},
+				{
+					"filename": "background/static/cloud.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 2000,
+						"h": 960
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 2000,
+						"h": 960
+					},
+					"frame": {
+						"x": 2000,
+						"y": 960,
+						"w": 2000,
+						"h": 960
+					}
+				},
+				{
+					"filename": "background/scene2/foreground.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 4096,
+						"h": 960
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 4096,
+						"h": 960
+					},
+					"frame": {
+						"x": 0,
+						"y": 1920,
+						"w": 4096,
+						"h": 960
+					}
+				},
+				{
+					"filename": "background/scene2/bg_far.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 4096,
+						"h": 960
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 4096,
+						"h": 960
+					},
+					"frame": {
+						"x": 0,
+						"y": 2880,
+						"w": 4096,
+						"h": 960
+					}
+				}
+			]
+		},
+		{
+			"image": "spritesheet_background-1.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 4096,
+				"h": 3840
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "background/scene1/bg.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 4096,
+						"h": 960
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 4096,
+						"h": 960
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 4096,
+						"h": 960
+					}
+				},
+				{
+					"filename": "background/scene1/bg_far.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 4096,
+						"h": 960
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 4096,
+						"h": 960
+					},
+					"frame": {
+						"x": 0,
+						"y": 960,
+						"w": 4096,
+						"h": 960
+					}
+				},
+				{
+					"filename": "background/scene1/foreground.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 4096,
+						"h": 960
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 4096,
+						"h": 960
+					},
+					"frame": {
+						"x": 0,
+						"y": 1920,
+						"w": 4096,
+						"h": 960
+					}
+				},
+				{
+					"filename": "background/scene2/bg.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 4096,
+						"h": 960
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 4096,
+						"h": 960
+					},
+					"frame": {
+						"x": 0,
+						"y": 2880,
+						"w": 4096,
+						"h": 960
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:4f31d61fe8b8bfed934fc0e31c54bfe5:9519216c399e068e9f34380d421e820c:73635916d07b76e02701de9460892438$"
+	}
+}

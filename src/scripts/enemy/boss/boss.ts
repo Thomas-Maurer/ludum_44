@@ -92,12 +92,12 @@ export default class Boss extends Enemy implements IEnemy {
      * Init all anims for Boss interaction
      */
     private initAnims(): void {
-        const BossRunAnims = this.generateFrameNames(this.runBossSpritePrefix, EnemiesEnum.SPRITE_SHEET_BOSS, 1, 9);
+        const BossRunAnims = this.generateFrameNames(this.runBossSpritePrefix, EnemiesEnum.SPRITE_SHEET_BOSS, 1, 11);
         const BossFightAnims = this.generateFrameNames(this.fightBossSpritePrefix, EnemiesEnum.SPRITE_SHEET_BOSS, 1, 4);
         const BossDeadAnims = this.generateFrameNames(this.deadBossSpritePrefix, EnemiesEnum.SPRITE_SHEET_BOSS, 1, 4);
         const BossHitAnims = this.generateFrameNames(this.deadBossSpritePrefix, EnemiesEnum.SPRITE_SHEET_BOSS, 2, 2);
 
-        this.scene.anims.create({ key: this.GUID + 'Run', frames: BossRunAnims, frameRate: 10, repeat: -1 });
+        this.scene.anims.create({ key: this.GUID + 'Run', frames: BossRunAnims, frameRate: 12, repeat: -1 });
         this.scene.anims.create({ key: this.GUID + 'Fight', frames: BossFightAnims, frameRate: 20 });
         this.scene.anims.create({ key: this.GUID + 'Dead', frames: BossDeadAnims, frameRate: 5, repeat: 0 });
         this.scene.anims.create({ key: this.GUID + 'Hit', frames: BossHitAnims, frameRate: 10, repeat: 0 });
