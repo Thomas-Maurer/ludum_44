@@ -5,6 +5,7 @@ import MainScene from "../../scenes/MainScene";
 import {EnemiesEnum} from "../enemies.enum";
 import {EnemyGuid} from "../enemy-guid.enum";
 import {Map} from "../../map-data";
+import Player from "../../player/Player";
 
 export default class Boss extends Enemy implements IEnemy {
     /**
@@ -92,9 +93,6 @@ export default class Boss extends Enemy implements IEnemy {
             this.anims.play(this.GUID + 'Run', true);
             this.isRunning = true;
         }
-
-        this.attackPlayer();
-
         // mak the enemy pnj always move
         this.setVelocityCustom();
     }
@@ -123,5 +121,48 @@ export default class Boss extends Enemy implements IEnemy {
             this.setFlipX(this.currentDirection === -1);
         }
         this.setVelocityX(this.currentVelocity);
+    }
+
+    /**
+     * Change velocity on enemy collide wall with sensor
+     * @param bodyA
+     * @param bodyB
+     */
+    protected onSensorCollide({ bodyA, bodyB }): void {
+        // Watch for the player colliding with walls/objects on either side and the ground below, so
+        // that we can use that logic inside of update to move the player.
+        // Note: we are using the "pair.separation" here. That number tells us how much bodyA and bodyB
+        // overlap. We want to teleport the sprite away from walls just enough so that the player won't
+        // be able to press up against the wall and use friction to hang in midair. This formula leaves
+        // 0.5px of overlap with the sensor so that the sensor will stay colliding on the next tick if
+        // the player doesn't move.
+        if (bodyB.isSensor ) return; // We only care about collisions with physical objects
+        if (bodyB.gameObject instanceof Player) {
+            if (bodyB.gameObject.getAttackstate()) {
+                // player attack before
+            } else if (!this.isDead && !this.isHit) {
+                this.attackPlayer(bodyA, bodyB.gameObject);
+            }
+        } else {
+            if (bodyA === this.sensors.left) {
+                // is currently going to left
+                if (this.currentDirection === -1) {
+                    // make it going to right
+                    this.currentDirection = 1;
+                    this.currentVelocity = 1;
+                    this.setFlipX(false);
+                    this.setVelocityX(this.currentVelocity);
+                }
+            } else if (bodyA === this.sensors.right) {
+                // is currently going to left
+                if (this.currentDirection === 1) {
+                    // make it going to right
+                    this.currentDirection = -1;
+                    this.currentVelocity = -1;
+                    this.setFlipX(true);
+                    this.setVelocityX(this.currentVelocity);
+                }
+            }
+        }
     }
 }
