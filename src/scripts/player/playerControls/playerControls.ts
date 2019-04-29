@@ -157,7 +157,6 @@ export class PlayerControls {
             player.getPlayerSprite().applyForce(this.negativeforceVector);
         } else {
             if (player.anims.currentAnim !== null && PLAYER_ANIM_DONT_CANCEL.hasOwnProperty(player.anims.currentAnim.key)) {
-                console.log(player.anims.currentAnim.key)
             } else {
                 player.doAction = false;
                 player.anims.play(PLAYER_ANIM.playerIdle, true);
@@ -171,7 +170,7 @@ export class PlayerControls {
             player.anims.play(PLAYER_ANIM.playerJump, true);
             this.audioManager.playSound(this.audioManager.soundsList.PLAYER_JUMP);
             player.desactivateJump();
-            player.getPlayerSprite().setVelocityY(-18);
+            player.getPlayerSprite().setVelocityY(-13);
         }
     }
 

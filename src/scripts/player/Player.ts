@@ -34,12 +34,12 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         super(world, x, y, key, frame, options);
         this.scene = scene;
         const matterEngine: any = Phaser.Physics.Matter;
-        const body = matterEngine.Matter.Bodies.rectangle(x, y, 55, 95, { chamfer: { radius: 8 } });
+        const body = matterEngine.Matter.Bodies.rectangle(x, y, 55, 95, { chamfer: { radius: 12 } });
 
         this.sensors = {
             bottom: matterEngine.Matter.Bodies.rectangle(x, y + 95*0.53, this.width * 0.25, this.width * 0.05, { isSensor: true }),
-            left: matterEngine.Matter.Bodies.rectangle(x - 55*0.53, y, 9, this.height * 0.55, { isSensor: true }),
-            right: matterEngine.Matter.Bodies.rectangle(x + 55*0.53, y, 9, this.height * 0.55, { isSensor: true })
+            left: matterEngine.Matter.Bodies.rectangle(x - 55*0.53, y, 9, this.height * 0.25, { isSensor: true }),
+            right: matterEngine.Matter.Bodies.rectangle(x + 55*0.53, y, 9, this.height * 0.25, { isSensor: true })
         };
 
         const compoundBody = matterEngine.Matter.Body.create({
@@ -329,7 +329,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         } else if (eventdata.bodyA === this.sensors.right && eventdata.gameObjectB instanceof Phaser.Tilemaps.Tile && !this.isTouching.right) {
             this.isTouching.right = true;
             if (eventdata.pair.separation > 0.5) this.x -= eventdata.pair.separation - 0.5;
-        } else if (eventdata.bodyA === this.sensors.bottom && eventdata.gameObjectB instanceof Phaser.Tilemaps.Tile && !this.isTouching.bottom) {
+        } else if (eventdata.bodyA === this.sensors.bottom && eventdata.gameObjectB instanceof Phaser.Tilemaps.Tile && !this.isTouching.ground) {
             this.isTouching.ground = true;
         }
     }
