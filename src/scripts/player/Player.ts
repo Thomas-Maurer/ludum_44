@@ -39,9 +39,9 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         const body = matterEngine.Matter.Bodies.rectangle(x, y, 55, 95, { chamfer: { radius: 12 } });
 
         this.sensors = {
-            bottom: matterEngine.Matter.Bodies.rectangle(x, y + 95*0.53, this.width * 0.25, this.width * 0.05, { isSensor: true }),
-            left: matterEngine.Matter.Bodies.rectangle(x - 55*0.53, y, 9, this.height * 0.25, { isSensor: true }),
-            right: matterEngine.Matter.Bodies.rectangle(x + 55*0.53, y, 9, this.height * 0.25, { isSensor: true })
+            bottom: matterEngine.Matter.Bodies.rectangle(x, y + 95 * 0.53, this.width * 0.25, this.width * 0.05, { isSensor: true }),
+            left: matterEngine.Matter.Bodies.rectangle(x - 55 * 0.53, y, 9, this.height * 0.25, { isSensor: true }),
+            right: matterEngine.Matter.Bodies.rectangle(x + 55 * 0.53, y, 9, this.height * 0.25, { isSensor: true })
         };
 
         const compoundBody = matterEngine.Matter.Body.create({
@@ -246,7 +246,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
 
             this.suckHintText.setColor("#000000");
             this.suckHintText.setBackgroundColor("#ffffff");
-            this.suckHintText.setText("Press [E] to suck");
+            this.suckHintText.setText("Press [E] to suck his blood");
             this.suckHintText.setPosition(this.x - 50, this.y - 100);
 
 
