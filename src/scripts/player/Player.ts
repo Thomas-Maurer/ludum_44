@@ -39,9 +39,9 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         const body = matterEngine.Matter.Bodies.rectangle(x, y, 55, 95, { chamfer: { radius: 12 } });
 
         this.sensors = {
-            bottom: matterEngine.Matter.Bodies.rectangle(x, y + 95*0.53, this.width * 0.25, this.width * 0.05, { isSensor: true }),
-            left: matterEngine.Matter.Bodies.rectangle(x - 55*0.53, y, 9, this.height * 0.25, { isSensor: true }),
-            right: matterEngine.Matter.Bodies.rectangle(x + 55*0.53, y, 9, this.height * 0.25, { isSensor: true })
+            bottom: matterEngine.Matter.Bodies.rectangle(x, y + 95 * 0.53, this.width * 0.25, this.width * 0.05, { isSensor: true }),
+            left: matterEngine.Matter.Bodies.rectangle(x - 55 * 0.53, y, 9, this.height * 0.25, { isSensor: true }),
+            right: matterEngine.Matter.Bodies.rectangle(x + 55 * 0.53, y, 9, this.height * 0.25, { isSensor: true })
         };
 
         const compoundBody = matterEngine.Matter.Body.create({
@@ -58,6 +58,14 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.handleCollision();
         // Before matter's update, reset our record of which surfaces the player is touching.
         scene.matter.world.on("beforeupdate", this.resetTouching, this);
+    }
+
+    public enablePowerUp(item: Item): void {
+
+        if (item.getNameItem() === 'dashPotion') {
+            this.allowDash = true;
+        }
+
     }
 
     private resetTouching(): void {
@@ -246,7 +254,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
 
             this.suckHintText.setColor("#000000");
             this.suckHintText.setBackgroundColor("#ffffff");
-            this.suckHintText.setText("Press [E] to suck");
+            this.suckHintText.setText("Press [E] to suck his blood");
             this.suckHintText.setPosition(this.x - 50, this.y - 100);
 
 
@@ -308,6 +316,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.scene.matterCollision.addOnCollideActive({
             objectA: this.getPlayerSprite(),
             callback: (eventData: any) => {
+                if (eventData.bodyA.isSensor) return; // We only care about collisions with physical objects
                 this.canSuck = false;
                 if (eventData.gameObjectB !== undefined && eventData.gameObjectB instanceof Phaser.Tilemaps.Tile) {
                     this.setPlayerInAirValue(false);
