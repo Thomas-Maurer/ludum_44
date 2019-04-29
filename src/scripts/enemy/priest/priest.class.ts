@@ -50,10 +50,6 @@ export class Priest extends Enemy implements IEnemy {
         this.on('animationcomplete_' + this.GUID + 'Fight', () => {
             if (!this.isDead) {
                 this.pushBullet();
-
-                if (this.currentPlayerInstance !== null) {
-                    this.currentPlayerInstance.getDamageFromEnemy(this.info.damage);
-                }
                 this.isDoingAnAction = false;
                 this.anims.play(this.GUID + 'Run', true);
                 this.isRunning = true;
@@ -107,11 +103,6 @@ export class Priest extends Enemy implements IEnemy {
         this.scene.matterCollision.addOnCollideActive({
             objectA: [this.sensors.leftRangeAttack, this.sensors.rightRangeAttack],
             callback: this.onSensorRangeAttack,
-            context: this
-        });
-        this.scene.matterCollision.addOnCollideEnd({
-            objectA: [this.sensors.leftRangeAttack, this.sensors.rightRangeAttack],
-            callback: () => this.currentPlayerInstance = null,
             context: this
         });
     }

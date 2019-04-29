@@ -476,7 +476,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     onSensorCollide(eventdata) {
         if (eventdata.bodyB.isSensor) return;
         if ( eventdata.gameObjectB instanceof Bullet) {
-            this.takeDamage(eventdata.gameObjectB.DAMAGE);
+            this.getDamageFromEnemy(eventdata.gameObjectB.DAMAGE);
             eventdata.gameObjectB.destroy();
         }// We only care about collisions with physical objects
         if (eventdata.bodyA === this.sensors.left && eventdata.gameObjectB instanceof Phaser.Tilemaps.Tile && !this.isTouching.left) {

@@ -1,5 +1,5 @@
 export enum PriestInfo {
-    LIFE = 8,
-    DAMAGE = 15,
-    GAIN = 20,
+    LIFE = 5,
+    DAMAGE = 8,
+    GAIN = 15,
 }
