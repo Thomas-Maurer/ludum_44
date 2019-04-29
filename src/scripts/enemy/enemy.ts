@@ -59,6 +59,9 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
         this.handleCollision();
     }
 
+    /**
+     * Handle collision effects
+     */
     private handleCollision(): void {
         this.scene.matterCollision.addOnCollideStart({
             objectA: [this.sensors.left, this.sensors.right],
@@ -154,9 +157,11 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
         this.setVelocityCustom();
     }
 
+    /**
+     * Attack player
+     */
     private attackPlayer() {
         this.isDoingAnAction = true;
-        console.log('do action');
         this.anims.play(this.GUID + 'Fight', true);
     }
 

@@ -38,6 +38,13 @@ export class Peasant extends Enemy implements IEnemy {
         super(world, scene, x, y, EnemiesEnum.SPRITE_SHEET_ID, Peasant.firstSpriteSheet);
         this.world = world;
         this.initAnims();
+        this.initAnimationComplete();
+    }
+
+    private initAnimationComplete() {
+        this.on('animationcomplete_' + this.GUID + 'Fight', () => {
+            this.isDoingAnAction = false;
+        });
     }
 
     /**
