@@ -57,6 +57,10 @@ export default class Boss extends Enemy implements IEnemy {
         this.on('animationcomplete_' + this.GUID + 'Hit', () => {
             this.isHit = false;
         });
+
+        this.on('animationcomplete_' + this.GUID + 'Dead', () => {
+            this.scene.caliceSprite.visible = true;
+        });
     }
 
     /**

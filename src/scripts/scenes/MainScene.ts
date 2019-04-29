@@ -26,6 +26,7 @@ export default class MainScene extends Phaser.Scene {
   public shopZone: any[] = [];
   public musicCanPlay: boolean = false;
   public win: boolean = false;
+  public caliceSprite: VictoryItem;
   private parralaxLayers: {
     static: {
       cloud: Phaser.GameObjects.TileSprite,
@@ -323,13 +324,14 @@ export default class MainScene extends Phaser.Scene {
 
   private addCalice(): void {
     const spawnPoint: any = this.map.findObject("calice_spawn", (obj: any) => obj.name === "calice");
-    let caliceSprite = new VictoryItem(this.matter.world, this, spawnPoint.x, spawnPoint.y, 'all_sprites', 'items/calice1.png');
+    this.caliceSprite = new VictoryItem(this.matter.world, this, spawnPoint.x, spawnPoint.y, 'all_sprites', 'items/calice1.png');
     const caliceAnim = this.player.generateFrameNames('items/calice', 'all_sprites', 1, 2);
     this.anims.create({ key: 'caliceAnim', frames: caliceAnim, frameRate: 10, repeat: -1 });
-    caliceSprite.play('caliceAnim');
-    caliceSprite.setStatic(true);
-    caliceSprite.setCollisionCategory(1);
-    caliceSprite.setCollidesWith([this.playerCatCollision]);
+    this.caliceSprite.play('caliceAnim');
+    this.caliceSprite.visible = false;
+    this.caliceSprite.setStatic(true);
+    this.caliceSprite.setCollisionCategory(1);
+    this.caliceSprite.setCollidesWith([this.playerCatCollision]);
   }
   // Fct we call each frame
   /**
