@@ -3766,6 +3766,31 @@
 						"x": 0.5,
 						"y": 0.5
 					}
+				},
+				{
+					"filename": "items/pipe.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 64,
+						"h": 64
+					},
+					"frame": {
+						"x": 565,
+						"y": 133,
+						"w": 64,
+						"h": 64
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
 				}
 			]
 		}
@@ -3773,6 +3798,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:f318b90e5aec893ff6588397751b0aaa:4c001702521dfb0f8611a1146f0e1607:571cda970203196d06b9d26e2fe17b8f$"
+		"smartupdate": "$TexturePacker:SmartUpdate:890015cdcb329980b8db7411452aa2f1:a0bf4a6fc20b4f7441b5605ec71927af:571cda970203196d06b9d26e2fe17b8f$"
 	}
 }
