@@ -11,5 +11,6 @@ export interface IEnemy {
     info: {
         life: number; // life of the enemy
         damage: number; // dammage deal by the enemy
+        gain: number;
     }
 }

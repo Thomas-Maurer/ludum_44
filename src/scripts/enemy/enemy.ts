@@ -1,10 +1,11 @@
-import {Map} from "../map-data";
-import {EnemyGuid} from "./enemy-guid.enum";
-import {IEnemy} from "./enemy.interface";
+import { Map } from "../map-data";
+import { EnemyGuid } from "./enemy-guid.enum";
+import { IEnemy } from "./enemy.interface";
+import MainScene from "../scenes/MainScene";
 /**
  * Enemy class
  */
-export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy{
+export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
     /**
      * Current velocity
      */
@@ -15,7 +16,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy{
      */
     private currentDirection: number = 1;
 
-    protected scene: Phaser.Scene;
+    protected scene: MainScene;
 
     public isRunning = false;
     public isDead = false;
@@ -32,6 +33,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy{
     public info = {
         life:  0,
         damage:  0,
+        gain:  0,
     };
 
     /**
@@ -43,19 +45,21 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy{
      * @param key
      * @param frame
      */
-    constructor(world: Phaser.Physics.Matter.World, scene: Phaser.Scene, x: number, y: number, key: string, frame?: string | integer) {
+    constructor(world: Phaser.Physics.Matter.World, scene: MainScene, x: number, y: number, key: string, frame?: string | integer) {
         super(world, x, y, key, frame);
 
         this.scene = scene;
         scene.add.existing(this);
         // change collision rect
-        var group = this.world.nextGroup(true);
+        this.setPhysics(x, y);
+    }
+
+    /**
+     * Set physics of the enemy
+     */
+    private setPhysics(x: number, y: number) {
         const matterEngine: any = Phaser.Physics.Matter;
-        const body = matterEngine.Matter.Bodies.rectangle(x, y, 64, 115, {
-            chamfer: {
-                radius: 10
-            }
-        });
+        const body = matterEngine.Matter.Bodies.rectangle(x, y, 64, 115);
         this.setExistingBody(body);
 
         this.setFixedRotation();
@@ -70,7 +74,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy{
             return;
         }
         if (!this.isRunning) {
-            this.anims.play('peasantRun',true);
+            this.anims.play(this.GUID + 'Run',true);
             this.isRunning = true;
         }
 
@@ -103,11 +107,11 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy{
      * @param start
      * @param end
      */
-    public generateFrameNames (key: string, atlasName: string, start: number, end: number): Phaser.Animations.Types.AnimationFrame[] {
-        return this.scene.anims.generateFrameNames(atlasName,{
+    public generateFrameNames(key: string, atlasName: string, start: number, end: number): Phaser.Animations.Types.AnimationFrame[] {
+        return this.scene.anims.generateFrameNames(atlasName, {
             start: start, end: end, zeroPad: 1,
             prefix: key, suffix: '.png'
-        } )
+        })
     }
 
     /**
@@ -158,9 +162,60 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy{
     }
 
     /**
+     * Destroy sprite
+     */
+    public destroySprite() {
+        this.destroy();
+    }
+
+    /**
+     * Add a dead sensor to the corps
+     */
+    private addDeadSensor(): void {
+        const matterEngine: any = Phaser.Physics.Matter;
+        const Bodies = matterEngine.Matter.Bodies;
+        const deadSensor = Bodies.rectangle(0, 0, 64, 64, {
+            isSensor: true,
+            label: 'deadsensor'
+        });
+
+        const compoundBody = matterEngine.Matter.Body.create({
+            parts: [ deadSensor ],
+            inertia: Infinity
+        });
+
+        const currentX = this.x;
+        const currentY = this.y;
+
+        this.setExistingBody(compoundBody);
+        this.setStatic(true);
+        this.x = currentX;
+        this.y = currentY;
+    }
+
+    /**
      * Method used by childrens
      * @param damage
      */
-    public takeDamage(damage: number) {}
+    public takeDamage(damage: number): void {
+        debugger
+        if (this.isHit || this.isDead) {
+            return;
+        }
+        this.info.life = this.info.life - damage;
+
+        if (this.info.life <= 0) {
+            this.setStatic(true);
+            this.isDead = true;
+            this.stopAllAnims();
+            this.anims.play(this.GUID + 'Dead',true);
+            this.addDeadSensor();
+        } else {
+            this.isHit = true;
+            this.isRunning = false;
+            this.anims.play(this.GUID + 'Hit',true);
+            setTimeout(() => this.isHit = false, 500);
+        }
+    }
 
 }

@@ -110,7 +110,7 @@
 					}
 				},
 				{
-					"filename": "vampire/fightvamp8.png",
+					"filename": "vampire/fightvamp6.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -130,12 +130,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/fightvamp9.png",
+					"filename": "vampire/fightvamp7.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -155,12 +155,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/jumpvamp1.png",
+					"filename": "vampire/fightvamp8.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -180,12 +180,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/jumpvamp2.png",
+					"filename": "vampire/fightvamp9.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -205,12 +205,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/jumpvamp3.png",
+					"filename": "vampire/jumpvamp1.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -230,12 +230,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/jumpvamp4.png",
+					"filename": "vampire/jumpvamp2.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -255,12 +255,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/jumpvamp5.png",
+					"filename": "vampire/jumpvamp3.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -280,12 +280,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/jumpvamp6.png",
+					"filename": "vampire/jumpvamp4.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -305,12 +305,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/jumpvamp7.png",
+					"filename": "vampire/jumpvamp5.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -330,12 +330,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/runvampright1.png",
+					"filename": "vampire/jumpvamp6.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -355,12 +355,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/runvampright10.png",
+					"filename": "vampire/jumpvamp7.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -380,12 +380,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/runvampright2.png",
+					"filename": "vampire/runvampright1.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -405,12 +405,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/runvampright3.png",
+					"filename": "vampire/runvampright10.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -430,12 +430,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/runvampright4.png",
+					"filename": "vampire/runvampright2.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -455,12 +455,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/runvampright5.png",
+					"filename": "vampire/runvampright3.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -480,12 +480,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/runvampright6.png",
+					"filename": "vampire/runvampright4.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -505,12 +505,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/runvampright7.png",
+					"filename": "vampire/runvampright5.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -530,12 +530,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/runvampright8.png",
+					"filename": "vampire/runvampright6.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -555,12 +555,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/runvampright9.png",
+					"filename": "vampire/runvampright7.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -580,12 +580,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/vampdrink1.png",
+					"filename": "vampire/runvampright8.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -605,12 +605,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/vampdrink2.png",
+					"filename": "vampire/runvampright9.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -630,12 +630,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/vampdrink3.png",
+					"filename": "vampire/vampdrink1.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -655,12 +655,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/vampdrink4.png",
+					"filename": "vampire/vampdrink2.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -680,12 +680,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/vampdrink5.png",
+					"filename": "vampire/vampdrink3.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -705,12 +705,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/vampdrink6.png",
+					"filename": "vampire/vampdrink4.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -730,87 +730,62 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "Poses/player_stand.png",
+					"filename": "vampire/vampdrink5.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 80,
-						"h": 110
+						"w": 120,
+						"h": 120
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 80,
-						"h": 110
+						"w": 120,
+						"h": 120
 					},
 					"frame": {
 						"x": 3000,
 						"y": 3840,
-						"w": 80,
-						"h": 110
+						"w": 120,
+						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "Poses/player_swim1.png",
+					"filename": "vampire/vampdrink6.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 80,
-						"h": 110
+						"w": 120,
+						"h": 120
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 80,
-						"h": 110
+						"w": 120,
+						"h": 120
 					},
 					"frame": {
-						"x": 3080,
+						"x": 3120,
 						"y": 3840,
-						"w": 80,
-						"h": 110
+						"w": 120,
+						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "Poses/player_swim2.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 80,
-						"h": 110
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 80,
-						"h": 110
-					},
-					"frame": {
-						"x": 3160,
-						"y": 3840,
-						"w": 80,
-						"h": 110
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
-					}
-				},
-				{
-					"filename": "Poses/player_talk.png",
+					"filename": "Poses/player_stand.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -835,7 +810,7 @@
 					}
 				},
 				{
-					"filename": "Poses/player_walk1.png",
+					"filename": "Poses/player_swim1.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -860,7 +835,7 @@
 					}
 				},
 				{
-					"filename": "Poses/player_walk2.png",
+					"filename": "Poses/player_swim2.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -875,6 +850,81 @@
 					},
 					"frame": {
 						"x": 3400,
+						"y": 3840,
+						"w": 80,
+						"h": 110
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_talk.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 80,
+						"h": 110
+					},
+					"frame": {
+						"x": 3480,
+						"y": 3840,
+						"w": 80,
+						"h": 110
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_walk1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 80,
+						"h": 110
+					},
+					"frame": {
+						"x": 3560,
+						"y": 3840,
+						"w": 80,
+						"h": 110
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Poses/player_walk2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 80,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 80,
+						"h": 110
+					},
+					"frame": {
+						"x": 3640,
 						"y": 3840,
 						"w": 80,
 						"h": 110
@@ -1666,8 +1716,8 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
@@ -1691,12 +1741,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/deathvamp1.png",
+					"filename": "vampire/dash3.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1716,12 +1766,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/deathvamp2.png",
+					"filename": "vampire/dash4.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1741,12 +1791,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/deathvamp3.png",
+					"filename": "vampire/deathvamp1.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1766,12 +1816,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/deathvamp4.png",
+					"filename": "vampire/deathvamp2.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1791,12 +1841,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/deathvamp5.png",
+					"filename": "vampire/deathvamp3.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1816,12 +1866,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/deathvamp6.png",
+					"filename": "vampire/deathvamp4.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1841,12 +1891,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/deathvamp7.png",
+					"filename": "vampire/deathvamp5.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1866,8 +1916,8 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
@@ -1896,7 +1946,7 @@
 					}
 				},
 				{
-					"filename": "vampire/drink1.png",
+					"filename": "vampire/deathvamp6.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1916,8 +1966,8 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
@@ -1946,7 +1996,7 @@
 					}
 				},
 				{
-					"filename": "vampire/drink10.png",
+					"filename": "vampire/deathvamp7.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1966,12 +2016,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/drink11.png",
+					"filename": "vampire/drink1.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1991,12 +2041,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/drink12.png",
+					"filename": "vampire/drink10.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -2016,12 +2066,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/drink13.png",
+					"filename": "vampire/drink11.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -2041,12 +2091,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/drink14.png",
+					"filename": "vampire/drink12.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -2066,12 +2116,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/drink2.png",
+					"filename": "vampire/drink13.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -2091,12 +2141,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/drink3.png",
+					"filename": "vampire/drink14.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -2116,12 +2166,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/drink4.png",
+					"filename": "vampire/drink2.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -2141,12 +2191,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/drink5.png",
+					"filename": "vampire/drink3.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -2166,12 +2216,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/drink6.png",
+					"filename": "vampire/drink4.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -2191,12 +2241,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/drink7.png",
+					"filename": "vampire/drink5.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -2216,12 +2266,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/drink8.png",
+					"filename": "vampire/drink6.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -2241,12 +2291,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/drink9.png",
+					"filename": "vampire/drink7.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -2266,12 +2316,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/fightvamp1.png",
+					"filename": "vampire/drink8.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -2291,8 +2341,8 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
@@ -2321,7 +2371,7 @@
 					}
 				},
 				{
-					"filename": "vampire/fightvamp10.png",
+					"filename": "vampire/drink9.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -2341,12 +2391,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/fightvamp11.png",
+					"filename": "vampire/fightvamp1.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -2366,12 +2416,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/fightvamp12.png",
+					"filename": "vampire/fightvamp10.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -2391,12 +2441,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/fightvamp13.png",
+					"filename": "vampire/fightvamp11.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -2416,12 +2466,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/fightvamp14.png",
+					"filename": "vampire/fightvamp12.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -2441,12 +2491,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/fightvamp15.png",
+					"filename": "vampire/fightvamp13.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -2466,12 +2516,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/fightvamp16.png",
+					"filename": "vampire/fightvamp14.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -2491,12 +2541,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/fightvamp17.png",
+					"filename": "vampire/fightvamp15.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -2516,12 +2566,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/fightvamp18.png",
+					"filename": "vampire/fightvamp16.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -2541,12 +2591,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/fightvamp19.png",
+					"filename": "vampire/fightvamp17.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -2566,12 +2616,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/fightvamp2.png",
+					"filename": "vampire/fightvamp18.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -2591,12 +2641,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/fightvamp3.png",
+					"filename": "vampire/fightvamp19.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -2616,12 +2666,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/fightvamp4.png",
+					"filename": "vampire/fightvamp2.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -2641,12 +2691,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/fightvamp5.png",
+					"filename": "vampire/fightvamp3.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -2666,12 +2716,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/fightvamp6.png",
+					"filename": "vampire/fightvamp4.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -2691,12 +2741,12 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
-					"filename": "vampire/fightvamp7.png",
+					"filename": "vampire/fightvamp5.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -2716,8 +2766,8 @@
 						"h": 120
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.4166666666666667,
+						"y": 0.5833333333333334
 					}
 				},
 				{
@@ -2801,6 +2851,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:2af9a3b40f80d411223a4cd14aa4556d:ca05d29f0cf9d96abe40090e5446dd3d:891aeea45958f21e96a4508ee113e1b2$"
+		"smartupdate": "$TexturePacker:SmartUpdate:62c9cb73d55adfe7b620614dd2b4ef21:59bb11e8c13851b38f71643d7714b1bb:891aeea45958f21e96a4508ee113e1b2$"
 	}
 }
