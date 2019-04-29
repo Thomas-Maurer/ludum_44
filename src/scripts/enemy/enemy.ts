@@ -10,12 +10,12 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
     /**
      * Current velocity
      */
-    private currentVelocity: number = 1;
+    protected currentVelocity: number = 1;
     /**
      * If -1 currentdirection is to left if +1 is to right
      * @type {number}
      */
-    private currentDirection: number = 1;
+    protected currentDirection: number = 1;
 
     protected scene: MainScene;
 
@@ -109,7 +109,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
     /**
      * Set physics of the enemy
      */
-    private setPhysics(x: number, y: number) {
+    protected setPhysics(x: number, y: number) {
         const matterEngine: any = Phaser.Physics.Matter;
         const body = matterEngine.Matter.Bodies.rectangle(x, y, 50, 115, {
             chamfer: { radius: 17 }
@@ -149,7 +149,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
         this.setVelocityCustom();
     }
 
-    private attackPlayer() {
+    protected attackPlayer() {
 
     }
 
@@ -164,7 +164,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
     /**
      * Set the velocity of the sprite depending on the platform
      */
-    private setVelocityCustom(): void {
+    protected setVelocityCustom(): void {
         this.setVelocityOnGround();
         // this.setVelocityOnCollide();
     }
@@ -187,7 +187,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
     /**
      * Set current velocity and direction
      */
-    private setVelocityOnGround(): void {
+    protected setVelocityOnGround(): void {
         const map = Map.getInstance();
         // calculate tile (for origin position of the sprite
         const tileX: number = (this.x / Map.TILES_SIZE_X) - 0.5;
