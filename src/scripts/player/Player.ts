@@ -86,7 +86,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.inAir = true;
         this.healthPoint = 100;
         this.baseDamage = 1;
-        this.isInSun = true;
+        this.isInSun = false;
         this.isPlayerDead = false;
         this.doAction = false;
         this.allowDash = false;
@@ -138,7 +138,6 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.once('animationcomplete_playerDeath', () => {
             window.dispatchEvent(EventsUtils.PLAYER_DEAD);
             this.scene.audioManager.playSound(this.scene.audioManager.soundsList.DEATH);
-            this.scene.audioManager.playingMusic.stop();
         }, this);
 
         this.on('animationcomplete_suck', () => {
@@ -389,14 +388,12 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     public disableSun(): void {
         this.isInSun = false;
         const audioManager = this.scene.audioManager;
-        audioManager.playingMusic.stop();
         audioManager.playMusic(audioManager.musicsList.SHOP);
     }
 
     public enableSun(): void {
         this.isInSun = true;
         const audioManager = this.scene.audioManager;
-        audioManager.playingMusic.stop();
         audioManager.playMusic(audioManager.musicsList.WORLD);
     }
 

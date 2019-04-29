@@ -1,6 +1,8 @@
+import MainScene from "./scenes/MainScene";
+
 export default class AudioManager {
     public soundInstance: Phaser.Sound.BaseSound
-    private scene: Phaser.Scene;
+    private scene: MainScene;
     public playingSound: Phaser.Sound.BaseSound;
     public playingMusic: Phaser.Sound.BaseSound;
     /**
@@ -24,7 +26,7 @@ export default class AudioManager {
         CHURCH: 'church',
         SHOP: 'shop'
     }
-    constructor(scene: Phaser.Scene) {
+    constructor(scene: MainScene) {
 
 
         this.scene = scene;
@@ -61,10 +63,20 @@ export default class AudioManager {
      * Play the given music name (one at time)
      */
     public playMusic(musicName: string, options?: SoundConfig) {
+        //Stop if music can't play
+        if (!this.scene.musicCanPlay) {
+            return;
+        }
+        if (!options) {
+            options = {}
+        };
         if (this.playingMusic) {
             this.playingMusic.stop();
         }
         this.playingMusic = this.scene.sound.add(musicName);
+        options.loop = true; //force music loop
         this.playingMusic.play(null, options);
+
     }
+
 }

@@ -3,6 +3,11 @@ import {
 } from 'vuex';
 export default {
     name: "MainMenu",
+    data() {
+        return {
+            loading: true
+        }
+    },
     computed: mapState([
         'play',
         'dead',
@@ -11,9 +16,15 @@ export default {
     methods: {
         setPlay() {
             this.$store.commit("setPlay", true);
+            const event = new Event("play");
+            window.dispatchEvent(event);
         },
         initEventsListeners() {
-
+            window.addEventListener("keydown", (event) => {
+                if (event.key === "Enter") {
+                    this.handleEnterKey();
+                }
+            });
             window.addEventListener('PLAYER_DEAD', (e) => {
                 this.$store.commit("setDead", true);
             });
@@ -27,6 +38,20 @@ export default {
             window.dispatchEvent(event);
             this.$store.commit("setDead", false);
             this.$store.commit("setWin", false);
+        },
+        handleEnterKey() {
+            // Retry if player dead or won
+            if (this.dead || this.win) {
+                this.retry();
+                return;
+            }
+
+            //set play if not already playing
+            if (!this.play) {
+                this.setPlay();
+                return;
+            }
+
         }
     },
     mounted() {
@@ -34,5 +59,8 @@ export default {
             this.setPlay();
         }
         this.initEventsListeners();
+        setTimeout(() => {
+            this.loading = false;
+        }, 5000);
     },
 };
