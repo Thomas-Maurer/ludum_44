@@ -11,7 +11,11 @@ export default new Vuex.Store({
         win: false,
         potion: false,
         glass: false,
-        umbrella: false
+        umbrella: false,
+        bossBaseHp: 50,
+        bossHp: 50,
+        bossHpPercent: 100,
+        bossBarEnabled: false,
     },
     mutations: {
         setPlay(state, value) {
@@ -34,6 +38,11 @@ export default new Vuex.Store({
         },
         setPlayerHP(state, value) {
             state.playerHP = value;
+        },
+        setBossHp(state, value) {
+            state.bossHp = value;
+            state.bossHpPercent = (value / state.bossBaseHp) * 100;
+            state.bossBarEnabled = true;
         }
     },
     actions: {

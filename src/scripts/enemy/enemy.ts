@@ -3,6 +3,7 @@ import { EnemyGuid } from "./enemy-guid.enum";
 import { IEnemy } from "./enemy.interface";
 import MainScene from "../scenes/MainScene";
 import Player from "../player/Player";
+import Boss from "./boss/boss";
 /**
  * Enemy class
  */
@@ -95,7 +96,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
         // be able to press up against the wall and use friction to hang in midair. This formula leaves
         // 0.5px of overlap with the sensor so that the sensor will stay colliding on the next tick if
         // the player doesn't move.
-        if (bodyB.isSensor ) return; // We only care about collisions with physical objects
+        if (bodyB.isSensor) return; // We only care about collisions with physical objects
         if (bodyB.gameObject instanceof Player) {
             if (bodyB.gameObject.getAttackstate()) {
                 // player attack before
@@ -140,14 +141,14 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
         };
 
         const compoundBody = matterEngine.Matter.Body.create({
-            parts: [ body, this.sensors.left, this.sensors.right],
+            parts: [body, this.sensors.left, this.sensors.right],
             inertia: Infinity
         });
 
         this.setExistingBody(compoundBody);
         this.setFixedRotation();
         this.setFriction(0);
-        this.setOrigin(0.5,0.65);
+        this.setOrigin(0.5, 0.65);
     }
 
     /**
@@ -227,7 +228,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
         // calculate tile (for origin position of the sprite
         const tileX: number = (this.x / Map.TILES_SIZE_X) - 0.5;
 
-        const tileY: number = (this.y / Map.TILES_SIZE_Y) + 1 ;
+        const tileY: number = (this.y / Map.TILES_SIZE_Y) + 1;
 
         if (!map.isExistTile(tileX, tileY)) {
             this.currentDirection = this.currentDirection * -1;
@@ -267,7 +268,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
         this.setStatic(true);
         this.x = currentX;
         this.y = currentY;
-        this.setOrigin(0.5,0.65);
+        this.setOrigin(0.5, 0.65);
 
     }
 
@@ -282,6 +283,16 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
         this.currentPlayerInstance = null;
 
         this.info.life = this.info.life - damage;
+
+        if (this.GUID === EnemyGuid.BOSS) {
+            const bossHpEvent: CustomEvent = new CustomEvent("BOSS_HP", {
+                detail: this.info.life
+            });
+            window.dispatchEvent(bossHpEvent);
+        }
+
+        //window.dispatchEvent(playerHpEvent);
+
         if (this.info.life <= 0) {
             this.isDead = true;
             this.setStatic(true);
