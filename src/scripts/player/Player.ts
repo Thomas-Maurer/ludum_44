@@ -438,6 +438,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
                         this.emit('playerbuyitem');
                     }
                 } else {
+
                     if (eventData.bodyB.isSensor === false) {
                         this.killPlayer();
                     }
@@ -458,11 +459,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     }
 
     onSensorCollide(eventdata) {
-        if (eventdata.bodyB.isSensor) return;
-        if ( eventdata.gameObjectB instanceof Bullet) {
-            this.takeDamage(eventdata.gameObjectB.DAMAGE);
-            eventdata.gameObjectB.destroy();
-        }// We only care about collisions with physical objects
+        if (eventdata.bodyB.isSensor) return; // We only care about collisions with physical objects
         if (eventdata.bodyA === this.sensors.left && eventdata.gameObjectB instanceof Phaser.Tilemaps.Tile && !this.isTouching.left) {
             this.isTouching.left = true;
             if (eventdata.pair.separation > 0.5) this.x += eventdata.pair.separation - 0.5;

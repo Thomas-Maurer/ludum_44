@@ -5,7 +5,7 @@
 			"format": "RGBA8888",
 			"size": {
 				"w": 256,
-				"h": 1866
+				"h": 1805
 			},
 			"scale": 1,
 			"frames": [
@@ -1102,91 +1102,28 @@
 					}
 				},
 				{
-					"filename": "fireball2.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 64,
-						"h": 64
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 64,
-						"h": 64
-					},
-					"frame": {
-						"x": 116,
-						"y": 1641,
-						"w": 64,
-						"h": 64
-					}
-				},
-				{
-					"filename": "fireball3.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 64,
-						"h": 64
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 64,
-						"h": 64
-					},
-					"frame": {
-						"x": 184,
-						"y": 1658,
-						"w": 64,
-						"h": 64
-					}
-				},
-				{
-					"filename": "fireball4.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 64,
-						"h": 64
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 64,
-						"h": 64
-					},
-					"frame": {
-						"x": 116,
-						"y": 1709,
-						"w": 64,
-						"h": 64
-					}
-				},
-				{
-					"filename": "fireball1.png",
+					"filename": "deathpaysan6.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 64,
-						"h": 64
+						"w": 120,
+						"h": 120
 					},
 					"spriteSourceSize": {
-						"x": 2,
-						"y": 0,
-						"w": 62,
-						"h": 64
+						"x": 29,
+						"y": 63,
+						"w": 74,
+						"h": 57
 					},
 					"frame": {
-						"x": 184,
-						"y": 1726,
-						"w": 62,
-						"h": 64
+						"x": 116,
+						"y": 1658,
+						"w": 74,
+						"h": 57
 					}
 				},
 				{
-					"filename": "deathpaysan6.png",
+					"filename": "deathpriest6.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1207,7 +1144,7 @@
 					}
 				},
 				{
-					"filename": "deathpriest6.png",
+					"filename": "deathpaysan9.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1215,16 +1152,16 @@
 						"h": 120
 					},
 					"spriteSourceSize": {
-						"x": 29,
-						"y": 63,
-						"w": 74,
-						"h": 57
+						"x": 30,
+						"y": 97,
+						"w": 73,
+						"h": 23
 					},
 					"frame": {
-						"x": 80,
-						"y": 1777,
-						"w": 74,
-						"h": 57
+						"x": 2,
+						"y": 1780,
+						"w": 73,
+						"h": 23
 					}
 				},
 				{
@@ -1242,8 +1179,8 @@
 						"h": 40
 					},
 					"frame": {
-						"x": 2,
-						"y": 1780,
+						"x": 80,
+						"y": 1719,
 						"w": 74,
 						"h": 40
 					}
@@ -1263,8 +1200,8 @@
 						"h": 40
 					},
 					"frame": {
-						"x": 2,
-						"y": 1824,
+						"x": 80,
+						"y": 1763,
 						"w": 74,
 						"h": 40
 					}
@@ -1285,7 +1222,7 @@
 					},
 					"frame": {
 						"x": 158,
-						"y": 1794,
+						"y": 1719,
 						"w": 73,
 						"h": 27
 					}
@@ -1306,7 +1243,7 @@
 					},
 					"frame": {
 						"x": 158,
-						"y": 1825,
+						"y": 1750,
 						"w": 73,
 						"h": 27
 					}
@@ -1327,7 +1264,7 @@
 					},
 					"frame": {
 						"x": 158,
-						"y": 1825,
+						"y": 1750,
 						"w": 73,
 						"h": 27
 					}
@@ -1348,7 +1285,7 @@
 					},
 					"frame": {
 						"x": 158,
-						"y": 1825,
+						"y": 1750,
 						"w": 73,
 						"h": 27
 					}
@@ -1369,30 +1306,9 @@
 					},
 					"frame": {
 						"x": 158,
-						"y": 1825,
+						"y": 1750,
 						"w": 73,
 						"h": 27
-					}
-				},
-				{
-					"filename": "deathpaysan9.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 120,
-						"h": 120
-					},
-					"spriteSourceSize": {
-						"x": 30,
-						"y": 97,
-						"w": 73,
-						"h": 23
-					},
-					"frame": {
-						"x": 80,
-						"y": 1838,
-						"w": 73,
-						"h": 23
 					}
 				}
 			]
@@ -1401,6 +1317,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:835355681819cef16453edcd9e98ca33:2283f0fdd8f1f5bc298efc2ed46ec166:9b2a76c8b2a408b3f0547a4eddda1e06$"
+		"smartupdate": "$TexturePacker:SmartUpdate:2709a4bd6869631786cb57d483bdf39b:a40c05f9617b1d810a43f29b47510bef:9b2a76c8b2a408b3f0547a4eddda1e06$"
 	}
 }
