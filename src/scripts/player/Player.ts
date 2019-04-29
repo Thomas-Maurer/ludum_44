@@ -24,6 +24,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     private isPlayerDead: boolean;
     public doAction: boolean;
     private itemWantToBuy: Item;
+    private allowDash: boolean;
     constructor(world: Phaser.Physics.Matter.World, scene: MainScene, x: number, y: number, key: string, frame?: string | integer, options?: object) {
         super(world, x, y, key, frame, options);
         this.scene = scene;
@@ -35,7 +36,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.initDefaultValue();
         this.generateAnim();
         this.generateEventHandler();
-
+        this.generateComboKeys();
     }
 
     /**
@@ -53,6 +54,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.isInSun = true;
         this.isPlayerDead = false;
         this.doAction = false;
+        this.allowDash = false;
     }
 
     /**
@@ -101,14 +103,16 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         const playerJumpAnims = this.generateFrameNames('vampire/jumpvamp', 'all_sprites', 1, 7);
         const playerAttackAnims = this.generateFrameNames('vampire/fightvamp', 'all_sprites', 9, 19);
         const playerDeathAnims = this.generateFrameNames('vampire/deathvamp', 'all_sprites', 1, 7);
-        const playerSuck = this.generateFrameNames('vampire/vampdrink', 'all_sprites', 1, 5);
+        const playerSuckAnims = this.generateFrameNames('vampire/vampdrink', 'all_sprites', 1, 5);
+        const playerDashAnims = this.generateFrameNames('vampire/dash', 'all_sprites', 1, 2);
 
-        this.scene.anims.create({ key: PLAYER_ANIM.suck, frames: playerSuck, frameRate: 10, repeat: 0 });
+        this.scene.anims.create({ key: PLAYER_ANIM.suck, frames: playerSuckAnims, frameRate: 10, repeat: 0 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerRun, frames: playerRunAnims, frameRate: 10, repeat: -1 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerIdle, frames: playerIdleAnims, frameRate: 10, repeat: -1 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerJump, frames: playerJumpAnims, frameRate: 9 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerAttack, frames: playerAttackAnims, frameRate: 50 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerDeath, frames: playerDeathAnims, frameRate: 13 });
+        this.scene.anims.create({ key: PLAYER_ANIM.playerDash, frames: playerDashAnims, frameRate: 50, repeat: -1 });
     }
 
     public getPlayerControl(): PlayerControls {
@@ -118,6 +122,17 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     private addPlayerTouchTargetEvent(): void {
         this.once('playertouchtarget', function (enemy: Enemy) {
             this.doDamageTo(enemy);
+        }, this);
+    }
+
+    private generateComboKeys(): void {
+        this.scene.input.keyboard.createCombo([ this.playerControl.getControls().right, this.playerControl.getControls().right ], { resetOnMatch: true });
+        this.scene.input.keyboard.createCombo([ this.playerControl.getControls().left, this.playerControl.getControls().left ], { resetOnMatch: true });
+        this.scene.input.keyboard.on('keycombomatch', function (event) {
+            console.log(this)
+            this.anims.play(PLAYER_ANIM.playerDash, true);
+            console.log(this.anims.currentAnim.key);
+
         }, this);
     }
 
