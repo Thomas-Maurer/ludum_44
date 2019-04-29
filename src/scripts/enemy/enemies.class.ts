@@ -82,7 +82,7 @@ export class Enemies {
     public updateAllEnemies(playerX: number): void {
         for (let index = 0; index < this.listOfEnemies.length; index++) {
             let enemy = this.listOfEnemies[index];
-            if (enemy.isDead) {
+            if (enemy.isDead || enemy.x === undefined) {
                 this.listOfEnemies.splice(index, 1);
                 continue;
             }
