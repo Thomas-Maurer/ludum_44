@@ -96,7 +96,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.isPlayerDead = false;
         this.doAction = false;
         this.allowDash = false;
-        this.glasses = true;
+        this.glasses = false;
         this.isTouching = { left: false, right: false, ground: false };
     }
 

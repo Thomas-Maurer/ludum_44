@@ -229,7 +229,7 @@ export default class MainScene extends Phaser.Scene {
           isStatic: true // It shouldn't move
         }
       );
-      const bossRoomSprite = this.add.sprite((obj.x + 8) + obj.width / 2, obj.y + obj.height / 2, 'all_sprites_background', 'background/boss_room');
+      const bossRoomSprite = this.add.sprite((obj.x + 8) + obj.width / 2, obj.y + obj.height / 2, 'all_sprites_background', 'background/boss_room.png');
       bossRoomSprite.setDepth(0);
       this.bossRooms.push(bossRoom);
     });
