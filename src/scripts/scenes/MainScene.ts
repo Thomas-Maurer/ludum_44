@@ -18,6 +18,7 @@ export default class MainScene extends Phaser.Scene {
   public playerCatCollision: any;
   public itemsCat: any;
   public sunSensors: any[];
+  public win: boolean = false;
   private parralaxLayers: {
     static: {
       cloud: Phaser.GameObjects.TileSprite,
@@ -46,6 +47,8 @@ export default class MainScene extends Phaser.Scene {
       key: "MainScene",
     });
 
+    this.win = false;
+
   }
   preload() {
     this.load.tilemapTiledJSON("map", "/assets/map/map_beta.json");
@@ -53,9 +56,10 @@ export default class MainScene extends Phaser.Scene {
     this.load.multiatlas('block', 'assets/graphics/map/backgrounds/block.json', 'assets/graphics/map/backgrounds');
     // Load body shapes from JSON file generated using PhysicsEditor
     this.load.json('shapes', 'assets/graphics/char/character/shapes_char.json');
-    this.audioManager = new AudioManager(this);
-
     this.load.multiatlas(EnemiesEnum.SPRITE_SHEET_ID, EnemiesEnum.SPRITE_SHEET_URL, EnemiesEnum.SPRITE_SHEET_FOLDER);
+    if (!this.audioManager) {
+      this.audioManager = new AudioManager(this);
+    }
   }
   create() {
     /** Build all layers maps */
@@ -112,14 +116,14 @@ export default class MainScene extends Phaser.Scene {
     // Create a sensor at the rectangle object created in Tiled (under the "sunSensor" layer)
     this.map.findObject("sunSensor", (obj: any) => {
       const sunSensor = this.matter.add.rectangle(
-          obj.x + obj.width / 2,
-          obj.y + obj.height / 2,
-          obj.width,
-          obj.height,
-          {
-            isSensor: true, // It shouldn't physically interact with other bodies
-            isStatic: true // It shouldn't move
-          }
+        obj.x + obj.width / 2,
+        obj.y + obj.height / 2,
+        obj.width,
+        obj.height,
+        {
+          isSensor: true, // It shouldn't physically interact with other bodies
+          isStatic: true // It shouldn't move
+        }
       );
       this.sunSensors.push(sunSensor);
     });
@@ -160,7 +164,7 @@ export default class MainScene extends Phaser.Scene {
   generateItems() {
     this.map.findObject("items", (obj: any) => {
       this.itemUtil.generateItem(obj);
-      }
+    }
     );
   }
 
@@ -169,6 +173,7 @@ export default class MainScene extends Phaser.Scene {
    */
   restart() {
     this.scene.restart();
+    this.win = false;
   }
 
   /**
@@ -184,10 +189,16 @@ export default class MainScene extends Phaser.Scene {
    * Trigger the victory of the player
    */
   public triggerVictory(): void {
+
+    if (this.win) {
+      return;
+    }
+    this.win = true;
     //TODO play win anim
     console.log('you win !');
     //this.scene.restart();
-    // window.dispatchEvent(EventsUtils.PLAYER_WIN);
+    window.dispatchEvent(EventsUtils.PLAYER_WIN);
+
     this.audioManager.playSound(this.audioManager.soundsList.VICTORY);
   }
 

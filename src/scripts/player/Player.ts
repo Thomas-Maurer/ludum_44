@@ -3,8 +3,9 @@ import { Enemy } from "../enemy/enemy";
 import MainScene from "../scenes/MainScene";
 import EventsUtils from "../utils/events.utils";
 import Item from "../items/item";
-import {PLAYER_ANIM} from "./animTabs";
+import { PLAYER_ANIM } from "./animTabs";
 import VictoryItem from "../items/victoryItem";
+import Vector2 = Phaser.Math.Vector2;
 
 export default class Player extends Phaser.Physics.Matter.Sprite {
     private playerControl: PlayerControls;
@@ -25,6 +26,8 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     public doAction: boolean;
     private itemWantToBuy: Item;
     private allowDash: boolean;
+    private lookRight : boolean;
+    private lookLeft : boolean;
     constructor(world: Phaser.Physics.Matter.World, scene: MainScene, x: number, y: number, key: string, frame?: string | integer, options?: object) {
         super(world, x, y, key, frame, options);
         this.scene = scene;
@@ -36,18 +39,17 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.initDefaultValue();
         this.generateAnim();
         this.generateEventHandler();
-        this.generateComboKeys();
     }
 
     /**
      * Init the default value of the player Char
      */
     private initDefaultValue(): void {
-        this.playerControl = new PlayerControls(this.scene);
+        this.playerControl = new PlayerControls(this.scene, this);
         this.canJump = true;
         this.canAttack = true;
         this.setFixedRotation();
-        this.setFriction(0.2, 0.05, 0);
+        this.setFriction(0, 0.05, 0);
         this.inAir = true;
         this.healthPoint = 100;
         this.baseDamage = 1;
@@ -55,6 +57,26 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.isPlayerDead = false;
         this.doAction = false;
         this.allowDash = false;
+    }
+
+    public setLookRight(value: boolean): void {
+        this.lookLeft = !value;
+        this.lookRight = value;
+    }
+
+    public setLookLeft(value: boolean): void {
+        this.lookLeft = value;
+        this.lookRight = !value;
+    }
+
+    private dash(): void {
+        if (this.allowDash) {
+            if (this.lookRight){
+                this.setPosition(this.x + 100, this.y);
+            } else {
+                this.setPosition(this.x - 100, this.y);
+            }
+        }
     }
 
     /**
@@ -66,6 +88,11 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         }, this);
 
         this.on('animationcomplete_playerJump', function () {
+            this.anims.play(PLAYER_ANIM.playerIdle);
+        }, this);
+
+        this.on('animationcomplete_playerDash', function () {
+            this.dash();
             this.anims.play(PLAYER_ANIM.playerIdle);
         }, this);
 
@@ -104,7 +131,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         const playerAttackAnims = this.generateFrameNames('vampire/fightvamp', 'all_sprites', 9, 19);
         const playerDeathAnims = this.generateFrameNames('vampire/deathvamp', 'all_sprites', 1, 7);
         const playerSuckAnims = this.generateFrameNames('vampire/vampdrink', 'all_sprites', 1, 5);
-        const playerDashAnims = this.generateFrameNames('vampire/dash', 'all_sprites', 1, 2);
+        const playerDashAnims = this.generateFrameNames('vampire/dash', 'all_sprites', 1, 4);
 
         this.scene.anims.create({ key: PLAYER_ANIM.suck, frames: playerSuckAnims, frameRate: 10, repeat: 0 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerRun, frames: playerRunAnims, frameRate: 10, repeat: -1 });
@@ -112,7 +139,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.scene.anims.create({ key: PLAYER_ANIM.playerJump, frames: playerJumpAnims, frameRate: 9 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerAttack, frames: playerAttackAnims, frameRate: 50 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerDeath, frames: playerDeathAnims, frameRate: 13 });
-        this.scene.anims.create({ key: PLAYER_ANIM.playerDash, frames: playerDashAnims, frameRate: 50, repeat: -1 });
+        this.scene.anims.create({ key: PLAYER_ANIM.playerDash, frames: playerDashAnims, frameRate: 13});
     }
 
     public getPlayerControl(): PlayerControls {
@@ -126,8 +153,8 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     }
 
     private generateComboKeys(): void {
-        this.scene.input.keyboard.createCombo([ this.playerControl.getControls().right, this.playerControl.getControls().right ], { resetOnMatch: true });
-        this.scene.input.keyboard.createCombo([ this.playerControl.getControls().left, this.playerControl.getControls().left ], { resetOnMatch: true });
+        this.scene.input.keyboard.createCombo([this.playerControl.getControls().right, this.playerControl.getControls().right], { resetOnMatch: true });
+        this.scene.input.keyboard.createCombo([this.playerControl.getControls().left, this.playerControl.getControls().left], { resetOnMatch: true });
         this.scene.input.keyboard.on('keycombomatch', function (event) {
             console.log(this)
             this.anims.play(PLAYER_ANIM.playerDash, true);
@@ -237,7 +264,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
                         this.addItemPlayerWantToBuy(eventData.gameObjectB);
                         this.emit('playerbuyitem');
                     }
-                }else {
+                } else {
                     if (eventData.bodyB.isSensor === false) {
                         this.killPlayer();
                     }
@@ -320,9 +347,16 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.addPlayerTouchTargetEvent();
     }
 
+    /**
+     * Suck
+     */
     public suck() {
+        if (this.isSucking) {
+            return;
+        }
         this.isSucking = true;
-        this.anims.play('suck',true);
+        this.anims.play('suck', true);
+        this.scene.audioManager.playSound(this.scene.audioManager.soundsList.SUCK)
     }
 
 
