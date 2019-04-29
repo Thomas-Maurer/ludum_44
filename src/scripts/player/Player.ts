@@ -415,6 +415,14 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     }
 
     /**
+     * Player get damage from enemy
+     * @param damage
+     */
+    public getDamageFromEnemy(damage: number): void {
+        this.takeDamage(damage);
+    }
+
+    /**
      * Gain health point
      * @param gain
      */
