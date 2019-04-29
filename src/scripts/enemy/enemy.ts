@@ -57,6 +57,13 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
         // change collision rect
         this.setPhysics(x, y);
         this.handleCollision();
+
+        const fightAnimation = 'animationcomplete_' + this.GUID + 'Fight';
+
+        this.on(fightAnimation, () => {
+            console.log('fiche finish');
+            this.isDoingAnAction = false;
+        }, this);
     }
 
     /**
@@ -130,13 +137,12 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
 
         const compoundBody = matterEngine.Matter.Body.create({
             parts: [ body, this.sensors.left, this.sensors.right],
-            frictionStatic: 0,
-            mass: 5000,
             inertia: Infinity
         });
 
         this.setExistingBody(compoundBody);
         this.setFixedRotation();
+        this.setFriction(0);
     }
 
     /**
@@ -163,6 +169,10 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
     private attackPlayer() {
         this.isDoingAnAction = true;
         this.anims.play(this.GUID + 'Fight', true);
+        // c'est de la merde mais animationcomplete marche pas
+        setTimeout(() => {
+            this.isDoingAnAction = false;
+        }, 2000);
     }
 
     /**
@@ -213,34 +223,6 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
         }
         this.setVelocityX(this.currentVelocity);
     }
-
-    // /**
-    //  * Set velocity on collide
-    //  */
-    // private setVelocityOnCollide(): void {
-    //     // fix prob with origin of the tile TODO check this condition after doing good sprite
-    //     // 0.3+ for fix "bug" math round
-    //     const xToAdd = this.currentDirection === -1 ? -1.3 : 0.3;
-    //     const map = Map.getInstance();
-    //     // calculate tile (for origin position of the sprite
-    //     const tileX: number = (this.x / Map.TILES_SIZE_X) + xToAdd;
-    //     let tileY: number = (this.y / Map.TILES_SIZE_Y);
-    //
-    //     if (map.isExistTile(tileX, tileY)) {
-    //         this.currentDirection = this.currentDirection * -1;
-    //         this.currentVelocity = this.currentVelocity * -1;
-    //         this.setFlipX(this.currentDirection === -1);
-    //     }
-    //     // TODO delete after adding the right sprite (1 is corresponding to 64px)
-    //     // checking collide on head
-    //     tileY = tileY - 1;
-    //
-    //     if (map.isExistTile(tileX, tileY)) {
-    //         this.currentDirection = this.currentDirection * -1;
-    //         this.currentVelocity = this.currentVelocity * -1;
-    //         this.setFlipX(this.currentDirection === -1);
-    //     }
-    // }
 
     /**
      * Destroy sprite

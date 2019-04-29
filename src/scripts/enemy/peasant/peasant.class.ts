@@ -38,13 +38,6 @@ export class Peasant extends Enemy implements IEnemy {
         super(world, scene, x, y, EnemiesEnum.SPRITE_SHEET_ID, Peasant.firstSpriteSheet);
         this.world = world;
         this.initAnims();
-        this.initAnimationComplete();
-    }
-
-    private initAnimationComplete() {
-        this.on('animationcomplete_' + this.GUID + 'Fight', () => {
-            this.isDoingAnAction = false;
-        });
     }
 
     /**
@@ -57,7 +50,7 @@ export class Peasant extends Enemy implements IEnemy {
         const peasantHitAnims = this.generateFrameNames(this.deadPeasantSpritePrefix, EnemiesEnum.SPRITE_SHEET_ID, 2, 2);
 
         this.scene.anims.create({ key: this.GUID + 'Run', frames: peasantRunAnims, frameRate: 10, repeat: -1 });
-        this.scene.anims.create({ key: this.GUID + 'Fight', frames: peasantFightAnims, frameRate: 10, repeat: -1 });
+        this.scene.anims.create({ key: this.GUID + 'Fight', frames: peasantFightAnims, frameRate: 10, repeat: 0 });
         this.scene.anims.create({ key: this.GUID + 'Dead', frames: peasantDeadAnims, frameRate: 5, repeat: 0 });
         this.scene.anims.create({ key: this.GUID + 'Hit', frames: peasantHitAnims, frameRate: 10, repeat: 0 });
     }
