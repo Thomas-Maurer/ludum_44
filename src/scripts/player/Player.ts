@@ -217,7 +217,6 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
 
                 } else if (eventData.gameObjectB instanceof VictoryItem) {
                     //TriggerVictory
-                    console.log(eventData.gameObjectB);
                     eventData.gameObjectB.destroy();
                     this.scene.triggerVictory();
                 } else if (eventData.gameObjectB instanceof Item) {

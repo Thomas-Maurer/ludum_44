@@ -7,8 +7,6 @@ import { EnemiesEnum } from "../enemy/enemies.enum";
 import { Enemies } from "../enemy/enemies.class";
 import VictoryItem from "../items/victoryItem";
 import EventsUtils from "../utils/events.utils";
-import Item from "../items/item";
-import BoostItem from "../items/boostItem";
 import ItemUtil from "../items/itemUtil";
 export default class MainScene extends Phaser.Scene {
   public matterCollision: PhaserMatterCollisionPlugin;
@@ -109,6 +107,7 @@ export default class MainScene extends Phaser.Scene {
     this.addEventsListeners();
     this.generateItems();
     this.buildSunSensor();
+    this.buildTextSign();
   }
 
   buildSunSensor(): void {
@@ -136,6 +135,14 @@ export default class MainScene extends Phaser.Scene {
       context: this
     });
 
+  }
+
+  buildTextSign(): void {
+    this.map.findObject('text_spawn', (obj: any) => {
+      this.add.text(obj.x, obj.y, obj.text.text, {
+        font: obj.text.pixelsize + "px " + obj.text.fontfamily
+      });
+    })
   }
 
   spawnPlayer(): Player {
