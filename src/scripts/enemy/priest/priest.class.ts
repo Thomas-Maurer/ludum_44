@@ -48,8 +48,9 @@ export class Priest extends Enemy implements IEnemy {
         });
 
         this.on('animationcomplete_' + this.GUID + 'Fight', () => {
-            this.pushBullet();
             if (!this.isDead) {
+                this.pushBullet();
+
                 if (this.currentPlayerInstance !== null) {
                     this.currentPlayerInstance.getDamageFromEnemy(this.info.damage);
                 }
@@ -139,7 +140,7 @@ export class Priest extends Enemy implements IEnemy {
                         this.setFlipX(false);
                     }
                 }
-                if (!this.isRangeAttacking) {
+                if (!this.isRangeAttacking && !this.isHit) {
                     this.rangeAttack(bodyB.gameObject);
                 }
             }
