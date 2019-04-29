@@ -22,6 +22,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
     public isRunning = false;
     public isDead = false;
     public isHit = false;
+    public isDoingAnAction = false;
 
     public sensors: any;
 
@@ -55,10 +56,10 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
         scene.add.existing(this);
         // change collision rect
         this.setPhysics(x, y);
-        this.handleCollision(world);
+        this.handleCollision();
     }
 
-    private handleCollision(world: Phaser.Physics.Matter.World): void {
+    private handleCollision(): void {
         this.scene.matterCollision.addOnCollideStart({
             objectA: [this.sensors.left, this.sensors.right],
             callback: this.onSensorCollide,
@@ -84,24 +85,28 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
         // be able to press up against the wall and use friction to hang in midair. This formula leaves
         // 0.5px of overlap with the sensor so that the sensor will stay colliding on the next tick if
         // the player doesn't move.
-        if (bodyB.isSensor || bodyB.gameObject instanceof Player) return; // We only care about collisions with physical objects
-        if (bodyA === this.sensors.left) {
-            // is currently going to left
-            if (this.currentDirection === -1) {
-                // make it going to right
-                this.currentDirection = 1;
-                this.currentVelocity = 1;
-                this.setFlipX(false);
-                this.setVelocityX(this.currentVelocity);
-            }
-        } else if (bodyA === this.sensors.right) {
-            // is currently going to left
-            if (this.currentDirection === 1) {
-                // make it going to right
-                this.currentDirection = -1;
-                this.currentVelocity = -1;
-                this.setFlipX(true);
-                this.setVelocityX(this.currentVelocity);
+        if (bodyB.isSensor ) return; // We only care about collisions with physical objects
+        if (bodyB.gameObject instanceof Player) {
+            this.attackPlayer();
+        } else {
+            if (bodyA === this.sensors.left) {
+                // is currently going to left
+                if (this.currentDirection === -1) {
+                    // make it going to right
+                    this.currentDirection = 1;
+                    this.currentVelocity = 1;
+                    this.setFlipX(false);
+                    this.setVelocityX(this.currentVelocity);
+                }
+            } else if (bodyA === this.sensors.right) {
+                // is currently going to left
+                if (this.currentDirection === 1) {
+                    // make it going to right
+                    this.currentDirection = -1;
+                    this.currentVelocity = -1;
+                    this.setFlipX(true);
+                    this.setVelocityX(this.currentVelocity);
+                }
             }
         }
     }
@@ -135,7 +140,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
      * Update function call by scene update
      */
     public update(): void {
-        if (this.isDead || this.isHit) {
+        if (this.isDead || this.isHit || this.isDoingAnAction) {
             return;
         }
         if (!this.isRunning) {
@@ -143,14 +148,16 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
             this.isRunning = true;
         }
 
-        this.attackPlayer();
+        // this.attackPlayer();
 
         // mak the enemy pnj always move
         this.setVelocityCustom();
     }
 
     private attackPlayer() {
-
+        this.isDoingAnAction = true;
+        console.log('do action');
+        this.anims.play(this.GUID + 'Fight', true);
     }
 
     /**
