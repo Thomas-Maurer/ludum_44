@@ -207,6 +207,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
             this.setStatic(true);
             this.isDead = true;
             this.stopAllAnims();
+            debugger
             this.anims.play(this.GUID + 'Dead',true);
             this.addDeadSensor();
         } else {
