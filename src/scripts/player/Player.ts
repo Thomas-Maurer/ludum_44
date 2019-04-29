@@ -40,7 +40,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         const body = matterEngine.Matter.Bodies.rectangle(x, y, 55, 95, { chamfer: { radius: 12 } });
 
         this.sensors = {
-            bottom: matterEngine.Matter.Bodies.rectangle(x, y + 95 * 0.53, 55 , this.width * 0.05, { isSensor: true }),
+            bottom: matterEngine.Matter.Bodies.rectangle(x, y + 95 * 0.53, 55, this.width * 0.05, { isSensor: true }),
             left: matterEngine.Matter.Bodies.rectangle(x - 55 * 0.53, y, 9, this.height * 0.25, { isSensor: true }),
             right: matterEngine.Matter.Bodies.rectangle(x + 55 * 0.53, y, 9, this.height * 0.25, { isSensor: true })
         };
@@ -57,6 +57,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.generateAnim();
         this.generateEventHandler();
         this.handleCollision();
+        this.takeDamage(0); //send a hp update to the ui
         // Before matter's update, reset our record of which surfaces the player is touching.
         scene.matter.world.on("beforeupdate", this.resetTouching, this);
     }
@@ -409,6 +410,11 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
             detail: this.healthPoint
         });
         window.dispatchEvent(playerHpEvent);
+
+        //play a sound if less than 25 hp
+        if (this.healthPoint <= 25) {
+            this.scene.audioManager.playSound(this.scene.audioManager.soundsList.HEARTH_BEAT);
+        }
         if (this.healthPoint <= 0) {
             this.killPlayer();
         }
