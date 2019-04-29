@@ -57,13 +57,6 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
         // change collision rect
         this.setPhysics(x, y);
         this.handleCollision();
-
-        const fightAnimation = 'animationcomplete_' + this.GUID + 'Fight';
-
-        this.on(fightAnimation, () => {
-            console.log('fiche finish');
-            this.isDoingAnAction = false;
-        }, this);
     }
 
     /**
@@ -97,7 +90,9 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
         // the player doesn't move.
         if (bodyB.isSensor ) return; // We only care about collisions with physical objects
         if (bodyB.gameObject instanceof Player) {
-            this.attackPlayer();
+            if (!this.isDead && !this.isHit) {
+                this.attackPlayer(bodyA);
+            }
         } else {
             if (bodyA === this.sensors.left) {
                 // is currently going to left
@@ -126,7 +121,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
      */
     private setPhysics(x: number, y: number) {
         const matterEngine: any = Phaser.Physics.Matter;
-        const body = matterEngine.Matter.Bodies.rectangle(x, y, 50, 115, {
+        const body = matterEngine.Matter.Bodies.rectangle(x, y, 50, 80, {
             chamfer: { radius: 17 }
         });
         // add sensor
@@ -143,6 +138,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
         this.setExistingBody(compoundBody);
         this.setFixedRotation();
         this.setFriction(0);
+        this.setOrigin(0.5,0.65);
     }
 
     /**
@@ -166,13 +162,22 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
     /**
      * Attack player
      */
-    private attackPlayer() {
+    private attackPlayer(bodyA: any): void {
+        if (bodyA === this.sensors.left) {
+            if (this.currentDirection !== -1) {
+                this.currentDirection = -1;
+                this.currentVelocity = -1;
+                this.setFlipX(true);
+            }
+        } else if (bodyA === this.sensors.right) {
+            if (this.currentDirection !== 1) {
+                this.currentDirection = 1;
+                this.currentVelocity = 1;
+                this.setFlipX(false);
+            }
+        }
         this.isDoingAnAction = true;
         this.anims.play(this.GUID + 'Fight', true);
-        // c'est de la merde mais animationcomplete marche pas
-        setTimeout(() => {
-            this.isDoingAnAction = false;
-        }, 2000);
     }
 
     /**
@@ -254,6 +259,8 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
         this.setStatic(true);
         this.x = currentX;
         this.y = currentY;
+        this.setOrigin(0.5,0.65);
+
     }
 
     /**
@@ -267,17 +274,17 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
         this.info.life = this.info.life - damage;
 
         if (this.info.life <= 0) {
-            this.setStatic(true);
             this.isDead = true;
-            this.stopAllAnims();
+            this.setStatic(true);
             this.anims.play(this.GUID + 'Dead', true);
             this.scene.audioManager.playSound(this.scene.audioManager.soundsList.PEASANT_DIE);
             this.addDeadSensor();
         } else {
+            this.stopAllAnims();
             this.isHit = true;
+            console.log(this.isHit);
             this.isRunning = false;
             this.anims.play(this.GUID + 'Hit', true);
-            setTimeout(() => this.isHit = false, 500);
         }
     }
 
