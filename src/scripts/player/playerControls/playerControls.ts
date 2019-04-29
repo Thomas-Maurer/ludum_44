@@ -115,6 +115,9 @@ export class PlayerControls {
                 player.getPlayerSprite().setVelocity(-0.3);
             }
         } else {
+            if (body.velocity.y <= -11) {
+                player.getPlayerSprite().setVelocity(-11);
+            }
             //Player touch the ground
             this.negativeforceVector = new Vector2(-0.1, 0);
             this.forceVector = new Vector2(0.1, 0);

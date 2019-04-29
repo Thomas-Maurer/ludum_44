@@ -85,6 +85,7 @@ export default class MainScene extends Phaser.Scene {
     // haven't mapped out custom collision shapes in Tiled so each colliding tile will get a default
     // rectangle body (similar to AP).
     this.matter.world.convertTilemapLayer(worldLayerCollide);
+    this.matter.world.convertTilemapLayer(worldLayer);
     this.player = this.spawnPlayer();
 
     this.enemies = new Enemies(this.map, this.matter.world, this);

@@ -5,6 +5,7 @@ import EventsUtils from "../utils/events.utils";
 import Item from "../items/item";
 import { PLAYER_ANIM } from "./animTabs";
 import VictoryItem from "../items/victoryItem";
+import Vector2 = Phaser.Math.Vector2;
 
 export default class Player extends Phaser.Physics.Matter.Sprite {
     private playerControl: PlayerControls;
@@ -39,7 +40,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         const body = matterEngine.Matter.Bodies.rectangle(x, y, 55, 95, { chamfer: { radius: 12 } });
 
         this.sensors = {
-            bottom: matterEngine.Matter.Bodies.rectangle(x, y + 95 * 0.53, this.width * 0.25, this.width * 0.05, { isSensor: true }),
+            bottom: matterEngine.Matter.Bodies.rectangle(x, y + 95 * 0.53, 55 , this.width * 0.05, { isSensor: true }),
             left: matterEngine.Matter.Bodies.rectangle(x - 55 * 0.53, y, 9, this.height * 0.25, { isSensor: true }),
             right: matterEngine.Matter.Bodies.rectangle(x + 55 * 0.53, y, 9, this.height * 0.25, { isSensor: true })
         };
@@ -105,9 +106,14 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     private dash(): void {
         if (this.allowDash) {
             if (this.lookRight) {
-                this.setPosition(this.x + 100, this.y);
+                let force = new Vector2(0.5, 0)
+                this.applyForce(force);
+
+                // this.setPosition(this.x + 100, this.y);
             } else {
-                this.setPosition(this.x - 100, this.y);
+                let force = new Vector2(-0.5, 0)
+                this.applyForce(force);
+                // this.setPosition(this.x - 100, this.y);
             }
         }
     }
