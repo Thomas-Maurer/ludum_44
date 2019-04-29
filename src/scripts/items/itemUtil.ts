@@ -11,10 +11,17 @@ export default class ItemUtil {
      * generate random item on spawn
      */
     public generateItem(obj: any): void {
-        let boostItem = new BoostItem(this.scene.matter.world, this.scene, obj.x, obj.y, 'all_sprites', 'items/iconglasses.png');
-        boostItem.setHpCost(10);
-        boostItem.setItemName('glasses');
-        // itemSprite.setStatic(true);
+        let frameName = '';
+        if (obj.name === 'glasses') {
+            frameName = 'items/iconglasses.png';
+        } else if (obj.name === 'umbrella') {
+            frameName = 'items/umbrella1.png';
+        } else if ((obj.name === 'pipe')){
+            frameName = 'items/pipe.png'
+        }
+        let boostItem = new BoostItem(this.scene.matter.world, this.scene, obj.x, obj.y, 'all_sprites', frameName);
+        boostItem.setHpCost(15);
+        boostItem.setItemName(obj.name);
         boostItem.setCollisionCategory(this.scene.itemsCat);
         boostItem.setCollidesWith([this.scene.playerCatCollision, 1, this.scene.itemsCat]);
     }

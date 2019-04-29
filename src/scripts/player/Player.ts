@@ -36,6 +36,8 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     private sensors: any;
     public isTouching: any;
     public glasses: boolean;
+    public pipe: boolean;
+    public umbrella: boolean;
 
     constructor(world: Phaser.Physics.Matter.World, scene: MainScene, x: number, y: number, key: string, frame?: string | integer, options?: object) {
         super(world, x, y, key, frame, options);
@@ -72,6 +74,10 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
             this.allowDash = true;
         } else if (item.getNameItem() === 'glasses') {
             this.glasses = true;
+        } else if (item.getNameItem() === 'pipe') {
+            this.pipe = true;
+        } else if (item.getNameItem() === 'umbrella') {
+            this.umbrella = true;
         }
 
     }
@@ -98,6 +104,8 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.doAction = false;
         this.allowDash = false;
         this.glasses = false;
+        this.pipe = false;
+        this.umbrella = false;
         this.isTouching = { left: false, right: false, ground: false };
     }
 
