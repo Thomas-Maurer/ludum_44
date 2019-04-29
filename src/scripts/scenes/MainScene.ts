@@ -75,15 +75,16 @@ export default class MainScene extends Phaser.Scene {
 
     this.generateParralaxLayers();
     const worldLayer = this.map.createStaticLayer('main_tile', tileset, 0, 0);
+    const worldLayerCollide = this.map.createStaticLayer('collide', tileset, 0, 0);
 
     this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
     this.matter.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
-    worldLayer.setCollisionByProperty({ collide: true });
+    worldLayerCollide.setCollisionByProperty({ collide: true });
 
     // Get the layers registered with Matter. Any colliding tiles will be given a Matter body. We
     // haven't mapped out custom collision shapes in Tiled so each colliding tile will get a default
     // rectangle body (similar to AP).
-    this.matter.world.convertTilemapLayer(worldLayer);
+    this.matter.world.convertTilemapLayer(worldLayerCollide);
     this.player = this.spawnPlayer();
 
     this.enemies = new Enemies(this.map, this.matter.world, this);

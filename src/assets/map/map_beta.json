@@ -29,7 +29,7 @@
          "name":"main_tile",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":293,
          "x":0,
          "y":0
