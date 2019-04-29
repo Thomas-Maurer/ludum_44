@@ -61,7 +61,7 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":673.333000000001,
+                 "width":673.333,
                  "x":11307.7,
                  "y":368.333
                 }],
@@ -177,15 +177,15 @@
                 }, 
                 {
                  "height":0,
-                 "id":82,
+                 "id":99,
                  "name":"pipe",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":3254,
-                 "y":616
+                 "x":9244,
+                 "y":230
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -206,8 +206,8 @@
                  "type":"",
                  "visible":true,
                  "width":610,
-                 "x":2734,
-                 "y":290
+                 "x":2737,
+                 "y":299
                 }, 
                 {
                  "height":380,
@@ -408,8 +408,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":9294.67,
-                 "y":201.333
+                 "x":9322.67,
+                 "y":227.333
                 }, 
                 {
                  "height":0,
@@ -420,8 +420,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":9420,
-                 "y":196
+                 "x":9438,
+                 "y":228
                 }, 
                 {
                  "height":0,
@@ -882,7 +882,7 @@
          "y":0
         }],
  "nextlayerid":14,
- "nextobjectid":99,
+ "nextobjectid":100,
  "orientation":"orthogonal",
  "renderorder":"left-up",
  "tiledversion":"1.2.3",
