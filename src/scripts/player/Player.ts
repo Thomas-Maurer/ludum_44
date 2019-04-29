@@ -177,11 +177,9 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         }, this);
 
         this.on('playerLeaveBossRoom', () => {
-            this.anims.play(PLAYER_ANIM.playerDrink);
         }, this);
 
         this.on('playerEnterBossRoom', () => {
-            this.anims.play(PLAYER_ANIM.playerDrink);
         }, this);
 
         this.on('animationcomplete_playerAttack', function () {

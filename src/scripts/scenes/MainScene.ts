@@ -111,6 +111,7 @@ export default class MainScene extends Phaser.Scene {
     this.addEventsListeners();
     this.generateItems();
     this.buildSunSensor();
+    this.buildBossRoomSensor();
     this.buildTextSign();
     this.audioManager.playMusic(this.audioManager.musicsList.TITLE);
     this.boss = this.spawnBoss();
