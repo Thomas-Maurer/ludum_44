@@ -175,8 +175,8 @@ export class PlayerControls {
     }
 
     private generateComboKeys(player: Player): void {
-        this.scene.input.keyboard.createCombo([ this.getControls().right, this.getControls().right ], { resetOnMatch: true });
-        this.scene.input.keyboard.createCombo([ this.getControls().left, this.getControls().left ], { resetOnMatch: true });
+        this.scene.input.keyboard.createCombo([ this.getControls().right, this.getControls().right ], { resetOnMatch: true, maxKeyDelay: 500 });
+        this.scene.input.keyboard.createCombo([ this.getControls().left, this.getControls().left ], { resetOnMatch: true, maxKeyDelay: 500 });
         this.scene.input.keyboard.on('keycombomatch', function () {
             if (this.allowDash) {
                 this.anims.play(PLAYER_ANIM.playerDash);
