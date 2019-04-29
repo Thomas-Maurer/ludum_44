@@ -26,8 +26,9 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     public doAction: boolean;
     private itemWantToBuy: Item;
     private allowDash: boolean;
-    private lookRight : boolean;
-    private lookLeft : boolean;
+    private lookRight: boolean;
+    private particleEmitter: Phaser.GameObjects.Particles.ParticleEmitter;
+    private lookLeft: boolean;
     private sensors: any;
     constructor(world: Phaser.Physics.Matter.World, scene: MainScene, x: number, y: number, key: string, frame?: string | integer, options?: object) {
         super(world, x, y, key, frame, options);
@@ -155,7 +156,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         const playerSuckAnims = this.generateFrameNames('vampire/vampdrink', 'all_sprites', 1, 5);
         const playerDashAnims = this.generateFrameNames('vampire/dash', 'all_sprites', 1, 4);
 
-        this.scene.anims.create({ key: PLAYER_ANIM.suck, frames: playerSuckAnims, frameRate: 5});
+        this.scene.anims.create({ key: PLAYER_ANIM.suck, frames: playerSuckAnims, frameRate: 5 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerRun, frames: playerRunAnims, frameRate: 10, repeat: -1 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerIdle, frames: playerIdleAnims, frameRate: 10, repeat: -1 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerJump, frames: playerJumpAnims, frameRate: 9 });
@@ -199,6 +200,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.handleCollision();
         this.handleActions();
         this.handleSun();
+        this.handleParticles();
     }
 
     /**
@@ -221,6 +223,17 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
      */
     public getPlayerSprite(): Phaser.Physics.Matter.Sprite {
         return this;
+    }
+
+    private handleParticles() {
+        if (!this.particleEmitter) {
+            let particles = this.scene.add.particles('sun_particle');
+            this.particleEmitter = particles.createEmitter({});
+        }
+
+        this.particleEmitter.setPosition(400, 300);
+        this.particleEmitter.setSpeed(200);
+        this.particleEmitter.setBlendMode(Phaser.BlendModes.ADD);
     }
 
     /**
@@ -286,7 +299,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
                         this.addItemPlayerWantToBuy(eventData.gameObjectB);
                         this.emit('playerbuyitem');
                     }
-                }else {
+                } else {
                     if (eventData.bodyB.isSensor === false) {
                         this.killPlayer();
                     }

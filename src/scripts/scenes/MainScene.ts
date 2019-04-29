@@ -60,6 +60,7 @@ export default class MainScene extends Phaser.Scene {
     if (!this.audioManager) {
       this.audioManager = new AudioManager(this);
     }
+    this.load.image('sun_particle', 'assets/graphics/gameplay/sun_particle.jpg');
   }
   create() {
     /** Build all layers maps */
