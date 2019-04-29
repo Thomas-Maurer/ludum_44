@@ -110,7 +110,7 @@ export default class MainScene extends Phaser.Scene {
     this.generateItems();
     this.buildSunSensor();
     this.buildTextSign();
-    this.audioManager.playMusic(this.audioManager.musicsList.WORLD);
+    this.audioManager.playMusic(this.audioManager.musicsList.TITLE);
     this.boss = this.spawnBoss();
   }
 
@@ -198,6 +198,8 @@ export default class MainScene extends Phaser.Scene {
     // User clicked on play
     window.addEventListener('play', (e) => {
       this.musicCanPlay = true;
+      this.audioManager.playMusic(this.audioManager.musicsList.WORLD);
+      this.audioManager.playSound(this.audioManager.soundsList.FART);
     });
     window.addEventListener('restart', (e) => {
       this.restart();

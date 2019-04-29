@@ -20,7 +20,8 @@ export default class AudioManager {
         HEARTH_BEAT: 'hearth_beat',
         PLAYER_HURT: 'hurt',
         PLAYER_GAIN_HP: 'gain_hp',
-        PLAYER_LOOSE_HP: 'loose_hp'
+        PLAYER_LOOSE_HP: 'loose_hp',
+        FART: 'fart'
     };
     /**
      * List of music (.mp3)
@@ -28,7 +29,8 @@ export default class AudioManager {
     public musicsList = {
         WORLD: 'world',
         CHURCH: 'church',
-        SHOP: 'shop'
+        SHOP: 'shop',
+        TITLE: 'title'
     }
     constructor(scene: MainScene) {
 
@@ -68,7 +70,8 @@ export default class AudioManager {
      */
     public playMusic(musicName: string, options?: SoundConfig) {
         //Stop if music can't play
-        if (!this.scene.musicCanPlay) {
+        //except for title music
+        if (!this.scene.musicCanPlay && musicName !== this.musicsList.TITLE) {
             return;
         }
         if (!options) {

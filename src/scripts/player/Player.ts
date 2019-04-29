@@ -427,6 +427,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         });
         window.dispatchEvent(playerHpEvent);
 
+
         //play a sound if less than 25 hp
         if (this.healthPoint <= 25) {
             this.scene.audioManager.playSound(this.scene.audioManager.soundsList.HEARTH_BEAT);
@@ -441,6 +442,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
      * @param damage
      */
     public getDamageFromEnemy(damage: number): void {
+        this.scene.audioManager.playSound(this.scene.audioManager.soundsList.PLAYER_HURT);
         this.anims.play(PLAYER_ANIM.playerHit);
         this.takeDamage(damage);
     }
