@@ -53,6 +53,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
      */
     constructor(world: Phaser.Physics.Matter.World, scene: MainScene, x: number, y: number, key: string, frame?: string | integer) {
         super(world, x, y, key, frame);
+        this.setDepth(3);
 
         this.scene = scene;
         scene.add.existing(this);

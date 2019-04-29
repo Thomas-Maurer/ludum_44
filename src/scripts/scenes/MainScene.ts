@@ -84,6 +84,8 @@ export default class MainScene extends Phaser.Scene {
     this.generateParralaxLayers();
     const worldLayer = this.map.createStaticLayer('main_tile', tileset, 0, 0);
     const worldLayerCollide = this.map.createStaticLayer('collide', tileset, 0, 0);
+    worldLayer.depth = 1;
+    worldLayerCollide.depth = 2;
 
     this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
     this.matter.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
@@ -95,6 +97,7 @@ export default class MainScene extends Phaser.Scene {
     this.matter.world.convertTilemapLayer(worldLayerCollide);
     this.matter.world.convertTilemapLayer(worldLayer);
     this.player = this.spawnPlayer();
+    this.player.setDepth(3);
 
     this.enemies = new Enemies(this.map, this.matter.world, this);
 
@@ -174,7 +177,9 @@ export default class MainScene extends Phaser.Scene {
             isStatic: true // It shouldn't move
           }
       );
-      this.bossRooms.push(bossRoom);
+       const bossRoomSprite = this.add.sprite(obj.x + obj.width / 2, obj.y + obj.height / 2, 'all_sprites_background', 'background/boss_room');
+        bossRoomSprite.setDepth(0);
+       this.bossRooms.push(bossRoom);
     });
 
     this.matterCollision.addOnCollideStart({
