@@ -9,6 +9,7 @@ import VictoryItem from "../items/victoryItem";
 import EventsUtils from "../utils/events.utils";
 import ItemUtil from "../items/itemUtil";
 import Boss from "../enemy/boss/boss";
+import {PLAYER_ANIM} from "../player/animTabs";
 export default class MainScene extends Phaser.Scene {
   public matterCollision: PhaserMatterCollisionPlugin;
   public map: Phaser.Tilemaps.Tilemap;
@@ -116,6 +117,7 @@ export default class MainScene extends Phaser.Scene {
     this.buildSunSensor();
     this.buildBossRoomSensor();
     this.buildTextSign();
+    this.generatePnj();
     this.audioManager.playMusic(this.audioManager.musicsList.TITLE);
     this.boss = this.spawnBoss();
   }
@@ -162,6 +164,17 @@ export default class MainScene extends Phaser.Scene {
       context: this
     });
 
+  }
+
+  generatePnj(): void {
+    const pnjAnim = this.player.generateFrameNames('pnj/merch/merch', 'all_sprites', 1, 5);
+    this.anims.create({ key: 'pnj/merch/merch', frames: pnjAnim, frameRate: 5, repeat: -1});
+    // Create a sensor at the rectangle object created in Tiled (under the "boss_sensor" layer)
+    this.map.findObject("spawn_pnj", (obj: any) => {
+      const merchSprite = this.add.sprite((obj.x ) + obj.width / 2, obj.y + obj.height / 2, 'all_sprites', 'pnj/merch/merch1.png');
+      this.add.existing(merchSprite);
+      merchSprite.play('pnj/merch/merch', true);
+    });
   }
 
   buildBossRoomSensor(): void {

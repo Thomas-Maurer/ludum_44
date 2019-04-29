@@ -784,9 +784,44 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":16,
+         "name":"spawn_pnj",
+         "objects":[
+                {
+                 "height":0,
+                 "id":74,
+                 "name":"merch",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":11392,
+                 "y":554
+                }, 
+                {
+                 "height":0,
+                 "id":76,
+                 "name":"merch",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":3266,
+                 "y":406
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":16,
- "nextobjectid":71,
+ "nextlayerid":17,
+ "nextobjectid":78,
  "orientation":"orthogonal",
  "renderorder":"left-up",
  "tiledversion":"1.2.3",
