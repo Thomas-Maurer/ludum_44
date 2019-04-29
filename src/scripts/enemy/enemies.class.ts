@@ -81,18 +81,24 @@ export class Enemies {
      */
     public updateAllEnemies(playerX: number): void {
         for (let index = 0; index < this.listOfEnemies.length; index++) {
-            let enemy = this.listOfEnemies[index];
-            if (enemy.isDead) {
+            try {
+                let enemy = this.listOfEnemies[index];
+                if (enemy.isDead) {
+                    this.listOfEnemies.splice(index, 1);
+                    continue;
+                }
+                if (enemy.x + this.DISTANCE_TO_PLAYER >= playerX && enemy.x - this.DISTANCE_TO_PLAYER <= playerX) {
+                    enemy.update();
+                } else {
+                    if (enemy.anims.isPlaying) {
+                        enemy.stopAllAnims();
+                    }
+                }
+            } catch (e) {
                 this.listOfEnemies.splice(index, 1);
                 continue;
             }
-            if (enemy.x + this.DISTANCE_TO_PLAYER >= playerX && enemy.x - this.DISTANCE_TO_PLAYER <= playerX) {
-                enemy.update();
-            } else {
-                if (enemy.anims.isPlaying) {
-                    enemy.stopAllAnims();
-                }
-            }
+
         }
     }
 
