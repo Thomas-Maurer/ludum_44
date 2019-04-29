@@ -36,7 +36,7 @@ export default class MainScene extends Phaser.Scene {
       sky: Phaser.GameObjects.TileSprite,
     }
     scene1: {
-      foreground: Phaser.GameObjects.TileSprite,
+      //foreground: Phaser.GameObjects.TileSprite,
       bg_far: Phaser.GameObjects.TileSprite,
       bg: Phaser.GameObjects.TileSprite
     },
@@ -356,7 +356,7 @@ export default class MainScene extends Phaser.Scene {
 
         bg_far: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites_background', 'background/scene1/bg_far.png'),
         bg: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites_background', 'background/scene1/bg.png'),
-        foreground: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites_background', 'background/scene1/foreground.png'),
+        //foreground: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites_background', 'background/scene1/foreground.png'),
       },
       // scene2: {
       //   bg_far: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites_background', 'background/scene2/bg_far.png'),
@@ -399,7 +399,7 @@ export default class MainScene extends Phaser.Scene {
     this.parralaxLayers.scene1.bg.setTilePosition(this.cameras.main.scrollX * 0.4, this.cameras.main.scrollY * 0.4)
 
     //foreground
-    this.parralaxLayers.scene1.foreground.active = false;
+    // this.parralaxLayers.scene1.foreground.active = false;
   }
 
   // Fct we call each frame
