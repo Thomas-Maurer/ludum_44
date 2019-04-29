@@ -4,7 +4,7 @@ import Vector2 = Phaser.Math.Vector2;
 import KeyCodes = Phaser.Input.Keyboard.KeyCodes;
 import MainScene from "../../scenes/MainScene";
 import AudioManager from "../../AudioManager";
-import {PLAYER_ANIM, PLAYER_ANIM_ACTION, PLAYER_ANIM_DONT_CANCEL} from "../animTabs";
+import { PLAYER_ANIM, PLAYER_ANIM_ACTION, PLAYER_ANIM_DONT_CANCEL } from "../animTabs";
 
 export class PlayerControls {
     private cursors: any;
@@ -94,7 +94,7 @@ export class PlayerControls {
             });
     }
 
-    public getControls(): any{
+    public getControls(): any {
         return this.cursors;
     }
 
@@ -104,7 +104,7 @@ export class PlayerControls {
      * @param body
      */
 
-    private handlePlayerControlInAir(player: Player, body: any): void{
+    private handlePlayerControlInAir(player: Player, body: any): void {
         if (!player.isPlayerInTheAir()) {
             // Player is in the Air
             this.forceVector = new Vector2(0.1, 0);
@@ -132,12 +132,13 @@ export class PlayerControls {
         this.handlePlayerControlInAir(player, body);
 
 
-        if (this.cursors.attack.isDown) {
-            player.anims.play(PLAYER_ANIM.playerAttack,true);
+        if (this.cursors.attack.isDown && player.canAttack) {
+            player.anims.play(PLAYER_ANIM.playerAttack, true);
+            this.scene.audioManager.playSound(this.scene.audioManager.soundsList.HIT);
             player.enableAttackState();
         }
 
-        if(this.cursors.right.isDown){
+        if (this.cursors.right.isDown) {
             player.setLookRight(true);
             if (player.anims.currentAnim !== null && PLAYER_ANIM_ACTION.hasOwnProperty(player.anims.currentAnim.key)) {
             } else {
@@ -146,7 +147,7 @@ export class PlayerControls {
 
             player.getPlayerSprite().setFlipX(false);
             player.getPlayerSprite().applyForce(this.forceVector);
-        } else if(this.cursors.left.isDown){
+        } else if (this.cursors.left.isDown) {
             player.setLookLeft(true);
             if (player.anims.currentAnim !== null && PLAYER_ANIM_ACTION.hasOwnProperty(player.anims.currentAnim.key)) {
             } else {
@@ -164,12 +165,12 @@ export class PlayerControls {
             }
             player.getPlayerSprite().setVelocityX(0);
         }
-        if(this.cursors.action.isDown) {
+        if (this.cursors.action.isDown) {
             player.doAction = true;
         }
         if (this.cursors.up.isDown && player.getCanJump() && !player.isPlayerInTheAir()) {
             player.anims.play(PLAYER_ANIM.playerJump, true);
-            //this.audioManager.playSound(this.audioManager.soundsList.PLAYER_JUMP);
+            this.audioManager.playSound(this.audioManager.soundsList.PLAYER_JUMP);
             player.desactivateJump();
             player.getPlayerSprite().setVelocityY(-18);
         }
