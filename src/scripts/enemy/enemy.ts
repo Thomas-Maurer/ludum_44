@@ -2,6 +2,7 @@ import { Map } from "../map-data";
 import { EnemyGuid } from "./enemy-guid.enum";
 import { IEnemy } from "./enemy.interface";
 import MainScene from "../scenes/MainScene";
+import Player from "../player/Player";
 /**
  * Enemy class
  */
@@ -21,6 +22,8 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
     public isRunning = false;
     public isDead = false;
     public isHit = false;
+
+    public sensors: any;
 
     /**
      * Guid fill by the children
@@ -52,6 +55,55 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
         scene.add.existing(this);
         // change collision rect
         this.setPhysics(x, y);
+        this.handleCollision(world);
+    }
+
+    private handleCollision(world: Phaser.Physics.Matter.World): void {
+        this.scene.matterCollision.addOnCollideStart({
+            objectA: [this.sensors.left, this.sensors.right],
+            callback: this.onSensorCollide,
+            context: this
+        });
+        this.scene.matterCollision.addOnCollideActive({
+            objectA: [this.sensors.left, this.sensors.right],
+            callback: this.onSensorCollide,
+            context: this
+        });
+    }
+
+    /**
+     * Change velocity on enemy collide wall with sensor
+     * @param bodyA
+     * @param bodyB
+     */
+    private onSensorCollide({ bodyA, bodyB }): void {
+        // Watch for the player colliding with walls/objects on either side and the ground below, so
+        // that we can use that logic inside of update to move the player.
+        // Note: we are using the "pair.separation" here. That number tells us how much bodyA and bodyB
+        // overlap. We want to teleport the sprite away from walls just enough so that the player won't
+        // be able to press up against the wall and use friction to hang in midair. This formula leaves
+        // 0.5px of overlap with the sensor so that the sensor will stay colliding on the next tick if
+        // the player doesn't move.
+        if (bodyB.isSensor || bodyB.gameObject instanceof Player) return; // We only care about collisions with physical objects
+        if (bodyA === this.sensors.left) {
+            // is currently going to left
+            if (this.currentDirection === -1) {
+                // make it going to right
+                this.currentDirection = 1;
+                this.currentVelocity = 1;
+                this.setFlipX(false);
+                this.setVelocityX(this.currentVelocity);
+            }
+        } else if (bodyA === this.sensors.right) {
+            // is currently going to left
+            if (this.currentDirection === 1) {
+                // make it going to right
+                this.currentDirection = -1;
+                this.currentVelocity = -1;
+                this.setFlipX(true);
+                this.setVelocityX(this.currentVelocity);
+            }
+        }
     }
 
     /**
@@ -59,20 +111,24 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
      */
     private setPhysics(x: number, y: number) {
         const matterEngine: any = Phaser.Physics.Matter;
-        const body = matterEngine.Matter.Bodies.rectangle(x, y, 64, 115);
+        const body = matterEngine.Matter.Bodies.rectangle(x, y, 50, 115, {
+            chamfer: { radius: 17 }
+        });
         // add sensor
-        const leftSensor = matterEngine.Matter.Bodies.rectangle(100,0, 50, 10,{ isSensor: true, label: 'left' });
-        const rightSensor = matterEngine.Matter.Bodies.circle(70, 0, 24, { isSensor: true, label: 'right' });
+        this.sensors = {
+            left: matterEngine.Matter.Bodies.rectangle(x - 50, y, 20, 50, { isSensor: true, label: 'left' }),
+            right: matterEngine.Matter.Bodies.rectangle(x + 50, y, 20, 50, { isSensor: true, label: 'right' })
+        };
 
         const compoundBody = matterEngine.Matter.Body.create({
-            parts: [ body, leftSensor, rightSensor],
+            parts: [ body, this.sensors.left, this.sensors.right],
+            frictionStatic: 0,
+            mass: 5000,
             inertia: Infinity
         });
 
         this.setExistingBody(compoundBody);
-
         this.setFixedRotation();
-        this.setFriction(0);
     }
 
     /**
