@@ -1,6 +1,7 @@
 import { Peasant } from "./peasant/peasant.class";
 import { Enemy } from "./enemy";
 import MainScene from "../scenes/MainScene";
+import {Priest} from "./priest/priest.class";
 /**
  * Class initializing all enemies sprites
  */
@@ -42,7 +43,8 @@ export class Enemies {
      * @param scene
      */
     private initSpawns(world: Phaser.Physics.Matter.World, scene: MainScene) {
-        this.iniPeasantSpawn(world, scene);
+        this.initPeasantSpawn(world, scene);
+        this.initPriestSpawn(world, scene);
     }
 
     /**
@@ -50,7 +52,21 @@ export class Enemies {
      * @param world
      * @param scene
      */
-    private iniPeasantSpawn(world: Phaser.Physics.Matter.World, scene: MainScene) {
+    private initPriestSpawn(world: Phaser.Physics.Matter.World, scene: MainScene) {
+        this.mapObject.findObject(this.SPAWN_PRIEST, (obj: any) => {
+            let priest = new Priest(world, scene, obj.x, obj.y);
+            priest.setCollisionCategory(this.collisionCat);
+            priest.setCollidesWith([1, this.scene.playerCatCollision]);
+            this.listOfEnemies.push(priest);
+        });
+    }
+
+    /**
+     * Init peasant spawn
+     * @param world
+     * @param scene
+     */
+    private initPeasantSpawn(world: Phaser.Physics.Matter.World, scene: MainScene) {
         this.mapObject.findObject(this.SPAWN_PEASANT, (obj: any) => {
             let peasant = new Peasant(world, scene, obj.x, obj.y);
             peasant.setCollisionCategory(this.collisionCat);
