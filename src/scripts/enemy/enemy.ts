@@ -10,12 +10,12 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
     /**
      * Current velocity
      */
-    private currentVelocity: number = 1;
+    protected currentVelocity: number = 1;
     /**
      * If -1 currentdirection is to left if +1 is to right
      * @type {number}
      */
-    private currentDirection: number = 1;
+    protected currentDirection: number = 1;
 
     public currentPlayerInstance: Player;
 
@@ -87,7 +87,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
      * @param bodyA
      * @param bodyB
      */
-    private onSensorCollide({ bodyA, bodyB }): void {
+    protected onSensorCollide({ bodyA, bodyB }): void {
         // Watch for the player colliding with walls/objects on either side and the ground below, so
         // that we can use that logic inside of update to move the player.
         // Note: we are using the "pair.separation" here. That number tells us how much bodyA and bodyB
@@ -128,7 +128,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
     /**
      * Set physics of the enemy
      */
-    private setPhysics(x: number, y: number) {
+    protected setPhysics(x: number, y: number) {
         const matterEngine: any = Phaser.Physics.Matter;
         const body = matterEngine.Matter.Bodies.rectangle(x, y, 50, 80, {
             chamfer: { radius: 17 }
@@ -169,7 +169,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
     /**
      * Attack player
      */
-    private attackPlayer(bodyA: any, playerInstance: Player): void {
+    protected attackPlayer(bodyA: any, playerInstance: Player): void {
         if (bodyA === this.sensors.left) {
             if (this.currentDirection !== -1) {
                 this.currentDirection = -1;
@@ -199,7 +199,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
     /**
      * Set the velocity of the sprite depending on the platform
      */
-    private setVelocityCustom(): void {
+    protected setVelocityCustom(): void {
         this.setVelocityOnGround();
         // this.setVelocityOnCollide();
     }
@@ -222,7 +222,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
     /**
      * Set current velocity and direction
      */
-    private setVelocityOnGround(): void {
+    protected setVelocityOnGround(): void {
         const map = Map.getInstance();
         // calculate tile (for origin position of the sprite
         const tileX: number = (this.x / Map.TILES_SIZE_X) - 0.5;

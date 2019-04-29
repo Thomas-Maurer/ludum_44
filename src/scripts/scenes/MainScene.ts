@@ -8,12 +8,14 @@ import { Enemies } from "../enemy/enemies.class";
 import VictoryItem from "../items/victoryItem";
 import EventsUtils from "../utils/events.utils";
 import ItemUtil from "../items/itemUtil";
+import Boss from "../enemy/boss/boss";
 export default class MainScene extends Phaser.Scene {
   public matterCollision: PhaserMatterCollisionPlugin;
   public map: Phaser.Tilemaps.Tilemap;
   public itemUtil: ItemUtil;
   public player: Player;
   public shapes: any;
+  public boss: Boss;
   public audioManager: AudioManager;
   public playerCatCollision: any;
   public itemsCat: any;
@@ -93,7 +95,6 @@ export default class MainScene extends Phaser.Scene {
 
     this.enemies = new Enemies(this.map, this.matter.world, this);
 
-    //this.enemy.setCollisionCategory(defaultCat);
     this.player.setCollisionCategory(this.playerCatCollision);
     // 1 is the collision category of the tile with tiled
     this.player.setCollidesWith([1, this.enemies.collisionCat, this.itemsCat]);
@@ -109,6 +110,7 @@ export default class MainScene extends Phaser.Scene {
     this.buildSunSensor();
     this.buildTextSign();
     this.audioManager.playMusic(this.audioManager.musicsList.WORLD);
+    this.boss = this.spawnBoss();
   }
 
   buildSunSensor(): void {
@@ -161,6 +163,11 @@ export default class MainScene extends Phaser.Scene {
         font: obj.text.pixelsize + "px " + obj.text.fontfamily
       });
     })
+  }
+
+  spawnBoss(): Boss {
+    const spawnPoint: any = this.map.findObject("spawn_boss", (obj: any) => obj.name === "boss");
+    return new Boss(this.matter.world, this, spawnPoint.x, spawnPoint.y);
   }
 
   spawnPlayer(): Player {
@@ -289,5 +296,7 @@ export default class MainScene extends Phaser.Scene {
     this.player.update();
     this.updateParralax();
     this.enemies.updateAllEnemies(this.player.x);
+    this.boss.update();
+
   }
 }
