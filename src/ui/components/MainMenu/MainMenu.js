@@ -69,6 +69,6 @@ export default {
         this.initEventsListeners();
         setTimeout(() => {
             this.loading = false;
-        }, 7000);
+        }, 10000);
     },
 };
