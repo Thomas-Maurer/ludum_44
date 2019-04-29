@@ -454,6 +454,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
             detail: this.healthPoint
         });
         window.dispatchEvent(playerHpEvent);
+        this.generateHpAnim("+" + gain + "");
     }
 
     /**
@@ -517,10 +518,6 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.isSucking = true;
         this.anims.play('suck', true);
         this.scene.audioManager.playSound(this.scene.audioManager.soundsList.SUCK);
-
-        this.generateHpAnim("+" + PeasantInfo.GAIN + "");
-
-
     }
 
     /**
