@@ -214,6 +214,39 @@
         }, 
         {
          "draworder":"topdown",
+         "id":17,
+         "name":"shop_zone",
+         "objects":[
+                {
+                 "height":374,
+                 "id":78,
+                 "name":"shopZone",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":610,
+                 "x":2740,
+                 "y":298
+                }, 
+                {
+                 "height":380,
+                 "id":79,
+                 "name":"shopZone",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":700,
+                 "x":11292,
+                 "y":342
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":4,
          "name":"spawn_peasant",
          "objects":[
@@ -820,8 +853,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":17,
- "nextobjectid":78,
+ "nextlayerid":18,
+ "nextobjectid":80,
  "orientation":"orthogonal",
  "renderorder":"left-up",
  "tiledversion":"1.2.3",

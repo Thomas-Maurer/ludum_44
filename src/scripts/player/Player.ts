@@ -34,6 +34,8 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     private lookLeft: boolean;
     private sensors: any;
     public isTouching: any;
+    public glasses: boolean;
+
     constructor(world: Phaser.Physics.Matter.World, scene: MainScene, x: number, y: number, key: string, frame?: string | integer, options?: object) {
         super(world, x, y, key, frame, options);
         this.scene = scene;
@@ -67,6 +69,8 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
 
         if (item.getNameItem() === 'dashPotion') {
             this.allowDash = true;
+        } else if (item.getNameItem() === 'glasses') {
+            this.glasses = true;
         }
 
     }
@@ -92,6 +96,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.isPlayerDead = false;
         this.doAction = false;
         this.allowDash = false;
+        this.glasses = false;
         this.isTouching = { left: false, right: false, ground: false };
     }
 
@@ -189,6 +194,12 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
             window.dispatchEvent(bossHpEvent);
         }, this);
 
+        this.on('playerLeaveShop', () => {
+        }, this);
+
+        this.on('playerEnterShop', () => {
+        }, this);
+
         this.on('animationcomplete_playerAttack', function () {
             this.anims.play(PLAYER_ANIM.playerIdle);
             //TODO Player attack system
@@ -210,6 +221,11 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         const playerHitAnims = this.generateFrameNames('vampire/hitvamp', 'all_sprites', 1, 5);
         const playerDashAnims = this.generateFrameNames('vampire/dash', 'all_sprites', 1, 4);
         const playerVictoryAnims = this.generateFrameNames('vampire/drink', 'all_sprites', 1, 14);
+
+        const playerGlassesOnAttackAnims = this.generateFrameNames('vampire/lunettes/glassesfightvamp', 'all_sprites', 1, 19);
+        const playerGlassesOnJumpAnims = this.generateFrameNames('vampire/lunettes/glassesjumpvamp', 'all_sprites', 1, 7);
+        const playerGlassesOnRunAnims = this.generateFrameNames('vampire/lunettes/glassesrunvamp', 'all_sprites', 1, 10);
+        const playerGlassesOnIdleAnims = this.generateFrameNames('vampire/lunettes/glassesfightvamp', 'all_sprites', 1, 9);
 
         this.scene.anims.create({ key: PLAYER_ANIM.suck, frames: playerSuckAnims, frameRate: 5 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerRun, frames: playerRunAnims, frameRate: 10, repeat: -1 });
@@ -318,11 +334,17 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
                 this.willTakeSunDamage = null;
             }
         }
+        let sunDamage = 1;
+        let delaySunDamage = 1000;
 
         if (this.isInSun && !this.willTakeSunDamage) {
+            // If we have glasses just double the time before we take sun damage
+            if (this.glasses) {
+                delaySunDamage = delaySunDamage * 2;
+            }
             //  The same as above, but uses a method signature to declare it (shorter, and compatible with GSAP syntax)
-            this.willTakeSunDamage = this.scene.time.delayedCall(1000, () => {
-                this.takeDamage(1);
+            this.willTakeSunDamage = this.scene.time.delayedCall(delaySunDamage, () => {
+                this.takeDamage(sunDamage);
                 this.willTakeSunDamage.remove();
                 this.willTakeSunDamage = null;
 

@@ -23,6 +23,7 @@ export default class MainScene extends Phaser.Scene {
   public fps: any;
   public sunSensors: any[];
   public bossRooms: any[];
+  public shopZone: any[];
   public musicCanPlay: boolean = false;
   public win: boolean = false;
   private parralaxLayers: {
@@ -115,6 +116,7 @@ export default class MainScene extends Phaser.Scene {
     this.addEventsListeners();
     this.generateItems();
     this.buildSunSensor();
+    this.buildShopSensor();
     this.buildBossRoomSensor();
     this.buildTextSign();
     this.generatePnj();
@@ -160,6 +162,43 @@ export default class MainScene extends Phaser.Scene {
           this.player.enableSun();
         }
 
+      },
+      context: this
+    });
+
+  }
+
+  buildShopSensor(): void {
+    // Create a sensor at the rectangle object created in Tiled (under the "sunSensor" layer)
+    this.map.findObject("sunSensor", (obj: any) => {
+      const shopZone = this.matter.add.rectangle(
+          obj.x + obj.width / 2,
+          obj.y + obj.height / 2,
+          obj.width,
+          obj.height,
+          {
+            isSensor: true, // It shouldn't physically interact with other bodies
+            isStatic: true // It shouldn't move
+          }
+      );
+      this.shopZone.push(shopZone);
+    });
+
+    this.matterCollision.addOnCollideStart({
+      objectA: this.player,
+      objectB: this.shopZone,
+      callback: (eventData: any) => {
+        this.player.emit('playerEnterShop');
+      },
+      context: this
+    });
+
+    this.matterCollision.addOnCollideEnd({
+      objectA: this.player,
+      objectB: this.shopZone,
+      callback: (eventData: any) => {
+        if (eventData.bodyA.isSensor) return; // We only care about collisions with physical objects
+        this.player.emit('playerLeaveShop');
       },
       context: this
     });
