@@ -32,6 +32,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy{
     public info = {
         life:  0,
         damage:  0,
+        gain:  0,
     };
 
     /**

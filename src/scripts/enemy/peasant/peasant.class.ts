@@ -28,8 +28,9 @@ export class Peasant extends Enemy implements IEnemy {
 
     public GUID: EnemyGuid = EnemyGuid.PEASANT;
     public info = {
-        life:  PeasantInfo.LIFE,
-        damage:  PeasantInfo.DAMAGE,
+        life: PeasantInfo.LIFE,
+        damage: PeasantInfo.DAMAGE,
+        gain: PeasantInfo.GAIN
     };
 
     constructor(world: Phaser.Physics.Matter.World, scene: Phaser.Scene, x: number, y: number) {

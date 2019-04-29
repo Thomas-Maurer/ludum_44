@@ -103,9 +103,15 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         }, this);
 
         this.on('animationcomplete_suck', () => {
+            this.gainDamage(this.currentEnemyDead.info.gain / 5);
             this.currentEnemyDead.destroySprite();
             this.anims.play(PLAYER_ANIM.playerIdle);
             this.isSucking = false;
+            this.currentEnemyDead = null;
+        });
+
+        this.on('animationupdate-suck', () => {
+            this.gainDamage(this.currentEnemyDead.info.gain / 5);
         });
 
         this.on('playerbuyitem', () => {
@@ -295,7 +301,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
      * Take damage
      */
     private takeDamage(damage: number) {
-        console.log("Player take " + damage + " damages")
+        console.log("Player take " + damage + " damages");
         this.healthPoint -= damage;
         const playerHpEvent: CustomEvent = new CustomEvent("PLAYER_HP", {
             detail: this.healthPoint
@@ -304,6 +310,22 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         if (this.healthPoint <= 0) {
             this.killPlayer();
         }
+    }
+
+    /**
+     * Gain health point
+     * @param gain
+     */
+    private gainDamage(gain: number): void {
+        console.log("Player win " + gain + " damages");
+        this.healthPoint += gain;
+        if (this.healthPoint > 100) {
+            this.healthPoint = 100;
+        }
+        const playerHpEvent: CustomEvent = new CustomEvent("PLAYER_HP", {
+            detail: this.healthPoint
+        });
+        window.dispatchEvent(playerHpEvent);
     }
 
     /**
@@ -360,7 +382,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.currentEnemyDead = enemyDead;
         this.isSucking = true;
         this.anims.play('suck', true);
-        this.scene.audioManager.playSound(this.scene.audioManager.soundsList.SUCK)
+        this.scene.audioManager.playSound(this.scene.audioManager.soundsList.SUCK);
     }
 
 
