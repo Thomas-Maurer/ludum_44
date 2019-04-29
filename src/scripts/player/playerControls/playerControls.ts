@@ -147,7 +147,7 @@ export class PlayerControls {
 
             player.getPlayerSprite().setFlipX(false);
             player.getPlayerSprite().applyForce(this.forceVector);
-        } else if (this.cursors.left.isDown) {
+        } else if (this.cursors.left.isDown && !player.isTouching.left) {
             player.setLookLeft(true);
             if (player.anims.currentAnim !== null && PLAYER_ANIM_ACTION.hasOwnProperty(player.anims.currentAnim.key)) {
             } else {
@@ -168,7 +168,7 @@ export class PlayerControls {
         if (this.cursors.action.isDown) {
             player.doAction = true;
         }
-        if (this.cursors.up.isDown && player.getCanJump() && !player.isPlayerInTheAir()) {
+        if (this.cursors.up.isDown && player.getCanJump() && !player.isPlayerInTheAir() && player.isTouching.ground) {
             player.anims.play(PLAYER_ANIM.playerJump, true);
             this.audioManager.playSound(this.audioManager.soundsList.PLAYER_JUMP);
             player.desactivateJump();
