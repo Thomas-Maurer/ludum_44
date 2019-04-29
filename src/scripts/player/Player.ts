@@ -131,6 +131,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         }, this);
     }
 
+
     /**
      * Create all the anim the player has
      */
