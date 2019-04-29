@@ -24,7 +24,6 @@ export const PLAYER_ANIM_DONT_CANCEL: any = {
     playerHit: 'playerHit',
     playerJumpGlasses: 'playerJumpGlasses',
     playerAttackGlasses: 'playerAttackGlasses',
-    playerRunGlasses: 'playerRunGlasses',
     suck: 'suck',
 
 };
@@ -37,7 +36,6 @@ export const PLAYER_ANIM_ACTION: any = {
     playerHit: 'playerHit',
     playerJumpGlasses: 'playerJumpGlasses',
     playerAttackGlasses: 'playerAttackGlasses',
-    playerRunGlasses: 'playerRunGlasses',
     suck: 'suck',
 
 };

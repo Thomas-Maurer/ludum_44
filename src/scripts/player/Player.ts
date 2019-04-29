@@ -96,7 +96,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.isPlayerDead = false;
         this.doAction = false;
         this.allowDash = false;
-        this.glasses = false;
+        this.glasses = true;
         this.isTouching = { left: false, right: false, ground: false };
     }
 
@@ -134,11 +134,11 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         }, this);
 
         this.on('animationcomplete_playerJump', function () {
-            if (this.glasses) {
-                this.anims.play(PLAYER_ANIM.playerIdleGlasses);
-            } else {
                 this.anims.play(PLAYER_ANIM.playerIdle);
-            }
+        }, this);
+
+        this.on('animationcomplete_playerJumpGlasses', function () {
+                this.anims.play(PLAYER_ANIM.playerIdleGlasses);
         }, this);
 
         this.on('animationcomplete_playerHit', function () {
@@ -223,6 +223,12 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
             //TODO Player attack system
             this.disableAttackState();
         }, this);
+
+        this.on('animationcomplete_playerAttackGlasses', function () {
+            this.anims.play(PLAYER_ANIM.playerIdleGlasses);
+            //TODO Player attack system
+            this.disableAttackState();
+        }, this);
     }
 
 
@@ -242,7 +248,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
 
         const playerGlassesOnAttackAnims = this.generateFrameNames('vampire/lunettes/glassesfightvamp', 'all_sprites', 1, 19);
         const playerGlassesOnJumpAnims = this.generateFrameNames('vampire/lunettes/glassesjumpvamp', 'all_sprites', 1, 7);
-        const playerGlassesOnRunAnims = this.generateFrameNames('vampire/lunettes/glassesrunvamp', 'all_sprites', 1, 10);
+        const playerGlassesOnRunAnims = this.generateFrameNames('vampire/lunettes/glassesrunvampright', 'all_sprites', 1, 10);
         const playerGlassesOnIdleAnims = this.generateFrameNames('vampire/lunettes/glassesfightvamp', 'all_sprites', 1, 9);
 
         this.scene.anims.create({ key: PLAYER_ANIM.suck, frames: playerSuckAnims, frameRate: 5 });

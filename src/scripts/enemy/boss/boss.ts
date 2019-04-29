@@ -40,7 +40,6 @@ export default class Boss extends Enemy implements IEnemy {
         this.world = world;
         this.initAnims();
         this.on('animationcomplete', (anim, frame) => {
-            console.log(anim.key)
             this.emit('animationcomplete_' + anim.key, anim, frame);
         });
 

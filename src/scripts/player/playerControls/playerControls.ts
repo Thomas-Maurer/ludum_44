@@ -136,7 +136,11 @@ export class PlayerControls {
 
 
         if (this.cursors.attack.isDown && player.canAttack) {
-            player.anims.play(PLAYER_ANIM.playerAttack, true);
+            if (player.glasses) {
+                player.anims.play(PLAYER_ANIM.playerAttackGlasses, true);
+            } else {
+                player.anims.play(PLAYER_ANIM.playerAttack, true);
+            }
             this.scene.audioManager.playSound(this.scene.audioManager.soundsList.HIT);
             player.enableAttackState();
         }

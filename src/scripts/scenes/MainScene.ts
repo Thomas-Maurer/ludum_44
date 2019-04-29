@@ -314,7 +314,7 @@ export default class MainScene extends Phaser.Scene {
     }
     this.win = true;
     //TODO play win anim
-    console.log('you win !');
+
     //this.scene.restart();
     window.dispatchEvent(EventsUtils.PLAYER_WIN);
     this.audioManager.playMusic(this.audioManager.musicsList.TITLE);

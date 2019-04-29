@@ -42,7 +42,7 @@ export default class AudioManager {
             if (this.soundsList.hasOwnProperty(soundName)) {
                 const soundFileName = this.soundsList[soundName];
                 this.scene.load.audio(soundFileName, 'assets/sounds/' + soundFileName + '.wav');
-                console.log("Sound " + soundFileName + " loaded from " + soundFileName)
+                // console.log("Sound " + soundFileName + " loaded from " + soundFileName)
             }
         }
 
@@ -51,7 +51,7 @@ export default class AudioManager {
             if (this.musicsList.hasOwnProperty(soundName)) {
                 const soundFileName = this.musicsList[soundName];
                 this.scene.load.audio(soundFileName, 'assets/sounds/' + soundFileName + '.mp3');
-                console.log("Music " + soundFileName + " loaded from " + soundFileName)
+                // console.log("Music " + soundFileName + " loaded from " + soundFileName)
             }
         }
 
