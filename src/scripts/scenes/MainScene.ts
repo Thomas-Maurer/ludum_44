@@ -125,7 +125,8 @@ export default class MainScene extends Phaser.Scene {
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
       objectB: this.sunSensors,
-      callback: () => {
+      callback: (eventData:any) => {
+        if (eventData.bodyA.isSensor) return; // We only care about collisions with physical objects
         this.player.disableSun()
       },
       context: this
@@ -134,7 +135,8 @@ export default class MainScene extends Phaser.Scene {
     this.matterCollision.addOnCollideEnd({
       objectA: this.player,
       objectB: this.sunSensors,
-      callback: () => {
+      callback: (eventData:any) => {
+        if (eventData.bodyA.isSensor) return; // We only care about collisions with physical objects
         if (this.player.isInSun) {
           this.player.disableSun()
         }
