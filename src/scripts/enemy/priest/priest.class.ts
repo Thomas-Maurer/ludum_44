@@ -170,7 +170,8 @@ export class Priest extends Enemy implements IEnemy {
         } else {
             x += 10;
         }
-        new Bullet(this.world, this.scene, x, this.y, EnemiesEnum.SPRITE_SHEET_ID, 'fireball1.png', this.currentDirection);
+       const bullet = new Bullet(this.world, this.scene, x, this.y, EnemiesEnum.SPRITE_SHEET_ID, 'fireball1.png', this.currentDirection);
+        setTimeout(() => bullet.destroy(), 3000);
     }
 
 

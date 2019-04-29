@@ -116,7 +116,7 @@ export default class MainScene extends Phaser.Scene {
     this.cameras.main.startFollow(this.player.getPlayerSprite(), false, 0.5, 0.5);
     // Visualize all the matter bodies in the world. Note: this will be slow so go ahead and comment
     // it out after you've seen what the bodies look like.
-    this.matter.world.createDebugGraphic();
+    // this.matter.world.createDebugGraphic();
     this.addCalice();
     this.addEventsListeners();
     this.generateItems();
