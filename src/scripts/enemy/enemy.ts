@@ -60,7 +60,16 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
     private setPhysics(x: number, y: number) {
         const matterEngine: any = Phaser.Physics.Matter;
         const body = matterEngine.Matter.Bodies.rectangle(x, y, 64, 115);
-        this.setExistingBody(body);
+        // add sensor
+        const leftSensor = matterEngine.Matter.Bodies.rectangle(100,0, 50, 10,{ isSensor: true, label: 'left' });
+        const rightSensor = matterEngine.Matter.Bodies.circle(70, 0, 24, { isSensor: true, label: 'right' });
+
+        const compoundBody = matterEngine.Matter.Body.create({
+            parts: [ body, leftSensor, rightSensor],
+            inertia: Infinity
+        });
+
+        this.setExistingBody(compoundBody);
 
         this.setFixedRotation();
         this.setFriction(0);
@@ -78,8 +87,14 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
             this.isRunning = true;
         }
 
+        this.attackPlayer();
+
         // mak the enemy pnj always move
         this.setVelocityCustom();
+    }
+
+    private attackPlayer() {
+
     }
 
     /**
@@ -95,8 +110,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
      */
     private setVelocityCustom(): void {
         this.setVelocityOnGround();
-        this.setVelocityOnCollide();
-        this.setVelocityX(this.currentVelocity);
+        // this.setVelocityOnCollide();
     }
 
     /**
@@ -118,12 +132,11 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
      * Set current velocity and direction
      */
     private setVelocityOnGround(): void {
-        // fix prob with origin of the tile TODO check this condition after doing good sprite
-        const xToAdd = this.currentDirection === 1 ? 0 : this.currentDirection;
         const map = Map.getInstance();
         // calculate tile (for origin position of the sprite
-        const tileX: number = (this.x / Map.TILES_SIZE_X) + xToAdd;
-        const tileY: number = (this.y / Map.TILES_SIZE_Y) + 1;
+        const tileX: number = (this.x / Map.TILES_SIZE_X) - 0.5;
+
+        const tileY: number = (this.y / Map.TILES_SIZE_Y) + 1 ;
 
         if (!map.isExistTile(tileX, tileY)) {
             this.currentDirection = this.currentDirection * -1;
@@ -133,33 +146,33 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
         this.setVelocityX(this.currentVelocity);
     }
 
-    /**
-     * Set velocity on collide
-     */
-    private setVelocityOnCollide(): void {
-        // fix prob with origin of the tile TODO check this condition after doing good sprite
-        // 0.3+ for fix "bug" math round
-        const xToAdd = this.currentDirection === -1 ? -1.3 : 0.3;
-        const map = Map.getInstance();
-        // calculate tile (for origin position of the sprite
-        const tileX: number = (this.x / Map.TILES_SIZE_X) + xToAdd;
-        let tileY: number = (this.y / Map.TILES_SIZE_Y);
-
-        if (map.isExistTile(tileX, tileY)) {
-            this.currentDirection = this.currentDirection * -1;
-            this.currentVelocity = this.currentVelocity * -1;
-            this.setFlipX(this.currentDirection === -1);
-        }
-        // TODO delete after adding the right sprite (1 is corresponding to 64px)
-        // checking collide on head
-        tileY = tileY - 1;
-
-        if (map.isExistTile(tileX, tileY)) {
-            this.currentDirection = this.currentDirection * -1;
-            this.currentVelocity = this.currentVelocity * -1;
-            this.setFlipX(this.currentDirection === -1);
-        }
-    }
+    // /**
+    //  * Set velocity on collide
+    //  */
+    // private setVelocityOnCollide(): void {
+    //     // fix prob with origin of the tile TODO check this condition after doing good sprite
+    //     // 0.3+ for fix "bug" math round
+    //     const xToAdd = this.currentDirection === -1 ? -1.3 : 0.3;
+    //     const map = Map.getInstance();
+    //     // calculate tile (for origin position of the sprite
+    //     const tileX: number = (this.x / Map.TILES_SIZE_X) + xToAdd;
+    //     let tileY: number = (this.y / Map.TILES_SIZE_Y);
+    //
+    //     if (map.isExistTile(tileX, tileY)) {
+    //         this.currentDirection = this.currentDirection * -1;
+    //         this.currentVelocity = this.currentVelocity * -1;
+    //         this.setFlipX(this.currentDirection === -1);
+    //     }
+    //     // TODO delete after adding the right sprite (1 is corresponding to 64px)
+    //     // checking collide on head
+    //     tileY = tileY - 1;
+    //
+    //     if (map.isExistTile(tileX, tileY)) {
+    //         this.currentDirection = this.currentDirection * -1;
+    //         this.currentVelocity = this.currentVelocity * -1;
+    //         this.setFlipX(this.currentDirection === -1);
+    //     }
+    // }
 
     /**
      * Destroy sprite
@@ -198,7 +211,6 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
      * @param damage
      */
     public takeDamage(damage: number): void {
-        debugger
         if (this.isHit || this.isDead) {
             return;
         }
