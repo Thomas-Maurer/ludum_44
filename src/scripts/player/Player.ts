@@ -211,9 +211,11 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         }, this);
 
         this.on('playerLeaveShop', () => {
+            this.scene.audioManager.playMusic(this.scene.audioManager.musicsList.WORLD);
         }, this);
 
         this.on('playerEnterShop', () => {
+            this.scene.audioManager.playMusic(this.scene.audioManager.musicsList.SHOP);
         }, this);
 
         this.on('animationcomplete_playerAttack', function () {
@@ -463,8 +465,6 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
 
     public disableSun(): void {
         this.isInSun = false;
-        const audioManager = this.scene.audioManager;
-        audioManager.playMusic(audioManager.musicsList.SHOP);
         const sunEvent: CustomEvent = new CustomEvent("PLAYER_SUN_STATE", {
             detail: false
         });
@@ -473,8 +473,6 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
 
     public enableSun(): void {
         this.isInSun = true;
-        const audioManager = this.scene.audioManager;
-        audioManager.playMusic(audioManager.musicsList.WORLD);
         const sunEvent: CustomEvent = new CustomEvent("PLAYER_SUN_STATE", {
             detail: true
         });

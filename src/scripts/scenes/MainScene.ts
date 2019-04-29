@@ -9,7 +9,7 @@ import VictoryItem from "../items/victoryItem";
 import EventsUtils from "../utils/events.utils";
 import ItemUtil from "../items/itemUtil";
 import Boss from "../enemy/boss/boss";
-import {PLAYER_ANIM} from "../player/animTabs";
+import { PLAYER_ANIM } from "../player/animTabs";
 export default class MainScene extends Phaser.Scene {
   public matterCollision: PhaserMatterCollisionPlugin;
   public map: Phaser.Tilemaps.Tilemap;
@@ -21,9 +21,9 @@ export default class MainScene extends Phaser.Scene {
   public playerCatCollision: any;
   public itemsCat: any;
   public fps: any;
-  public sunSensors: any[];
-  public bossRooms: any[];
-  public shopZone: any[];
+  public sunSensors: any[] = [];
+  public bossRooms: any[] = [];
+  public shopZone: any[] = [];
   public musicCanPlay: boolean = false;
   public win: boolean = false;
   private parralaxLayers: {
@@ -172,14 +172,14 @@ export default class MainScene extends Phaser.Scene {
     // Create a sensor at the rectangle object created in Tiled (under the "sunSensor" layer)
     this.map.findObject("sunSensor", (obj: any) => {
       const shopZone = this.matter.add.rectangle(
-          obj.x + obj.width / 2,
-          obj.y + obj.height / 2,
-          obj.width,
-          obj.height,
-          {
-            isSensor: true, // It shouldn't physically interact with other bodies
-            isStatic: true // It shouldn't move
-          }
+        obj.x + obj.width / 2,
+        obj.y + obj.height / 2,
+        obj.width,
+        obj.height,
+        {
+          isSensor: true, // It shouldn't physically interact with other bodies
+          isStatic: true // It shouldn't move
+        }
       );
       this.shopZone.push(shopZone);
     });
@@ -207,10 +207,10 @@ export default class MainScene extends Phaser.Scene {
 
   generatePnj(): void {
     const pnjAnim = this.player.generateFrameNames('pnj/merch/merch', 'all_sprites', 1, 5);
-    this.anims.create({ key: 'pnj/merch/merch', frames: pnjAnim, frameRate: 5, repeat: -1});
+    this.anims.create({ key: 'pnj/merch/merch', frames: pnjAnim, frameRate: 5, repeat: -1 });
     // Create a sensor at the rectangle object created in Tiled (under the "boss_sensor" layer)
     this.map.findObject("spawn_pnj", (obj: any) => {
-      const merchSprite = this.add.sprite((obj.x ) + obj.width / 2, obj.y + obj.height / 2, 'all_sprites', 'pnj/merch/merch1.png');
+      const merchSprite = this.add.sprite((obj.x) + obj.width / 2, obj.y + obj.height / 2, 'all_sprites', 'pnj/merch/merch1.png');
       this.add.existing(merchSprite);
       merchSprite.play('pnj/merch/merch', true);
     });
@@ -229,9 +229,9 @@ export default class MainScene extends Phaser.Scene {
           isStatic: true // It shouldn't move
         }
       );
-       const bossRoomSprite = this.add.sprite((obj.x + 8) + obj.width / 2, obj.y + obj.height / 2, 'all_sprites_background', 'background/boss_room');
-        bossRoomSprite.setDepth(0);
-       this.bossRooms.push(bossRoom);
+      const bossRoomSprite = this.add.sprite((obj.x + 8) + obj.width / 2, obj.y + obj.height / 2, 'all_sprites_background', 'background/boss_room');
+      bossRoomSprite.setDepth(0);
+      this.bossRooms.push(bossRoom);
     });
 
     this.matterCollision.addOnCollideStart({
