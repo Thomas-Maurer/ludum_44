@@ -31,9 +31,9 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
      * @type {{life: number; damage: number}}
      */
     public info = {
-        life:  0,
-        damage:  0,
-        gain:  0,
+        life: 0,
+        damage: 0,
+        gain: 0,
     };
 
     /**
@@ -74,7 +74,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
             return;
         }
         if (!this.isRunning) {
-            this.anims.play(this.GUID + 'Run',true);
+            this.anims.play(this.GUID + 'Run', true);
             this.isRunning = true;
         }
 
@@ -180,7 +180,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
         });
 
         const compoundBody = matterEngine.Matter.Body.create({
-            parts: [ deadSensor ],
+            parts: [deadSensor],
             inertia: Infinity
         });
 
@@ -208,12 +208,13 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
             this.setStatic(true);
             this.isDead = true;
             this.stopAllAnims();
-            this.anims.play(this.GUID + 'Dead',true);
+            this.anims.play(this.GUID + 'Dead', true);
+            this.scene.audioManager.playSound(this.scene.audioManager.soundsList.PEASANT_DIE);
             this.addDeadSensor();
         } else {
             this.isHit = true;
             this.isRunning = false;
-            this.anims.play(this.GUID + 'Hit',true);
+            this.anims.play(this.GUID + 'Hit', true);
             setTimeout(() => this.isHit = false, 500);
         }
     }
