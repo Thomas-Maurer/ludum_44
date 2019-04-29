@@ -11,7 +11,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     private playerControl: PlayerControls;
     public scene: MainScene;
     private canJump: boolean;
-    private canAttack: boolean;
+    public canAttack: boolean;
     private jumpCooldownTimer: Phaser.Time.TimerEvent;
     private attackCooldownTimer: Phaser.Time.TimerEvent;
     private inAir: boolean;
