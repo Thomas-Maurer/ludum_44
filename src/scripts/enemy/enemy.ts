@@ -87,7 +87,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
      * @param bodyA
      * @param bodyB
      */
-    private onSensorCollide({ bodyA, bodyB }): void {
+    protected onSensorCollide({ bodyA, bodyB }): void {
         // Watch for the player colliding with walls/objects on either side and the ground below, so
         // that we can use that logic inside of update to move the player.
         // Note: we are using the "pair.separation" here. That number tells us how much bodyA and bodyB
@@ -169,7 +169,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
     /**
      * Attack player
      */
-    private attackPlayer(bodyA: any, playerInstance: Player): void {
+    protected attackPlayer(bodyA: any, playerInstance: Player): void {
         if (bodyA === this.sensors.left) {
             if (this.currentDirection !== -1) {
                 this.currentDirection = -1;
