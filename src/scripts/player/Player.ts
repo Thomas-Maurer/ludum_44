@@ -189,7 +189,12 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         });
 
         this.on('animationupdate-suck', () => {
-            this.gainDamage(this.currentEnemyDead.info.gain / 5);
+            if (this.pipe) {
+                this.gainDamage((this.currentEnemyDead.info.gain * 2) / 5);
+
+            } else {
+                this.gainDamage(this.currentEnemyDead.info.gain / 5);
+            }
         });
 
         this.on('playerbuyitem', () => {
@@ -377,9 +382,13 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
 
         if (this.isInSun && !this.willTakeSunDamage) {
             // If we have glasses just double the time before we take sun damage
-            if (this.glasses) {
+            if (this.umbrella) {
+                delaySunDamage = delaySunDamage * 4;
+            } else if (this.glasses) {
                 delaySunDamage = delaySunDamage * 2;
             }
+
+
             //  The same as above, but uses a method signature to declare it (shorter, and compatible with GSAP syntax)
             this.willTakeSunDamage = this.scene.time.delayedCall(delaySunDamage, () => {
                 this.takeDamage(sunDamage);
