@@ -17,9 +17,13 @@
       </div>
 
       <div class="tutorial-block" v-show="tutorial">
-        <div
-          class="lore-block"
-        >Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt quae ullam temporibus ex eaque corrupti earum eius labore maiores. Ipsam facere officiis animi dolores neque vero ipsa repellendus voluptate nulla!</div>
+        <div class="lore-block">
+          <p>
+            You are Lord Barouny from the Khurleigh Castle in the
+            Shrewsword Highlands. Your goal is to retrieve the Divine
+            Chalice by stealing it from the Crusader of Light in the Church.
+          </p>
+        </div>
         <div class="controls-block">
           <div class="control-type">
             <img src="../../../assets/graphics/ui/arrow_keys.png">
