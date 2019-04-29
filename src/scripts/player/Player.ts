@@ -137,6 +137,10 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
             this.anims.play(PLAYER_ANIM.playerIdle);
         }, this);
 
+        this.on('animationcomplete_playerDrink', function () {
+            this.scene.triggerVictory();
+        }, this);
+
         this.once('animationcomplete_playerDeath', () => {
             window.dispatchEvent(EventsUtils.PLAYER_DEAD);
             this.scene.audioManager.playSound(this.scene.audioManager.soundsList.DEATH);
@@ -165,6 +169,10 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
             }
         });
 
+        this.on('playerVictory', () => {
+            this.anims.play(PLAYER_ANIM.playerDrink);
+        }, this);
+
         this.on('animationcomplete_playerAttack', function () {
             this.anims.play(PLAYER_ANIM.playerIdle);
             //TODO Player attack system
@@ -184,6 +192,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         const playerDeathAnims = this.generateFrameNames('vampire/deathvamp', 'all_sprites', 1, 7);
         const playerSuckAnims = this.generateFrameNames('vampire/vampdrink', 'all_sprites', 1, 5);
         const playerDashAnims = this.generateFrameNames('vampire/dash', 'all_sprites', 1, 4);
+        const playerVictoryAnims = this.generateFrameNames('vampire/drink', 'all_sprites', 1, 14);
 
         this.scene.anims.create({ key: PLAYER_ANIM.suck, frames: playerSuckAnims, frameRate: 5 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerRun, frames: playerRunAnims, frameRate: 10, repeat: -1 });
@@ -192,6 +201,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.scene.anims.create({ key: PLAYER_ANIM.playerAttack, frames: playerAttackAnims, frameRate: 50 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerDeath, frames: playerDeathAnims, frameRate: 13 });
         this.scene.anims.create({ key: PLAYER_ANIM.playerDash, frames: playerDashAnims, frameRate: 13 });
+        this.scene.anims.create({ key: PLAYER_ANIM.playerDrink, frames: playerVictoryAnims, frameRate: 10});
     }
 
     public getPlayerControl(): PlayerControls {
@@ -349,7 +359,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
                 } else if (eventData.gameObjectB instanceof VictoryItem) {
                     //TriggerVictory
                     eventData.gameObjectB.destroy();
-                    this.scene.triggerVictory();
+                    this.emit('playerVictory');
                 } else if (eventData.gameObjectB instanceof Item) {
                     if (this.doAction) {
                         this.doAction = false;

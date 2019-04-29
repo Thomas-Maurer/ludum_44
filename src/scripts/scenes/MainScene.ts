@@ -58,6 +58,7 @@ export default class MainScene extends Phaser.Scene {
   preload() {
     this.load.tilemapTiledJSON("map", "assets/map/map_beta.json");
     this.load.multiatlas('all_sprites', 'assets/graphics/map/backgrounds/spritesheet.json', 'assets/graphics/map/backgrounds');
+    this.load.multiatlas('all_sprites_background', 'assets/graphics/map/backgrounds/spritesheet_background.json', 'assets/graphics/map/backgrounds');
     this.load.multiatlas('block', 'assets/graphics/map/backgrounds/block.json', 'assets/graphics/map/backgrounds');
     // Load body shapes from JSON file generated using PhysicsEditor
     this.load.json('shapes', 'assets/graphics/char/character/shapes_char.json');
@@ -237,20 +238,20 @@ export default class MainScene extends Phaser.Scene {
   private generateParralaxLayers() {
     this.parralaxLayers = {
       static: {
-        sky: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/static/sky.png'),
-        sun: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/static/sun.png'),
-        cloud: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/static/cloud.png'),
+        sky: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites_background', 'background/static/sky.png'),
+        sun: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites_background', 'background/static/sun.png'),
+        cloud: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites_background', 'background/static/cloud.png'),
       },
       scene1: {
 
-        bg_far: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/scene1/bg_far.png'),
-        bg: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/scene1/bg.png'),
-        foreground: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/scene1/foreground.png'),
+        bg_far: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites_background', 'background/scene1/bg_far.png'),
+        bg: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites_background', 'background/scene1/bg.png'),
+        foreground: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites_background', 'background/scene1/foreground.png'),
       },
       // scene2: {
-      //   bg_far: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/scene2/bg_far.png'),
-      //   bg: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/scene2/bg.png'),
-      //   foreground: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites', 'background/scene2/foreground.png'),
+      //   bg_far: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites_background', 'background/scene2/bg_far.png'),
+      //   bg: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites_background', 'background/scene2/bg.png'),
+      //   foreground: this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'all_sprites_background', 'background/scene2/foreground.png'),
 
       // }
 
