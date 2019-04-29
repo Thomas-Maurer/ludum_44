@@ -509,9 +509,9 @@
   </data>
  </layer>
  <objectgroup id="3" name="sunSensor">
-  <object id="13" name="sunSensor" x="2752" y="320" width="576" height="316"/>
+  <object id="13" name="sunSensor" x="2752" y="306" width="576" height="348"/>
   <object id="15" name="sunSensor" x="169" y="637" width="188" height="130"/>
-  <object id="44" name="sunSensor" x="11318.7" y="385.333" width="653.333" height="317.333"/>
+  <object id="44" name="sunSensor" x="11307.7" y="368.333" width="673.333" height="348.333"/>
  </objectgroup>
  <objectgroup id="4" name="boss_sensor">
   <object id="69" name="boss_room" x="16896" y="128" width="1730" height="714"/>
