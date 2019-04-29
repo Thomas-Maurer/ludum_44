@@ -112,14 +112,14 @@ export default class MainScene extends Phaser.Scene {
     // Create a sensor at the rectangle object created in Tiled (under the "sunSensor" layer)
     this.map.findObject("sunSensor", (obj: any) => {
       const sunSensor = this.matter.add.rectangle(
-          obj.x + obj.width / 2,
-          obj.y + obj.height / 2,
-          obj.width,
-          obj.height,
-          {
-            isSensor: true, // It shouldn't physically interact with other bodies
-            isStatic: true // It shouldn't move
-          }
+        obj.x + obj.width / 2,
+        obj.y + obj.height / 2,
+        obj.width,
+        obj.height,
+        {
+          isSensor: true, // It shouldn't physically interact with other bodies
+          isStatic: true // It shouldn't move
+        }
       );
       this.sunSensors.push(sunSensor);
     });
@@ -160,7 +160,7 @@ export default class MainScene extends Phaser.Scene {
   generateItems() {
     this.map.findObject("items", (obj: any) => {
       this.itemUtil.generateItem(obj);
-      }
+    }
     );
   }
 
