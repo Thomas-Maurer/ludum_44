@@ -7,6 +7,8 @@ import { PLAYER_ANIM } from "./animTabs";
 import VictoryItem from "../items/victoryItem";
 import Vector2 = Phaser.Math.Vector2;
 import { BossInfo } from "../enemy/Boss/Boss-info.enum";
+import { PeasantInfo } from "../enemy/peasant/peasant-info.enum";
+import {Bullet} from "../enemy/priest/bullet.class";
 
 export default class Player extends Phaser.Physics.Matter.Sprite {
     private playerControl: PlayerControls;
