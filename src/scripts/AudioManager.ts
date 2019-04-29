@@ -11,7 +11,9 @@ export default class AudioManager {
         PLAYER_FOOTSTEP: "playerFootstep",
         VICTORY: 'victory',
         DEATH: 'death',
-        SUCK: 'suck'
+        SUCK: 'suck',
+        PEASANT_DIE: 'peasantDie',
+        PLAYER_DIE: 'playerDie'
     };
     /**
      * List of music (.mp3)

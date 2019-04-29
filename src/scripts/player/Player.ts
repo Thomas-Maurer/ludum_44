@@ -15,7 +15,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     private jumpCooldownTimer: Phaser.Time.TimerEvent;
     private attackCooldownTimer: Phaser.Time.TimerEvent;
     private inAir: boolean;
-    private isInSun: boolean;
+    public isInSun: boolean;
     private willTakeSunDamage: Phaser.Time.TimerEvent;
     private healthPoint: number;
     private baseDamage: number;
@@ -288,7 +288,17 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     }
 
     public disableSun(): void {
-        this.isInSun = !this.isInSun;
+        this.isInSun = false;
+        const audioManager = this.scene.audioManager;
+        audioManager.playingMusic.stop();
+        audioManager.playMusic(audioManager.musicsList.SHOP);
+    }
+
+    public enableSun(): void {
+        this.isInSun = true;
+        const audioManager = this.scene.audioManager;
+        audioManager.playingMusic.stop();
+        audioManager.playMusic(audioManager.musicsList.WORLD);
     }
 
     /**
@@ -311,7 +321,13 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
      * Show deathScreen
      */
     public killPlayer(): void {
+        //stop if already dead
+        if (this.isPlayerDead) {
+            return;
+        }
+        this.isPlayerDead = true;
         this.anims.play('playerDeath', true);
+        this.scene.audioManager.playSound(this.scene.audioManager.soundsList.PLAYER_DIE)
     }
 
     /**
