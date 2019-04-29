@@ -70,7 +70,7 @@ export class Enemy extends Phaser.Physics.Matter.Sprite implements IEnemy {
      */
     private handleCollision(): void {
         //Handle current collision
-        this.scene.matterCollision.addOnCollideActive({
+        this.scene.matterCollision.addOnCollideStart({
             objectA: this,
             callback: (eventData: any) => {
                 if (eventData.bodyA.isSensor) return; // We only care about collisions with physical objects
