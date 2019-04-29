@@ -9,6 +9,7 @@ export default class AudioManager {
         PLAYER_FOOTSTEP: "playerFootstep",
         VICTORY: 'victory',
         DEATH: 'death',
+        SUCK: 'suck'
     };
     /**
      * List of music (.mp3)
