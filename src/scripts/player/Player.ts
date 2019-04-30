@@ -7,7 +7,7 @@ import { PLAYER_ANIM } from "./animTabs";
 import VictoryItem from "../items/victoryItem";
 import Vector2 = Phaser.Math.Vector2;
 import { BossInfo } from "../enemy/Boss/Boss-info.enum";
-import {Bullet} from "../enemy/priest/bullet.class";
+import { Bullet } from "../enemy/priest/bullet.class";
 
 export default class Player extends Phaser.Physics.Matter.Sprite {
     private playerControl: PlayerControls;
@@ -143,11 +143,11 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         }, this);
 
         this.on('animationcomplete_playerJump', function () {
-                this.anims.play(PLAYER_ANIM.playerIdle);
+            this.anims.play(PLAYER_ANIM.playerIdle);
         }, this);
 
         this.on('animationcomplete_playerJumpGlasses', function () {
-                this.anims.play(PLAYER_ANIM.playerIdleGlasses);
+            this.anims.play(PLAYER_ANIM.playerIdleGlasses);
         }, this);
 
         this.on('animationcomplete_playerHit', function () {
@@ -300,6 +300,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
      */
     update() {
         if (this.isPlayerDead) {
+
             this.killPlayer();
         } else {
             this.handleActions();
@@ -453,8 +454,15 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
                         this.addItemPlayerWantToBuy(eventData.gameObjectB);
                         this.emit('playerbuyitem');
                     }
-                } else {
+                }
+                //prevent sudden death in the case where the bullet havent been destroyed
+                else if (eventData.gameObjectB instanceof Bullet) {
+                    return;
+                }
+
+                else {
                     if (eventData.bodyB.isSensor === false) {
+
                         this.killPlayer();
                     }
                 }
@@ -475,7 +483,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
 
     onSensorCollide(eventdata) {
         if (eventdata.bodyB.isSensor) return;
-        if ( eventdata.gameObjectB instanceof Bullet) {
+        if (eventdata.gameObjectB instanceof Bullet) {
             this.getDamageFromEnemy(eventdata.gameObjectB.DAMAGE);
             eventdata.gameObjectB.destroy();
         }// We only care about collisions with physical objects
