@@ -42,6 +42,10 @@ export default {
             this.$store.commit("setBossHp", 0);
         },
         handleEnterKey() {
+            //prevent loading skip
+            if (this.loading) {
+                return;
+            }
             // Retry if player dead or won
             if (this.dead || this.win) {
                 this.retry();

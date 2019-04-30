@@ -2,8 +2,35 @@
   <div>
     <!-- enable here  -->
     <div class="main-menu" v-if="!play">
-      <div class="game-title">
+      <div class="game-title" v-if="!tutorial">
         <img src="../../../assets/graphics/ui/logo.png" alt="Vampire Quest">
+      </div>
+
+      <div class="gameplay-elements-block" v-show="tutorial">
+        <div class="gameplay-element">
+          <div class="icon">
+            <img src="../../../assets/graphics/ui/sun.png">
+          </div>
+          <span class="label">You are protected from the sun</span>
+        </div>
+        <div class="gameplay-element">
+          <div class="icon">
+            <img src="../../../assets/graphics/ui/sun_active.png">
+          </div>
+          <span class="label">You are taking damages from the sun</span>
+        </div>
+        <div class="gameplay-element">
+          <div class="icon">
+            <img src="../../../assets/graphics/ui/bloodpotion_single.png">
+          </div>
+          <span class="label">Represent your life</span>
+        </div>
+        <div class="gameplay-element">
+          <div class="icon">
+            <img src="../../../assets/graphics/ui/ennemie_gameplay.png">
+          </div>
+          <span class="label">Kill them and absorb their blood to regain your life</span>
+        </div>
       </div>
 
       <div class="continue-block">
@@ -36,10 +63,6 @@
           <div class="control-type">
             <img src="../../../assets/graphics/ui/e.png">
             <span class="control-label">Interact</span>
-          </div>
-          <div class="control-type potion">
-            <div class="potion-icon"></div>
-            <span class="control-label">Keep it full</span>
           </div>
         </div>
       </div>
