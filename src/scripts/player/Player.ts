@@ -640,7 +640,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         if (value.charAt(0) === "-") {
             this.scene.audioManager.playSound(this.scene.audioManager.soundsList.PLAYER_LOOSE_HP)
         } else {
-            this.scene.audioManager.playSound(this.scene.audioManager.soundsList.PLAYER_GAIN_HP)
+            //this.scene.audioManager.playSound(this.scene.audioManager.soundsList.PLAYER_GAIN_HP)
         }
 
         //destroy text after duration
